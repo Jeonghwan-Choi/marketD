@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- Mybatis 사용시 옵션 설정 문서 -->
+	
+	<!-- 사용시 다음과 같은 순서로 tag를 작성해야 합니다.
+	 properties,
+	settings,
+	typeAliases,
+	typeHandlers,
+	objectFactory,
+	objectWrapperFactory,
+	plugins,
+	environments,
+	databaseIdProvider,
+	mappers
+	-->
+
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+
+	<!-- 옵션 태그 -->
+	<!-- select를 리턴 받기 위한 타입 별칭 설정 -->
+	<typeAliases>
+  		<!-- main alias -->
+<!-- 		<typeAlias alias="member" type="com.world.domain.main.vo.MemberVO" />
+        <typeAlias alias="product" type="com.world.domain.main.vo.ProductVO"/>
+  		<typeAlias alias="item" type="com.world.domain.main.vo.ItemVO"/>
+  		<typeAlias alias="dotory" type="com.world.domain.main.vo.DotoryVO"/>
+  		<typeAlias alias="friend" type="com.world.domain.main.vo.FriendVO"/>
+  		<typeAlias alias="guest" type="com.world.domain.main.vo.GuestVO"/>
+ 		<typeAlias alias="cart" type="com.world.domain.main.vo.CartVO"/>
+  		miniHome alias
+		<typeAlias alias="visitorLog" type="com.world.domain.minihome.vo.VisitorLogVO" />
+		<typeAlias alias="photo" type="com.world.domain.minihome.vo.PhotoVO" />
+		<typeAlias alias="reply" type="com.world.domain.minihome.vo.ReplyVO" />
+		<typeAlias alias="video" type="com.world.domain.minihome.vo.VideoVO" />
+		<typeAlias alias="dotory" type="com.world.domain.main.vo.DotoryVO" /> -->
+	</typeAliases>
+
+</configuration>
