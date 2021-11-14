@@ -27,8 +27,10 @@
 	<!-- select를 리턴 받기 위한 타입 별칭 설정 -->
 	<typeAliases>
   		<!-- main alias -->
-<!-- 		<typeAlias alias="member" type="com.world.domain.main.vo.MemberVO" />
-        <typeAlias alias="product" type="com.world.domain.main.vo.ProductVO"/>
+ 		<typeAlias alias="member" type="com.spring.market.vo.MemberVO" />
+ 		<typeAlias alias="board" type="com.spring.market.vo.BoardVO" />
+ 		<typeAlias alias="image" type="com.spring.market.vo.ImageVO" />
+    <!--    <typeAlias alias="product" type="com.world.domain.main.vo.ProductVO"/>
   		<typeAlias alias="item" type="com.world.domain.main.vo.ItemVO"/>
   		<typeAlias alias="dotory" type="com.world.domain.main.vo.DotoryVO"/>
   		<typeAlias alias="friend" type="com.world.domain.main.vo.FriendVO"/>
