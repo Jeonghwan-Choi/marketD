@@ -1,7 +1,7 @@
 package com.spring.market.vo;
 
 public class MemberVO {
-	private String memberno;
+	private int memberno;
 	private String email;
 	private String password;
 	private String name;
@@ -10,7 +10,7 @@ public class MemberVO {
 	private int phone;
 	private String address;
 	public MemberVO() {}
-	public MemberVO(String memberno, String email, String password, String name, int gender, int admin, int phone,
+	public MemberVO(int memberno, String email, String password, String name, int gender, int admin, int phone,
 			String address) {
 		super();
 		this.memberno = memberno;
@@ -22,10 +22,10 @@ public class MemberVO {
 		this.phone = phone;
 		this.address = address;
 	}
-	public String getMemberno() {
+	public int getMemberno() {
 		return memberno;
 	}
-	public void setMemberno(String memberno) {
+	public void setMemberno(int memberno) {
 		this.memberno = memberno;
 	}
 	public String getEmail() {

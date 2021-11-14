@@ -102,8 +102,9 @@
                     <br>
                     <div>* 이메일 :<br>
                         <input type = "text" id = "email" name = "email" value="${sessionScope.joinEmail}" >
-                        <input class="addr_button" type="button" value="중복확인" onclick="emailcheck()" ><br>
-                        <p id = "email-t">이메일 주소는 고객님의 안전한 거래와 회원정보 보호를 위해 정확하게 입력해 주세요.</p>
+                        <input id="emailCk" class="addr_button" type="button" value="중복확인" onclick="emailcheck()" ><br>
+                        <p id = "email-t">이메일 주소는 고객님의 안전한 거래와 회원정보 보호를 위해 정확하게 입력해 주세요.</p><br>
+                        <p id = "checkMsg"></p>
                     </div>
                     
                     
@@ -162,10 +163,31 @@
                 document.formm.email.focus();
                 return;
               }
-              var url = "MbergerServlet?command=id_check_form&id=" 
-            + document.formm.email.value;
-              window.open( url, "_blank_1",
-            "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=400, height=250");
+              console.log($('#email').val());
+              $.ajax({
+     	         url : 'emailChk.do',
+     	         method : 'POST',
+     	         data : 'email=' + $('#email').val() ,
+     	         type : "POST",
+				
+     	         success : function(data) {
+     	        	 
+     	        	 console.log(data);
+     	        	 
+     	        	if(data == 0){
+     	        		$('#checkMsg').html('<p style="color:blue;margin-left:15px; font-size:13px;">사용가능한 아이디입니다.</p>');
+
+     	        	}else{ 
+     	        		$('#checkMsg').html('<p style="color:red;margin-left:15px; font-size:13px;">이미 사용중인 아이디입니다.</p>');
+     	        	}
+
+
+     	         },
+     	         error : function() {
+     	            alert("request error!");
+     	         }
+     	      }) 	
+              
         }
         
         
@@ -177,10 +199,16 @@
       $("#usediv").hide();
    });        
           
+
+
+   
           
   var count = 0; /* 문자 중복을 막기 위한 인증번호 */
    
  $(document).ready(function() {
+	 
+
+	 
 
     $("#send").click(function() {
        
@@ -233,6 +261,7 @@
              }
          }   
     })
+    
     $("#enterBtn").click(function() {   /* 내가 작성한 번호와 인증번호를 비교한다 */
        
        var userNum = $("#userNum").val();
@@ -256,6 +285,7 @@
        }
     });
   });
+	
 </script>
 
         

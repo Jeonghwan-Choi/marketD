@@ -26,6 +26,12 @@ public class MemberDAO {
 	      sqlSession.update("MemberDAO.insertMember",vo);
 		
 	}
+	
+	public MemberVO emailChk (String email) {
+		
+		System.out.println("run MemberDAO emailChk()  " +email);
+		return sqlSession.selectOne("MemberDAO.emailChk",email);
+	}
 
 
 }

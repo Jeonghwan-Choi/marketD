@@ -2,6 +2,7 @@ package com.spring.market.controller;
 
 import java.util.HashMap;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.spring.market.impl.MemberService;
 import com.spring.market.vo.MemberVO;
 
+import org.apache.ibatis.session.SqlSession;
 import org.json.simple.JSONObject;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
@@ -24,6 +26,9 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 @Controller
 
 public class JoinController {
+	
+	@Inject
+	SqlSession sqlSession;
 	
 	@Autowired
 	MemberService memberService;	
@@ -98,6 +103,23 @@ public class JoinController {
 
 			return "redirect:/main";
 		}
+		
+		//ajax를 이용한 이메일 중복확인
+		@ResponseBody
+		   @RequestMapping(value = "/emailChk.do", method = RequestMethod.POST)
+		     public int emailChk(HttpServletRequest request, MemberVO vo, String email) throws Exception {
+
+//		      
+//			   MemberVO loginCount = sqlSession.selectOne("MemberDAO.emailChk", email);
+		       
+//		       System.out.println(email);
+//
+		       MemberVO member = memberService.emailChk(email);
+		       int rowcount = Integer.parseInt(member.getEmail());
+		       System.out.println("result value : "+ member.getEmail());
+		       
+		       return rowcount;
+		     }
 	   
 	   
 	   

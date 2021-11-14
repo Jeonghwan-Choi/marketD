@@ -25,6 +25,14 @@ public class MemberServiceImpl implements MemberService {
 		 memberDAO.insertMember(vo);
 		
 	}
+
+	@Override
+	public MemberVO emailChk(String email) {
+		System.out.println("MemberServiceImpl emailChk() :" + email);
+		return memberDAO.emailChk(email);
+	}
+	
+
 	
 	
 

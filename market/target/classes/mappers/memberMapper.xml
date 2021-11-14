@@ -12,11 +12,11 @@
         insert into member(email,password,name,gender,phone,address) values(#{email},#{password},#{name},#{gender},#{phone},#{address}) 
     </insert>
     
-<!--     <select id="getcartCount" resultType="cart" parameterType="cart">
-  		select count(*)"cartno" from cart where memberNo =#{value}
+   <select id="emailChk" resultType="member" parameterType="member">
+  		select NVL(count(email),0)"email"  from member where email = #{email}
   	</select>
   	
-  	<select id="getCartList" resultType="cart">
+<!--    	<select id="getCartList" resultType="cart">
     	select * from cart where memberNo=#{memberNo}
     </select>
     
