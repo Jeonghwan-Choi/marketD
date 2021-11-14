@@ -117,7 +117,7 @@ header {
       margin: 10px;
       border-radius: 10px;
   }
-  .main_product_div img{
+  .product_img{
     width: 100%;  
     height: 60%;
     border-radius: 10px;
@@ -159,4 +159,8 @@ header {
     background-color: #495057;
     height: 200px;
     display: block;
+  }
+  .watch-icon{
+  	width:20px;
+  	height:20px;
   }

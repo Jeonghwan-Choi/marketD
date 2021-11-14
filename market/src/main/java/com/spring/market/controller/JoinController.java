@@ -27,8 +27,7 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 public class JoinController {
 	
-	@Inject
-	SqlSession sqlSession;
+
 	
 	@Autowired
 	MemberService memberService;	
@@ -74,32 +73,9 @@ public class JoinController {
 		@RequestMapping("/insertMember")
 		public String insertMember(HttpServletRequest req, Model model, MemberVO vo) throws IllegalStateException {
 
-			
-			
-			System.out.println("1번 insertMember");
-
-			String email = req.getParameter("email");
-			String password = req.getParameter("password");
-			String name = req.getParameter("name");
-			String gender = req.getParameter("gender");
-			String admin = req.getParameter("admin");
-			String phone = req.getParameter("phone");
 			String address = req.getParameter("member_addr")+" "+req.getParameter("member_addr_1");
-			
-			System.out.println("email : " + email);
-			System.out.println("password : " + password);
-			System.out.println("name : " + name);
-			System.out.println("gender : " + gender);
-			System.out.println("admin : " + admin);
-			System.out.println("phone : " + phone);
-			System.out.println("address : " + address);
-
 			vo.setAddress(address);
-			
-			System.out.println("2번 insertMember");
-
 			memberService.insertMember(vo);
-
 
 			return "redirect:/main";
 		}
@@ -109,14 +85,8 @@ public class JoinController {
 		   @RequestMapping(value = "/emailChk.do", method = RequestMethod.POST)
 		     public int emailChk(HttpServletRequest request, MemberVO vo, String email) throws Exception {
 
-//		      
-//			   MemberVO loginCount = sqlSession.selectOne("MemberDAO.emailChk", email);
-		       
-//		       System.out.println(email);
-//
 		       MemberVO member = memberService.emailChk(email);
 		       int rowcount = Integer.parseInt(member.getEmail());
-		       System.out.println("result value : "+ member.getEmail());
 		       
 		       return rowcount;
 		     }
