@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  
+<mapper namespace="MemberDAO">
+ 
+
+	<insert id="insertMember"> 
+        insert into member(email,password,name,gender,phone,address) values(#{email},#{password},#{name},#{gender},#{phone},#{address}) 
+    </insert>
+    
+<!--     <select id="getcartCount" resultType="cart" parameterType="cart">
+  		select count(*)"cartno" from cart where memberNo =#{value}
+  	</select>
+  	
+  	<select id="getCartList" resultType="cart">
+    	select * from cart where memberNo=#{memberNo}
+    </select>
+    
+    <select id="getCartListCount" resultType="int">
+    	select count(*) from cart where memberNo=#{memberNo}
+    </select> -->
+  
+ 	
+</mapper>
