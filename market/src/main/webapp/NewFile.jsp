@@ -123,8 +123,8 @@
                     <br>
                     <div style="margin-left: 10px;"> 프로필사진 </div>
                     <img style="width: 150px; margin: 20px; border-radius: 100%;" id="preview-image" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
-                    <input style="display: block;" type="file" id="input-image" name = "input-image" >
-                    
+                   <!--  <input style="display: block;" type="file" id="input-image" name = "input-image" > -->
+                     <input type="file" id="input-image" maxlength="5" name = "input-image" multiple />
                     
                 </div>
                 <input class = "join_button" type = "button" value = "계정생성" onclick="idcheck()">
