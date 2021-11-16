@@ -13,5 +13,13 @@
     	select * from board where boardno=#{boardno}
     </select> 
   
+  <insert id="insertBoard" parameterType="board">
+  	<!-- insert into board(memberno,title,category,datetime,content,price) values(#{memberno},#{title},#{category},TO_CHAR(LOCALTIMESTAMP,'yyyy/mm/dd HH24:MI'),#{content},#{price}) -->
+  	insert into board(memberno,title,category,datetime,content,price) values(#{memberno},#{title},#{category},#{datetime},#{content},#{price})
+  </insert>
+  
+  <select id="firstBoardno" parameterType="board" resultType="board">
+  	select boardno from (select boardno from board where memberno=#{memberno} order by boardno desc) where rownum=1
+  </select>
  	
 </mapper>

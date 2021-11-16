@@ -21,4 +21,10 @@ public class ImageServiceImpl implements ImageService {
 		return imageDAO.boardImages(boardno);
 	}
 
+	@Override
+	public void insertBoardImage(ImageVO vo) {
+		System.out.println("run ImageServiceImpl insertBoardImage");
+		imageDAO.insertBoardImage(vo);
+	}
+
 }

@@ -19,5 +19,15 @@ public class BoardDAO {
 		return sqlSession.selectOne("BoardDAO.boardInfo",boardno);
 		
 	}
+	public void insertBoard(BoardVO vo) {
+		System.out.println("run BoardDAO insertBoard()");
+		sqlSession.update("BoardDAO.insertBoard",vo);
+		
+	}
+	
+	public BoardVO firstBoardno(int memberno) {
+		System.out.println("run BoardDAO firstBoardno()");
+		return sqlSession.selectOne("BoardDAO.firstBoardno",memberno);
+	}
 
 }

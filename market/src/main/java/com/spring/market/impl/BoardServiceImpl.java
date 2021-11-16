@@ -18,5 +18,15 @@ public class BoardServiceImpl implements BoardService {
 		System.out.println("run BoardServiceImpl boardInfo()");
 		return boardDAO.boardInfo(boardno);
 	}
+	@Override
+	public void insertBoard(BoardVO vo) {
+		System.out.println("run BoardServiceImpl insertBoard()");
+		boardDAO.insertBoard(vo);
+	}
+	@Override
+	public BoardVO firstBoardno(int memberno) {
+		System.out.println("run BoardServiceImpl firstBoardno(memberno)");
+		return boardDAO.firstBoardno(memberno);
+	}
 
 }

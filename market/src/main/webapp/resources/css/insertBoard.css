@@ -1,0 +1,90 @@
+@charset "UTF-8";
+.insertboard_insertboard{
+    width:750px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.column img{
+    border-radius: 10px;
+    margin: 2px;
+}
+.insertboard_insertboard_img_div_label_p_update{
+    color:#ff8a3d;
+}
+body {
+    font-family:'Malgun Gothic';
+    line-height:40px;
+    
+}
+textarea,input{
+    border:none;
+    background-color: white;
+}
+input:focus {
+    outline: none;
+}
+textarea:focus {
+    outline: none;
+}
+.insertboard_insertboard_img_label_div{
+    border: 1px solid rgb(163, 162, 162);
+    width: 100px;
+    text-align: center;
+    float: left;
+    line-height: 180%;
+    border-radius: 10px;
+    margin: 2px;
+}
+.insertboard_insertboard_img_div_label{
+   margin-bottom: 20px; 
+}
+.insertboard_insertboard_img_div_label img{
+    width: 50%;
+    height: 50%;
+    margin-top:10px;
+}
+input[id=insertboard_submitButton]{
+    
+    color: #ff8a3d;
+}
+.insertboard_insertboard_submitButton_div{
+    text-align: center;
+}
+.insertboard_insertboard_img_div_imgs_wrap img{
+    height: 100%;
+    
+}
+.insertboard_insertboard_content_div_category{
+    cursor: pointer;
+}
+.insertboard_insertboard_img_div_imgs_wrap img {
+    width: 100px;
+    height: 100px;
+}
+
+.test {
+    width: 100px;
+    height: 100px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+.insertboard_insertboard_category{
+    width:500px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.insertboard_insertboard_category img{
+    width:20px;
+    height: 20px;
+}
+.categoryTitle{
+    font-weight: bold;
+    color:rgb(68, 68, 68);
+}

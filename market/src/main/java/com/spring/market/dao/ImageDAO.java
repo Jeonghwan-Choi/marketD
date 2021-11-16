@@ -20,5 +20,9 @@ public class ImageDAO {
 		return sqlSession.selectList("ImageDAO.boardImages",boardno);
 		
 	}
+	public void insertBoardImage(ImageVO vo) {
+		System.out.println("run ImageDAO insertBoardImage()");
+		sqlSession.update("ImageDAO.insertBoardImage",vo);
+	}
 
 }

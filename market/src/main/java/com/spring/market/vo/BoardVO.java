@@ -5,7 +5,7 @@ public class BoardVO {
 	private int memberno;
 	private String title;
 	private String category;
-	private String dateTime;
+	private String datetime;
 	private String content;
 	private int price;
 	
@@ -38,11 +38,11 @@ public class BoardVO {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	public String getDateTime() {
-		return dateTime;
+	public String getDatetime() {
+		return datetime;
 	}
-	public void setDateTime(String dateTime) {
-		this.dateTime = dateTime;
+	public void setDatetime(String datetime) {
+		this.datetime = datetime;
 	}
 	public String getContent() {
 		return content;
@@ -56,14 +56,14 @@ public class BoardVO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public BoardVO(int boardno, int memberno, String title, String category, String dateTime, String content,
+	public BoardVO(int boardno, int memberno, String title, String category, String datetime, String content,
 			int price) {
 		super();
 		this.boardno = boardno;
 		this.memberno = memberno;
 		this.title = title;
 		this.category = category;
-		this.dateTime = dateTime;
+		this.datetime = datetime;
 		this.content = content;
 		this.price = price;
 	}

@@ -13,5 +13,7 @@
     	select imagename from image where boardno=#{boardno} order by imageno
     </select> 
   
- 	
+ 	<insert id="insertBoardImage" parameterType="image">
+ 		insert into image(imageindex,memberno,boardno,imagename) values(#{imageindex},#{memberno},#{boardno},#{imagename})
+ 	</insert>
 </mapper>
