@@ -16,5 +16,22 @@
    <select id="memberInfo" resultType="member" parameterType="member">
     	select * from member where memberno=#{memberno}
     </select> 
+    
+    
+    <insert id="insertMember" parameterType="member"> 
+        insert into member(email,password,name,gender,phone,address) values(#{email},#{password},#{name},#{gender},#{phone},#{address}) 
+    </insert>
+    
+   <select id="emailChk" resultType="member" parameterType="member">
+  		select NVL(count(email),0)"email"  from member where email = #{email}
+  	</select>
+  	
+   	<select id="loginMember" resultType="member">
+    	select * from member where email = #{email}
+    </select>
+    
+    <update id="updateProfileImg" parameterType="member"> 
+        update member set profile =#{profile} , profiletype=#{profiletype} where memberno = #{memberno} 
+    </update>
  	
 </mapper>

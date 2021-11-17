@@ -6,21 +6,23 @@ public class MemberVO {
 	private String password;
 	private String name;
 	private int gender;
-	private int admin;
 	private int phone;
 	private String address;
+	private String profile;
+	private String profiletype;
 	public MemberVO() {}
-	public MemberVO(int memberno, String email, String password, String name, int gender, int admin, int phone,
-			String address) {
+	public MemberVO(int memberno, String email, String password, String name, int gender, int phone,
+			String address, String profile, String profiletype) {
 		super();
 		this.memberno = memberno;
 		this.email = email;
 		this.password = password;
 		this.name = name;
 		this.gender = gender;
-		this.admin = admin;
 		this.phone = phone;
 		this.address = address;
+		this.profile = profile;
+		this.profiletype = profiletype;
 	}
 	public int getMemberno() {
 		return memberno;
@@ -52,12 +54,7 @@ public class MemberVO {
 	public void setGender(int gender) {
 		this.gender = gender;
 	}
-	public int getAdmin() {
-		return admin;
-	}
-	public void setAdmin(int admin) {
-		this.admin = admin;
-	}
+
 	public int getPhone() {
 		return phone;
 	}
@@ -70,4 +67,20 @@ public class MemberVO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+	public String getProfiletype() {
+		return profiletype;
+	}
+	public void setProfiletype(String profiletype) {
+		this.profiletype = profiletype;
+	}
+	
+
+
+	
 }

@@ -29,5 +29,9 @@ public class BoardDAO {
 		System.out.println("run BoardDAO firstBoardno()");
 		return sqlSession.selectOne("BoardDAO.firstBoardno",memberno);
 	}
+	public List<BoardVO> boardList() {
+		System.out.println("run BoardDAO boardList()");
+		return sqlSession.selectList("BoardDAO.boardList");
+	}
 
 }

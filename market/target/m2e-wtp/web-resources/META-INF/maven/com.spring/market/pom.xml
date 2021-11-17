@@ -19,7 +19,12 @@
 		<!-- tx? -->
 		<!-- text? -->
 
-		
+		<!-- sms? -->
+		<dependency>
+		    <groupId>net.nurigo</groupId>
+		    <artifactId>javaSDK</artifactId>
+		    <version>2.2</version>
+		</dependency>
 		<!-- 오라클 db 접속 : oracle cloud dependencies -->
 		<!-- https://mvnrepository.com/artifact/com.oracle.database.security/osdt_core -->
 		<dependency>

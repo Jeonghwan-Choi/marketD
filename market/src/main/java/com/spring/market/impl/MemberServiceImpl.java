@@ -25,5 +25,29 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println("run MemberServiceImpl memberInfo()");
 		return memberDAO.memberInfo(memberno);
 	}
+	
+	
+	@Override
+	public void insertMember(MemberVO vo) {
+		 memberDAO.insertMember(vo);
+		
+	}
+
+	@Override
+	public MemberVO emailChk(String email) {
+		System.out.println("MemberServiceImpl emailChk() :" + email);
+		return memberDAO.emailChk(email);
+	}
+
+	@Override
+	public MemberVO loginMember(MemberVO vo) {
+		System.out.println("MemberServiceImpl loginMember() :" + vo);
+		return memberDAO.loginMember(vo);
+	}
+
+	@Override
+	public void updateProfileImg(MemberVO vo) {
+		 memberDAO.updateProfileImg(vo);
+	}
 
 }

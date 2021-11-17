@@ -14,12 +14,31 @@
     </select> 
   
   <insert id="insertBoard" parameterType="board">
-  	<!-- insert into board(memberno,title,category,datetime,content,price) values(#{memberno},#{title},#{category},TO_CHAR(LOCALTIMESTAMP,'yyyy/mm/dd HH24:MI'),#{content},#{price}) -->
-  	insert into board(memberno,title,category,datetime,content,price) values(#{memberno},#{title},#{category},#{datetime},#{content},#{price})
+  	 insert into board(memberno,title,category,datetime,content,price) values(#{memberno},#{title},#{category},TO_CHAR(LOCALTIMESTAMP,'yyyy/mm/dd HH24:MI'),#{content},#{price}) 
+  	<!--insert into board(memberno,title,category,datetime,content,price) values(#{memberno},#{title},#{category},#{datetime},#{content},#{price})-->
   </insert>
   
   <select id="firstBoardno" parameterType="board" resultType="board">
   	select boardno from (select boardno from board where memberno=#{memberno} order by boardno desc) where rownum=1
   </select>
+  
+  
+  
+  <select id="boardList" resultType="board">
+	<![CDATA[
+	    select a.boardno, a.memberno, a.title, a.category,a.datetime,a.content,a.price, nvl((b.cnt),0)"cnt",d.imagename,e.address,f.wish
+		from board a
+		LEFT JOIN (SELECT boardno,COUNT(distinct(memberno))cnt FROM guest GROUP BY boardno ) b
+		ON a.boardno = b.boardno
+		LEFT JOIN image d
+		ON a.boardno = d.boardno
+		LEFT JOIN member e
+		ON a.memberno = e.memberno
+		LEFT JOIN (SELECT boardno,COUNT(memberno)wish FROM wish group by boardno) f
+		ON a.boardno = f.boardno
+		where d.imageindex = 1 and rownum < 10
+		order by cnt desc NULLS LAST
+     ]]>
+    </select>
  	
 </mapper>

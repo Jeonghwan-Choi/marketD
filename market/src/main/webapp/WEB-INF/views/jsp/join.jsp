@@ -47,7 +47,8 @@
 
     
     </script>
-        <form id ="join_form" method="post" action="/insertMember" name = "formm" >
+        <form id ="join_form" method="post" action="/insertMember" name = "formm"  enctype="multipart/form-data">
+
             <div>
             <input type="text" value="${sessionScope.naverID}" style="display:none;">
                 <a id = "main_text">회원가입</a>
@@ -73,9 +74,9 @@
     
     
                     
-                    <form action="#" method="post">
+
                          <div>* 휴대전화 번호 :</div>
-	                    <input type="text" id="to" name="phone"/>   <!-- 인증번호 받을사람 휴대폰 번호 -->
+	                    <input type="text" id="to" name="phone" placeholder="- 를 빼고 입력해주세요." >   <!-- 인증번호 받을사람 휴대폰 번호 -->
 	                    <input id="send" class="phonebtn" type="button" value="인증번호 발송"  ><br>
                         <div id = "usediv">
                       	  <input type='text' id='userNum' placeholder='인증번호를 입력해주세요.'>
@@ -83,12 +84,12 @@
                         </div>
                        
 					  
-						<input type="hidden" name="text" id="text">   <!-- 인증번호를 히든으로 저장해서 보낸다 -->
+						<input type="hidden" id="text">   <!-- 인증번호를 히든으로 저장해서 보낸다 -->
                         
 
                        
 	                    
-					</form>
+
                     <div>* 주소 :</div>
                     <input style="width:234px;" class="content_td_address" id = "member_post" name ="member_post" type = "text" value ="" readonly>
                     <input style="width:234px;" class="content_td_address" id = "member_addr" name ="member_addr"type = "text" value ="" readonly>
@@ -121,14 +122,13 @@
                     <br>
                     <br>
                     <div style="margin-left: 10px;"> 프로필사진 </div>
-                    <img style="width: 150px; margin: 20px; border-radius: 100%;" id="preview-image" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
-                    <input style="display: block;" type="file" id="input-image" name = "profile">
+                    <img style="width: 150px; margin: 20px; border-radius: 100%;" id="preview-image" name="prview" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
+                    <input style="display: block;" type="file" id="input-image" name = "profileimg">
                     
                     
                 </div>
-                <input class = "join_button" type = "button" value = "계정생성" onclick="idcheck()">
-                <input type="button" onclick= "test()" value= "test">
-                <input type="text" >
+                <input class = "join_button" type = "submit" value = "계정생성" >
+
             </div>
         </form>
         

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,12 +12,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
-<form action="/insertBoard" method="post" id="insertBoard" name="insertBoard">
+<form action="/insertBoard" method="post" id="insertBoard" name="insertBoard" enctype="multipart/form-data">
     <main class="insertboard">
+    <input type="hidden" value="${memberVO.memberno}" id="memberno" name="memberno">
         <div class="insertboard_insertboard">
             <div class="insertboard_insertboard_div">
                 <div class="insertboard_insertboard_img_div">
-                    <input type="file" id="input_imgs" maxlength="5" style="display: none;" multiple />
+                    <input type="file" name="input_imgs" id="input_imgs" maxlength="5" style="display: none;" multiple />
                     <div class="insertboard_insertboard_img_label_div">
                         <label class="insertboard_insertboard_img_div_label" for="input_imgs">
                             <img src="${pageContext.request.contextPath}/resources/image/camera.png"><br>
@@ -29,23 +31,23 @@
                 </div>
                 <div class="insertboard_insertboard_content_div" style="display:inline;">
                     <hr>
-                    <input type="text" id="insertboard_insertboard_content_title" value="" placeholder="글 제목">
+                    <input type="text" name="title" id="insertboard_insertboard_content_title" value="" placeholder="글 제목">
                     <hr>
                     <div class="insertboard_insertboard_content_div_category">
                         <!-- onclick="location.href='categoryList.html'" data-transition="slide" -->
-                        <input type="button" id="insertboard_insertboard_category" value="카테고리 선택">
+                        <input type="text" name="category" id="insertboard_insertboard_category" value="카테고리 선택">
                         <span style="float: right;">&#10095;</span>
                     </div>
                     <hr>
-                    <input type="number" id="insertboard_insertboard_price" value="" placeholder="&#8361; 가격">
+                    <input type="number" id="insertboard_insertboard_price" value="" placeholder="&#8361; 가격" name="price">
                     <span style="float: right;">원</span>
                     <hr>
                     <textarea style="width:100%;" rows="10"
-                        placeholder="원미1동에 올릴게시글 내용을 작성해주세요.(가품 및 판매금지품목은 게시가 제한될 수 있어요.)" value="" id="insertboard_insertboard_content"></textarea>
+                        placeholder="${memberVO.address }에 올릴게시글 내용을 작성해주세요.(가품 및 판매금지품목은 게시가 제한될 수 있어요.)" value="" id="insertboard_insertboard_content" name="content"></textarea>
                 </div>
                 <div class="insertboard_insertboard_submitButton_div">
 
-                    <input type="button" value="완료" onclick="test()" id="insertBoard">
+                    <input type="submit" value="완료" id="insertBoard">
 
                 </div>
             </div>
@@ -124,7 +126,10 @@
             multipleContainer.appendChild($colDiv1)
              if(fileArr.length>5){
             	alert("사진등록은 5장까지 가능합니다.")
-            	location.href("insertBoard.com");
+            	location.href("insertBoard");
+            } else if(fileArr.length==0){
+            	alert("사진은 한 개 이상 등록해야합니다.")
+            	location.href("insertBoard");
             } 
         }
     }
@@ -135,15 +140,10 @@
 
 
 	function test() {
+    	event.preventDefault();    
 		var length = document.getElementsByClassName("image").length
 		//사진 개수 chk
-		if(length>5){
-			alert('사진은 5개까지 등록 가능합니다.');
-			return;
-		}else if(length==0){
-			alert('사진은 한 개 이상 등록해야합니다.')
-			return
-		}
+		
 		var title = document.getElementById("insertboard_insertboard_content_title").value
 	    var category = document.getElementById("insertboard_insertboard_category").value
 	    var content = document.getElementById("insertboard_insertboard_content").value
@@ -175,6 +175,7 @@
 					var imagename = jQuery(".image").eq(i-1).attr("alt");
 					$.ajax({
 						url:'insertBoardImage',
+						enctype: 'multipart/form-data',  
 						method : 'POST',
 						data :'imageindex='+i+'&memberno=25&boardno='+data+'&imagename='+imagename,
 						type:'POST',
@@ -201,6 +202,8 @@
         console.log(jQuery(".image").eq(i).attr("alt"))
         //boardno 가지고 image insert
     }
+   /*  document.formm.action = "/insertBoardImage";
+    document.formm.submit(); */
 }
 </script>
 </html>

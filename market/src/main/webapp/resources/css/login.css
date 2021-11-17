@@ -1,0 +1,27 @@
+@charset "UTF-8";
+*{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
+.login_main{
+    width: 700px;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 150px;
+    border: 1px rgb(231, 231, 231) solid;
+    border-radius: 10px;
+    box-shadow: rgb(247, 247, 247) 0px 0px 0px 2px;
+    padding: 50px;
+    
+}    
+.login_main img{
+
+    width: 20px;
+    height: 20px;
+}
+.login_main_p{
+    font-size: 20px;
+
+    
+}

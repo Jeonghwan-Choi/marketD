@@ -29,4 +29,10 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.firstBoardno(memberno);
 	}
 
+	@Override
+	public List<BoardVO> boardList() {
+		System.out.println("run BoardServiceImpl boardList()");
+		return boardDAO.boardList();
+	}
+
 }

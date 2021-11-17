@@ -8,5 +8,12 @@ import com.spring.market.vo.MemberVO;
 public interface MemberService {
 
 	List<MemberVO> memberList();
+	
 	MemberVO memberInfo(int memberno);
+	
+
+	void insertMember(MemberVO vo);
+	MemberVO emailChk(String email);
+	MemberVO loginMember(MemberVO vo);
+	void updateProfileImg(MemberVO vo);
 }
