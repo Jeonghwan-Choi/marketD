@@ -33,5 +33,16 @@ public class MemberDAO {
 		return sqlSession.selectOne("MemberDAO.emailChk",email);
 	}
 
+	public MemberVO loginMember(MemberVO vo) {
+		System.out.println("run MemberDAO loginMember()  " +vo);
+		return sqlSession.selectOne("MemberDAO.loginMember",vo);
+	}
+	
+	public void updateProfileImg(MemberVO vo) {
+		System.out.println("run MemberDAO updateProfileImg()");
+	      sqlSession.update("MemberDAO.updateProfileImg",vo);
+		
+	}
+
 
 }

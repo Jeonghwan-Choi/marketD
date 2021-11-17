@@ -8,7 +8,7 @@
 <mapper namespace="MemberDAO">
  
 
-	<insert id="insertMember"> 
+	<insert id="insertMember" parameterType="member"> 
         insert into member(email,password,name,gender,phone,address) values(#{email},#{password},#{name},#{gender},#{phone},#{address}) 
     </insert>
     
@@ -16,11 +16,15 @@
   		select NVL(count(email),0)"email"  from member where email = #{email}
   	</select>
   	
-<!--    	<select id="getCartList" resultType="cart">
-    	select * from cart where memberNo=#{memberNo}
+   	<select id="loginMember" resultType="member">
+    	select * from member where email = #{email}
     </select>
     
-    <select id="getCartListCount" resultType="int">
+    <update id="updateProfileImg" parameterType="member"> 
+        update member set profile =#{profile} , profiletype=#{profiletype} where memberno = #{memberno} 
+    </update>
+    
+<!--     <select id="getCartListCount" resultType="int">
     	select count(*) from cart where memberNo=#{memberNo}
     </select> -->
   

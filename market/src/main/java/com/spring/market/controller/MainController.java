@@ -25,5 +25,12 @@ public class MainController {
 				
 		return "/jsp/main";
 	}
+	
+	@RequestMapping("/login")
+	public String login(HttpServletRequest req, Model model) throws IllegalStateException {
+
+				
+		return "/jsp/login";
+	}
 
 }

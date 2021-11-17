@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="kr">
 <head>
@@ -9,7 +10,7 @@
     <title>Document</title>
     
 </head>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/join.css?ver=1.0 "  >
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/join.css?ver=1.0 "  >
 <body>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -46,7 +47,8 @@
 
     
     </script>
-        <form id ="join_form" method="post" action="/insertMember" name = "formm" >
+        <form id ="join_form" method="post" action="/insertMember" name = "formm"  enctype="multipart/form-data">
+
             <div>
             <input type="text" value="${sessionScope.naverID}" style="display:none;">
                 <a id = "main_text">회원가입</a>
@@ -72,9 +74,9 @@
     
     
                     
-                    <form action="#" method="post">
+
                          <div>* 휴대전화 번호 :</div>
-	                    <input type="text" id="to" name="phone"/>   <!-- 인증번호 받을사람 휴대폰 번호 -->
+	                    <input type="text" id="to" name="phone" placeholder="- 를 빼고 입력해주세요." >   <!-- 인증번호 받을사람 휴대폰 번호 -->
 	                    <input id="send" class="phonebtn" type="button" value="인증번호 발송"  ><br>
                         <div id = "usediv">
                       	  <input type='text' id='userNum' placeholder='인증번호를 입력해주세요.'>
@@ -82,12 +84,12 @@
                         </div>
                        
 					  
-						<input type="hidden" name="text" id="text">   <!-- 인증번호를 히든으로 저장해서 보낸다 -->
+						<input type="hidden" id="text">   <!-- 인증번호를 히든으로 저장해서 보낸다 -->
                         
 
                        
 	                    
-					</form>
+
                     <div>* 주소 :</div>
                     <input style="width:234px;" class="content_td_address" id = "member_post" name ="member_post" type = "text" value ="" readonly>
                     <input style="width:234px;" class="content_td_address" id = "member_addr" name ="member_addr"type = "text" value ="" readonly>
@@ -119,15 +121,40 @@
                     <div id="checkPwd" style="margin-left:15px; font-size:13px;"> 암호를 입력하세요.</div>
                     <br>
                     <br>
-    
+                    <div style="margin-left: 10px;"> 프로필사진 </div>
+                    <img style="width: 150px; margin: 20px; border-radius: 100%;" id="preview-image" name="prview" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
+                    <input style="display: block;" type="file" id="input-image" name = "profileimg">
                     
                     
                 </div>
-                <input class = "join_button" type = "button" value = "계정생성" onclick="idcheck()">
+                <input class = "join_button" type = "submit" value = "계정생성" >
+
             </div>
         </form>
         
         <script>
+
+        function readImage(input) {
+            // 인풋 태그에 파일이 있는 경우
+            if(input.files && input.files[0]) {
+                // 이미지 파일인지 검사 (생략)
+                // FileReader 인스턴스 생성
+                const reader = new FileReader()
+                // 이미지가 로드가 된 경우
+                reader.onload = e => {
+                    const previewImage = document.getElementById("preview-image")
+                    previewImage.src = e.target.result
+                }
+                // reader가 이미지 읽도록 하기
+                reader.readAsDataURL(input.files[0])
+            }
+        }
+
+        // input file에 change 이벤트 부여
+        const inputImage = document.getElementById("input-image")
+        inputImage.addEventListener("change", e => {
+            readImage(e.target)
+        })
         
         function checkPwd(){
               var f1 = document.forms[0];
@@ -156,6 +183,15 @@
                     document.formm.submit();
               }
         }	  
+        
+        function test() {
+  
+        	
+        	
+        		document.formm.action = "/test";
+                  document.formm.submit();
+          
+  	    }	 
         
         function emailcheck() {
               if (document.formm.email.value == "") {

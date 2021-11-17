@@ -1,6 +1,14 @@
 package com.spring.market.controller;
 
+
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.SocketException;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -11,14 +19,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.market.impl.MemberService;
 import com.spring.market.vo.MemberVO;
 
+import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPFile;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.json.simple.JSONObject;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
+
+
+import com.spring.market.dao.FtpClient;
 
 
 
@@ -71,12 +87,83 @@ public class JoinController {
 	     }
 	   
 		@RequestMapping("/insertMember")
-		public String insertMember(HttpServletRequest req, Model model, MemberVO vo) throws IllegalStateException {
-
+		public String insertMember(HttpServletRequest req, Model model, MemberVO vo,MultipartHttpServletRequest mtfRequest) throws SocketException, IOException, Exception {
+   
+//			//SQL insertMember
 			String address = req.getParameter("member_addr")+" "+req.getParameter("member_addr_1");
 			vo.setAddress(address);
 			memberService.insertMember(vo);
+			MemberVO member =  memberService.loginMember(vo);
+			System.out.println(member.getMemberno());
+			int memberno = member.getMemberno();
+			
+//			//파일질라 data upload
+//			
+		      List<MultipartFile> fileList = mtfRequest.getFiles("profileimg");
+		      System.out.println(fileList.size());
+		      FtpClient client = new FtpClient("112.175.184.60", 21, "cjhftp", "chlwjdghks1!");
+		      
+		        for (MultipartFile mf : fileList) {
+		           
+		          String str1 = mf.getContentType();
+		          String getStr1[] = str1.split("/");
+		          String itype = getStr1[1];
+		          
+		          System.out.println(itype);
+		          
+		         
+		          if(itype.equals("octet-stream")) {
+		        	  
+		        	   vo.setProfile("https://dnvefa72aowie.cloudfront.net/origin/profile/202109/23D6FCD4F145019383458B90F66961C9E8AD8DFA8122229A084C2DAA4507023E.jpg?q=82&s=80x80&t=crop");
+			           vo.setProfiletype(itype);
+			           vo.setMemberno(memberno);
+			           
+			           memberService.updateProfileImg(vo);
+		          
+		          }else {
+		        	  //이미지 넣기 정리 
+		        	  
+		        	   File p123 = File.createTempFile(mf.getInputStream().toString(),"."+itype);
+			           IOUtils.copy(mf.getInputStream(),new FileOutputStream(p123));
+			           client.upload(p123,"html/"+memberno+"/profile",memberno);
+			           System.out.println(p123.getName());
+			           
+			           vo.setProfile(p123.getName());
+			           vo.setProfiletype(itype);
+			           vo.setMemberno(memberno);
+			           
+			           memberService.updateProfileImg(vo);
+			           
+		          }
+		          
+		           
+		       }
+			
 
+			
+			return "redirect:/main";
+		}
+		
+
+		
+		@RequestMapping("/test")
+		   public String test(HttpServletRequest req, Model model,MultipartHttpServletRequest mtfRequest) throws Exception{
+		      List<MultipartFile> fileList = mtfRequest.getFiles("profile");
+		      System.out.println(fileList.size());
+		      FtpClient client = new FtpClient("112.175.184.60", 21, "cjhftp", "chlwjdghks1!");
+		      
+		        for (MultipartFile mf : fileList) {
+		           
+		          String str1 = mf.getContentType();
+		          String getStr1[] = str1.split("/");
+		          String itype = getStr1[1];
+		          int memberno = 32;
+		           File p123 = File.createTempFile(mf.getInputStream().toString(),"."+itype);
+		           IOUtils.copy(mf.getInputStream(),new FileOutputStream(p123));
+		           client.upload(p123,"html/",memberno);
+		           System.out.println("upload suc" + mf);
+		       }
+			
 			return "redirect:/main";
 		}
 		

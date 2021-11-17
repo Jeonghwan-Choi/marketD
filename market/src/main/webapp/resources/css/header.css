@@ -60,12 +60,14 @@ header {
 
   }
 
-  .header_chatting_div{
+  .header_chatting_div div{
     margin-top: 18px;
-    margin-right: 40px;
+    margin-right: 10px;
     float: right;
+
     
   }
+  
   .header_chatting_div input{
       width: 120px;
       height: 40px;
@@ -75,6 +77,36 @@ header {
       border: 1px solid rgb(216, 216, 216);
       border-radius: 3px;
       color: rgb(134, 134, 134);
+  }
+  .header_login_div_profile{
+      width: 30px;
+      height: 30px;
+      border-radius: 100%;
+  }
+  .header_login_div{
+
+    border-radius: 3px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 38px;
+    height: 40px;
+  }
+  .header_login_div:hover{
+    transition-duration: 1s;
+    cursor: pointer;
+    background-position: 50%;
+    background-color: #f3f3f3;
+
+  }
+  .header_login_div_down{
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    }   
+  .header_login_div span{
+      line-height:40px;
+      font-size: 18px;
+      margin-left: 5px;
   }
 
 
@@ -117,7 +149,7 @@ header {
       margin: 10px;
       border-radius: 10px;
   }
-  .product_img{
+  .main_product_div .product_img{
     width: 100%;  
     height: 60%;
     border-radius: 10px;
@@ -159,8 +191,4 @@ header {
     background-color: #495057;
     height: 200px;
     display: block;
-  }
-  .watch-icon{
-  	width:20px;
-  	height:20px;
   }

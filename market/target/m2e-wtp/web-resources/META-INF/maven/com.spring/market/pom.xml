@@ -22,7 +22,24 @@
 		    <artifactId>javaSDK</artifactId>
 		    <version>2.2</version>
 		</dependency>
-
+		<!--ftp -->
+      <!-- https://mvnrepository.com/artifact/commons-net/commons-net -->
+      <dependency>
+         <groupId>commons-net</groupId>
+         <artifactId>commons-net</artifactId>
+         <version>3.8.0</version>
+      </dependency>
+      <!-- -->
+      <dependency>
+         <groupId>org.aspectj</groupId>
+         <artifactId>aspectjrt</artifactId>
+         <version>1.6.10</version>
+      </dependency>
+      <dependency>
+	    <groupId>servlets.com</groupId>
+	    <artifactId>cos</artifactId>
+	    <version>05Nov2002</version>
+	  </dependency>
 
 		
 		<!-- 오라클 db 접속 : oracle cloud dependencies -->

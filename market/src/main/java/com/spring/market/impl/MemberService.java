@@ -10,4 +10,6 @@ public interface MemberService {
 	List<MemberVO> memberList();
 	void insertMember(MemberVO vo);
 	MemberVO emailChk(String email);
+	MemberVO loginMember(MemberVO vo);
+	void updateProfileImg(MemberVO vo);
 }
