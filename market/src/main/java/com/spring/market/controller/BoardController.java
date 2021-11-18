@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -73,15 +74,20 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/insertBoard")
+	@ResponseBody
 	public String insertBoard(HttpServletRequest req, Model model,BoardVO vo,MultipartHttpServletRequest mtfRequest) throws Exception {
 		System.out.println("run BoardController insertBoard()");
 
+		 
 		String title = req.getParameter("title");
 		String category = req.getParameter("category");
 		String  price = req.getParameter("price");
 		String content=req.getParameter("content");
 		int memberno = Integer.parseInt(req.getParameter("memberno"));
 	
+		title=new String(title.getBytes("8859_1"),"utf-8");
+		category=new String(category.getBytes("8859_1"),"utf-8");
+		content=new String(content.getBytes("8859_1"),"utf-8");
 		
 		vo.setTitle(title);
 		vo.setCategory(category);
@@ -118,11 +124,7 @@ public class BoardController {
     		
 		}
 		
-		
-		
-		
-		
-		return "/jsp/board";
+		return "redirect:/board";
 	}
 	
 //	@RequestMapping("/firstBoardno")

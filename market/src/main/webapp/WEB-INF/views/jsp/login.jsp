@@ -11,6 +11,7 @@
 
 </head>
 <body>
+<%request.setCharacterEncoding("UTF-8"); %>
     <div class="login_main">
         <div>
             <img src="https://w.namu.la/s/e333e0887c17ef96c77da7c2c9b49e9d342b02f01994851f69870be0bc786b1c1757e80f7e7dd00a5a99ec605b11e55ff7a3f20867b612ecccb493f4b68112dc06b7fa51d6052af753face6bbac777be">
