@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
- 
+ <%response.setHeader("Access-Control-Allow-Origin","*"); %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,11 +9,11 @@
     <body>
     
     
-        <script src="http://localhost:82/socket.io/socket.io.js"></script>
+        <script src="http://cjhwebsocket.cafe24app.com/socket.io/socket.io.js"></script>
         <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
         <script>
             $(document).ready(function(){
-                var socket = io("http://localhost:82");
+                var socket = io("http://cjhwebsocket.cafe24app.com:80");
             });
         </script>
     </body>

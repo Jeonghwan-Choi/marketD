@@ -27,7 +27,7 @@
 	            <input type= "submit" value="로그인">
             
 	            <input type= "button" value="회원가입" onclick="joinform()">
-	            <input type= "button" value="카카오 로그인">
+	            <input type= "button" value="카카오 로그인" onclick="ttst()">
 	            <input type= "button" value="네이버아이디로 로그인">
             </form>
 
@@ -41,6 +41,9 @@
 
 	function joinform(){
 		location.href = "/join";
+	}
+	function ttst(){
+		location.href = "/ttst";
 	}
 </script>
 

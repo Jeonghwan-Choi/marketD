@@ -32,5 +32,12 @@ public class MainController {
 				
 		return "/jsp/login";
 	}
+	@RequestMapping("/ttst")
+	public String ttst(HttpServletRequest req, Model model) throws IllegalStateException {
+
+				
+		return "/jsp/socket";
+	}
+
 
 }
