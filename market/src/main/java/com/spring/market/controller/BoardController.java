@@ -81,17 +81,17 @@ public class BoardController {
 		 
 		String title = req.getParameter("title");
 		String category = req.getParameter("category");
-		String  price = req.getParameter("price");
+		int  price = Integer.parseInt(req.getParameter("price"));
 		String content=req.getParameter("content");
 		int memberno = Integer.parseInt(req.getParameter("memberno"));
 	
-		title=new String(title.getBytes("8859_1"),"utf-8");
-		category=new String(category.getBytes("8859_1"),"utf-8");
-		content=new String(content.getBytes("8859_1"),"utf-8");
+		System.out.println(title);		
+		System.out.println(content);	
+		
 		
 		vo.setTitle(title);
 		vo.setCategory(category);
-		vo.setPrice(Integer.parseInt(price));
+		vo.setPrice(price);
 		vo.setContent(content);
 		vo.setMemberno(memberno);
 		

@@ -1,4 +1,3 @@
-@charset "UTF-8";
 *{  
     margin: 0;
     padding: 0;
@@ -149,14 +148,18 @@ header {
       display: inline-block;
       margin: 10px;
       border-radius: 10px;
+      text-decoration:none ;
   }
   .main_product_div .product_img{
     width: 100%;  
     height: 60%;
     border-radius: 10px;
     border: none;
+    
   }
-
+  .main_product_div_a{
+	  text-decoration:none ;
+  }
   .main_product_title{
       color: balck;
       font-weight: 700;
@@ -181,7 +184,9 @@ header {
       float: right;
         color: black;
     }
-
+  .main_product_div_a:hover{
+    color : red;
+  }
 
 
 
