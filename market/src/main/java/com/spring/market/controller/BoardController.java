@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
@@ -60,11 +61,8 @@ public class BoardController {
 		
 		List<ImageVO> boardImages = imageService.boardImages(boardno);
 		
-		
-//		List<ImageVO> list = new ArrayList<ImageVO>();
-//		for(int i = 0; i<boardImages.size();i++) {
-//			list.add(boardImages.get(i));
-//		}
+		System.out.println("size: "+boardImages.size());
+
 		model.addAttribute("boardImages", boardImages);
 		model.addAttribute("BoardMemberno", memberno);
 		model.addAttribute("BoardBoardno", boardno);
@@ -72,7 +70,11 @@ public class BoardController {
 //		방문자 등록 1인1개 한정임 인기중고 뽑기위해
 		BoardVO vo = new BoardVO();
 		vo.setBoardno(boardno);
-		vo.setMemberno(memberno);
+		HttpSession session = req.getSession();
+		System.out.println(session.getAttribute("loginM"));
+		int loginMemberno = (int) session.getAttribute("loginM");
+		
+		vo.setMemberno(loginMemberno);
 		boardService.insertGuest(vo);
 		return "/jsp/board";
 	}

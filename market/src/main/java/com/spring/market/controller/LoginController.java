@@ -46,7 +46,7 @@ public class LoginController {
 			
 			HttpSession session=req.getSession();
 	        session.setAttribute("memberVO", member);
-			
+	        session.setAttribute("loginM", member.getMemberno());
 			return "redirect:/main";
 		}
 		
