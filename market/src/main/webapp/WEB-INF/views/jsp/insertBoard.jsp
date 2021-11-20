@@ -202,7 +202,7 @@
         //boardno 가지고 image insert
     }
    /*  document.formm.action = "/insertBoardImage";
-    document.formm.submit(); */
+    	document.formm.submit(); */
 }
 </script>
 </html>

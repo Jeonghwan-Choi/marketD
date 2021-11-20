@@ -1,0 +1,270 @@
+    .chat_main{
+        border: 1px solid rgb(219, 219, 219);
+        height: 85vh;
+        background-color: white;
+        margin-top: 105px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 85%;
+        border-radius: 10px;
+        padding: 0 auto;
+        
+        
+    }
+    #chat_user{
+        float: left;
+        width:29%;
+        height: 100%;
+        border-radius: 10px 0px 0px 10px;
+        border-right: 1px solid rgb(219, 219, 219);
+    }
+    .chat_user_left{
+        float:left;
+        width: 20%;
+        height: 100%;
+        background-color: rgb(234, 235, 238);
+        border-radius: 10px 0px 0px 10px;
+    }
+    .chat_user_list{
+        float:left;
+        width: 80%;
+        height: 100%;
+        background-color: white;
+        overflow:auto;
+    }
+    .chat_user_myname{
+        text-align: left;
+        height: 60px;
+        border-bottom: 1px solid rgb(219, 219, 219);
+    }    
+    .chat_user_myname span{
+        line-height: 60px;
+        font-size: 18px;
+        font-weight: 600;
+        margin-left: 10px;
+        color: rgb(75, 75, 75);
+    }
+    .chat_user_readm{
+        height: 30px;
+        text-align: right;
+        border-bottom: 1px solid rgb(219, 219, 219);
+        font-size: 14px;
+        padding: 7px;
+        color: rgb(129, 129, 129);
+        
+    }
+    .chat_user_readm div{
+        padding: 5px;
+        float: right;
+        width: 140px;
+    }
+    .chat_user_readm div:hover{
+        background-color:rgb(243, 243, 243);
+        border-radius: 3px;
+    }
+
+    .chat_user_readm img{
+        width: 16px;
+        height: 16px;
+    }
+    /* .chat_user_list_room{
+        width: 100%;
+        padding:20px;
+        border-bottom: 1px solid rgb(219, 219, 219);
+    } */
+    .chat_user_list_room{
+        display: flex;
+        
+        height: 60px;
+        border-bottom: 1px solid rgb(219, 219, 219);
+        -webkit-box-align: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        transition: background-color 0.6s ease 0s, background-size 0.6s ease 0s;
+        background-position: center center;
+    }
+    .chat_user_list_room a{
+        padding: 16px;
+    }    
+    .chat_user_list_room a:hover{
+        background-color: rgb(235, 235, 235);
+    }
+    .chat_user_list_room_m_img_div{
+        float: left;
+    }    
+    .chat_user_list_room_m_img_div img{
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        border: 1px solid rgb(219, 219, 219);
+        margin-top: 4px;
+        
+    }
+    .chat_user_list_room_m_center_div{
+        margin-left: 50px;
+        margin-top: 3px;
+    }
+
+    .chat_user_list_room_m_member_div{
+        float: left;
+       
+    }
+    .chat_user_list_room_m_member_div span{
+        font-size: 12px;
+        color: rgb(151, 151, 151);
+    }
+
+    .chat_user_list_room_m_message_div{
+        margin-top: 2px;
+        font-size: 14px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        color: rgb(92, 92, 92);
+    }
+
+    #chat_box{
+        width: 70%;
+        float: left;
+        text-align: left;
+        height: 100%;
+
+    }
+    .chat_box_ms{
+        height: 73%;
+        overflow:auto;
+    }
+/* 공통 */
+    .chat_box_p_div img{
+        width: 50px;
+        height: 50px;
+        margin: 7px;
+        border-radius: 100%;
+        border: 1px solid rgb(219, 219, 219);
+        
+    }
+
+    .chat_box_m_div span{
+        line-height: 23px;
+        font-size: 15px;
+    }
+/* 보낸사람 */
+    .a{
+        background-color: white;
+        padding: 8px;
+        display: flex;
+        -webkit-box-pack: start;
+        justify-content: start;
+        padding: 4px;
+        margin-bottom: 30px;
+    }
+    .a .chat_box_p_div{
+        background-color: white;
+        width: 10%;    
+    }
+    .a .chat_box_m_div{
+        padding: 15px;
+        border-radius: 0px 30px 30px 30px;
+        background-color: rgb(245, 245, 245);
+        border: 1px solid rgb(240, 240, 240);
+        width: 35%;
+    }
+    .a .chat_box_m_div_time_div{
+        display: flex;
+        flex-direction: column;
+        -webkit-box-pack: end;
+        justify-content: flex-end;
+        padding: 0px 4px;
+        color: rgb(151, 151, 151);
+        font-size: 13px;
+    }
+/* 받는사람  */
+    .b{
+        background-color: white;
+        padding: 8px;
+        display: flex;
+        -webkit-box-pack: end;
+        justify-content: end;
+        padding: 4px;
+        margin-bottom: 30px;
+    }
+    .b .chat_box_p_div{
+        background-color: white;
+        width: 10%;    
+    }
+    .b .chat_box_m_div{
+        color: white;
+        padding: 15px;
+        border-radius: 30px 0px 30px 30px;
+        background-color: rgb(241, 119, 48);
+        width: 35%;
+        text-overflow: ellipsis;
+    }
+    .b .chat_box_m_div_time_div{
+        display: flex;
+        flex-direction: column;
+        -webkit-box-pack: end;
+        justify-content: flex-end;
+        padding: 0px 4px;
+        color: rgb(151, 151, 151);
+        font-size: 13px;
+    }
+
+    .chat_box_user{
+        padding: 10px;
+        height: 40px;
+        border-bottom: 1px solid rgb(219, 219, 219);
+    }
+    .chat_box_user div{
+        float: left;
+    }
+    .chat_box_user div span{
+        line-height: 43px;
+        margin-left: 10px;
+        font-size: 17px;
+    }
+    .chat_box_user img{
+        width: 40px;
+        height: 40px;
+        border: 1px solid rgb(219, 219, 219);
+        border-radius: 100%;
+    }
+
+    .chat_box_send_div{
+        margin: 7px;
+        border: 1px solid rgb(219, 219, 219);
+        height: 14%;
+        padding: 3px;
+        margin-left: 18px;
+        border-radius: 10px;
+    }
+
+    .chat_box_send_text_div{
+        background-color: blue;
+        width: 100%;
+        height: 70%;
+    }
+    #msg{
+        border: none;
+        width: 100%;
+        height: 100%;
+        outline: none;
+        font-size: 16px;
+    }
+    .chat_box_send_btn_div{
+        margin: 4px;
+        float: right;
+    }
+    #msg_process{
+        width: 70px;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        padding: 2px;
+        font-size: 14px;
+        background-color: rgb(179, 178, 178);
+        height: 25px;
+    }
+

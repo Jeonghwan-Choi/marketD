@@ -6,7 +6,8 @@
 <head>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css ">
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -18,6 +19,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            z-index: 2;
         }
         .container{
             width:600px;
@@ -55,11 +57,16 @@
 
 </head>
 <body>
+<%@ include file = "header.jsp"%>
 <main class="proudct">
         <div class="proudct_product" >
             <div class="proudct_product_div">
                 <div class="proudct_product_img_div">
-                     
+                <form method="post" action="" name="formm">
+	                <input name="boardMemberno" type="text" value="${BoardMemberno}">
+	                <input name="boardBoardno" type="text" value="${BoardBoardno}">
+	                <input name="loginMemberno" type="text" value="${sessionScope.memberVO.memberno}">
+                </form>
                     <div class="wrapper">
                     
 				        <div class="btn">
@@ -68,7 +75,9 @@
 				        <div class="container">
 				            <ul class="slider">
 					             <c:forEach items="${boardImages}" var="boardImages" varStatus="status">
-					                <li class="item"><img class="landscape" src="http://cjhftp.dothome.co.kr/${boardImages.imagename }"></li>
+					                <li class="item">
+					                	<img class="landscape" src="http://cjhftp.dothome.co.kr/${boardImages.memberno}/board/${boardImages.boardno }/${boardImages.imagename}">
+					                </li>
 					            </c:forEach> 
 				            </ul>
 				        </div>
@@ -76,31 +85,16 @@
 				            <a class="next" style="text-decoration: none; cursor:pointer; font-size:50px; margin-left:10px; color:gray;">&#10095;</a>
 				        </div>
 				    </div>
-                    
-                    
                     <div class="proudct_product_profile_div">
                         <div class="proudct_product_profile" >
-                            <img alt="케이티" src="https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png">
-                            
-                        </div>
-                        
-                        
-                        
-                        
-                        
+                            <img  src="https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png">                      
+                        </div>             
                         <div class="proudct_product_profile_name">
                             <a class="proudct_product_profile_name_name">${memberInfo.name }</a><br>
                             <a class="proudct_product_profile_name_address" >${memberInfo.address }</a>
-
-
+                        	<input style="float: right;" onclick="Confirm();" type="button" value="당근채팅">
                         </div>
-
-                
-
                         
-                        
-
-                       
                     </div>
                     <div class="cr" ></div>
 
@@ -248,5 +242,50 @@
     prevBtn.addEventListener('click', function () {
         plusSlides(-1);
     });
+</script>
+
+<script type="text/javascript">
+	var alert = function(msg, type) {
+		swal({
+			title : '',
+			text : msg,
+			type : type,
+			timer : 1500,
+			customClass : 'sweet-size',
+			showConfirmButton : false
+		});
+	}
+
+	var confirm = function(msg, title, resvNum) {
+		swal({
+			title : title,
+			text : msg,
+			type : "warning",
+			showCancelButton : true,
+			confirmButtonClass : "btn-danger",
+			confirmButtonText : "예",
+			cancelButtonText : "아니오",
+			closeOnConfirm : false,
+			closeOnCancel : true
+		}, function(isConfirm) {
+			if (isConfirm) {
+				swal('', '채팅방이 생성 되었습니다.', "success",
+						document.formm.action = "/chat",
+							document.formm.submit());
+			}else{
+				/* document.formm.action = "/chat";
+		    	document.formm.submit(); */
+				// swal('', '예약이 거부되었습니다.', "failed");
+			}
+
+		});
+	}
+
+	function Alert() {
+		alert('gg', 'success');
+	}
+	function Confirm() {
+		confirm('', '채팅방을 생성할까요?');
+	}
 </script>
 </html>

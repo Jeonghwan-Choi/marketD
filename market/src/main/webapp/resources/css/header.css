@@ -7,7 +7,7 @@ header {
     top: 0;
     left: 0;
     right: 0;
-    
+    z-index: 3;
     
     border-bottom: 3px solid rgb(243, 243, 243);
     color: rgb(240, 144, 79);
@@ -88,7 +88,7 @@ header {
     border-radius: 3px;
     padding-left: 15px;
     padding-right: 15px;
-    padding-bottom: 38px;
+
     height: 40px;
   }
   .header_login_div:hover{

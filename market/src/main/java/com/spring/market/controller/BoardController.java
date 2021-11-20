@@ -42,6 +42,7 @@ public class BoardController {
 	@RequestMapping("/board")
 	public String boardInfo(HttpServletRequest req, Model model,int boardno,int memberno) throws IllegalStateException, ParseException {
 		System.out.println("run BoardController boardInfo()");
+		System.out.println(boardno);
 		model.addAttribute("boardInfo", boardService.boardInfo(boardno));
 		
 		//게시물 등록 시간
@@ -58,12 +59,21 @@ public class BoardController {
 		model.addAttribute("memberInfo", memberVO);
 		
 		List<ImageVO> boardImages = imageService.boardImages(boardno);
-		List<ImageVO> list = new ArrayList<ImageVO>();
-		for(int i = 0; i<boardImages.size();i++) {
-			list.add(boardImages.get(i));
-		}
-		model.addAttribute("boardImages", list);
 		
+		
+//		List<ImageVO> list = new ArrayList<ImageVO>();
+//		for(int i = 0; i<boardImages.size();i++) {
+//			list.add(boardImages.get(i));
+//		}
+		model.addAttribute("boardImages", boardImages);
+		model.addAttribute("BoardMemberno", memberno);
+		model.addAttribute("BoardBoardno", boardno);
+		
+//		방문자 등록 1인1개 한정임 인기중고 뽑기위해
+		BoardVO vo = new BoardVO();
+		vo.setBoardno(boardno);
+		vo.setMemberno(memberno);
+		boardService.insertGuest(vo);
 		return "/jsp/board";
 	}
 	

@@ -8,7 +8,7 @@
             <p>인기중고</p>
             <c:forEach items="${productList}" var="productVO">
 	            <div class="main_product_div">
-	            	<a class="main_product_div_a" href="#">
+	            	<a class="main_product_div_a" href="board?boardno=${productVO.boardno }&memberno=${productVO.memberno}">
 		                <img class="product_img" src="http://cjhftp.dothome.co.kr/${productVO.memberno}/board/${productVO.boardno }/${productVO.imagename}">
 		                <div class="main_product_title" >${productVO.title }</div><br>
 		                <div class="main_product_address">${productVO.address }</div><br>
@@ -27,7 +27,7 @@
 	            </div>
 			</c:forEach>
         </div>
-        <a href="/insertBoardForm">최정환바보</a>
+        <a href="/insertBoardForm">피효정바보</a>
       </main>   
       <footer class="footer">
 

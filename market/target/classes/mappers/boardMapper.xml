@@ -40,5 +40,9 @@
 		order by cnt desc NULLS LAST
      ]]>
     </select>
+    
+      <insert id="insertGuest" parameterType="board">
+	  	 insert into guest(boardno,memberno) values(#{boardno},#{memberno}) 
+  	 </insert>
  	
 </mapper>
