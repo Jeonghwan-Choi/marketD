@@ -87,10 +87,12 @@
     .chat_user_list_room a{
         padding: 16px;
         width: 100%;
+      ;
         
     }    
     .chat_user_list_room a:hover{
         background-color: rgb(235, 235, 235);
+        cursor: pointer
     }
     .chat_user_list_room_m_img_div{
         float: left;

@@ -32,13 +32,15 @@
                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                 var roadAddr = data.roadAddress; // 도로명 주소 변수
                 var jibunAddr = data.jibunAddress; // 지번 주소 변수
+                var sigungu = data.sigungu;
+                var bname = data.bname;
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('member_post').value = data.zonecode;
                 if(roadAddr !== ''){
-                    document.getElementById("member_addr").value = roadAddr;
+                    document.getElementById("member_addr").value = sigungu+" "+bname;
                 } 
                 else if(jibunAddr !== ''){
-                    document.getElementById("member_addr").value = jibunAddr;
+                    document.getElementById("member_addr").value = sigungu+" "+bname;
                 }
             }
         }).open();
@@ -94,8 +96,8 @@
                     <input style="width:234px;" class="content_td_address" id = "member_post" name ="member_post" type = "text" value ="" readonly>
                     <input style="width:234px;" class="content_td_address" id = "member_addr" name ="member_addr"type = "text" value ="" readonly>
                     <input class="addr_button" type="button" value="주소검색" onclick="findAddr()" ><br>
-                    <input class="content_td_address" name = "member_addr_1"type="text" placeholder="상세주소">
-                    
+<!--                     <input class="content_td_address" name = "member_addr_1"type="text" placeholder="상세주소">
+ -->                    
                     <br>
                     <br>
     
