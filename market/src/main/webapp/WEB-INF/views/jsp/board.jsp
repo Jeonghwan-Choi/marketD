@@ -111,9 +111,9 @@
                         <a class="product_detail_price">
                             ${boardInfo.price }원
                         </a><br>
-                        <textarea class="product_detail_content"   readonly >
+                        <p class="product_detail_content"   >
 							${boardInfo.content }
-                        </textarea>
+                        </p>
                         <a class="product_detail_favorite" >관심</a>
                         <a class="product_detail_chatting" >채팅</a>
                         <a class="product_detail_select" >조회</a>

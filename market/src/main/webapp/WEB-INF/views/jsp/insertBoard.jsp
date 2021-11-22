@@ -46,7 +46,7 @@
                 </div>
                 <div class="insertboard_insertboard_submitButton_div">
 
-                    <input type="submit" value="완료" id="insertBoard">
+                    <input type="button" value="완료" id="insertBoard" onclick="boardSubmit()">
 
                 </div>
             </div>
@@ -204,5 +204,13 @@
    /*  document.formm.action = "/insertBoardImage";
     	document.formm.submit(); */
 }
+    function boardSubmit(){
+    	   var str = $("#insertboard_insertboard_content").val();
+
+    	    str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+    	    $("#insertboard_insertboard_content").val(str);
+			$("#insertBoard").submit();
+
+    }
 </script>
 </html>

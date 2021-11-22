@@ -96,7 +96,7 @@
 		                            </div>
 		                            <div class="chat_user_list_room_m_center_div">
 		                                <div class="chat_user_list_room_m_member_div">
-		                                    <span>${chatVO.name }</span>
+		                                    <span>${chatVO.name }</span>	
 		                                    <span> · </span>
 		                                    <span>${chatVO.datetime } </span>
 		                                </div>
