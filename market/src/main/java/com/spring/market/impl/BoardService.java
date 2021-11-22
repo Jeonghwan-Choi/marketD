@@ -10,4 +10,6 @@ public interface BoardService {
 	void insertBoard(BoardVO vo);
 	BoardVO firstBoardno(int memberno);
 	List<BoardVO> boardList();
+	void insertGuest(BoardVO vo);
+	void addwish(BoardVO vo);
 }

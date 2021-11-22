@@ -33,5 +33,12 @@ public class BoardDAO {
 		System.out.println("run BoardDAO boardList()");
 		return sqlSession.selectList("BoardDAO.boardList");
 	}
-
+	public void insertGuest(BoardVO vo) {
+		System.out.println("run BoardDAO insertGuest()");
+		sqlSession.update("BoardDAO.insertGuest",vo);		
+	}
+	public void addwish(BoardVO vo) {
+		System.out.println("run BoardDAO addwish()");
+		sqlSession.update("BoardDAO.addwish",vo);		
+	}
 }

@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
@@ -42,6 +43,7 @@ public class BoardController {
 	@RequestMapping("/board")
 	public String boardInfo(HttpServletRequest req, Model model,int boardno,int memberno) throws IllegalStateException, ParseException {
 		System.out.println("run BoardController boardInfo()");
+		System.out.println(boardno);
 		model.addAttribute("boardInfo", boardService.boardInfo(boardno));
 		
 		//게시물 등록 시간
@@ -55,14 +57,36 @@ public class BoardController {
 		
 		
 		MemberVO memberVO = memberService.memberInfo(memberno);
-		model.addAttribute("memberInfo", memberVO);
 		
+		model.addAttribute("memberInfo", memberVO);
 		List<ImageVO> boardImages = imageService.boardImages(boardno);
-		List<ImageVO> list = new ArrayList<ImageVO>();
-		for(int i = 0; i<boardImages.size();i++) {
-			list.add(boardImages.get(i));
-		}
-		model.addAttribute("boardImages", list);
+		
+		
+		model.addAttribute("boardImages", boardImages);
+		model.addAttribute("BoardMemberno", memberno);
+		model.addAttribute("BoardBoardno", boardno);
+		
+//		방문자 등록 1인1개 한정임 인기중고 뽑기위해
+		BoardVO vo = new BoardVO();
+		vo.setBoardno(boardno);
+		vo.setMemberno(memberno);
+		boardService.insertGuest(vo);
+		
+		//wish 상태 확인하기
+		MemberVO wishmemVO = new MemberVO();
+		wishmemVO.setBoardno(boardno);
+		
+		HttpSession session = req.getSession();
+		int loginno = (int) session.getAttribute("loginM");
+		wishmemVO.setMemberno(loginno);
+		
+		MemberVO wishmemVO2 = new MemberVO();
+		wishmemVO2 = memberService.wishchk(wishmemVO);
+		
+		System.out.println("loginno:"+loginno);
+		
+		model.addAttribute("wishchk",wishmemVO2);
+		System.out.println("chkwishchk"+wishmemVO2.getWishno());
 		
 		return "/jsp/board";
 	}
@@ -81,17 +105,17 @@ public class BoardController {
 		 
 		String title = req.getParameter("title");
 		String category = req.getParameter("category");
-		String  price = req.getParameter("price");
+		int  price = Integer.parseInt(req.getParameter("price"));
 		String content=req.getParameter("content");
 		int memberno = Integer.parseInt(req.getParameter("memberno"));
 	
-		title=new String(title.getBytes("8859_1"),"utf-8");
-		category=new String(category.getBytes("8859_1"),"utf-8");
-		content=new String(content.getBytes("8859_1"),"utf-8");
+		System.out.println(title);		
+		System.out.println(content);	
+		
 		
 		vo.setTitle(title);
 		vo.setCategory(category);
-		vo.setPrice(Integer.parseInt(price));
+		vo.setPrice(price);
 		vo.setContent(content);
 		vo.setMemberno(memberno);
 		
@@ -127,11 +151,6 @@ public class BoardController {
 		return "redirect:/board";
 	}
 	
-//	@RequestMapping("/firstBoardno")
-//	@ResponseBody
-//	public int firstBoardno(HttpServletRequest req, Model model,BoardVO vo) throws IllegalStateException, ParseException {
-//		
-//	}
 	@RequestMapping("/insertBoardImage")
 	//public String insertBoardImage(HttpServletRequest req, Model model,MultipartHttpServletRequest mtfRequest) throws Exception {
 		public String insertBoardImage(HttpServletRequest req, Model model,MultipartHttpServletRequest mtfRequest) throws Exception{
@@ -167,6 +186,20 @@ public class BoardController {
 		
 		
 		return "/jsp/board";
+	}
+	
+	@RequestMapping("/addwish")
+	@ResponseBody
+	public void addwish(HttpServletRequest req, Model model,BoardVO vo) throws Exception {
+		boardService.addwish(vo);
+		 
+		
+		
+	}
+	@RequestMapping("/deleteWish")
+	@ResponseBody
+	public void deleteWish(HttpServletRequest req, Model model,MemberVO vo) throws Exception {
+		memberService.deleteWish(vo);
 	}
 
 }

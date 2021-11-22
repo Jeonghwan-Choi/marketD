@@ -8,7 +8,7 @@ header {
     top: 0;
     left: 0;
     right: 0;
-    
+    z-index: 3;
     
     border-bottom: 3px solid rgb(243, 243, 243);
     color: rgb(240, 144, 79);
@@ -89,7 +89,7 @@ header {
     border-radius: 3px;
     padding-left: 15px;
     padding-right: 15px;
-    padding-bottom: 38px;
+
     height: 40px;
   }
   .header_login_div:hover{
@@ -149,14 +149,18 @@ header {
       display: inline-block;
       margin: 10px;
       border-radius: 10px;
+      text-decoration:none ;
   }
   .main_product_div .product_img{
     width: 100%;  
     height: 60%;
     border-radius: 10px;
     border: none;
+    
   }
-
+  .main_product_div_a{
+	  text-decoration:none ;
+  }
   .main_product_title{
       color: balck;
       font-weight: 700;
@@ -181,7 +185,9 @@ header {
       float: right;
         color: black;
     }
-
+  .main_product_div_a:hover{
+    color : red;
+  }
 
 
 

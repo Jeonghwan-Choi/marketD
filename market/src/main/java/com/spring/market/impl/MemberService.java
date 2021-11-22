@@ -16,4 +16,6 @@ public interface MemberService {
 	MemberVO emailChk(String email);
 	MemberVO loginMember(MemberVO vo);
 	void updateProfileImg(MemberVO vo);
+	MemberVO wishchk(MemberVO vo);
+	void deleteWish(MemberVO vo);
 }

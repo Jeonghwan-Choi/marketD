@@ -34,5 +34,16 @@ public class BoardServiceImpl implements BoardService {
 		System.out.println("run BoardServiceImpl boardList()");
 		return boardDAO.boardList();
 	}
-
+	@Override
+	public void insertGuest(BoardVO vo) {
+		System.out.println("run BoardServiceImpl insertGuest()");
+		boardDAO.insertGuest(vo);
+	}
+	@Override
+	public void addwish(BoardVO vo) {
+		System.out.println("run BoardServiceImpl addwish()");
+		boardDAO.addwish(vo);
+		
+	}
+	
 }

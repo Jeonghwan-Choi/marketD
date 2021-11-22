@@ -111,6 +111,7 @@ public class BoardVO {
 		this.address = address;
 	}
 
+	
 	public int getWish() {
 		return wish;
 	}

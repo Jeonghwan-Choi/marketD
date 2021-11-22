@@ -6,7 +6,9 @@
 <head>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css ">
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -18,6 +20,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            z-index: 2;
         }
         .container{
             width:600px;
@@ -49,17 +52,26 @@
            /* -o-transition: all 0.25s cubic-bezier(1, .01, .32, 1);*/
             transition: all 0.25s cubic-bezier(1, .01, .32, 1);
         }
+        
+        
     </style>
     
     <title>coco board</title>
 
 </head>
 <body>
+<%@ include file = "header.jsp"%>
 <main class="proudct">
         <div class="proudct_product" >
             <div class="proudct_product_div">
                 <div class="proudct_product_img_div">
-                     
+                <form method="post" action="/chat" name="formm" id="formm">
+	                <input name="boardMemberno" id="boardMemberno" type="text" value="${BoardMemberno}">
+	                <input name="boardBoardno" id="boardBoardno" type="text" value="${BoardBoardno}">
+	                <input name="user1" id="loginMemberno" type="text" value="${sessionScope.memberVO.memberno}">
+	                <input type="submit">
+                </form>
+                <input type="text" id="wishno" value="${wishchk.wishno }">
                     <div class="wrapper">
                     
 				        <div class="btn">
@@ -68,7 +80,9 @@
 				        <div class="container">
 				            <ul class="slider">
 					             <c:forEach items="${boardImages}" var="boardImages" varStatus="status">
-					                <li class="item"><img class="landscape" src="http://cjhftp.dothome.co.kr/${boardImages.imagename }"></li>
+					                <li class="item">
+					                	<img class="landscape" src="http://cjhftp.dothome.co.kr/${boardImages.memberno}/board/${boardImages.boardno }/${boardImages.imagename}">
+					                </li>
 					            </c:forEach> 
 				            </ul>
 				        </div>
@@ -76,31 +90,34 @@
 				            <a class="next" style="text-decoration: none; cursor:pointer; font-size:50px; margin-left:10px; color:gray;">&#10095;</a>
 				        </div>
 				    </div>
-                    
-                    
                     <div class="proudct_product_profile_div">
                         <div class="proudct_product_profile" >
-                            <img alt="케이티" src="https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png">
-                            
-                        </div>
-                        
-                        
-                        
-                        
-                        
+                            <img  src="https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png">                      
+                        </div>             
                         <div class="proudct_product_profile_name">
                             <a class="proudct_product_profile_name_name">${memberInfo.name }</a><br>
                             <a class="proudct_product_profile_name_address" >${memberInfo.address }</a>
-
-
+                            <div class="wish_span">
+                            	 <div class="wish_input" id="wish_input">
+	                            	<input onclick="Confirm();" type="button" value="당근채팅">
+	                            </div>
+	                            <div class="wish_div" id="wish_div">
+	                           		<span>
+	                           			 <c:set var="wishno" value="${wishchk.wishno }"/>
+		                           		<c:choose>
+				                           	<c:when test="${wishno eq 0}">
+				                            	<img id="wish_img" class="wish_img" src="http://cjhftp.dothome.co.kr/ico/heart.png">
+			                            	</c:when>
+			                            	<c:otherwise>
+			                            		<img id="wish_img" class="wish_img" src="http://cjhftp.dothome.co.kr/ico/heart2.png">
+			                            	</c:otherwise>
+		                            	</c:choose> 
+	                           		</span>
+	                            </div>
+                            </div>
+                        	
                         </div>
-
-                
-
                         
-                        
-
-                       
                     </div>
                     <div class="cr" ></div>
 
@@ -248,5 +265,100 @@
     prevBtn.addEventListener('click', function () {
         plusSlides(-1);
     });
+</script>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<script type="text/javascript">
+	var alert = function(msg, type) {
+		swal({
+			title : '',
+			text : msg,
+			type : type,
+			timer : 1500,
+			customClass : 'sweet-size',
+			showConfirmButton : false
+		});
+	}
+
+	var confirm = function(msg, title, resvNum) {
+		swal({
+			title : title,
+			text : msg,
+			type : "warning",
+			showCancelButton : true,
+			confirmButtonClass : "btn-danger",
+			confirmButtonText : "예",
+			cancelButtonText : "아니오",
+			closeOnConfirm : false,
+			closeOnCancel : true
+		}, function(isConfirm) {
+			if (isConfirm) {
+				swal('', '채팅방이 생성 되었습니다.', "success",
+						$("#formm").submit());
+			}else{
+				/* document.formm.action = "/chat";
+		    	document.formm.submit(); */
+				// swal('', '예약이 거부되었습니다.', "failed");
+			}
+
+		});
+	}
+
+	function Alert() {
+		alert('gg', 'success');
+	}
+	function Confirm() {
+		confirm('', '채팅방을 생성할까요?');
+	}
+	
+	 
+	 $('.wish_div').on({ 
+	        'click': function(){
+	            if(jQuery('#wish_img').attr("src")=='http://cjhftp.dothome.co.kr/ico/heart.png'){
+	                $('#wish_img').attr('src','http://cjhftp.dothome.co.kr/ico/heart2.png');
+	                
+	                const memberno = document.getElementById('loginMemberno').value;
+	                const boardno = document.getElementById('boardBoardno').value;
+	                
+	                
+	                $.ajax({
+	                    url : 'addwish',
+	                    method : 'POST',
+	                    data : 'memberno=' + memberno + '&boardno=' + boardno,
+	                    type : "POST",
+
+	                    success : function(data) {
+	                  		 alert("해당 상품을 찜했습니다.")
+	           				 
+	           		},
+	                    error : function() {
+	                       alert("request error!");
+	                    }
+	                 })  
+	                
+	            }else if(jQuery('#wish_img').attr("src")=='http://cjhftp.dothome.co.kr/ico/heart2.png'){
+	                $('#wish_img').attr('src','http://cjhftp.dothome.co.kr/ico/heart.png');
+	                
+	                const memberno = document.getElementById('loginMemberno').value;
+	                const boardno = document.getElementById('boardBoardno').value;
+	                
+	                
+	                $.ajax({
+	                    url : 'deleteWish',
+	                    method : 'POST',
+	                    data : 'memberno=' + memberno + '&boardno=' + boardno,
+	                    type : "POST",
+
+	                    success : function(data) {
+	                  		 alert("해당 상품의 찜선택을 취소했습니다.")
+	           				 
+	           		},
+	                    error : function() {
+	                       alert("request error!");
+	                    }
+	                 }) 
+	            }           
+	        } 
+	    });
 </script>
 </html>

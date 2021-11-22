@@ -5,24 +5,29 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
   
-<mapper namespace="CartDAO">
+<mapper namespace="ChatDAO">
  
 
-<!-- 	<insert id="insertCart"> 
-        INSERT INTO cart (cartno,category, name,price,filename,resdate,memberNo ) VALUES (seq_cart.nextval, #{category},#{name},#{price},#{filename},sysdate,#{memberNo}) 
-    </insert>
     
-    <select id="getcartCount" resultType="cart" parameterType="cart">
-  		select count(*)"cartno" from cart where memberNo =#{value}
-  	</select>
-  	
-  	<select id="getCartList" resultType="cart">
-    	select * from cart where memberNo=#{memberNo}
+  <select id="myChatList" parameterType="chat" resultType="chat">
+	<![CDATA[
+		select a.chatmember,a.chatroomno,a.user1,a.user2,m.name,m.address,m.profile,cm.chatmessage
+		from chatmember a
+		Left Join member m
+		ON a.user2 = m.memberno
+		Left Join (SELECT chatroomno, chatmessage,chatmessageno
+        FROM ( SELECT chatroomno, chatmessage,chatmessageno
+        , ROW_NUMBER() OVER(PARTITION BY chatroomno ORDER BY chatmessageno DESC) as RowIdx
+        FROM chatmessage 
+        ) t1 WHERE RowIdx = 1) cm
+		ON a.chatroomno = cm.chatroomno
+		where user1 = #{user1}
+     ]]>
     </select>
     
-    <select id="getCartListCount" resultType="int">
-    	select count(*) from cart where memberNo=#{memberNo}
-    </select> -->
-  
+<!--     <insert id="insertChatMessage" parameterType="chat"> 
+        insert into member(email,password,name,gender,phone,address) values(#{email},#{password},#{name},#{gender},#{phone},#{address}) 
+    </insert> -->
+
  	
 </mapper>

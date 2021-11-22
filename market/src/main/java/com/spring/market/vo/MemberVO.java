@@ -10,9 +10,11 @@ public class MemberVO {
 	private String address;
 	private String profile;
 	private String profiletype;
+	private int wishno;
+	private int boardno;
 	public MemberVO() {}
 	public MemberVO(int memberno, String email, String password, String name, int gender, int phone,
-			String address, String profile, String profiletype) {
+			String address, String profile, String profiletype,int wishno,int boardno) {
 		super();
 		this.memberno = memberno;
 		this.email = email;
@@ -23,6 +25,20 @@ public class MemberVO {
 		this.address = address;
 		this.profile = profile;
 		this.profiletype = profiletype;
+		this.wishno=wishno;
+		this.boardno=boardno;
+	}
+	public int getBoardno() {
+		return boardno;
+	}
+	public void setBoardno(int boardno) {
+		this.boardno = boardno;
+	}
+	public int getWishno() {
+		return wishno;
+	}
+	public void setWishno(int wishno) {
+		this.wishno = wishno;
 	}
 	public int getMemberno() {
 		return memberno;

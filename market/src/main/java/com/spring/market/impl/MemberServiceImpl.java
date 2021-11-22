@@ -50,4 +50,15 @@ public class MemberServiceImpl implements MemberService {
 		 memberDAO.updateProfileImg(vo);
 	}
 
+	@Override
+	public MemberVO wishchk(MemberVO vo) {
+		System.out.println("MemberServiceImpl wishchk() :" + vo);
+		return memberDAO.wishchk(vo);
+	}
+	@Override
+	public void deleteWish(MemberVO vo) {
+		System.out.println("MemberServiceImpl deleteWish() :" + vo);
+		memberDAO.deleteWish(vo);
+	}
+
 }

@@ -14,9 +14,16 @@
     </select> 
   
    <select id="memberInfo" resultType="member" parameterType="member">
-    	select * from member where memberno=#{memberno}
+    	 select * from member where memberno=#{memberno} 
+    	<!--<![CDATA[
+	    	select m.memberno,m.email,m.password,m.name,m.gender,m.phone,m.address,m.profile,b.wishno,b.boardno,b.memberno
+			from member m
+			left join (select boardno,memberno,wishno from wish) b
+			on b.boardno=#{boardno} and b.memberno=#{memberno}
+			where m.memberno=#{memberno}
+		]]>-->
     </select> 
-    
+   
     
     <insert id="insertMember" parameterType="member"> 
         insert into member(email,password,name,gender,phone,address) values(#{email},#{password},#{name},#{gender},#{phone},#{address}) 
@@ -33,5 +40,12 @@
     <update id="updateProfileImg" parameterType="member"> 
         update member set profile =#{profile} , profiletype=#{profiletype} where memberno = #{memberno} 
     </update>
+    
+      <select id="wishchk" resultType="member" parameterType="member">
+    	select NVL(MAX(wishno),0)wishno from wish where boardno=#{boardno} and memberno=#{memberno}
+    </select> 
+    <delete id="deleteWish" parameterType="member">
+    	delete from wish where boardno=#{boardno} and memberno=#{memberno}
+    </delete>
  	
 </mapper>
