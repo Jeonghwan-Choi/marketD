@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +13,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css ">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat.css ">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="http://localhost:80/socket.io/socket.io.js"></script>
+<script src="http://cjhwebsocket.cafe24app.com:80/socket.io/socket.io.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <style>
 
@@ -20,9 +22,11 @@
 <body>
 
     <header>
-        <label>MemberNO : </label><input id="memberno" type="text" value="${boardMemberno} "><br>
-        <label>RoomNO : </label><input id="roomno" type="text" value="${boardBoardno}"><br>
-        <label>LoginMemberNO : </label><input id="loginmemberno" type="text" value="${loginMemberno}"><br>
+    	<div style="display:none;">
+       		 <label>MemberNO : </label><input id="memberno" type="text" value="${boardMemberno} "><br>
+      	 	 <label>RoomNO : </label><input id="roomno" type="text" value="${boardBoardno}"><br>
+      		 <label>LoginMemberNO : </label><input id="loginmemberno" type="text" value="${loginMemberno}"><br>
+        </div>
         <div class = "header_img_div">
             <img class="fixed-logo" alt="당근마켓" src="https://d1unjqcospf8gs.cloudfront.net/assets/home/base/header/logo-basic-24b18257ac4ef693c02233bf21e9cb7ecbf43ebd8d5b40c24d99e14094a44c81.svg">
         </div>
@@ -56,7 +60,8 @@
 
       </header>
 
-    <div class = "chat_main">
+
+   <div class = "chat_main">
         <div>
 
         </div>
@@ -66,43 +71,46 @@
             </div>
             <div id="chat_user_list" class="chat_user_list">
                 <div id="chat_user_myname" class="chat_user_myname">
-                    <span>최정환</span>
+                    <span>${memberVO.name}</span>
                 </div>
                 <div id="chat_user_readm" class="chat_user_readm">
-                    <div>
-                        <span>안읽은 메시지만 보기</span>
-                        <span class="readm_img_span">
+                  
+                    
+                        <div class="readm_img_span">안읽은 메시지만 보기
                             <img id="readm_img" class="readm_img" src="http://cjhftp.dothome.co.kr/ico/tick2.png">
-                        </span>
-                    </div>
+                        </div>
+                    
                 </div>
                 <!-- 여기서 부터 사람 한명 -->
-                <div class="chat_user_list_room">
-                    <a>
-                        <div class="chat_user_list_room_m">
-                            <div class="chat_user_list_room_m_img_div">
-                                <img src="https://dnvefa72aowie.cloudfront.net/origin/profile/202109/23D6FCD4F145019383458B90F66961C9E8AD8DFA8122229A084C2DAA4507023E.jpg?q=82&amp;s=80x80&amp;t=crop" alt="profile">
-                            </div>
-                            <div class="chat_user_list_room_m_center_div">
-                                <div class="chat_user_list_room_m_member_div">
-                                    <span>당근이</span>
-                                    <span>안양1동</span>
-                                    <span> · </span>
-                                    <span> 14:47 </span>
-                                </div>
-                                <br>
-                                <div class="chat_user_list_room_m_message_div">
-                                    <span>
-                                        최정환님 안녕하세요, 안양1동 근처에서 다양한 물품들이 <!-- 매일 올라오고 있어요. 알림을 받으려면 키워드를 등록해보세요! -->
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            
-                        </div>
-                    </a>
-                 </div>
+                <c:forEach items="${mychatList}" var="chatVO">
+	                <div class="chat_user_list_room">
+		                    <a>
+		                        <div class="chat_user_list_room_m">
+		                            <div class="chat_user_list_room_m_img_div">
+<%-- 		                            <c:choose>
+								         <c:when test="${sessionScope.memberVO==null}"> --%>
+								         	  <img src="http://cjhftp.dothome.co.kr/${chatVO.user2}/profile/${chatVO.profile}">
+<%-- 								         </c:when>
+							         </c:choose> --%>
+		                                
+		                            </div>
+		                            <div class="chat_user_list_room_m_center_div">
+		                                <div class="chat_user_list_room_m_member_div">
+		                                    <span>${chatVO.name }</span>
+		                                    <span> · </span>
+		                                    <span>${chatVO.datetime } </span>
+		                                </div>
+		                                <br>
+		                                <div class="chat_user_list_room_m_message_div">
+		                                    <span>
+		                                        ${chatVO.chatmessage }
+		                                    </span>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    </a>                
+	                 </div>
+   				 </c:forEach> 
                  <!-- 여기까지 -->
 
 
@@ -146,7 +154,7 @@
     });
 
     $(document).ready(function() {
-            var socket = io("http://localhost:80");
+            var socket = io("http://cjhwebsocket.cafe24app.com:80");
  
             //msg에서 키를 누를떄
             $("#msg").keydown(function(key) {
@@ -159,8 +167,16 @@
  
             //msg_process를 클릭할 때
             $("#msg_process").click(function() {
+
+                //time 
+                let today = new Date();
+                let time = (today.getMonth()+1)+'.'+today.getDate()+' '+today.getHours()+':'+today.getMinutes();
                 //소켓에 send_msg라는 이벤트로 input에 #msg의 벨류를 담고 보내준다.
-                socket.emit("send_msg", $("#roomno").val()+"//"+$("#memberno").val()+"//"+$("#msg").val());
+                socket.emit("send_msg", $("#roomno").val()+"//"+$("#memberno").val()+"//"+$("#msg").val()+"//"+time);
+
+                //ajax insert sql 
+
+
                 //#msg에 벨류값을 비워준다.
                 $("#msg").val("");
             });
@@ -169,16 +185,21 @@
             socket.on('send_msg', function(msg) {
                 var jbSplit = msg.split('//');
                 //div 태그를 만들어 텍스트를 msg로 지정을 한뒤 #chat_box에 추가를 시켜준다.
-                console.log()
+                console.log(msg)
                     
                 if($("#roomno").val()==jbSplit[0]){    
                     if($("#memberno").val()==jbSplit[1]){
-                        $('<div class="b"><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >15:34</span></div><div class="chat_box_m_div" ><span>'+jbSplit[2]+'</span></div><div class="chat_box_p_div"><img></div></div>').appendTo("#chat_box_ms");
+                        $('<div class="b"><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+jbSplit[3]+'</span></div><div class="chat_box_m_div" ><span>'+jbSplit[2]+'</span></div><div class="chat_box_p_div"><img></div></div>').appendTo("#chat_box_ms");
                     }else{
-                        $('<div class="a"><div class="chat_box_p_div"><img src="" ></div><div class="chat_box_m_div" > <span>'+jbSplit[2]+'</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >14:34</span></div></div>').appendTo("#chat_box_ms");
+                        $('<div class="a"><div class="chat_box_p_div"><img src="" ></div><div class="chat_box_m_div" > <span>'+jbSplit[2]+'</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+jbSplit[3]+'</span></div></div>').appendTo("#chat_box_ms");
                     }
                 }    
+
+                //스크롤 자동으로 내려가기
+                $('#chat_box_ms').stop().animate({scrollTop:$('#chat_box_ms')[0].scrollHeight},1000)
             });
+
+            
         });
 
 

@@ -7,6 +7,7 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css ">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,10 +63,11 @@
         <div class="proudct_product" >
             <div class="proudct_product_div">
                 <div class="proudct_product_img_div">
-                <form method="post" action="" name="formm">
+                <form id="formm" method="post" action="/chat" name="formm">
 	                <input name="boardMemberno" type="text" value="${BoardMemberno}">
 	                <input name="boardBoardno" type="text" value="${BoardBoardno}">
-	                <input name="loginMemberno" type="text" value="${sessionScope.memberVO.memberno}">
+	                <input name="user1" type="text" value="${sessionScope.memberVO.memberno}">
+	                <input type = "submit">
                 </form>
                     <div class="wrapper">
                     
@@ -270,8 +272,7 @@
 		}, function(isConfirm) {
 			if (isConfirm) {
 				swal('', '채팅방이 생성 되었습니다.', "success",
-						document.formm.action = "/chat",
-							document.formm.submit());
+						$("#formm").submit());
 			}else{
 				/* document.formm.action = "/chat";
 		    	document.formm.submit(); */

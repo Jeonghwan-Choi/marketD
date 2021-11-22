@@ -10,6 +10,8 @@
 
 <!--     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
  --><link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css?ver=1.1 " >
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
 </head>
 
 
@@ -28,7 +30,10 @@
         <nav>      
             <div class="header_chatting_div">
                 <div>
-                    <input class="header_chatting_btn" type="button" value="당근채팅">
+                	<form name="formm" method="post" action="/chat">
+                		<input name="user1" id="loginMemberno" type= "text" value="${sessionScope.memberVO.memberno}">
+               	 	    <input class="header_chatting_btn" type="submit"  value="당근채팅" >
+                	</form>
                 </div>
 	              <c:choose>
 			         <c:when test="${sessionScope.memberVO==null}">
@@ -57,6 +62,10 @@
         <script>
         	function loginform(){
         		location.href = "/login";
+        	}
+        	function chatform(){
+        		console.log($("#Loginmemberno").val());
+       		location.href = "/chat";
         	}
         </script>
 

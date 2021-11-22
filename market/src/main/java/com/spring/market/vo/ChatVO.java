@@ -11,17 +11,21 @@ public class ChatVO {
 	private int chatmember;
 	private int user1;
 	private int user2;
+	private String name;
+	private String address;
+	private String profile;
 	
 	//chatmessage
 	private int chatmessageno;
 	private int seller;
 	private String chatmessage;
 	private int readst;
-
+	
 	public ChatVO() {}
 
 	public ChatVO(int chatroomno, int boardno, int buyerno, String datetime, int chatmember, int user1, int user2,
-			int chatmessageno, int seller, String chatmessage, int readst) {
+			String name, String address, String profile, int chatmessageno, int seller, String chatmessage,
+			int readst) {
 		super();
 		this.chatroomno = chatroomno;
 		this.boardno = boardno;
@@ -30,6 +34,9 @@ public class ChatVO {
 		this.chatmember = chatmember;
 		this.user1 = user1;
 		this.user2 = user2;
+		this.name = name;
+		this.address = address;
+		this.profile = profile;
 		this.chatmessageno = chatmessageno;
 		this.seller = seller;
 		this.chatmessage = chatmessage;
@@ -92,6 +99,30 @@ public class ChatVO {
 		this.user2 = user2;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+
 	public int getChatmessageno() {
 		return chatmessageno;
 	}
@@ -123,8 +154,13 @@ public class ChatVO {
 	public void setReadst(int readst) {
 		this.readst = readst;
 	}
+
 	
+		
 	
+
+
+
 	
 
 }
