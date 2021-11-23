@@ -111,6 +111,18 @@
 		                                        ${chatVO.chatmessage }
 		                                    </span>
 		                                </div>
+		                                
+											
+												<c:choose>
+										         	<c:when test="${chatVO.readst != 0 }">
+										         	<div class="chat_user_list_room_read" >
+	  													<span>${chatVO.readst }</span>
+	  												</div>	
+	 								    		 	</c:when>
+								         		</c:choose> 
+											
+										
+		                                
 		                            </div>
 		                        </div>
 		                    </a>                
@@ -210,6 +222,7 @@
                 if($("#roomno").val()==jbSplit[0]){    
                     if($("#memberno").val()==jbSplit[1]){
                         $('<div class="a"><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+jbSplit[1]+'/profile/'+$("#profilename").val()+'" ></div><div class="chat_box_m_div" > <span>'+jbSplit[2]+'</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+jbSplit[3]+'</span></div></div>').appendTo("#chat_box_ms");
+                    	
                     }else{
                         $('<div class="b"><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+jbSplit[3]+'</span></div><div class="chat_box_m_div" ><span>'+jbSplit[2]+'</span></div><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+jbSplit[1]+'/profile/'+$("#myprofilename").val()+'" ></div></div>').appendTo("#chat_box_ms");
 

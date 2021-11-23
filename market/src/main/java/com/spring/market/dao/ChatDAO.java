@@ -33,5 +33,10 @@ public class ChatDAO {
 		System.out.println("run ChatDAO insertMessage()");
 		sqlSession.update("ChatDAO.insertMessage",vo);
 	}
+	
+	public void updateReadst(ChatVO vo) {
+		System.out.println("run ChatDAO updateReadst()");
+		sqlSession.update("ChatDAO.updateReadst",vo);
+	}
 
 }

@@ -11,7 +11,7 @@
   <!-- 채팅목록 조회  -->
   <select id="myChatList" parameterType="chat" resultType="chat">
 	<![CDATA[
-		select a.chatmember,a.chatroomno,a.user1,a.user2,m.name,m.address,m.profile,cm.chatmessage
+		select a.chatmember,a.chatroomno,a.user1,a.user2,m.name,m.address,m.profile,cm.chatmessage,NVL((cmm.readst),0)"readst"
 		from chatmember a
 		Left Join member m
 		ON a.user2 = m.memberno
@@ -20,8 +20,11 @@
         , ROW_NUMBER() OVER(PARTITION BY chatroomno ORDER BY chatmessageno DESC) as RowIdx
         FROM chatmessage 
         ) t1 WHERE RowIdx = 1) cm
-		ON a.chatroomno = cm.chatroomno
-		where user1 = #{user1}
+        ON a.chatroomno = cm.chatroomno
+        Left Join (select chatroomno,count(readst)readst
+        FROM chatmessage where readst='1' group by chatroomno ) cmm
+        ON a.chatroomno = cmm.chatroomno
+		where user1 =  #{user1} order by cm.chatmessageno desc
      ]]>
     </select>
 
@@ -39,5 +42,8 @@
     <insert id="insertMessage" parameterType="chat"> 
         insert into chatmessage(chatroomno,seller,chatmessage,readst,datetime) values(#{chatroomno},#{seller},#{chatmessage},1,TO_CHAR(LOCALTIMESTAMP,'yyyy/mm/dd HH24:MI')) 
     </insert>
+    <update id="updateReadst" parameterType="chat"> 
+    update chatmessage set readst = 0 where chatroomno = #{chatroomno} and seller = #{seller}
+    </update>
  	
 </mapper>

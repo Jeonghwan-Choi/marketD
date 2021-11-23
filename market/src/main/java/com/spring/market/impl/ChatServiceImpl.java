@@ -33,5 +33,11 @@ public class ChatServiceImpl implements ChatService {
 		chatDAO.insertMessage(vo);
 	}
 
+	@Override
+	public void updateReadst(ChatVO vo) {
+		System.out.println("run ChatServiceImpl updateReadst()");
+		chatDAO.updateReadst(vo);
+	}
+
 
 }

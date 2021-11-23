@@ -10,4 +10,5 @@ public interface ChatService {
 	List<ChatVO> myChatList(ChatVO vo);
 	List<ChatVO> selectChatList(ChatVO vo);
 	void insertMessage(ChatVO vo);
+	void updateReadst(ChatVO vo);
 }

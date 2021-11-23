@@ -118,6 +118,20 @@
         font-size: 12px;
         color: rgb(151, 151, 151);
     }
+    
+    .chat_user_list_room_read{
+		width:20px;
+		height:20px;
+		background-color: rgb(237,102,83);
+		float:right; text-align:center;
+		color:white; font-size:14px;
+		font-weight:600; border-radius:100%;
+		margin-top:-15px;
+		
+	}
+	.chat_user_list_room_read span{
+		line-height: 21px;
+	}
 
     .chat_user_list_room_m_message_div{
         margin-top: 2px;
@@ -127,6 +141,7 @@
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
         color: rgb(92, 92, 92);
+        width:85%;
     }
 
     #chat_box{
