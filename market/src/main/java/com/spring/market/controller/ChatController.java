@@ -50,5 +50,9 @@ public class ChatController {
 		
 		return "/jsp/chat";
 	}
+//	
+//	@RequestMapping("/selectChat")
+//	public String selectChat(HttpServletRequest)
+//	
 
 }

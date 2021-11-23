@@ -8,7 +8,7 @@
 <mapper namespace="ChatDAO">
  
 
-    
+  <!-- 채팅목록 조회  -->
   <select id="myChatList" parameterType="chat" resultType="chat">
 	<![CDATA[
 		select a.chatmember,a.chatroomno,a.user1,a.user2,m.name,m.address,m.profile,cm.chatmessage
@@ -28,6 +28,12 @@
 <!--     <insert id="insertChatMessage" parameterType="chat"> 
         insert into member(email,password,name,gender,phone,address) values(#{email},#{password},#{name},#{gender},#{phone},#{address}) 
     </insert> -->
-
+    
+  <!-- 선택된 채팅내용  -->
+  <select id="SelectChatList" parameterType="chat" resultType="chat">
+	<![CDATA[
+		select * from chatmessage where chatroomno = #{chatroomno};
+     ]]>
+    </select>
  	
 </mapper>
