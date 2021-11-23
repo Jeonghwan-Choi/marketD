@@ -15,11 +15,11 @@ public class ChatServiceImpl implements ChatService {
 	@Autowired
 	private ChatDAO chatDAO;
 
-	@Override
-	public List<ChatVO> myChatList(ChatVO vo) {
-		System.out.println("run ChatServiceImpl myChatList()");
-		return chatDAO.myChatList(vo);
-	}
+	/*
+	 * @Override public List<ChatVO> myChatList(ChatVO vo) {
+	 * System.out.println("run ChatServiceImpl myChatList()"); return
+	 * chatDAO.myChatList(vo); }
+	 */
 
 
 }

@@ -12,11 +12,14 @@ public class BoardVO {
 	private String imagename;
 	private String address;
 	private int wish;
+	private int wishcount;
+	private int chatcount;
+	private int viewscount;
 	
 	public BoardVO() {}
 
 	public BoardVO(int boardno, int memberno, String title, String category, String datetime, String content, int price,
-			int cnt, String imagename,String address,int wish) {
+			int cnt, String imagename,String address,int wish,int wishcount,int chatcount,int viewscount) {
 		super();
 		this.boardno = boardno;
 		this.memberno = memberno;
@@ -29,6 +32,9 @@ public class BoardVO {
 		this.imagename = imagename;
 		this.address = address;
 		this.wish = wish;
+		this.wishcount = wishcount;
+		this.chatcount = chatcount;
+		this.viewscount = viewscount;
 	}
 
 	public int getBoardno() {
@@ -119,8 +125,28 @@ public class BoardVO {
 	public void setWish(int wish) {
 		this.wish = wish;
 	}
+	public int getWishcount() {
+		return wishcount;
+	}
+
+	public void setWishcount(int wishcount) {
+		this.wishcount = wishcount;
+	}
+	public int getChatcount() {
+		return chatcount;
+	}
+
+	public void setChatcount(int chatcount) {
+		this.chatcount = chatcount;
+	}
 	
-	
+	public int getViewscount() {
+		return viewscount;
+	}
+
+	public void setViewscount(int viewscount) {
+		this.viewscount = viewscount;
+	}
 	
 
 

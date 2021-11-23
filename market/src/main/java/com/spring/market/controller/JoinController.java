@@ -90,7 +90,7 @@ public class JoinController {
 		public String insertMember(HttpServletRequest req, Model model, MemberVO vo,MultipartHttpServletRequest mtfRequest) throws SocketException, IOException, Exception {
    
 //			//SQL insertMember
-			String address = req.getParameter("member_addr")+" "+req.getParameter("member_addr_1");
+			String address = req.getParameter("member_addr");
 			vo.setAddress(address);
 			memberService.insertMember(vo);
 			MemberVO member =  memberService.loginMember(vo);

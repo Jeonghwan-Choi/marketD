@@ -84,19 +84,21 @@
                 <!-- 여기서 부터 사람 한명 -->
                 <c:forEach items="${mychatList}" var="chatVO">
 	                <div class="chat_user_list_room">
-		                    <a>
+		                    <a id="chatroomno" class="chatroom${chatVO.chatroomno }" >
+		                    <span class="boardMemberno" style="display:none;">${chatVO.user2}</span>
+		                    <span class="boardRoomno" style="display:none;">${chatVO.chatroomno}</span>
 		                        <div class="chat_user_list_room_m">
 		                            <div class="chat_user_list_room_m_img_div">
 <%-- 		                            <c:choose>
-								         <c:when test="${sessionScope.memberVO==null}"> --%>
-								         	  <img src="http://cjhftp.dothome.co.kr/${chatVO.user2}/profile/${chatVO.profile}">
-<%-- 								         </c:when>
-							         </c:choose> --%>
+									         <c:when test="${sessionScope.memberVO==null}"> --%>
+									         	  <img src="http://cjhftp.dothome.co.kr/${chatVO.user2}/profile/${chatVO.profile}">
+	<%-- 								     </c:when>
+							         	</c:choose> --%>
 		                                
 		                            </div>
 		                            <div class="chat_user_list_room_m_center_div">
 		                                <div class="chat_user_list_room_m_member_div">
-		                                    <span>${chatVO.name }</span>
+		                                    <span>${chatVO.name }</span>	
 		                                    <span> · </span>
 		                                    <span>${chatVO.datetime } </span>
 		                                </div>
@@ -139,9 +141,16 @@
         </div>
         
     </div>
+    
+    <input type="button" value="약속잡기" onclick="open2()">
 
 </body>
 <script>
+	function open2(){
+	    
+		window.open("/chatlocation", "_blank", "width=1100, height=600,toolbar=no,location=no,resizable=no,left=30,top=30,menubar=no" ); 
+	
+	}
 
     $('.chat_user_readm div').on({ 
         'click': function(){
@@ -201,7 +210,35 @@
 
             
         });
+    $("a").click(function() {
+        var myClass = $(this).attr("class");
+        console.log(myClass);
+        console.log($("."+myClass).children('.boardMemberno').html());
+        console.log($("."+myClass).children('.boardroomno').html());
+		
+        var boardMemberno = $("."+myClass).children('.boardMemberno').html()
+        var boardRoomno = $("."+myClass).children('.boardRoomno').html()
+        
+        $("#memberno").val(boardMemberno);
+        $("#roomno").val(boardRoomno);
+        
+        
+        $.ajax({
+            url : 'addwish',
+            method : 'POST',
+            data : 'memberno=' + memberno + '&boardno=' + boardno,
+            type : "POST",
 
+            success : function(data) {
+                 alert("해당 상품을 찜했습니다.")
+                
+         },
+            error : function() {
+               alert("request error!");
+            }
+         })  
+        
+    });	
 
 
 </script>

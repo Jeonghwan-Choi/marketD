@@ -52,5 +52,20 @@
 	  	 insert into guest(boardno,memberno) values(#{boardno},#{memberno}) 
   	 </insert>
   	 
+  	 <select id="countWish" parameterType="board" resultType="board">
+  	 	select count(wishno)wishcount from wish where boardno=#{boardno}
+  	 </select>
+  	 
+  	 <select id="countChat" parameterType="board" resultType="board">
+  	 	select count(chatroomno)chatcount from chatroom where boardno=#{boardno}
+ 	</select>
  	
+ 	<select id="countViews" parameterType="board" resultType="board">
+ 	<![CDATA[
+ 		select nvl((b.cnt),0)viewscount from board a
+		LEFT JOIN (SELECT boardno,COUNT(distinct(memberno))cnt FROM guest GROUP BY boardno ) b
+		ON a.boardno = b.boardno
+		where a.boardno=#{boardno}
+		]]>
+	</select>
 </mapper>

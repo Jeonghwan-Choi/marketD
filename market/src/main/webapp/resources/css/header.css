@@ -1,7 +1,10 @@
-@charset "UTF-8";
 *{  
     margin: 0;
     padding: 0;
+    
+}
+body{
+	font-family: 'NanumMyeongjoYetHangul';
 }
 header {
     position: fixed;
@@ -162,8 +165,8 @@ header {
 	  text-decoration:none ;
   }
   .main_product_title{
-      color: balck;
-      font-weight: 700;
+      color: #404040;
+      font-weight: 550;
       margin-left: 5px;
       margin-top: 5px;
   }
@@ -171,11 +174,13 @@ header {
       color: gray;
       font-size: 13px;
       margin-top:-15px ;
+      margin-left:7px;
   }
   .main_product_price{
     color: #ff8a3d;
     font-weight: 600;
     font-size: 15px;
+    margin-left:7px;
 
 
   }
@@ -185,11 +190,79 @@ header {
       float: right;
         color: black;
     }
+    .main_product_wish{
+      padding-right: 10px;
+      float: right;
+        color: black;
+    }
   .main_product_div_a:hover{
     color : red;
   }
 
 
+#insertBoardForm{
+	 position: fixed;
+    bottom: 10px;
+    right: 10px; 
+    width:10px;
+    height:10px;
+    
+}
+
+/* insertBoardForm button styling*/
+.btn-3,
+.btn-3::after {
+  -webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.btn-3 {
+	border-radius: 50%;
+  background: rgb(241, 119, 48);
+  border: 3px solid #fff;
+  /* border-radius: 5px; */
+  color: #fff;
+  display: block;
+  font-size: 1.6em;
+  font-weight: bold;
+  margin: 1em auto;
+  padding: 2em 6em;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.btn-3::before,
+.btn-3::after {
+  background: #fff;
+  content: '';
+  position: absolute;
+  z-index: -1;
+  	border-radius: 50%;
+}
+
+.btn-3:hover {
+  color: rgb(241, 119, 48);
+  background:white;
+  
+}
+
+
+.btn-3::after {
+  height: 0;
+  left: 50%;
+  top: 50%;
+  width: 0;
+}
+
+.btn-3:hover:after {
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  	border-radius: 50%;
+}
 
 
     /* =================================================================footer */

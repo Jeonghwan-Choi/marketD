@@ -43,6 +43,7 @@ public class LoginController {
 			//System.out.println(member.getPassword());
 			
 			System.out.println(member.getProfile());
+			System.out.println("addresschk"+member.getAddress());
 			
 			HttpSession session=req.getSession();
 	        session.setAttribute("memberVO", member);

@@ -24,8 +24,14 @@ public class ChatController {
 	ChatService chatService;
 
 
-	
-
+	@RequestMapping("/chatlocation")
+	public String chatlocation(HttpServletRequest req, Model model, ChatVO vo) throws IllegalStateException {
+		return "/jsp/chatlocation";
+	}
+	@RequestMapping("/chatcalendar")
+	public String chatcalendar(HttpServletRequest req, Model model, ChatVO vo) throws IllegalStateException {
+		return "/jsp/chatcalendar";
+	}
 	
 	@RequestMapping("/chat")
 	public String chat(HttpServletRequest req, Model model, ChatVO vo) throws IllegalStateException {
@@ -39,12 +45,12 @@ public class ChatController {
 		int user1 = Integer.parseInt(req.getParameter("user1"));
 
 		
-		List <ChatVO> mychatList =  chatService.myChatList(vo);
+		//List <ChatVO> mychatList =  chatService.myChatList(vo);
 	
 		
 		
-		model.addAttribute("mychatList",mychatList);
-		System.out.println("mychatList.size(): "+mychatList.size());
+		//model.addAttribute("mychatList",mychatList);
+		//System.out.println("mychatList.size(): "+mychatList.size());
 		
 		
 		

@@ -17,6 +17,7 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=25eb93196f96f5e9cacf100023363c56&libraries=services"></script>
 
 
     <script>
@@ -32,16 +33,58 @@
                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                 var roadAddr = data.roadAddress; // 도로명 주소 변수
                 var jibunAddr = data.jibunAddress; // 지번 주소 변수
+                var sigungu = data.sigungu;
+                var bname = data.bname;
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('member_post').value = data.zonecode;
                 if(roadAddr !== ''){
-                    document.getElementById("member_addr").value = roadAddr;
+                    document.getElementById("member_addr").value = sigungu+" "+bname;
                 } 
                 else if(jibunAddr !== ''){
-                    document.getElementById("member_addr").value = jibunAddr;
+                    document.getElementById("member_addr").value = sigungu+" "+bname;
                 }
             }
         }).open();
+    }
+    
+    function addressSearch(){
+    	 if (navigator.geolocation) {
+    		 $("#address-t").html("주소를 찾고 있습니다.");
+    		 $("#address-t").css("color","red");
+             //위치 정보를 얻기
+                 navigator.geolocation.getCurrentPosition (function(pos) {
+                     console.log(pos.coords.latitude);
+                     console.log(pos.coords.longitude);  
+
+                     let geocoder = new kakao.maps.services.Geocoder();
+             
+                     let coord = new kakao.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+                     let callback = function(result, status) {
+
+                     
+                        
+                 };
+                 let lat = pos.coords.latitude;
+                 let lng = pos.coords.longitude;
+                 getAddr(lat,lng);
+                 function getAddr(lat,lng){
+                     let geocoder = new kakao.maps.services.Geocoder();
+
+                     let coord = new kakao.maps.LatLng(lat, lng);
+                     let callback = function(result, status) {
+                         if (status === kakao.maps.services.Status.OK) {
+                             console.log(result)
+                             console.log(result[0].address.region_2depth_name+" "+result[0].address.region_3depth_name);
+                             $("#member_addr").val(result[0].address.region_2depth_name+" "+result[0].address.region_3depth_name);
+                             $("#address-t").html("주소인증을 완료하였습니다.");
+                    		 $("#address-t").css("color","blue");
+
+                         }
+                     };
+                     geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+                 }
+             });
+         }      
     }
 
 
@@ -93,9 +136,11 @@
                     <div>* 주소 :</div>
                     <input style="width:234px;" class="content_td_address" id = "member_post" name ="member_post" type = "text" value ="" readonly>
                     <input style="width:234px;" class="content_td_address" id = "member_addr" name ="member_addr"type = "text" value ="" readonly>
-                    <input class="addr_button" type="button" value="주소검색" onclick="findAddr()" ><br>
-                    <input class="content_td_address" name = "member_addr_1"type="text" placeholder="상세주소">
-                    
+                    <input class="addr_button" type="button" value="주소인증" onclick="addressSearch()" ><br>
+<!--                     <input class="content_td_address" name = "member_addr_1"type="text" placeholder="상세주소">
+ -->                
+                    <p style="float:right; margin-right:25px" id = "address-t"></p>
+     	
                     <br>
                     <br>
     

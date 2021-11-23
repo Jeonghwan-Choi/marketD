@@ -40,7 +40,7 @@
 
 	<!-- 한글 처리 코드 -->
 	<filter>
-		<filter-name>encodingFilter</filter-name>
+		<filter-name>characterEncoding</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
 		<init-param>
 			<param-name>encoding</param-name>
@@ -55,6 +55,15 @@
 		</init-param>
 		
 	</filter>
+	
+
+	<!-- 위 한글 처리 코드를 모든(/*) url 패턴에 적용 -->
+	<filter-mapping>
+		<filter-name>characterEncoding</filter-name>
+		<url-pattern>/*</url-pattern>
+		
+	</filter-mapping>
+	
 	<filter>
   <filter-name>multipart</filter-name>
     <filter-class>org.springframework.web.multipart.support.MultipartFilter</filter-class>
@@ -66,13 +75,6 @@
   </filter-mapping>
 
 
-
-	<!-- 위 한글 처리 코드를 모든(/*) url 패턴에 적용 -->
-	<filter-mapping>
-		<filter-name>encodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-		
-	</filter-mapping>
 	
 		<!-- <multipart-config>
 	<location>ftp://cjhftp.dothome.co.kr/html/</location>

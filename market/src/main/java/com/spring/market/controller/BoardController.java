@@ -66,18 +66,21 @@ public class BoardController {
 		model.addAttribute("BoardMemberno", memberno);
 		model.addAttribute("BoardBoardno", boardno);
 		
+
+		HttpSession session = req.getSession();
+		int loginno = (int) session.getAttribute("loginM");
+		
 //		방문자 등록 1인1개 한정임 인기중고 뽑기위해
 		BoardVO vo = new BoardVO();
 		vo.setBoardno(boardno);
 		vo.setMemberno(memberno);
 		boardService.insertGuest(vo);
+		vo.setMemberno(loginno);
+		boardService.insertGuest(vo);
 		
 		//wish 상태 확인하기
 		MemberVO wishmemVO = new MemberVO();
 		wishmemVO.setBoardno(boardno);
-		
-		HttpSession session = req.getSession();
-		int loginno = (int) session.getAttribute("loginM");
 		wishmemVO.setMemberno(loginno);
 		
 		MemberVO wishmemVO2 = new MemberVO();
@@ -87,6 +90,19 @@ public class BoardController {
 		
 		model.addAttribute("wishchk",wishmemVO2);
 		System.out.println("chkwishchk"+wishmemVO2.getWishno());
+		
+		//countWish
+		model.addAttribute("countWish",boardService.countWish(boardno).getWishcount());
+		//countChat
+		model.addAttribute("countChat",boardService.countChat(boardno).getChatcount());
+		//countChat
+		model.addAttribute("countViews",boardService.countViews(boardno).getViewscount());
+		System.out.println("views"+boardService.countViews(boardno).getViewscount());
+		System.out.println("boardno:"+boardno);
+		
+		//인기중고
+		model.addAttribute("productList", boardService.boardList());
+		
 		
 		return "/jsp/board";
 	}
@@ -98,7 +114,6 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/insertBoard")
-	@ResponseBody
 	public String insertBoard(HttpServletRequest req, Model model,BoardVO vo,MultipartHttpServletRequest mtfRequest) throws Exception {
 		System.out.println("run BoardController insertBoard()");
 
@@ -147,8 +162,11 @@ public class BoardController {
     		
     		
 		}
+        
+        //main이동
+		model.addAttribute("productList", boardService.boardList());
 		
-		return "redirect:/board";
+		return "/jsp/main";
 	}
 	
 	@RequestMapping("/insertBoardImage")

@@ -45,5 +45,20 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.addwish(vo);
 		
 	}
+	@Override
+	public BoardVO countWish(int boardno) {
+		System.out.println("run BoardServiceImpl countWish()");
+		return boardDAO.countWish(boardno);
+	}
+	@Override
+	public BoardVO countChat(int boardno) {
+		System.out.println("run BoardServiceImpl countChat()");
+		return boardDAO.countChat(boardno);
+	}
+	@Override
+	public BoardVO countViews(int boardno) {
+		System.out.println("run BoardServiceImpl countViews()");
+		return boardDAO.countViews(boardno);
+	}
 	
 }

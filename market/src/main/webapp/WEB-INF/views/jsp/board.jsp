@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file = "header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,66 +13,23 @@
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <style>
-        ul{
-            list-style:none;
-        }
-        .wrapper{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2;
-        }
-        .container{
-            width:600px;
-            height:400px;
-            position: relative;
-            background-color: antiquewhite;
-            overflow: hidden;
-        }
-        .slider{
-            display: flex;
-            position:absolute;
-            top:0;
-            left:0;
-        }
-        .item{
-            width:100%;
-            height:400px;
-            font-size: 35px;
-            text-align: center;
-        }
-        .item img{
-        	width:100%;
-            height:400px;
-        }
-        
-
-        .container ul{
-           /* -webkit-transition: all 0.25s cubic-bezier(1, .01, .32, 1);*/  /* 제조사마다 접두사를 붙여야 한다. 파이어폭스는 -moz-, 웹킷계열은 -webkit-, 오페라는 -o-라고 앞에 붙여주어야 한다. */
-           /* -o-transition: all 0.25s cubic-bezier(1, .01, .32, 1);*/
-            transition: all 0.25s cubic-bezier(1, .01, .32, 1);
-        }
-        
-        
-    </style>
+   
     
     <title>coco board</title>
 
 </head>
 <body>
-<%@ include file = "header.jsp"%>
-<main class="proudct">
+<div class="proudct">
         <div class="proudct_product" >
             <div class="proudct_product_div">
                 <div class="proudct_product_img_div">
                 <form method="post" action="/chat" name="formm" id="formm">
-	                <input name="boardMemberno" id="boardMemberno" type="text" value="${BoardMemberno}">
-	                <input name="boardBoardno" id="boardBoardno" type="text" value="${BoardBoardno}">
-	                <input name="user1" id="loginMemberno" type="text" value="${sessionScope.memberVO.memberno}">
-	                <input type="submit">
+	                <input name="boardMemberno" id="boardMemberno" type="hidden" value="${BoardMemberno}">
+	                <input name="boardBoardno" id="boardBoardno" type="hidden" value="${BoardBoardno}">
+	                <input name="user1" id="loginMemberno" type="hidden" value="${sessionScope.memberVO.memberno}">
+	                <input type="submit" style="background-color:transparent;  border:0px transparent solid;" value="">
                 </form>
-                <input type="text" id="wishno" value="${wishchk.wishno }">
+                <input type="hidden" id="wishno" value="${wishchk.wishno }">
                     <div class="wrapper">
                     
 				        <div class="btn">
@@ -132,12 +90,10 @@
                         <a class="product_detail_price">
                             ${boardInfo.price }원
                         </a><br>
-                        <textarea class="product_detail_content"   readonly >
-							${boardInfo.content }
-                        </textarea>
-                        <a class="product_detail_favorite" >관심</a>
-                        <a class="product_detail_chatting" >채팅</a>
-                        <a class="product_detail_select" >조회</a>
+                        <p class="product_detail_content">${boardInfo.content }</p>
+                        <a class="product_detail_favorite" >관심 </a><a class="product_detail_favorite_1">${countWish }</a>
+                        <a class="product_detail_chatting" >채팅</a> <a class="product_detail_chatting" >${countChat }</a>
+                        <a class="product_detail_select" >조회</a> <a class="product_detail_select" >${countViews }</a>
                     </div>
 
                 </div>
@@ -147,13 +103,13 @@
          
 
         </div>
-      </main>   
+       </div>   
       
 
-      <div class="main">
+       <div class="main">
         <div class="main_product" >
             <p>인기중고</p>
-            <div class="main_product_div">
+            <!-- <div class="main_product_div">
                 <img alt="아이폰xs 256GB" src="https://dnvefa72aowie.cloudfront.net/origin/article/202111/9D520DB0335DB62D95F06EA80E43DC34A0F189314277C2632AEC8E588BD695C9.jpg?q=82&amp;s=300x300&amp;t=crop">
                 <div class="main_product_title" >아이폰xs 256GB</div><br>
                 <div class="main_product_address">경기도 안양시 동안구 호계3동</div><br>
@@ -217,7 +173,33 @@
                     </div>
                     
                 </div>    
-            </div>
+            </div> -->
+            <c:forEach items="${productList}" var="productVO">
+	            <div class="main_product_div">
+	            	<a class="main_product_div_a" href="board?boardno=${productVO.boardno }&memberno=${productVO.memberno}">
+		                <img class="product_img" src="http://cjhftp.dothome.co.kr/${productVO.memberno}/board/${productVO.boardno }/${productVO.imagename}">
+		                <div class="main_product_title" >${productVO.title }</div><br>
+		                <div class="main_product_address">${productVO.address }</div><br>
+		                <input type="hidden" value ="${productVO.memberno }">
+		                <input type="hidden" value ="${productVO.boardno }">
+		                <div>
+		                    <div class="main_product_price" >${productVO.price } 원
+		                        <div class="main_product_favorit">
+		                        
+		                        <img class="watch-icon" alt="Watch count" src="https://d1unjqcospf8gs.cloudfront.net/assets/home/base/like-8111aa74d4b1045d7d5943a901896992574dd94c090cef92c26ae53e8da58260.svg" >
+		                            
+		                        </div>
+		                        <div class="main_product_wish">
+		                        
+		                        
+		                            ${productVO.wish } 
+		                        </div>
+		                    </div>
+		                   
+		                </div>   
+		            </a>     
+	            </div>
+			</c:forEach>
 
         </div>
       </div>   
@@ -319,7 +301,8 @@
 	                
 	                const memberno = document.getElementById('loginMemberno').value;
 	                const boardno = document.getElementById('boardBoardno').value;
-	                
+	                var wish = $(".product_detail_favorite_1").html
+	                console.log(wish);
 	                
 	                $.ajax({
 	                    url : 'addwish',
@@ -328,6 +311,7 @@
 	                    type : "POST",
 
 	                    success : function(data) {
+	                    	wish = wish + 1
 	                  		 alert("해당 상품을 찜했습니다.")
 	           				 
 	           		},

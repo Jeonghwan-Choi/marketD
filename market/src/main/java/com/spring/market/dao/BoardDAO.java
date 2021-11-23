@@ -41,4 +41,16 @@ public class BoardDAO {
 		System.out.println("run BoardDAO addwish()");
 		sqlSession.update("BoardDAO.addwish",vo);		
 	}
+	public BoardVO countWish(int boardno) {
+		System.out.println("run BoardDAO countWish()");
+		return sqlSession.selectOne("BoardDAO.countWish",boardno);		
+	}
+	public BoardVO countChat(int boardno) {
+		System.out.println("run BoardDAO countChat()");
+		return sqlSession.selectOne("BoardDAO.countChat",boardno);		
+	}
+	public BoardVO countViews(int boardno) {
+		System.out.println("run BoardDAO countViews()");
+		return sqlSession.selectOne("BoardDAO.countViews",boardno);		
+	}
 }
