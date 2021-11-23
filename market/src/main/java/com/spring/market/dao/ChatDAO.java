@@ -23,4 +23,15 @@ public class ChatDAO {
 		return sqlSession.selectList("ChatDAO.myChatList",vo);
 	}
 
+	public List<ChatVO> selectChatList(ChatVO vo) {
+		System.out.println("run ChatDAO selectChatList()");
+		System.out.println("seller = "+vo.getChatroomno());
+		return sqlSession.selectList("ChatDAO.SelectChatList",vo);
+	}
+
+	public void insertMessage(ChatVO vo) {
+		System.out.println("run ChatDAO insertMessage()");
+		sqlSession.update("ChatDAO.insertMessage",vo);
+	}
+
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.market.impl.ChatService;
 import com.spring.market.vo.ChatVO;
@@ -28,6 +29,7 @@ public class ChatController {
 
 	
 	@RequestMapping("/chat")
+	
 	public String chat(HttpServletRequest req, Model model, ChatVO vo) throws IllegalStateException {
 
 		System.out.println(vo.getUser1());
@@ -50,9 +52,38 @@ public class ChatController {
 		
 		return "/jsp/chat";
 	}
-//	
-//	@RequestMapping("/selectChat")
-//	public String selectChat(HttpServletRequest)
-//	
+	
+	@RequestMapping("/selectChat")
+	@ResponseBody
+	public List <ChatVO> selectChat(HttpServletRequest req,Model model,ChatVO vo,int roomno)throws Exception {
+
+		vo.setChatroomno(roomno);
+		List<ChatVO> chatVo = chatService.selectChatList(vo);
+
+	
+		System.out.println("========= chatVo size:: " + chatVo.size());
+//		for (int i = 0; i < chatVo.size(); i++) {
+//
+//			list.add(photoVo.get(i));
+//			folder = photoVo.get(i).getFolder();
+//		}
+		model.addAttribute("selectChatList", chatVo);
+		return chatVo;
+	}
+	
+	@RequestMapping("/insertMessage")
+	@ResponseBody
+	public String insertMessage(HttpServletRequest req,Model model,ChatVO vo,int roomno,int seller, String chatmessage)throws Exception {
+
+		vo.setChatroomno(roomno);
+		vo.setSeller(seller);
+		vo.setChatmessage(chatmessage);
+		
+		chatService.insertMessage(vo);
+
+	
+
+		return "msg suc";
+	}
 
 }

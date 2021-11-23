@@ -24,16 +24,20 @@
 		where user1 = #{user1}
      ]]>
     </select>
-    
-<!--     <insert id="insertChatMessage" parameterType="chat"> 
-        insert into member(email,password,name,gender,phone,address) values(#{email},#{password},#{name},#{gender},#{phone},#{address}) 
-    </insert> -->
+
     
   <!-- 선택된 채팅내용  -->
   <select id="SelectChatList" parameterType="chat" resultType="chat">
 	<![CDATA[
-		select * from chatmessage where chatroomno = #{chatroomno};
+		select a.chatmessageno,a.chatroomno,a.seller,a.chatmessage,a.readst,a.datetime,m.profile from chatmessage a
+        Left Join member m
+        on seller = m.memberno
+        where chatroomno =  #{chatroomno} order by datetime asc
      ]]>
     </select>
+    
+    <insert id="insertMessage" parameterType="chat"> 
+        insert into chatmessage(chatroomno,seller,chatmessage,readst,datetime) values(#{chatroomno},#{seller},#{chatmessage},1,TO_CHAR(LOCALTIMESTAMP,'yyyy/mm/dd HH24:MI')) 
+    </insert>
  	
 </mapper>

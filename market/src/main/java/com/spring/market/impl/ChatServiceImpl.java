@@ -21,5 +21,17 @@ public class ChatServiceImpl implements ChatService {
 		return chatDAO.myChatList(vo);
 	}
 
+	@Override
+	public List<ChatVO> selectChatList(ChatVO vo) {
+		System.out.println("run ChatServiceImpl selectChatList()");
+		return chatDAO.selectChatList(vo);
+	}
+
+	@Override
+	public void insertMessage(ChatVO vo) {
+		System.out.println("run ChatServiceImpl insertMessage()");
+		chatDAO.insertMessage(vo);
+	}
+
 
 }

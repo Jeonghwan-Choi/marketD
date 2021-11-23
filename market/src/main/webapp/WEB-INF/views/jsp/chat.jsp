@@ -22,10 +22,12 @@
 <body>
 
     <header>
-    	<div style="display:none;">
+    	<div style="display:none;" >
        		 <label>MemberNO : </label><input id="memberno" type="text" value="${boardMemberno} "><br>
       	 	 <label>RoomNO : </label><input id="roomno" type="text" value="${boardBoardno}"><br>
       		 <label>LoginMemberNO : </label><input id="loginmemberno" type="text" value="${loginMemberno}"><br>
+        	 <label>MyProfile : </label><input id="myprofilename" type="text" value="${sessionScope.memberVO.profile}"><br>
+        	 <label>Profile : </label><input id="profilename" type="text" value=""><br>
         </div>
         <div class = "header_img_div">
             <img class="fixed-logo" alt="당근마켓" src="https://d1unjqcospf8gs.cloudfront.net/assets/home/base/header/logo-basic-24b18257ac4ef693c02233bf21e9cb7ecbf43ebd8d5b40c24d99e14094a44c81.svg">
@@ -87,6 +89,7 @@
 		                    <a id="chatroomno" class="chatroom${chatVO.chatroomno }" >
 		                    <span class="boardMemberno" style="display:none;">${chatVO.user2}</span>
 		                    <span class="boardRoomno" style="display:none;">${chatVO.chatroomno}</span>
+		                    <span class="profilename" style="display:none;">${chatVO.profile}</span>
 		                        <div class="chat_user_list_room_m">
 		                            <div class="chat_user_list_room_m_img_div">
 <%-- 		                            <c:choose>
@@ -174,9 +177,24 @@
                 let today = new Date();
                 let time = (today.getMonth()+1)+'.'+today.getDate()+' '+today.getHours()+':'+today.getMinutes();
                 //소켓에 send_msg라는 이벤트로 input에 #msg의 벨류를 담고 보내준다.
-                socket.emit("send_msg", $("#roomno").val()+"//"+$("#memberno").val()+"//"+$("#msg").val()+"//"+time);
+                socket.emit("send_msg", $("#roomno").val()+"//"+$("#loginmemberno").val()+"//"+$("#msg").val()+"//"+time);
 
                 //ajax insert sql 
+		        
+		        $.ajax({
+			         url : 'insertMessage',
+			         method : 'POST',
+			         data : 'roomno=' + $("#roomno").val() +'&seller='+$("#loginmemberno").val() +'&chatmessage='+$("#msg").val()  ,
+			         type : "POST",
+		
+			         success : function(data) {
+						console.log(data);
+		                
+		         },
+		            error : function() {
+		               alert("request error!");
+		            }
+		         })  
 
 
                 //#msg에 벨류값을 비워준다.
@@ -191,14 +209,17 @@
                     
                 if($("#roomno").val()==jbSplit[0]){    
                     if($("#memberno").val()==jbSplit[1]){
-                        $('<div class="b"><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+jbSplit[3]+'</span></div><div class="chat_box_m_div" ><span>'+jbSplit[2]+'</span></div><div class="chat_box_p_div"><img></div></div>').appendTo("#chat_box_ms");
+                        $('<div class="a"><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+jbSplit[1]+'/profile/'+$("#profilename").val()+'" ></div><div class="chat_box_m_div" > <span>'+jbSplit[2]+'</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+jbSplit[3]+'</span></div></div>').appendTo("#chat_box_ms");
                     }else{
-                        $('<div class="a"><div class="chat_box_p_div"><img src="" ></div><div class="chat_box_m_div" > <span>'+jbSplit[2]+'</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+jbSplit[3]+'</span></div></div>').appendTo("#chat_box_ms");
+                        $('<div class="b"><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+jbSplit[3]+'</span></div><div class="chat_box_m_div" ><span>'+jbSplit[2]+'</span></div><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+jbSplit[1]+'/profile/'+$("#myprofilename").val()+'" ></div></div>').appendTo("#chat_box_ms");
+
                     }
                 }    
 
                 //스크롤 자동으로 내려가기
-                $('#chat_box_ms').stop().animate({scrollTop:$('#chat_box_ms')[0].scrollHeight},1000)
+/*                 $('#chat_box_ms').stop().animate({scrollTop:$('#chat_box_ms')[0].scrollHeight},100)
+ */            
+                $("#chat_box_ms").scrollTop($("#chat_box_ms")[0].scrollHeight); 
             });
 
             
@@ -208,24 +229,38 @@
         console.log(myClass);
         console.log($("."+myClass).children('.boardMemberno').html());
         console.log($("."+myClass).children('.boardroomno').html());
+        
 		
-        var boardMemberno = $("."+myClass).children('.boardMemberno').html()
-        var boardRoomno = $("."+myClass).children('.boardRoomno').html()
+        var boardMemberno = $("."+myClass).children('.boardMemberno').html();
+        var boardRoomno = $("."+myClass).children('.boardRoomno').html();
+        var loginmemberno = $("#loginmemberno").val();
+        var profilename = $("."+myClass).children('.profilename').html();
         
         $("#memberno").val(boardMemberno);
         $("#roomno").val(boardRoomno);
-        
+        $("#profilename").val(profilename);
         
         $.ajax({
-            url : 'addwish',
-            method : 'POST',
-            data : 'memberno=' + memberno + '&boardno=' + boardno,
-            type : "POST",
+	         url : 'selectChat',
+	         method : 'POST',
+	         data : 'roomno=' + boardRoomno ,
+	         type : "POST",
 
-            success : function(data) {
-                 alert("해당 상품을 찜했습니다.")
-                
-         },
+	         success : function(data) {
+	        	 $(".a").remove();
+	        	 $(".b").remove();
+	        	 $(data).each(
+		           function(index) {
+		              if(loginmemberno == this.seller){
+
+	                        $('<div class="b"><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div><div class="chat_box_m_div" ><span>'+this.chatmessage+'</span></div><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'" ></div></div>').appendTo("#chat_box_ms");
+		              }else if(loginmemberno != this.seller){
+	                        $('<div class="a"><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'" ></div><div class="chat_box_m_div" > <span>'+this.chatmessage+'</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div></div>').appendTo("#chat_box_ms");
+		              }
+		              $("#chat_box_ms").scrollTop($("#chat_box_ms")[0].scrollHeight); 
+
+		       	   });
+         	},
             error : function() {
                alert("request error!");
             }
