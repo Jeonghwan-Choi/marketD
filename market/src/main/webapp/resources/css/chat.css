@@ -230,6 +230,16 @@
         color: rgb(151, 151, 151);
         font-size: 13px;
     }
+    
+    .b .chat_box_m_div_read_div{
+        display: flex;
+        flex-direction: column;
+        -webkit-box-pack: end;
+        justify-content: flex-end;
+        padding: 0px 4px;
+        color: rgb(241, 119, 48);
+        font-size: 13px;
+    }
 
     .chat_box_user{
         padding: 10px;

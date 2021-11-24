@@ -76,6 +76,9 @@ public class BoardController {
 		
 		vo.setMemberno(loginMemberno);
 		boardService.insertGuest(vo);
+		
+		
+		
 		return "/jsp/board";
 	}
 	

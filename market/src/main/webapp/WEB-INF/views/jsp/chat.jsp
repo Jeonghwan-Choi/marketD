@@ -13,7 +13,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css ">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat.css ">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="http://cjhwebsocket.cafe24app.com:80/socket.io/socket.io.js"></script>
+<!-- <script src="http://cjhwebsocket.cafe24app.com:80/socket.io/socket.io.js"></script> -->
+<script src="http://localhost:80/socket.io/socket.io.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <style>
 
@@ -50,6 +51,7 @@
                     <div class="header_login_div">
                         <img class="header_login_div_profile" src="https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_256_disabled-97ac2510cb2860b9e37caf23beb1e8e0ca130152a119b65402c4673af18bf2a1.png">
                         <span>최정환</span>
+                                               
                         <img class="header_login_div_down"  src="https://cdn-icons.flaticon.com/png/512/2985/premium/2985150.png?token=exp=1637135271~hmac=3f62a84e9d5a4112839b78e572418d09" >
                     </div>
 
@@ -87,6 +89,7 @@
                 <c:forEach items="${mychatList}" var="chatVO">
 	                <div class="chat_user_list_room">
 		                    <a id="chatroomno" class="chatroom${chatVO.chatroomno }" >
+		                    <span id="${chatVO.user2 }" class="${chatVO.chatroomno }-${chatVO.user2 }" style="display:none;"></span>
 		                    <span class="boardMemberno" style="display:none;">${chatVO.user2}</span>
 		                    <span class="boardRoomno" style="display:none;">${chatVO.chatroomno}</span>
 		                    <span class="profilename" style="display:none;">${chatVO.profile}</span>
@@ -115,8 +118,13 @@
 											
 												<c:choose>
 										         	<c:when test="${chatVO.readst != 0 }">
-										         	<div class="chat_user_list_room_read" >
-	  													<span>${chatVO.readst }</span>
+										         	<div  id="${chatVO.chatroomno}_chat_user_list_room_read" class="chat_user_list_room_read" >
+	  													<span id="${chatVO.chatroomno}_chat_user_list_room_read_span" class="chat_user_list_room_read_span">${chatVO.readst }</span>
+	  												</div>	
+	 								    		 	</c:when>
+	 								    		 	<c:when test="${chatVO.readst == 0 }">
+										         	<div  id="${chatVO.chatroomno}_chat_user_list_room_read" class="chat_user_list_room_read" style="display:none;">
+	  													<span id="${chatVO.chatroomno}_chat_user_list_room_read_span" class="chat_user_list_room_read_span">0</span>
 	  												</div>	
 	 								    		 	</c:when>
 								         		</c:choose> 
@@ -159,6 +167,16 @@
 
 </body>
 <script>
+var nick = $("#loginmemberno").val();
+$(function () {
+    var socket = io("http://localhost:80");
+    socket.emit('newuser', nick);
+    // Regular forum submission event handler below this.
+
+
+
+
+
 
     $('.chat_user_readm div').on({ 
         'click': function(){
@@ -171,7 +189,7 @@
     });
 
     $(document).ready(function() {
-            var socket = io("http://cjhwebsocket.cafe24app.com:80");
+           
  
             //msg에서 키를 누를떄
             $("#msg").keydown(function(key) {
@@ -189,24 +207,52 @@
                 let today = new Date();
                 let time = (today.getMonth()+1)+'.'+today.getDate()+' '+today.getHours()+':'+today.getMinutes();
                 //소켓에 send_msg라는 이벤트로 input에 #msg의 벨류를 담고 보내준다.
-                socket.emit("send_msg", $("#roomno").val()+"//"+$("#loginmemberno").val()+"//"+$("#msg").val()+"//"+time);
+                socket.emit("send_msg", "2//"+$("#roomno").val()+"//"+$("#loginmemberno").val()+"//"+$("#msg").val()+"//"+time);
 
                 //ajax insert sql 
 		        
-		        $.ajax({
-			         url : 'insertMessage',
-			         method : 'POST',
-			         data : 'roomno=' + $("#roomno").val() +'&seller='+$("#loginmemberno").val() +'&chatmessage='+$("#msg").val()  ,
-			         type : "POST",
-		
-			         success : function(data) {
-						console.log(data);
-		                
-		         },
-		            error : function() {
-		               alert("request error!");
-		            }
-		         })  
+
+  
+
+	                    	
+
+	                    if($("."+$("#roomno").val()+"-"+$("#memberno").val()).html()==1){
+	                    		//상대가 내방에 접속중
+	                    	$.ajax({
+	           			         url : 'insertMessage',
+	           			         method : 'POST',
+	           			         data : 'roomno=' + $("#roomno").val() +'&seller='+$("#loginmemberno").val() +'&chatmessage='+$("#msg").val()+"&readst=0"  ,
+	           			         type : "POST",
+	           		
+	           			         success : function(data) {
+	           						console.log(data);
+	           		                
+	           		         },
+	           		            error : function() {
+	           		               alert("request error!");
+	           		            }
+	           		         }) 	
+	                    	}else{
+	                    		//상대가 내방에 접속중이 아님
+	                    	$.ajax({
+	           			         url : 'insertMessage',
+	           			         method : 'POST',
+	           			         data : 'roomno=' + $("#roomno").val() +'&seller='+$("#loginmemberno").val() +'&chatmessage='+$("#msg").val()+"&readst=1"  ,
+	           			         type : "POST",
+	           		
+	           			         success : function(data) {
+	           						console.log(data);
+	           		                
+	           		         },
+	           		            error : function() {
+	           		               alert("request error!");
+	           		            }
+	           		         }) 
+	                    }
+
+
+                
+ 
 
 
                 //#msg에 벨류값을 비워준다.
@@ -215,20 +261,60 @@
  
             //소켓 서버로 부터 send_msg를 통해 이벤트를 받을 경우 
             socket.on('send_msg', function(msg) {
+            	 console.log(msg)	
+            	
                 var jbSplit = msg.split('//');
+
+            	 
+                if(jbSplit[0]==1){
+                	$("#"+jbSplit[2]).html("");
+					$("."+jbSplit[1]+"-"+jbSplit[2]).html("1");
+					
+					console.log("roomno: "+$("#roomno").val());
+					console.log("loginmemberno: "+$("#loginmemberno").val());
+					
+					if(jbSplit[1]==$("#roomno").val()){
+						if(jbSplit[2]!=$("#loginmemberno").val()){
+							$(".chat_box_m_div_read_div_span").html("")
+						}
+					}
+					
+				} 
+                
+                
+                
                 //div 태그를 만들어 텍스트를 msg로 지정을 한뒤 #chat_box에 추가를 시켜준다.
-                console.log(msg)
-                    
-                if($("#roomno").val()==jbSplit[0]){    
-                    if($("#memberno").val()==jbSplit[1]){
-                        $('<div class="a"><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+jbSplit[1]+'/profile/'+$("#profilename").val()+'" ></div><div class="chat_box_m_div" > <span>'+jbSplit[2]+'</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+jbSplit[3]+'</span></div></div>').appendTo("#chat_box_ms");
-                    	
-                    }else{
-                        $('<div class="b"><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+jbSplit[3]+'</span></div><div class="chat_box_m_div" ><span>'+jbSplit[2]+'</span></div><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+jbSplit[1]+'/profile/'+$("#myprofilename").val()+'" ></div></div>').appendTo("#chat_box_ms");
-
-                    }
-                }    
-
+                
+               
+                 if(jbSplit[0]==2){  
+                	
+                	var SumReadst = parseInt($("#"+jbSplit[1]+"_chat_user_list_room_read_span").html()) + 1
+               		
+                	if($("#roomno").val() != jbSplit[1]){
+                		if( jbSplit[2] != $("#loginmemberno").val() ){
+                			
+                    		$("#"+jbSplit[1]+"_chat_user_list_room_read").css("display","block");
+                        	$("#"+jbSplit[1]+"_chat_user_list_room_read_span").html(SumReadst);
+                    	}
+                	}
+                	
+                	
+                	 
+	                if($("#roomno").val()==jbSplit[1]){    
+	                    if($("#memberno").val()==jbSplit[2]){
+	                        $('<div class="a"><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+jbSplit[2]+'/profile/'+$("#profilename").val()+'" ></div><div class="chat_box_m_div" > <span>'+jbSplit[3]+'</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+jbSplit[4]+'</span></div></div>').appendTo("#chat_box_ms");
+	                    	
+	                    }else{
+	                    	if($("."+$("#roomno").val()+"-"+$("#memberno").val()).html()==1){
+	                    		//상대가 내방에 접속중
+	                    		$('<div class="b"><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+jbSplit[4]+'</span></div><div class="chat_box_m_div" ><span>'+jbSplit[3]+'</span></div><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+jbSplit[2]+'/profile/'+$("#myprofilename").val()+'" ></div></div>').appendTo("#chat_box_ms");
+	                    	}else{
+	                    		//상대가 내방에 접속중이 아님
+	                    		$('<div class="b"><div class="chat_box_m_div_read_div"><span class="chat_box_m_div_read_div_span">1</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+jbSplit[4]+'</span></div><div class="chat_box_m_div" ><span>'+jbSplit[3]+'</span></div><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+jbSplit[2]+'/profile/'+$("#myprofilename").val()+'" ></div></div>').appendTo("#chat_box_ms");
+	                    	}
+	                    }
+	                } 
+                 }
                 //스크롤 자동으로 내려가기
 /*                 $('#chat_box_ms').stop().animate({scrollTop:$('#chat_box_ms')[0].scrollHeight},100)
  */            
@@ -249,14 +335,21 @@
         var loginmemberno = $("#loginmemberno").val();
         var profilename = $("."+myClass).children('.profilename').html();
         
+        $("#"+boardRoomno+"_chat_user_list_room_read").css("display","none");
+    	
+    	$("#"+boardRoomno+"_chat_user_list_room_read_span").html(0);
+        
         $("#memberno").val(boardMemberno);
         $("#roomno").val(boardRoomno);
         $("#profilename").val(profilename);
         
+       
+        socket.emit("send_msg", "1//"+boardRoomno+"//"+loginmemberno+"//"+boardMemberno);
+        
         $.ajax({
 	         url : 'selectChat',
 	         method : 'POST',
-	         data : 'roomno=' + boardRoomno ,
+	         data : 'roomno=' + $("#roomno").val() +'&seller='+$("#memberno").val() +'&chatmessage='+$("#msg").val()+"&readst=0",
 	         type : "POST",
 
 	         success : function(data) {
@@ -265,8 +358,12 @@
 	        	 $(data).each(
 		           function(index) {
 		              if(loginmemberno == this.seller){
-
-	                        $('<div class="b"><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div><div class="chat_box_m_div" ><span>'+this.chatmessage+'</span></div><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'" ></div></div>').appendTo("#chat_box_ms");
+							if(this.readst == 0){
+								$('<div class="b"><div class="chat_box_m_div_read_div"><span class="chat_box_m_div_read_div_span"></span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div><div class="chat_box_m_div" ><span>'+this.chatmessage+'</span></div><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'" ></div></div>').appendTo("#chat_box_ms");
+							}else{
+								$('<div class="b"><div class="chat_box_m_div_read_div"><span class="chat_box_m_div_read_div_span">'+this.readst+'</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div><div class="chat_box_m_div" ><span>'+this.chatmessage+'</span></div><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'" ></div></div>').appendTo("#chat_box_ms");
+							}
+	                        
 		              }else if(loginmemberno != this.seller){
 	                        $('<div class="a"><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'" ></div><div class="chat_box_m_div" > <span>'+this.chatmessage+'</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div></div>').appendTo("#chat_box_ms");
 		              }
@@ -280,7 +377,10 @@
          })  
         
     });	
+});    
 
 
 </script>
+
+
 </html>

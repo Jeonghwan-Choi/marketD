@@ -22,7 +22,7 @@
         ) t1 WHERE RowIdx = 1) cm
         ON a.chatroomno = cm.chatroomno
         Left Join (select chatroomno,count(readst)readst
-        FROM chatmessage where readst='1' group by chatroomno ) cmm
+        FROM chatmessage where readst='1' and seller != #{user1} group by chatroomno ) cmm
         ON a.chatroomno = cmm.chatroomno
 		where user1 =  #{user1} order by cm.chatmessageno desc
      ]]>
@@ -40,10 +40,10 @@
     </select>
     
     <insert id="insertMessage" parameterType="chat"> 
-        insert into chatmessage(chatroomno,seller,chatmessage,readst,datetime) values(#{chatroomno},#{seller},#{chatmessage},1,TO_CHAR(LOCALTIMESTAMP,'yyyy/mm/dd HH24:MI')) 
+        insert into chatmessage(chatroomno,seller,chatmessage,readst,datetime) values(#{chatroomno},#{seller},#{chatmessage},#{readst},TO_CHAR(LOCALTIMESTAMP,'yyyy/mm/dd HH24:MI')) 
     </insert>
     <update id="updateReadst" parameterType="chat"> 
-    update chatmessage set readst = 0 where chatroomno = #{chatroomno} and seller = #{seller}
+   		update chatmessage set readst = 0 where chatroomno = #{chatroomno} and seller = #{seller}
     </update>
  	
 </mapper>

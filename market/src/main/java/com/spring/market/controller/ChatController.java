@@ -55,13 +55,19 @@ public class ChatController {
 	
 	@RequestMapping("/selectChat")
 	@ResponseBody
-	public List <ChatVO> selectChat(HttpServletRequest req,Model model,ChatVO vo,int roomno)throws Exception {
+	public List <ChatVO> selectChat(HttpServletRequest req,Model model,ChatVO vo,int roomno,int seller, String chatmessage, int readst)throws Exception {
 
 		vo.setChatroomno(roomno);
 		List<ChatVO> chatVo = chatService.selectChatList(vo);
+		System.out.println("========= chatVo size:: " + chatVo.size());
+		
+		vo.setSeller(seller);
+		vo.setChatmessage(chatmessage);
+		vo.setReadst(readst);
+		chatService.updateReadst(vo);
 
 	
-		System.out.println("========= chatVo size:: " + chatVo.size());
+
 //		for (int i = 0; i < chatVo.size(); i++) {
 //
 //			list.add(photoVo.get(i));
@@ -73,11 +79,12 @@ public class ChatController {
 	
 	@RequestMapping("/insertMessage")
 	@ResponseBody
-	public String insertMessage(HttpServletRequest req,Model model,ChatVO vo,int roomno,int seller, String chatmessage)throws Exception {
+	public String insertMessage(HttpServletRequest req,Model model,ChatVO vo,int roomno,int seller, String chatmessage, int readst)throws Exception {
 
 		vo.setChatroomno(roomno);
 		vo.setSeller(seller);
 		vo.setChatmessage(chatmessage);
+		vo.setReadst(readst);
 		
 		chatService.insertMessage(vo);
 
@@ -85,5 +92,7 @@ public class ChatController {
 
 		return "msg suc";
 	}
+	
+
 
 }
