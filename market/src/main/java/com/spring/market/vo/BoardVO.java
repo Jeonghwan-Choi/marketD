@@ -8,6 +8,9 @@ public class BoardVO {
 	private String datetime;
 	private String content;
 	private int price;
+	private String email;
+	private String name;
+	private String profile;
 	private int cnt;
 	private String imagename;
 	private String address;
@@ -15,27 +18,9 @@ public class BoardVO {
 	private int wishcount;
 	private int chatcount;
 	private int viewscount;
+	private MemberVO member;
 	
 	public BoardVO() {}
-
-	public BoardVO(int boardno, int memberno, String title, String category, String datetime, String content, int price,
-			int cnt, String imagename,String address,int wish,int wishcount,int chatcount,int viewscount) {
-		super();
-		this.boardno = boardno;
-		this.memberno = memberno;
-		this.title = title;
-		this.category = category;
-		this.datetime = datetime;
-		this.content = content;
-		this.price = price;
-		this.cnt = cnt;
-		this.imagename = imagename;
-		this.address = address;
-		this.wish = wish;
-		this.wishcount = wishcount;
-		this.chatcount = chatcount;
-		this.viewscount = viewscount;
-	}
 
 	public int getBoardno() {
 		return boardno;
@@ -93,6 +78,30 @@ public class BoardVO {
 		this.price = price;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+
 	public int getCnt() {
 		return cnt;
 	}
@@ -117,7 +126,6 @@ public class BoardVO {
 		this.address = address;
 	}
 
-	
 	public int getWish() {
 		return wish;
 	}
@@ -125,6 +133,7 @@ public class BoardVO {
 	public void setWish(int wish) {
 		this.wish = wish;
 	}
+
 	public int getWishcount() {
 		return wishcount;
 	}
@@ -132,6 +141,7 @@ public class BoardVO {
 	public void setWishcount(int wishcount) {
 		this.wishcount = wishcount;
 	}
+
 	public int getChatcount() {
 		return chatcount;
 	}
@@ -139,7 +149,7 @@ public class BoardVO {
 	public void setChatcount(int chatcount) {
 		this.chatcount = chatcount;
 	}
-	
+
 	public int getViewscount() {
 		return viewscount;
 	}
@@ -147,6 +157,44 @@ public class BoardVO {
 	public void setViewscount(int viewscount) {
 		this.viewscount = viewscount;
 	}
+
+	
+
+	public BoardVO(int boardno, int memberno, String title, String category, String datetime, String content, int price,
+			String email, String name, String profile, int cnt, String imagename, String address, int wish,
+			int wishcount, int chatcount, int viewscount, MemberVO member) {
+		super();
+		this.boardno = boardno;
+		this.memberno = memberno;
+		this.title = title;
+		this.category = category;
+		this.datetime = datetime;
+		this.content = content;
+		this.price = price;
+		this.email = email;
+		this.name = name;
+		this.profile = profile;
+		this.cnt = cnt;
+		this.imagename = imagename;
+		this.address = address;
+		this.wish = wish;
+		this.wishcount = wishcount;
+		this.chatcount = chatcount;
+		this.viewscount = viewscount;
+		this.member = member;
+	}
+
+	public MemberVO getMember() {
+		return member;
+	}
+
+	public void setMember(MemberVO member) {
+		this.member = member;
+	}
+
+	
+
+	
 	
 
 

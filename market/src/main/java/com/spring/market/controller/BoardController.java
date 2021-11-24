@@ -43,65 +43,68 @@ public class BoardController {
 	@RequestMapping("/board")
 	public String boardInfo(HttpServletRequest req, Model model,int boardno,int memberno) throws IllegalStateException, ParseException {
 		System.out.println("run BoardController boardInfo()");
-		System.out.println(boardno);
-		model.addAttribute("boardInfo", boardService.boardInfo(boardno));
-		
-		//게시물 등록 시간
-		String from = boardService.boardInfo(boardno).getDatetime();
-		Date format1 = new SimpleDateFormat("yyyy/MM/dd HH:mm").parse(from);
-		//현재시간
-		Date time = new Date();
-		long diffHor = (time.getTime()-format1.getTime())/3600000;
-		System.out.println(diffHor);
-		model.addAttribute("diffHor", diffHor);
-		
-		
-		MemberVO memberVO = memberService.memberInfo(memberno);
-		
-		model.addAttribute("memberInfo", memberVO);
-		List<ImageVO> boardImages = imageService.boardImages(boardno);
-		
-		
-		model.addAttribute("boardImages", boardImages);
-		model.addAttribute("BoardMemberno", memberno);
-		model.addAttribute("BoardBoardno", boardno);
-		
 
-		HttpSession session = req.getSession();
-		int loginno = (int) session.getAttribute("loginM");
 		
-//		방문자 등록 1인1개 한정임 인기중고 뽑기위해
-		BoardVO vo = new BoardVO();
-		vo.setBoardno(boardno);
-		vo.setMemberno(memberno);
-		boardService.insertGuest(vo);
-		vo.setMemberno(loginno);
-		boardService.insertGuest(vo);
+		List<BoardVO> bo =boardService.boardquery(boardno); 
+		model.addAttribute("boardquery",bo );
 		
-		//wish 상태 확인하기
-		MemberVO wishmemVO = new MemberVO();
-		wishmemVO.setBoardno(boardno);
-		wishmemVO.setMemberno(loginno);
-		
-		MemberVO wishmemVO2 = new MemberVO();
-		wishmemVO2 = memberService.wishchk(wishmemVO);
-		
-		System.out.println("loginno:"+loginno);
-		
-		model.addAttribute("wishchk",wishmemVO2);
-		System.out.println("chkwishchk"+wishmemVO2.getWishno());
-		
-		//countWish
-		model.addAttribute("countWish",boardService.countWish(boardno).getWishcount());
-		//countChat
-		model.addAttribute("countChat",boardService.countChat(boardno).getChatcount());
-		//countChat
-		model.addAttribute("countViews",boardService.countViews(boardno).getViewscount());
-		System.out.println("views"+boardService.countViews(boardno).getViewscount());
-		System.out.println("boardno:"+boardno);
-		
-		//인기중고
-		model.addAttribute("productList", boardService.boardList());
+//		//model.addAttribute("boardInfo", boardService.boardInfo(boardno));//1
+//		
+//		//게시물 등록 시간
+//		String from = boardService.boardInfo(boardno).getDatetime();//2
+//		Date format1 = new SimpleDateFormat("yyyy/MM/dd HH:mm").parse(from);
+//		//현재시간
+//		Date time = new Date();
+//		long diffHor = (time.getTime()-format1.getTime())/3600000;
+//		System.out.println(diffHor);
+//		model.addAttribute("diffHor", diffHor);
+//		
+//		
+//		MemberVO memberVO = memberService.memberInfo(memberno);//3
+//		
+//		model.addAttribute("memberInfo", memberVO);
+//		List<ImageVO> boardImages = imageService.boardImages(boardno);//4
+//		
+//		
+//		model.addAttribute("boardImages", boardImages);
+//		model.addAttribute("BoardMemberno", memberno);
+//		model.addAttribute("BoardBoardno", boardno);
+//		
+//
+//		HttpSession session = req.getSession();
+//		int loginno = (int) session.getAttribute("loginM");
+//		
+////		방문자 등록 1인1개 한정임 인기중고 뽑기위해
+//		BoardVO vo = new BoardVO();
+//		vo.setBoardno(boardno);
+//		vo.setMemberno(memberno);
+//		vo.setMemberno(loginno);
+//		boardService.insertGuest(vo);
+//		
+//		//wish 상태 확인하기
+//		MemberVO wishmemVO = new MemberVO();
+//		wishmemVO.setBoardno(boardno);
+//		wishmemVO.setMemberno(loginno);
+//		
+//		MemberVO wishmemVO2 = new MemberVO();
+//		wishmemVO2 = memberService.wishchk(wishmemVO);//
+//		
+//		System.out.println("loginno:"+loginno);
+//		
+//		model.addAttribute("wishchk",wishmemVO2);
+//		System.out.println("chkwishchk"+wishmemVO2.getWishno());
+//		
+//		//countWish
+//		model.addAttribute("countWish",boardService.countWish(boardno).getWishcount());
+//		//countChat
+//		model.addAttribute("countChat",boardService.countChat(boardno).getChatcount());
+//		//countChat
+//		model.addAttribute("countViews",boardService.countViews(boardno).getViewscount());
+//		System.out.println("views"+boardService.countViews(boardno).getViewscount());
+//		System.out.println("boardno:"+boardno);
+//		
+//		//인기중고
+		model.addAttribute("productList", boardService.boardList());//
 		
 		
 		return "/jsp/board";
@@ -211,7 +214,11 @@ public class BoardController {
 	public void addwish(HttpServletRequest req, Model model,BoardVO vo) throws Exception {
 		boardService.addwish(vo);
 		 
-		
+	}
+	@RequestMapping("/wishchk")
+	@ResponseBody
+	public int wishchk(HttpServletRequest req, Model model,MemberVO vo) throws Exception {
+		return memberService.wishchk(vo).getWishno();
 		
 	}
 	@RequestMapping("/deleteWish")

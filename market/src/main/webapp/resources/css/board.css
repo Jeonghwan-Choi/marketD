@@ -145,7 +145,7 @@ ul{
 .product_detail h1{
     font-size: 17px;
 }
-.product_detail_kinds,.product_detail_time,.product_detail_favorite,.product_detail_chatting,.product_detail_select{
+.product_detail_kinds,.product_detail_time,.product_detail_favorite,.product_detail_favorite_1,.product_detail_chatting,.product_detail_select{
     font-size: 13px;
     color: gray;
 } 

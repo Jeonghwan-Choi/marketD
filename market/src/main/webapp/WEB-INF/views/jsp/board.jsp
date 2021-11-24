@@ -19,17 +19,22 @@
 
 </head>
 <body>
+
+
+<c:forEach items="${boardquery }" var="board" begin="1" end="1">
 <div class="proudct">
         <div class="proudct_product" >
             <div class="proudct_product_div">
                 <div class="proudct_product_img_div">
                 <form method="post" action="/chat" name="formm" id="formm">
-	                <input name="boardMemberno" id="boardMemberno" type="hidden" value="${BoardMemberno}">
-	                <input name="boardBoardno" id="boardBoardno" type="hidden" value="${BoardBoardno}">
+	                <input name="boardMemberno" id="boardMemberno" type="hidden" value="${board.memberno}">
+	                <input name="boardBoardno" id="boardBoardno" type="hidden" value="${board.boardno}">
 	                <input name="user1" id="loginMemberno" type="hidden" value="${sessionScope.memberVO.memberno}">
+	                 <input type="hidden" id="boardDatetime" value="${board.datetime }"> 
 	                <input type="submit" style="background-color:transparent;  border:0px transparent solid;" value="">
                 </form>
-                <input type="hidden" id="wishno" value="${wishchk.wishno }">
+                <%-- <input type="hidden" id="wishno" value="${wishchk.wishno }"> --%>
+                
                     <div class="wrapper">
                     
 				        <div class="btn">
@@ -37,9 +42,9 @@
 				        </div>
 				        <div class="container">
 				            <ul class="slider">
-					             <c:forEach items="${boardImages}" var="boardImages" varStatus="status">
+ 								<c:forEach items="${boardquery }" var="image">
 					                <li class="item">
-					                	<img class="landscape" src="http://cjhftp.dothome.co.kr/${boardImages.memberno}/board/${boardImages.boardno }/${boardImages.imagename}">
+					                	<img class="landscape" src="http://cjhftp.dothome.co.kr/${board.memberno}/board/${board.boardno}/${image.imagename }">
 					                </li>
 					            </c:forEach> 
 				            </ul>
@@ -53,23 +58,16 @@
                             <img  src="https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png">                      
                         </div>             
                         <div class="proudct_product_profile_name">
-                            <a class="proudct_product_profile_name_name">${memberInfo.name }</a><br>
-                            <a class="proudct_product_profile_name_address" >${memberInfo.address }</a>
+                            <a class="proudct_product_profile_name_name">${board.name }</a><br>
+                            <a class="proudct_product_profile_name_address" >${board.address }</a>
                             <div class="wish_span">
                             	 <div class="wish_input" id="wish_input">
 	                            	<input onclick="Confirm();" type="button" value="당근채팅">
 	                            </div>
 	                            <div class="wish_div" id="wish_div">
 	                           		<span>
-	                           			 <c:set var="wishno" value="${wishchk.wishno }"/>
-		                           		<c:choose>
-				                           	<c:when test="${wishno eq 0}">
-				                            	<img id="wish_img" class="wish_img" src="http://cjhftp.dothome.co.kr/ico/heart.png">
-			                            	</c:when>
-			                            	<c:otherwise>
-			                            		<img id="wish_img" class="wish_img" src="http://cjhftp.dothome.co.kr/ico/heart2.png">
-			                            	</c:otherwise>
-		                            	</c:choose> 
+				                    	<img id="wish_img" class="wish_img" src="http://cjhftp.dothome.co.kr/ico/heart.png">
+			                            	
 	                           		</span>
 	                            </div>
                             </div>
@@ -80,20 +78,24 @@
                     <div class="cr" ></div>
 
                     <div class= "product_detail">
-                        <h1>${boardInfo.title }</h1>
+                        <h1>${board.title }</h1>
                         <a class="product_detail_kinds">
-                            ${boardInfo.category }
+                            ${board.category }
                         </a>
                         <a class="product_detail_time">
-                            · ${diffHor }시간전
+                            
                         </a><br>
                         <a class="product_detail_price">
-                            ${boardInfo.price }원
+                        
+                        
+                        
+                        
+                            ${board.price }원
                         </a><br>
-                        <p class="product_detail_content">${boardInfo.content }</p>
-                        <a class="product_detail_favorite" >관심 </a><a class="product_detail_favorite_1">${countWish }</a>
-                        <a class="product_detail_chatting" >채팅</a> <a class="product_detail_chatting" >${countChat }</a>
-                        <a class="product_detail_select" >조회</a> <a class="product_detail_select" >${countViews }</a>
+                        <p class="product_detail_content">${board.content }</p>
+                        <a class="product_detail_favorite" >관심 </a><a class="product_detail_favorite_1">${board.wishcount}</a>
+                        <a class="product_detail_chatting" >채팅</a> <a class="product_detail_chatting" >${board.chatcount }</a>
+                        <a class="product_detail_select" >조회</a> <a class="product_detail_select" >${board.viewscount }</a>
                     </div>
 
                 </div>
@@ -109,71 +111,6 @@
        <div class="main">
         <div class="main_product" >
             <p>인기중고</p>
-            <!-- <div class="main_product_div">
-                <img alt="아이폰xs 256GB" src="https://dnvefa72aowie.cloudfront.net/origin/article/202111/9D520DB0335DB62D95F06EA80E43DC34A0F189314277C2632AEC8E588BD695C9.jpg?q=82&amp;s=300x300&amp;t=crop">
-                <div class="main_product_title" >아이폰xs 256GB</div><br>
-                <div class="main_product_address">경기도 안양시 동안구 호계3동</div><br>
-                <div>
-                    <div class="main_product_price" >50,000원
-                        <div class="main_product_favorit">
-                            3
-                        </div>
-                    </div>
-                    
-                </div>    
-            </div>
-            <div class="main_product_div">
-                <img alt="아이폰xs 256GB" src="https://dnvefa72aowie.cloudfront.net/origin/article/202111/9D520DB0335DB62D95F06EA80E43DC34A0F189314277C2632AEC8E588BD695C9.jpg?q=82&amp;s=300x300&amp;t=crop">
-                <div class="main_product_title" >아이폰xs 256GB</div><br>
-                <div class="main_product_address">경기도 안양시 동안구 호계3동</div><br>
-                <div>
-                    <div class="main_product_price" >50,000원
-                        <div class="main_product_favorit">
-                            3
-                        </div>
-                    </div>
-                    
-                </div>    
-            </div>
-            <div class="main_product_div">
-                <img alt="아이폰xs 256GB" src="https://dnvefa72aowie.cloudfront.net/origin/article/202111/9D520DB0335DB62D95F06EA80E43DC34A0F189314277C2632AEC8E588BD695C9.jpg?q=82&amp;s=300x300&amp;t=crop">
-                <div class="main_product_title" >아이폰xs 256GB</div><br>
-                <div class="main_product_address">경기도 안양시 동안구 호계3동</div><br>
-                <div>
-                    <div class="main_product_price" >50,000원
-                        <div class="main_product_favorit">
-                            3
-                        </div>
-                    </div>
-                    
-                </div>    
-            </div>
-            <div class="main_product_div">
-                <img alt="아이폰xs 256GB" src="https://dnvefa72aowie.cloudfront.net/origin/article/202111/9D520DB0335DB62D95F06EA80E43DC34A0F189314277C2632AEC8E588BD695C9.jpg?q=82&amp;s=300x300&amp;t=crop">
-                <div class="main_product_title" >아이폰xs 256GB</div><br>
-                <div class="main_product_address">경기도 안양시 동안구 호계3동</div><br>
-                <div>
-                    <div class="main_product_price" >50,000원
-                        <div class="main_product_favorit">
-                            3
-                        </div>
-                    </div>
-                    
-                </div>    
-            </div>
-            <div class="main_product_div">
-                <img alt="아이폰xs 256GB" src="https://dnvefa72aowie.cloudfront.net/origin/article/202111/9D520DB0335DB62D95F06EA80E43DC34A0F189314277C2632AEC8E588BD695C9.jpg?q=82&amp;s=300x300&amp;t=crop">
-                <div class="main_product_title" >아이폰xs 256GB</div><br>
-                <div class="main_product_address">경기도 안양시 동안구 호계3동</div><br>
-                <div>
-                    <div class="main_product_price" >50,000원
-                        <div class="main_product_favorit">
-                            3
-                        </div>
-                    </div>
-                    
-                </div>    
-            </div> -->
             <c:forEach items="${productList}" var="productVO">
 	            <div class="main_product_div">
 	            	<a class="main_product_div_a" href="board?boardno=${productVO.boardno }&memberno=${productVO.memberno}">
@@ -203,11 +140,72 @@
 
         </div>
       </div>   
+</c:forEach> 
+      
       <footer class="footer">
 
       </footer>
+  
 </body>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
+
+	//wish
+		var memberno = document.getElementById('loginMemberno').value;
+		var boardno = document.getElementById('boardBoardno').value;
+	
+		$.ajax({
+            url : 'wishchk',
+            method : 'POST',
+            data : 'memberno=' + memberno + '&boardno=' + boardno,
+            type : "POST",
+
+            success : function(data) {
+                 const data1 = $.trim(data);
+                 if(data1==0){
+                     $("#wish_img").attr("src", "http://cjhftp.dothome.co.kr/ico/heart.png");
+                 }
+                 if(data1!=0){
+                	 $("#wish_img").attr("src", "http://cjhftp.dothome.co.kr/ico/heart2.png");
+                 }
+
+                
+         },
+            error : function() {
+               alert("request error!");
+            }
+         })  
+		console.log(boardDatetime);
+	
+
+
+	//diffHor
+	  var boardDatetime = document.getElementById('boardDatetime').value;
+	  console.log('2021/11/23 17:40');
+	  var boardyear = boardDatetime.substring(0,4);
+	  var boardmonth = boardDatetime.substring(5,7);
+	  var boarddate = boardDatetime.substring(8,10);
+	  var boardhours = boardDatetime.substring(11,13)
+	  var boardminutes = boardDatetime.substring(14,16);
+	  
+	var today = new Date();   
+
+	var year = today.getFullYear(); 
+	var month = today.getMonth() + 1; 
+	var date = today.getDate();  
+	var hours = today.getHours(); 
+	var minutes = today.getMinutes();  
+	
+	const date1 = new Date(boardyear,boardmonth,boarddate,boardhours,boardminutes);
+	const date2 =new Date(year,month,date,hours,minutes);
+	const elapsedSec = date2.getTime()-date1.getTime();
+	const elapsedhour=elapsedSec/1000/60/60;
+	var timehtml = ". "+(Math.round(elapsedhour))+" 시간 전";
+	$(".product_detail_time").html(timehtml);
+	
+	/* */
+	
+	
     var slideWrapper = document.querySelector('.container');
     var slides = document.querySelectorAll('.item');
     var totalSlides = slides.length; // item의 갯수
@@ -247,10 +245,8 @@
     prevBtn.addEventListener('click', function () {
         plusSlides(-1);
     });
-</script>
-<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 
-<script type="text/javascript">
+
 	var alert = function(msg, type) {
 		swal({
 			title : '',
@@ -278,8 +274,8 @@
 				swal('', '채팅방이 생성 되었습니다.', "success",
 						$("#formm").submit());
 			}else{
-				/* document.formm.action = "/chat";
-		    	document.formm.submit(); */
+				 document.formm.action = "/chat";
+		    	document.formm.submit(); 
 				// swal('', '예약이 거부되었습니다.', "failed");
 			}
 
@@ -302,7 +298,8 @@
 	                const memberno = document.getElementById('loginMemberno').value;
 	                const boardno = document.getElementById('boardBoardno').value;
 	                var wish = $(".product_detail_favorite_1").html
-	                console.log(wish);
+					var wishchk = $(".product_detail_favorite_1").html
+					var num = parseInt(wishchk);
 	                
 	                $.ajax({
 	                    url : 'addwish',
@@ -311,7 +308,7 @@
 	                    type : "POST",
 
 	                    success : function(data) {
-	                    	wish = wish + 1
+	                    	num = num+1;
 	                  		 alert("해당 상품을 찜했습니다.")
 	           				 
 	           		},

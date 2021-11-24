@@ -12,9 +12,10 @@ public class MemberVO {
 	private String profiletype;
 	private int wishno;
 	private int boardno;
+	private int cnt;
 	public MemberVO() {}
 	public MemberVO(int memberno, String email, String password, String name, int gender, int phone,
-			String address, String profile, String profiletype,int wishno,int boardno) {
+			String address,int cnt, String profile, String profiletype,int wishno,int boardno) {
 		super();
 		this.memberno = memberno;
 		this.email = email;
@@ -27,6 +28,7 @@ public class MemberVO {
 		this.profiletype = profiletype;
 		this.wishno=wishno;
 		this.boardno=boardno;
+		this.cnt=cnt;
 	}
 	public int getBoardno() {
 		return boardno;
@@ -97,6 +99,11 @@ public class MemberVO {
 	}
 	
 
-
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
 	
 }

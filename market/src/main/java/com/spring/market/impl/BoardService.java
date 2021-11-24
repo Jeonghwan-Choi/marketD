@@ -12,7 +12,6 @@ public interface BoardService {
 	List<BoardVO> boardList();
 	void insertGuest(BoardVO vo);
 	void addwish(BoardVO vo);
-	BoardVO countWish(int boardno);
-	BoardVO countChat(int boardno);
-	BoardVO countViews(int boardno);
+
+	List<BoardVO> boardquery(int boardno);
 }
