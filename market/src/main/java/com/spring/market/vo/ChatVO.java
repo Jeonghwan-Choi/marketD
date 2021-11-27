@@ -21,11 +21,60 @@ public class ChatVO {
 	private String chatmessage;
 	private int readst;
 	
+	//chatlocation
+	private int locationno;
+	private String locationtitle;
+	private String locationdate;
+	private String location;
+	private String locationdescription;
+	
+	public int getLocationno() {
+		return locationno;
+	}
+
+	public void setLocationno(int locationno) {
+		this.locationno = locationno;
+	}
+
+	public String getLocationtitle() {
+		return locationtitle;
+	}
+
+	public void setLocationtitle(String locationtitle) {
+		this.locationtitle = locationtitle;
+	}
+
+	public String getLocationdate() {
+		return locationdate;
+	}
+
+	public void setLocationdate(String locationdate) {
+		this.locationdate = locationdate;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getLocationdescription() {
+		return locationdescription;
+	}
+
+	public void setLocationdescription(String locationdescription) {
+		this.locationdescription = locationdescription;
+	}
+
 	public ChatVO() {}
 
+	
+
 	public ChatVO(int chatroomno, int boardno, int buyerno, String datetime, int chatmember, int user1, int user2,
-			String name, String address, String profile, int chatmessageno, int seller, String chatmessage,
-			int readst) {
+			String name, String address, String profile, int chatmessageno, int seller, String chatmessage, int readst,
+			int locationno, String locationtitle, String locationdate, String location, String locationdescription) {
 		super();
 		this.chatroomno = chatroomno;
 		this.boardno = boardno;
@@ -41,6 +90,11 @@ public class ChatVO {
 		this.seller = seller;
 		this.chatmessage = chatmessage;
 		this.readst = readst;
+		this.locationno = locationno;
+		this.locationtitle = locationtitle;
+		this.locationdate = locationdate;
+		this.location = location;
+		this.locationdescription = locationdescription;
 	}
 
 	public int getChatroomno() {

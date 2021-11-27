@@ -56,9 +56,7 @@
 	
 	<select id="boardquery" parameterType="board" resultType="board">
  	<![CDATA[
-		select a.boardno,a.memberno,a.title,a.category,a.datetime,a.content,a.price,i.imagename,m.email,m.name,m.profile,m.address,w.wishcount,c.chatcount,nvl((m.viewscount),0)viewscount from board a 
-		left join image i
-		on a.boardno=i.boardno
+		select a.boardno,a.memberno,a.title,a.category,a.datetime,a.content,a.price,m.email,m.name,m.profile,m.address,w.wishcount,c.chatcount,nvl((m.viewscount),0)viewscount from board a 
 		left join member m
 		on a.memberno=m.memberno
 		left join (select boardno,count(wishno)wishcount from wish group by boardno) w

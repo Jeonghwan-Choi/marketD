@@ -5,24 +5,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
   
-<mapper namespace="CartDAO">
- 
-
-<!-- 	<insert id="insertCart"> 
-        INSERT INTO cart (cartno,category, name,price,filename,resdate,memberNo ) VALUES (seq_cart.nextval, #{category},#{name},#{price},#{filename},sysdate,#{memberNo}) 
-    </insert>
-    
-    <select id="getcartCount" resultType="cart" parameterType="cart">
-  		select count(*)"cartno" from cart where memberNo =#{value}
-  	</select>
-  	
-  	<select id="getCartList" resultType="cart">
-    	select * from cart where memberNo=#{memberNo}
-    </select>
-    
-    <select id="getCartListCount" resultType="int">
-    	select count(*) from cart where memberNo=#{memberNo}
-    </select> -->
-  
+<mapper namespace="ChatDAO">
+	<insert id="insertChatLocation" parameterType="chat"> 
+		insert into chatlocation(locationtitle,locationdate,location,locationdescription) values(#{locationtitle},#{locationdate},#{location},#{locationdescription})
+	</insert>
  	
 </mapper>

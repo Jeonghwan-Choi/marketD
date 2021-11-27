@@ -53,8 +53,8 @@ public class BoardDAO {
 		System.out.println("run BoardDAO countViews()");
 		return sqlSession.selectOne("BoardDAO.countViews",boardno);		
 	}
-	public List<BoardVO> boardquery(int boardno) {
+	public BoardVO boardquery(int boardno) {
 		System.out.println("run BoardDAO boardquery()");
-		return sqlSession.selectList("BoardDAO.boardquery",boardno);
+		return sqlSession.selectOne("BoardDAO.boardquery",boardno);
 	}
 }

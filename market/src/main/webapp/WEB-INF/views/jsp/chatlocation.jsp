@@ -134,6 +134,15 @@
             /* line-height: 40px; 
             margin:0 auto; */
         }
+       .location_location_input{
+       		background:rgb(218, 218, 218,0.5);
+       }
+       .location_submit_input{
+       		background:white;
+       		border:none;
+       		color:gray;
+       		font-weight:border;
+       }
        
        
        /* map */
@@ -178,7 +187,6 @@
 </head>
 <body>
 <form action="/chatcalendar" method="post">
-	<input id="loc" type="text">
     <div class="main">
         <div class="location_header">
             <div class="location_header_img">
@@ -194,10 +202,11 @@
                 <table class="location_table">
                     <tr class="location_tr">
                         <th class="location_th">일시</th>
-                        <td class="location_td"><input class="location_date_input" type="text"></td>
+                        <td class="location_td"><input name="location_date_input" class="location_date_input" id="location_date_input" type="date"></td>
                     </tr>
+                    
                     <tr class="location_tr">
-                        <th class="location_th">장소</th>
+                        <th class="location_th">지도</th>
                         <td class="location_td">
 							<div class="map_wrap">
 							    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
@@ -205,7 +214,7 @@
 							    <div id="menu_wrap" class="bg_white">
 							        <div class="option">
 							            <div>
-							                    키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15"> 
+							                    키워드 : <input type="text" value="" id="keyword" size="15" placeholder="키워드입력"> 
 							                    <input type="button" value="검색하기" onclick="searchPlaces()">
 							            </div>
 							        </div>
@@ -218,8 +227,17 @@
                         </td>
                     </tr>
                     <tr class="location_tr">
+                        <th class="location_th">장소</th>
+                        <td class="location_td"><input class="location_location_input" id="location_location_input" name="location_location_input" type="text" value="" readonly></td>
+                        
+                    </tr>
+                    <tr class="location_tr">
                         <th class="location_th" style="vertical-align: top; padding-top: 10px;">설명</th>
-                        <td class="location_td" style="padding-top: 10px;"><textarea cols="70" rows="15" class="location_textarea" placeholder="설명추가"></textarea></td>
+                        <td class="location_td" style="padding-top: 10px;"><textarea cols="70" rows="15" id="location_textarea" name="location_textarea" class="location_textarea" placeholder="설명추가"></textarea></td>
+                    </tr>
+                    <tr class="location_tr">
+                        <th class="location_th"></th>
+                        <td class="location_td"><input name="location_submit_input" class="location_submit_input" id="location_submit_input" type="submit" value="약속잡기"></td>
                     </tr>
                 </table>
             </div>
@@ -243,7 +261,7 @@
             </div>
         </div>
     </div>
-     <input type="submit"> 
+    <input type="hidden" id="coordinate" name="coordinate" value="">
 </form>
 </body>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -275,10 +293,7 @@ function searchPlaces() {
 
     var keyword = document.getElementById('keyword').value;
 
-    if (!keyword.replace(/^\s+|\s+$/g, '')) {
-        alert('키워드를 입력해주세요!');
-        return false;
-    }
+    
 
     // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
     ps.keywordSearch( keyword, placesSearchCB); 
@@ -360,8 +375,11 @@ function displayPlaces(places) {
                 displayInfowindow(marker, title,xxx,yyy);
                 
                 console.log(index+":"+xxx+"/"+yyy);
+                console.log("title "+title);
+                $(".location_location_input").val(title);
                 
-                $('#loc').val(xxx+"/"+yyy);
+                
+                $('#coordinate').val(xxx+"/"+yyy);
                 
             };
 

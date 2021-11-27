@@ -15,6 +15,14 @@ public class ChatServiceImpl implements ChatService {
 	@Autowired
 	private ChatDAO chatDAO;
 
+	@Override
+	public void insertChatLocation(ChatVO vo) {
+		System.out.println("run BoardServiceImpl insertChatLocation(ChatVO)");
+		chatDAO.insertChatLocation(vo);
+		
+		
+	}
+
 	/*
 	 * @Override public List<ChatVO> myChatList(ChatVO vo) {
 	 * System.out.println("run ChatServiceImpl myChatList()"); return

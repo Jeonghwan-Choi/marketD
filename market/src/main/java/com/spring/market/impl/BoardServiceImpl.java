@@ -13,11 +13,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Autowired
 	private BoardDAO boardDAO;
-	@Override
-	public BoardVO boardInfo(int boardno) {
-		System.out.println("run BoardServiceImpl boardInfo()");
-		return boardDAO.boardInfo(boardno);
-	}
+	
 	@Override
 	public void insertBoard(BoardVO vo) {
 		System.out.println("run BoardServiceImpl insertBoard()");
@@ -47,7 +43,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public List<BoardVO> boardquery(int boardno) {
+	public BoardVO boardquery(int boardno) {
 		System.out.println("run BoardServiceImpl boardquery()");
 		return boardDAO.boardquery(boardno);
 	}

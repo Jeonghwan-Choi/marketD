@@ -30,6 +30,19 @@ public class ChatController {
 	}
 	@RequestMapping("/chatcalendar")
 	public String chatcalendar(HttpServletRequest req, Model model, ChatVO vo) throws IllegalStateException {
+		
+		String title = req.getParameter("location_header_input");
+		String date = req.getParameter("location_date_input");
+		String coordinate = req.getParameter("coordinate");
+		String content = req.getParameter("location_textarea");
+		
+		vo.setLocationtitle(title);
+		vo.setLocationdate(date);
+		vo.setLocation(coordinate);
+		vo.setLocationdescription(content);
+		
+		chatService.insertChatLocation(vo);
+		
 		return "/jsp/chatcalendar";
 	}
 	

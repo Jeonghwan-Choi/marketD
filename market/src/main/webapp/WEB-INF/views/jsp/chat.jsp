@@ -148,7 +148,7 @@
 <script>
 	function open2(){
 	    
-		window.open("/chatlocation", "_blank", "width=1100, height=600,toolbar=no,location=no,resizable=no,left=30,top=30,menubar=no" ); 
+		window.open("/chatlocation", "_blank", "width=1100, height=700,toolbar=no,location=no,resizable=no,left=30,top=30,menubar=no" ); 
 	
 	}
 

@@ -19,9 +19,6 @@
 
 </head>
 <body>
-
-
-<c:forEach items="${boardquery }" var="board" begin="1" end="1">
 <div class="proudct">
         <div class="proudct_product" >
             <div class="proudct_product_div">
@@ -42,7 +39,7 @@
 				        </div>
 				        <div class="container">
 				            <ul class="slider">
- 								<c:forEach items="${boardquery }" var="image">
+ 								<c:forEach items="${boardImages }" var="image">
 					                <li class="item">
 					                	<img class="landscape" src="http://cjhftp.dothome.co.kr/${board.memberno}/board/${board.boardno}/${image.imagename }">
 					                </li>
@@ -140,7 +137,6 @@
 
         </div>
       </div>   
-</c:forEach> 
       
       <footer class="footer">
 

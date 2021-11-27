@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.spring.market.vo.BoardVO;
 import com.spring.market.vo.ChatVO;
 
 
@@ -23,5 +22,9 @@ public class ChatDAO {
 	 * System.out.println("user1 = "+vo.getUser1()); return
 	 * sqlSession.selectList("ChatDAO.myChatList",vo); }
 	 */
-
+	public void insertChatLocation(ChatVO vo) {
+		System.out.println("run BoardDAO insertChatLocation()");
+		sqlSession.update("ChatDAO.insertChatLocation",vo);
+		
+	}
 }
