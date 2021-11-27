@@ -27,6 +27,26 @@
 		where user1 =  #{user1} order by cm.chatmessageno desc
      ]]>
     </select>
+    
+    <!-- 읽지 않은 메세지 뽑기 -->
+    <select id="myChatListNotRead" parameterType="chat" resultType="chat">
+	<![CDATA[
+		select a.chatmember,a.chatroomno,a.user1,a.user2,m.name,m.address,m.profile,cm.chatmessage,NVL((cmm.readst),0)"readst"
+		from chatmember a
+		Left Join member m
+		ON a.user2 = m.memberno
+		Left Join (SELECT chatroomno, chatmessage,chatmessageno
+        FROM ( SELECT chatroomno, chatmessage,chatmessageno
+        , ROW_NUMBER() OVER(PARTITION BY chatroomno ORDER BY chatmessageno DESC) as RowIdx
+        FROM chatmessage 
+        ) t1 WHERE RowIdx = 1) cm
+        ON a.chatroomno = cm.chatroomno
+        Left Join (select chatroomno,count(readst)readst
+        FROM chatmessage where readst='1' and seller != #{user1} group by chatroomno ) cmm
+        ON a.chatroomno = cmm.chatroomno
+		where user1 =  #{user1} and cmm.readst != 0 order by cm.chatmessageno desc
+     ]]>
+    </select>
 
     
   <!-- 선택된 채팅내용  -->

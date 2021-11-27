@@ -39,5 +39,11 @@ public class ChatServiceImpl implements ChatService {
 		chatDAO.updateReadst(vo);
 	}
 
+	@Override
+	public List<ChatVO> myChatListNotRead(int seller) {
+		System.out.println("run ChatServiceImpl myChatListNotRead()");
+		return chatDAO.myChatListNotRead(seller);		
+	}
+
 
 }

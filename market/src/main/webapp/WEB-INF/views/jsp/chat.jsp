@@ -13,8 +13,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css ">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat.css ">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!-- <script src="http://cjhwebsocket.cafe24app.com:80/socket.io/socket.io.js"></script> -->
-<script src="http://localhost:80/socket.io/socket.io.js"></script>
+<!-- <script src="http://cjhwebsocket.cafe24app.com:80/socket.io/socket.io.js"></script>
+ --><script src="http://localhost:80/socket.io/socket.io.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <style>
 
@@ -114,8 +114,7 @@
 		                                        ${chatVO.chatmessage }
 		                                    </span>
 		                                </div>
-		                                
-											
+
 												<c:choose>
 										         	<c:when test="${chatVO.readst != 0 }">
 										         	<div  id="${chatVO.chatroomno}_chat_user_list_room_read" class="chat_user_list_room_read" >
@@ -128,8 +127,6 @@
 	  												</div>	
 	 								    		 	</c:when>
 								         		</c:choose> 
-											
-										
 		                                
 		                            </div>
 		                        </div>
@@ -169,7 +166,8 @@
 <script>
 var nick = $("#loginmemberno").val();
 $(function () {
-    var socket = io("http://localhost:80");
+    /* var socket = io("http://cjhwebsocket.cafe24app.com:80"); */
+	var socket = io("http://localhost:80");
     socket.emit('newuser', nick);
     // Regular forum submission event handler below this.
 
@@ -182,11 +180,147 @@ $(function () {
         'click': function(){
             if(jQuery('#readm_img').attr("src")=='http://cjhftp.dothome.co.kr/ico/tick.png'){
                 $('#readm_img').attr('src','http://cjhftp.dothome.co.kr/ico/tick2.png');
+            //읽음과 상관없이 전체가 나옴
+            	$.ajax({
+				        url : 'allReadSelectChat',
+				        method : 'POST',
+				        data : 'seller=' + $("#loginmemberno").val() ,
+				        type : "POST",
+				
+				        success : function(data) {
+							 $(".chat_user_list_room").remove();
+
+							 
+							
+			               
+
+				           $(data).each(
+				                 function(index) {
+				                	 
+				                	 
+				                    
+									
+									
+				                    var maindiv = $('<div class="chat_user_list_room">'+
+				                    '<a id="chatroomno" class="chatroom'+this.chatroomno+'" >'+
+				                    '<span id="'+this.user2+'" class="'+this.chatroomno+'-'+this.user2+'" style="display:none;"></span>'+
+				                    '<span class="boardMemberno" style="display:none;">'+this.user2+'</span>'+
+				                    '<span class="boardRoomno" style="display:none;">'+this.chatroomno+'</span>'+
+				                    '<span class="profilename" style="display:none;">'+this.profile+'</span>'+
+				                    '<div class="chat_user_list_room_m">'+
+				                    '<div class="chat_user_list_room_m_img_div">'+
+				                    '<img src="http://cjhftp.dothome.co.kr/'+this.user2+'/profile/'+this.profile+'">'+    
+				                    '</div>'+
+				                    '<div class="chat_user_list_room_m_center_div">'+
+				                    '<div class="chat_user_list_room_m_member_div">'+
+				                    '<span>'+this.name+'</span>'+
+				                    '<span> · </span>'+
+				                    '<span>'+this.datetime+' </span>'+
+				                    '</div>'+
+				                    '<br>'+
+				                    '<div class="chat_user_list_room_m_message_div">'+
+				                    '<span>'+
+				                    ''+this.chatmessage+''+
+				                    '</span>'+
+				                    '</div>'+
+				                    '<div  id="'+this.chatroomno+'_chat_user_list_room_read" class="chat_user_list_room_read" >'+
+					                '<span id="'+this.chatroomno+'_chat_user_list_room_read_span" class="chat_user_list_room_read_span"></span>'+
+					                '</div>'+ 
+
+				                    '</div>'+
+				                    '</div>');
+				                    console.log("roomno:"+this.chatroomno);
+				                    console.log("read:"+this.readst);
+
+				                    $('.chat_user_list').append(maindiv);
+				                    if(this.readst == 0){
+				                    	$("#"+this.chatroomno+"_chat_user_list_room_read_span").text(0)
+				                    	$("#"+this.chatroomno+"_chat_user_list_room_read").css("display","none")
+				                    }else if(this.readst != 0){
+				                    	$("#"+this.chatroomno+"_chat_user_list_room_read_span").text(this.readst)
+				                    	$("#"+this.chatroomno+"_chat_user_list_room_read").css("display","block")
+				                    }
+				                    
+				                           
+				                 });
+				        },
+				        error : function() {
+				           alert("request error!");
+				        }
+				     })
+                console.log("읽은 메세지만 나옴  ");
             }else if(jQuery('#readm_img').attr("src")=='http://cjhftp.dothome.co.kr/ico/tick2.png'){
                 $('#readm_img').attr('src','http://cjhftp.dothome.co.kr/ico/tick.png');
-            }           
-        } 
-    });
+            //안읽은 메세지만 나옴    
+            console.log("안읽은 메세지만 나옴  ");
+                $.ajax({
+				        url : 'notReadSelectChat',
+				        method : 'POST',
+				        data : 'seller=' + $("#loginmemberno").val() ,
+				        type : "POST",
+				
+				        success : function(data) {
+							 $(".chat_user_list_room").remove();
+				
+
+				           $(data).each(
+				                 function(index) {
+				                    console.log(index)
+
+				                    var maindiv = $('<div class="chat_user_list_room">'+
+				                    '<a id="chatroomno" class="chatroom'+this.chatroomno+'" >'+
+				                    '<span id="'+this.user2+'" class="'+this.chatroomno+'-'+this.user2+'" style="display:none;"></span>'+
+				                    '<span class="boardMemberno" style="display:none;">'+this.user2+'</span>'+
+				                    '<span class="boardRoomno" style="display:none;">'+this.chatroomno+'</span>'+
+				                    '<span class="profilename" style="display:none;">'+this.profile+'</span>'+
+				                    '<div class="chat_user_list_room_m">'+
+				                    '<div class="chat_user_list_room_m_img_div">'+
+				                    '<img src="http://cjhftp.dothome.co.kr/'+this.user2+'/profile/'+this.profile+'">'+    
+				                    '</div>'+
+				                    '<div class="chat_user_list_room_m_center_div">'+
+				                    '<div class="chat_user_list_room_m_member_div">'+
+				                    '<span>'+this.name+'</span>'+
+				                    '<span> · </span>'+
+				                    '<span>'+this.datetime+' </span>'+
+				                    '</div>'+
+				                    '<br>'+
+				                    '<div class="chat_user_list_room_m_message_div">'+
+				                    '<span>'+
+				                    ''+this.chatmessage+''+
+				                    '</span>'+
+				                    '</div>'+
+				                    '<div  id="'+this.chatroomno+'_chat_user_list_room_read" class="chat_user_list_room_read" >'+
+					                '<span id="'+this.chatroomno+'_chat_user_list_room_read_span" class="chat_user_list_room_read_span"></span>'+
+					                '</div>'+ 
+				                    '</div>'+	 
+				                    '</div>'+
+				                    '</div>');
+
+
+				                    $('.chat_user_list').append(maindiv);
+				                    $('.chat_user_list').append(maindiv);
+				                    if(this.readst == 0){
+				                    	$("#"+this.chatroomno+"chat_user_list_room_read_span").text(0)
+				                    	$(".chat_user_list_room_read").css("display","none")
+				                    }else if(this.readst != 0){
+				                    	$("#"+this.chatroomno+"_chat_user_list_room_read_span").text(this.readst)
+				                    	$(".chat_user_list_room_read").css("display","block")
+				                    } 
+				                 });
+				        },
+				        error : function() {
+				           alert("request error!");
+				        }
+				     })
+				 //여기까지 ajax    
+	            }           
+	        } 
+	    });
+    
+    
+
+    
+    
 
     $(document).ready(function() {
            
@@ -323,7 +457,9 @@ $(function () {
 
             
         });
-    $("a").click(function() {
+    $(document).on("click","a",function(){
+/*     $("a").click(function() { */
+    	console.log("a click");
         var myClass = $(this).attr("class");
         console.log(myClass);
         console.log($("."+myClass).children('.boardMemberno').html());

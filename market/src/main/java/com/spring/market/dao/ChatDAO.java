@@ -39,4 +39,10 @@ public class ChatDAO {
 		sqlSession.update("ChatDAO.updateReadst",vo);
 	}
 
+	public List<ChatVO> myChatListNotRead(int seller) {
+		System.out.println("run ChatDAO myChatListNotRead()");
+		System.out.println("user1 = "+ seller);
+		return sqlSession.selectList("ChatDAO.myChatListNotRead",seller);
+	}
+
 }

@@ -93,6 +93,27 @@ public class ChatController {
 		return "msg suc";
 	}
 	
+	@RequestMapping("/notReadSelectChat")
+	@ResponseBody
+	public List <ChatVO> notReadSelectChat(HttpServletRequest req,Model model,ChatVO vo,int seller)throws Exception {
+
+		vo.setSeller(seller);
+		List<ChatVO> chatVo = chatService.myChatListNotRead(seller);
+		System.out.println("========= chatVo size:: " + chatVo.size());
+
+		return chatVo;
+	}
+	@RequestMapping("/allReadSelectChat")
+	@ResponseBody
+	public List <ChatVO> allReadSelectChat(HttpServletRequest req,Model model,ChatVO vo,int seller)throws Exception {
+
+		vo.setUser1(seller);
+		List<ChatVO> chatVo = chatService.myChatList(vo);
+		System.out.println("========= chatVo size:: " + chatVo.size());
+
+		return chatVo;
+	}
+	
 
 
 }
