@@ -53,8 +53,7 @@ public class BoardController {
 		model.addAttribute("boardImages", boardImages);
 	
 //		//인기중고
-		model.addAttribute("productList", boardService.boardList());//
-		
+		model.addAttribute("productList", boardService.boardList());
 		
 		return "/jsp/board";
 	}

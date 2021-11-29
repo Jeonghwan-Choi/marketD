@@ -56,6 +56,9 @@
                     $("#calendar_top_table #chatcalendar_top_tbody:last").append("<td class='chatcalendar_top_date'>"+ i +"</td>");
                     
                 }
+                
+                console.log()
+                
                 $(".chatcalendar_top_date").append("<div class='chatcalendar_top_event'>d</div>");
                 if($("#calendar_top_table > #chatcalendar_top_tbody > td").length%7!=0) { //마지막 줄 빈칸
                     for(i=1; i<= $("#calendar > #chatcalendar_top_tbody > td").length%7; i++) {

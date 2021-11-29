@@ -149,6 +149,7 @@
                     <br>
                     <div>* 이메일 :<br>
                         <input type = "text" id = "email" name = "email" value="${sessionScope.joinEmail}" >
+                        <input type = "text" id = "email1" name = "email1" value="${email}" >
                         <input id="emailCk" class="addr_button" type="button" value="중복확인" onclick="emailcheck()" ><br>
                         <p id = "email-t">이메일 주소는 고객님의 안전한 거래와 회원정보 보호를 위해 정확하게 입력해 주세요.</p><br>
                         <p id = "checkMsg"></p>

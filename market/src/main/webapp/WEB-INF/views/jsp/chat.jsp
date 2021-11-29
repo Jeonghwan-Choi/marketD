@@ -23,9 +23,10 @@
 
     <header>
     	<div style="display:none;">
-       		 <label>MemberNO : </label><input id="memberno" type="text" value="${boardMemberno} "><br>
+       		 <label>MemberNO : </label><input name="memberno" id="memberno" type="text" value="${boardMemberno} "><br>
       	 	 <label>RoomNO : </label><input id="roomno" type="text" value="${boardBoardno}"><br>
-      		 <label>LoginMemberNO : </label><input id="loginmemberno" type="text" value="${loginMemberno}"><br>
+      		 <label>LoginMemberNO : </label><input id="loginmemberno" name="loginno" type="text" value="${loginMemberno}"><br>
+      		 
         </div>
         <div class = "header_img_div">
             <img class="fixed-logo" alt="당근마켓" src="https://d1unjqcospf8gs.cloudfront.net/assets/home/base/header/logo-basic-24b18257ac4ef693c02233bf21e9cb7ecbf43ebd8d5b40c24d99e14094a44c81.svg">
@@ -82,10 +83,18 @@
                     
                 </div>
                 <!-- 여기서 부터 사람 한명 -->
-                <c:forEach items="${mychatList}" var="chatVO">
+                <c:forEach items="${mychatList}" var="chatVO" varStatus="status">
+                
+                
+                <input type="text" id="chatmember" name="chatmember" value="${chatVO.chatmember }">
+                <%-- <p>${status.count}</p>
+                <input type="hidden" id="hiden${status.count}" name="${status.count}" value="${chatVO.chatmember }"> --%><!-- 1부터시작 -->
+
+                
 	                <div class="chat_user_list_room">
 		                    <a id="chatroomno" class="chatroom${chatVO.chatroomno }" >
 		                    <span class="boardMemberno" style="display:none;">${chatVO.user2}</span>
+                <input type="hidden" id="boardMemberno" name="boardMemberno" value="${chatVO.user2}">
 		                    <span class="boardRoomno" style="display:none;">${chatVO.chatroomno}</span>
 		                        <div class="chat_user_list_room_m">
 		                            <div class="chat_user_list_room_m_img_div">
@@ -112,6 +121,37 @@
 		                        </div>
 		                    </a>                
 	                 </div>
+	                 
+    			<input type="button" id="listbutton" value="약속잡기">
+	                 <script>
+				 var user1 = $('#loginmemberno').val();
+				var user2 = $('#boardMemberno').val();
+				console.log(user1);
+				console.log(user2);
+        		
+                		$('#listbutton').one("click", function(){ 
+                			
+                			$.ajax({
+                	            url : 'chatlocationlist',
+                	            method : 'POST',
+                	            data : 'user1=' + user1+'&user2='+user2,
+                	            type : "POST",
+
+                	            success : function(data) {
+                	                 alert("성공.")
+                	                 console.log(data);
+                	                 console.log(data.login);
+                	                 window.open("chatlocation?login="+data.login+"&member="+data.member, "_blank", "width=1100, height=700,toolbar=no,location=no,resizable=no,left=30,top=30,menubar=no" ); 
+                	             	
+                	                
+                	         },
+                	            error : function() {
+                	               alert("request error!");
+                	            }
+                	         }) 
+                		});  
+                	
+				</script>
    				 </c:forEach> 
                  <!-- 여기까지 -->
 
@@ -142,14 +182,32 @@
         
     </div>
     
-    <input type="button" value="약속잡기" onclick="open2()">
 
 </body>
 <script>
 	function open2(){
 	    
-		window.open("/chatlocation", "_blank", "width=1100, height=700,toolbar=no,location=no,resizable=no,left=30,top=30,menubar=no" ); 
-	
+		var chatmember = $("#chatmember").val();
+		console.log("chatmember::"+chatmember);
+		
+		$.ajax({
+            url : 'chatlocationlist',
+            method : 'POST',
+            data : 'chatmember=' + chatmember,
+            type : "POST",
+
+            success : function(data) {
+                 alert("성공.")
+                /*  window.open("chatlocation", "_blank", "width=1100, height=700,toolbar=no,location=no,resizable=no,left=30,top=30,menubar=no" );  */
+             	
+                
+         },
+            error : function() {
+               alert("request error!");
+            }
+         }) 
+		
+		
 	}
 
     $('.chat_user_readm div').on({ 

@@ -147,8 +147,7 @@ header {
   }
   .main_product_div{
       width: 265px;
-      height: 280px;
-      border: 1px solid rgb(223, 223, 223);
+      height: 300px;
       display: inline-block;
       margin: 10px;
       border-radius: 10px;
@@ -224,13 +223,14 @@ header {
   border: 3px solid #fff;
   /* border-radius: 5px; */
   color: #fff;
-  display: block;
+   display: block;
   font-size: 1.6em;
   font-weight: bold;
   margin: 1em auto;
-  padding: 2em 6em;
+ padding: 1em 1em;
   position: relative;
   text-transform: uppercase;
+  
 }
 
 .btn-3::before,
@@ -256,13 +256,13 @@ header {
   width: 0;
 }
 
-.btn-3:hover:after {
+/* .btn-3:hover:after {
   height: 100%;
   left: 0;
   top: 0;
   width: 100%;
   	border-radius: 50%;
-}
+} */
 
 
     /* =================================================================footer */
