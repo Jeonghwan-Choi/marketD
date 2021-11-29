@@ -28,7 +28,11 @@
 	            <input type= "submit" value="로그인">
             
 	            <input type= "button" value="회원가입" onclick="joinform()">
-	            <input type= "button" value="카카오 로그인">
+	            <a  href="https://kauth.kakao.com/oauth/authorize
+				?client_id=a748acc709f6bb26bfb1e237f62fb4f0
+				&redirect_uri=http://localhost:8181/kakaologin
+				&response_type=code">로그인</a>
+
 	            <input type= "button" value="네이버아이디로 로그인">
             </form>
 

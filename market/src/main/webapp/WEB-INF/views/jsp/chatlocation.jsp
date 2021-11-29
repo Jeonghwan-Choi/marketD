@@ -189,6 +189,9 @@
 <form action="/chatcalendar" method="post">
     <div class="main">
         <div class="location_header">
+        <input type="text" value="${chatList.user1 }">
+        <input type="text" value="${chatList.user2 }">
+        <input type="text" value="${chatList.chatmember }">
             <div class="location_header_img">
                 <img src="http://cjhftp.dothome.co.kr/ico/cross.png">
             </div>
@@ -249,11 +252,11 @@
                     <div class="location_memberlist_content">
                         <div class="location_memberlist_div">
                             <img class="location_memberlist_img" src="http://cjhftp.dothome.co.kr/ico/duck.jpg">
-                            <span class="location_memberlist_span">최정환</span>
+                            <span class="location_memberlist_span">${chatList.login }</span>
                         </div>
                         <div class="location_memberlist_div">
                             <img class="location_memberlist_img" src="http://cjhftp.dothome.co.kr/ico/duck.jpg">
-                            <span class="location_memberlist_span">피효정</span>
+                            <span class="location_memberlist_span">${chatList.member}</span>
                         </div>
                         
                     </div>
@@ -265,6 +268,7 @@
 </form>
 </body>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fb6a99631a16b1a22bae6ea2a8990dee&libraries=services"></script>
 <script>
 // 마커를 담을 배열입니다
@@ -379,7 +383,7 @@ function displayPlaces(places) {
                 $(".location_location_input").val(title);
                 
                 
-                $('#coordinate').val(xxx+"/"+yyy);
+                $('#coordinate').val(title+"/"+xxx+"/"+yyy);
                 
             };
 

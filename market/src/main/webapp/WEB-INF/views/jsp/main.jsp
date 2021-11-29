@@ -34,7 +34,7 @@
 	            </div>
 			</c:forEach>
         </div>
-        <a href="/insertBoardForm" id="insertBoardForm" class="btn-3">+</a>
+        <a href="/insertBoardForm" id="insertBoardForm" class="btn-3" style="text-decoration: none; ">+</a>
        <!--  <input type="button" id="insertBoardForm" class="btn-3" name="insertBoardForm" value="+"> -->
         
       </main>   

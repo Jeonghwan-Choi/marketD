@@ -15,12 +15,49 @@ public class ChatServiceImpl implements ChatService {
 	@Autowired
 	private ChatDAO chatDAO;
 
+	
+	@Override
+	public List<ChatVO> myChatList(ChatVO vo) {
+		System.out.println("run ChatServiceImpl myChatList()");
+		return chatDAO.myChatList(vo);
+	}
+
+	@Override
+	public List<ChatVO> selectChatList(ChatVO vo) {
+		System.out.println("run ChatServiceImpl selectChatList()");
+		return chatDAO.selectChatList(vo);
+	}
+
+	@Override
+	public void insertMessage(ChatVO vo) {
+		System.out.println("run ChatServiceImpl insertMessage()");
+		chatDAO.insertMessage(vo);
+	}
+
+	@Override
+	public void updateReadst(ChatVO vo) {
+		System.out.println("run ChatServiceImpl updateReadst()");
+		chatDAO.updateReadst(vo);
+	}
+
+	@Override
+	public List<ChatVO> myChatListNotRead(int seller) {
+		System.out.println("run ChatServiceImpl myChatListNotRead()");
+		return chatDAO.myChatListNotRead(seller);		
+	}
+	
 	@Override
 	public void insertChatLocation(ChatVO vo) {
 		System.out.println("run BoardServiceImpl insertChatLocation(ChatVO)");
 		chatDAO.insertChatLocation(vo);
 		
 		
+	}
+
+	@Override
+	public ChatVO chatlocationlist(int chatmember) {
+		System.out.println("run ChatServiceImpl chatlocationlist()");
+		return chatDAO.chatlocationlist(chatmember);
 	}
 
 	/*

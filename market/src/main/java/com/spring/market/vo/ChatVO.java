@@ -15,6 +15,12 @@ public class ChatVO {
 	private String address;
 	private String profile;
 	
+
+	private String login;
+	private String member;
+	private int memberno;
+	
+
 	//chatmessage
 	private int chatmessageno;
 	private int seller;
@@ -27,6 +33,31 @@ public class ChatVO {
 	private String locationdate;
 	private String location;
 	private String locationdescription;
+	public String getLogin() {
+		return login;
+	}
+	
+
+	public int getMemberno() {
+		return memberno;
+	}
+
+	public void setMemberno(int memberno) {
+		this.memberno = memberno;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getMember() {
+		return member;
+	}
+
+	public void setMember(String member) {
+		this.member = member;
+	}
+
 	
 	public int getLocationno() {
 		return locationno;
@@ -72,9 +103,12 @@ public class ChatVO {
 
 	
 
+	
+
 	public ChatVO(int chatroomno, int boardno, int buyerno, String datetime, int chatmember, int user1, int user2,
-			String name, String address, String profile, int chatmessageno, int seller, String chatmessage, int readst,
-			int locationno, String locationtitle, String locationdate, String location, String locationdescription) {
+			String name, String address, String profile, String login, String member, int memberno, int chatmessageno,
+			int seller, String chatmessage, int readst, int locationno, String locationtitle, String locationdate,
+			String location, String locationdescription) {
 		super();
 		this.chatroomno = chatroomno;
 		this.boardno = boardno;
@@ -86,6 +120,9 @@ public class ChatVO {
 		this.name = name;
 		this.address = address;
 		this.profile = profile;
+		this.login = login;
+		this.member = member;
+		this.memberno = memberno;
 		this.chatmessageno = chatmessageno;
 		this.seller = seller;
 		this.chatmessage = chatmessage;
@@ -96,6 +133,7 @@ public class ChatVO {
 		this.location = location;
 		this.locationdescription = locationdescription;
 	}
+
 
 	public int getChatroomno() {
 		return chatroomno;

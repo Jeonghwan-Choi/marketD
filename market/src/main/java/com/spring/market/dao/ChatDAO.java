@@ -22,9 +22,44 @@ public class ChatDAO {
 	 * System.out.println("user1 = "+vo.getUser1()); return
 	 * sqlSession.selectList("ChatDAO.myChatList",vo); }
 	 */
+	
+	public List<ChatVO> myChatList(ChatVO vo){
+		System.out.println("run ChatDAO myChatList()");
+		System.out.println("user1 = "+vo.getUser1());
+		return sqlSession.selectList("ChatDAO.myChatList",vo);
+	}
+
+	public List<ChatVO> selectChatList(ChatVO vo) {
+		System.out.println("run ChatDAO selectChatList()");
+		System.out.println("seller = "+vo.getChatroomno());
+		return sqlSession.selectList("ChatDAO.SelectChatList",vo);
+	}
+
+	public void insertMessage(ChatVO vo) {
+		System.out.println("run ChatDAO insertMessage()");
+		sqlSession.update("ChatDAO.insertMessage",vo);
+	}
+	
+	public void updateReadst(ChatVO vo) {
+		System.out.println("run ChatDAO updateReadst()");
+		sqlSession.update("ChatDAO.updateReadst",vo);
+	}
+
+	public List<ChatVO> myChatListNotRead(int seller) {
+		System.out.println("run ChatDAO myChatListNotRead()");
+		System.out.println("user1 = "+ seller);
+		return sqlSession.selectList("ChatDAO.myChatListNotRead",seller);
+	}
+	
 	public void insertChatLocation(ChatVO vo) {
 		System.out.println("run BoardDAO insertChatLocation()");
 		sqlSession.update("ChatDAO.insertChatLocation",vo);
 		
 	}
+	public ChatVO chatlocationlist(int chatmember) {
+		System.out.println("run BoardDAO chatlocationlist()");
+		return sqlSession.selectOne("ChatDAO.chatlocationlist",chatmember);
+		
+	}
+
 }

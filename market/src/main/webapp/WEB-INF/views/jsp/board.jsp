@@ -106,7 +106,7 @@
       
 
        <div class="main">
-        <div class="main_product" >
+        <div class="main_product_board" >
             <p>인기중고</p>
             <c:forEach items="${productList}" var="productVO">
 	            <div class="main_product_div">

@@ -9,5 +9,77 @@
 	<insert id="insertChatLocation" parameterType="chat"> 
 		insert into chatlocation(locationtitle,locationdate,location,locationdescription) values(#{locationtitle},#{locationdate},#{location},#{locationdescription})
 	</insert>
+ 	<select id="chatlocationlist" parameterType="chat" resultType="chat">
+ 	<![CDATA[
+ 		select a.user1,a.user2,a.chatmember,b.memberno,b.name login,b.profile,d.memberno,d.name member ,d.profile
+		from chatmember a
+		left join member b
+		on a.user1=b.memberno
+		left join member d
+		on a.user2=d.memberno
+		where a.chatmember=#{chatmember}
+		]]>
+ 	</select>
  	
+ 	<!--  -->
+ 	
+ 	<!-- 채팅목록 조회  -->
+  <select id="myChatList" parameterType="chat" resultType="chat">
+	<![CDATA[
+		select a.chatmember,a.chatroomno,a.user1,a.user2,m.name,m.address,m.profile,cm.chatmessage,NVL((cmm.readst),0)"readst"
+		from chatmember a
+		Left Join member m
+		ON a.user2 = m.memberno
+		Left Join (SELECT chatroomno, chatmessage,chatmessageno
+        FROM ( SELECT chatroomno, chatmessage,chatmessageno
+        , ROW_NUMBER() OVER(PARTITION BY chatroomno ORDER BY chatmessageno DESC) as RowIdx
+        FROM chatmessage 
+        ) t1 WHERE RowIdx = 1) cm
+        ON a.chatroomno = cm.chatroomno
+        Left Join (select chatroomno,count(readst)readst
+        FROM chatmessage where readst='1' and seller != #{user1} group by chatroomno ) cmm
+        ON a.chatroomno = cmm.chatroomno
+		where user1 =  #{user1} order by cm.chatmessageno desc
+     ]]>
+    </select>
+    
+    <!-- 읽지 않은 메세지 뽑기 -->
+    <select id="myChatListNotRead" parameterType="chat" resultType="chat">
+	<![CDATA[
+		select a.chatmember,a.chatroomno,a.user1,a.user2,m.name,m.address,m.profile,cm.chatmessage,NVL((cmm.readst),0)"readst"
+		from chatmember a
+		Left Join member m
+		ON a.user2 = m.memberno
+		Left Join (SELECT chatroomno, chatmessage,chatmessageno
+        FROM ( SELECT chatroomno, chatmessage,chatmessageno
+        , ROW_NUMBER() OVER(PARTITION BY chatroomno ORDER BY chatmessageno DESC) as RowIdx
+        FROM chatmessage 
+        ) t1 WHERE RowIdx = 1) cm
+        ON a.chatroomno = cm.chatroomno
+        Left Join (select chatroomno,count(readst)readst
+        FROM chatmessage where readst='1' and seller != #{user1} group by chatroomno ) cmm
+        ON a.chatroomno = cmm.chatroomno
+		where user1 =  #{user1} and cmm.readst != 0 order by cm.chatmessageno desc
+     ]]>
+    </select>
+
+    
+  <!-- 선택된 채팅내용  -->
+  <select id="SelectChatList" parameterType="chat" resultType="chat">
+	<![CDATA[
+		select a.chatmessageno,a.chatroomno,a.seller,a.chatmessage,a.readst,a.datetime,m.profile from chatmessage a
+        Left Join member m
+        on seller = m.memberno
+        where chatroomno =  #{chatroomno} order by datetime asc
+     ]]>
+    </select>
+    
+    <insert id="insertMessage" parameterType="chat"> 
+    
+        insert into chatmessage(chatroomno,seller,chatmessage,readst,datetime) values(#{chatroomno},#{seller},#{chatmessage},#{readst},TO_CHAR(LOCALTIMESTAMP,'yyyy/mm/dd HH24:MI')) 
+    </insert>
+    <update id="updateReadst" parameterType="chat"> 
+   		update chatmessage set readst = 0 where chatroomno = #{chatroomno} and seller = #{seller}
+    </update>
+
 </mapper>

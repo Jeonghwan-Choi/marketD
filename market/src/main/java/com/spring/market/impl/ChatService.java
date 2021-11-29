@@ -10,4 +10,12 @@ public interface ChatService {
 	
 //	List<ChatVO> myChatList(ChatVO vo);
 	void insertChatLocation(ChatVO vo);
+	
+	
+	List<ChatVO> myChatList(ChatVO vo);
+	List<ChatVO> myChatListNotRead(int seller);
+	List<ChatVO> selectChatList(ChatVO vo);
+	void insertMessage(ChatVO vo);
+	void updateReadst(ChatVO vo);
+	ChatVO chatlocationlist(int chatmember);
 }
