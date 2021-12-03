@@ -39,14 +39,13 @@
     </div>
     <c:forEach items="${calendarList}" var="list" varStatus="status">
     	<input type="hidden" id="calendarDate${status.count }" name="calendarDate" value="${list.locationdate }">
+    	<input type="hidden" id="calendarMember${status.count }" name="calendarDate" value="${list.member }">
     	
     	 <script>
     	 var count = ${status.count };
-    	 console.log("count:"+count)
     		 var date = $("#calendarDate"+count).val();
-    	 console.log("date:"+date);
     		var now = date.substring(8,10);
-    		console.log("now:"+now); 
+    		
     		
     	</script> 
     </c:forEach>
@@ -106,14 +105,21 @@
                     
                 }
                 for(i=1;i<=lastDate;i++){
-	                var now = nowYear+"-"+(nowMonth+1)+"-"+i;
-	                console.log("for문now:"+now);
+				if(i<10){
+					var now = nowYear+"-"+(nowMonth+1)+"-0"+i;
 	                for(j=1;j<=31;j++){
 	                	var calendarDate = $("#calendarDate"+j).val();
-	                	console.log(calendarDate);
-	                	if(now===calendarDate){	$(".chatcalendar_top_date"+ i +"").append("<img id='carrotimg' src='http://cjhftp.dothome.co.kr/ico/carrot.png'><div class='chatcalendar_top_event'></div>");}
+	                	var calendarMember = $("#calendarMember"+j).val();
+	                	if(now===calendarDate){	$(".chatcalendar_top_date"+ i +"").append("<br><img id='carrotimg' src='http://cjhftp.dothome.co.kr/ico/carrot.png'><div style='display:inline;' class='chatcalendar_top_event'>"+calendarMember+"</div>");}
+					}
+				}else{  
+					var now = nowYear+"-"+(nowMonth+1)+"-"+i;
+	                for(j=1;j<=31;j++){
+	                	var calendarDate = $("#calendarDate"+j).val();
+	                	var calendarMember = $("#calendarMember"+j).val();
+	                	if(now===calendarDate){	$(".chatcalendar_top_date"+ i +"").append("<br><img id='carrotimg' src='http://cjhftp.dothome.co.kr/ico/carrot.png'><div style='display:inline;' class='chatcalendar_top_event'>"+calendarMember+"</div>");}
 	                }
-	                console.log(now);
+	                console.log(now);}
                 }
                 
                 
