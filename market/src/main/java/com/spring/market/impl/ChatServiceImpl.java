@@ -55,9 +55,22 @@ public class ChatServiceImpl implements ChatService {
 	}
 
 	@Override
-	public ChatVO chatlocationlist(int chatmember) {
-		System.out.println("run ChatServiceImpl chatlocationlist()");
-		return chatDAO.chatlocationlist(chatmember);
+	public ChatVO selectLocationMember(ChatVO vo) {
+		System.out.println("run ChatServiceImpl selectLocationMember()");
+		return chatDAO.selectLocationMember(vo);
+	}
+
+	@Override
+	public List<ChatVO> selectCalendarList(int user1) {
+		System.out.println("run ChatServiceImpl selectLocationMember()");
+		return chatDAO.selectCalendarList(user1);
+	}
+
+	@Override
+	public void insertLocationMessage(ChatVO vo) {
+		System.out.println("run BoardServiceImpl insertLocationMessage(ChatVO)");
+		chatDAO.insertLocationMessage(vo);
+		
 	}
 
 	/*

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +12,49 @@
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic-coding.css" rel="stylesheet">
 	
     <title>calendar</title>
+</head>
+<body>
+<div class="chatcalendar">
+    <div class="chatcalendar_top">
+        <table id="calendar_top_table">
+            <thead>
+                <tr>
+                    <th><input name="chatcalendar_top_preMon" id="chatcalendar_top_preMon" type="button" value="<"></th>
+                    <th colspan="5" class="calendar_top_year_mon"></th>
+                    <th><input name="chatcalendar_top_nextMon" id="chatcalendar_top_nextMon" type="button" value=">"></th>
+                </tr>
+                <tr>
+                    <th class="chatcalendar_top_day">일</th>
+                    <th class="chatcalendar_top_day">월</th>
+                    <th class="chatcalendar_top_day">화</th>
+                    <th class="chatcalendar_top_day">수</th>
+                    <th class="chatcalendar_top_day">목</th>
+                    <th class="chatcalendar_top_day">금</th>
+                    <th class="chatcalendar_top_day">토</th>
+                </tr>
+            </thead>
+            <tbody id="chatcalendar_top_tbody">
+            </tbody>
+        </table>
+    </div>
+    <c:forEach items="${calendarList}" var="list" varStatus="status">
+    	<input type="hidden" id="calendarDate${status.count }" name="calendarDate" value="${list.locationdate }">
+    	
+    	 <script>
+    	 var count = ${status.count };
+    	 console.log("count:"+count)
+    		 var date = $("#calendarDate"+count).val();
+    	 console.log("date:"+date);
+    		var now = date.substring(8,10);
+    		console.log("now:"+now); 
+    		
+    	</script> 
+    </c:forEach>
+    
+    	<input type="text" id="test" name="test" value="">
+</div>
+</body>
+
     <script>
         $(function(){
             var today = new Date();
@@ -53,10 +97,30 @@
                     if (plusDate==0) {
                         $("#calendar_top_table #chatcalendar_top_tbody:last").append("<tr></tr>");
                     }
-                    $("#calendar_top_table #chatcalendar_top_tbody:last").append("<td class='chatcalendar_top_date'>"+ i +"</td>");
+                    $("#calendar_top_table #chatcalendar_top_tbody:last").append("<td class='chatcalendar_top_date"+ i +"'>"+ i +"</td>");
+
+
+                   /*  var now = nowYear+"-"+(nowMonth+1)+"-"+i;
+                    $("#test").val(now);
+                    var calendarDate = $("#calendarDate").val(); */
                     
                 }
-                $(".chatcalendar_top_date").append("<div class='chatcalendar_top_event'>d</div>");
+                for(i=1;i<=lastDate;i++){
+	                var now = nowYear+"-"+(nowMonth+1)+"-"+i;
+	                console.log("for문now:"+now);
+	                for(j=1;j<=31;j++){
+	                	var calendarDate = $("#calendarDate"+j).val();
+	                	console.log(calendarDate);
+	                	if(now===calendarDate){	$(".chatcalendar_top_date"+ i +"").append("<img id='carrotimg' src='http://cjhftp.dothome.co.kr/ico/carrot.png'><div class='chatcalendar_top_event'></div>");}
+	                }
+	                console.log(now);
+                }
+                
+                
+			/* if(now=calendarDate){ */
+			
+			
+                
                 if($("#calendar_top_table > #chatcalendar_top_tbody > td").length%7!=0) { //마지막 줄 빈칸
                     for(i=1; i<= $("#calendar > #chatcalendar_top_tbody > td").length%7; i++) {
                         $("#calendar_top_table #chatcalendar_top_tbody:last").append("<td></td>");
@@ -74,36 +138,8 @@
         })
 
 
-       
+       $(".chatcalendar_top_event").html();
         
     </script>
 
-</head>
-<body>
-<div class="chatcalendar">
-    <div class="chatcalendar_top">
-        <table id="calendar_top_table">
-            <thead>
-                <tr>
-                    <th><input name="chatcalendar_top_preMon" id="chatcalendar_top_preMon" type="button" value="<"></th>
-                    <th colspan="5" class="calendar_top_year_mon"></th>
-                    <th><input name="chatcalendar_top_nextMon" id="chatcalendar_top_nextMon" type="button" value=">"></th>
-                </tr>
-                <tr>
-                    <th class="chatcalendar_top_day">일</th>
-                    <th class="chatcalendar_top_day">월</th>
-                    <th class="chatcalendar_top_day">화</th>
-                    <th class="chatcalendar_top_day">수</th>
-                    <th class="chatcalendar_top_day">목</th>
-                    <th class="chatcalendar_top_day">금</th>
-                    <th class="chatcalendar_top_day">토</th>
-                </tr>
-            </thead>
-            <tbody id="chatcalendar_top_tbody">
-            </tbody>
-        </table>
-    </div>
-    
-</div>
-</body>
 </html>

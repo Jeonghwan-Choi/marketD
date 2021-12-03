@@ -54,10 +54,13 @@ input[name=chatcalendar_top_perMon]{
     padding-left:10px;
 }
 .chatcalendar_top_event{
-    width:130px;
+    width:100px;
     height: 20px;
     background-color: cadetblue;
     color:white;
 }
-
+#carrotimg{
+	width:15px;
+	height:15px;
+}
 

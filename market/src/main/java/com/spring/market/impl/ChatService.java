@@ -17,5 +17,8 @@ public interface ChatService {
 	List<ChatVO> selectChatList(ChatVO vo);
 	void insertMessage(ChatVO vo);
 	void updateReadst(ChatVO vo);
-	ChatVO chatlocationlist(int chatmember);
+	
+	 ChatVO selectLocationMember(ChatVO vo);
+	 List<ChatVO> selectCalendarList(int user1);
+		void insertLocationMessage(ChatVO vo);
 }

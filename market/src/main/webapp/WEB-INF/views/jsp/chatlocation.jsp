@@ -7,6 +7,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+ <script src="http://cjhwebsocket.cafe24app.com:80/socket.io/socket.io.js"></script>
     <title>Document</title>
     <style>
         /* .main{
@@ -143,6 +145,11 @@
        		color:gray;
        		font-weight:border;
        }
+       .location_memberlist_div img{
+       		width:50px;
+            height:50px;
+       		
+       }
        
        
        /* map */
@@ -189,9 +196,9 @@
 <form action="/chatcalendar" method="post">
     <div class="main">
         <div class="location_header">
-        <input type="text" value="${chatList.user1 }">
-        <input type="text" value="${chatList.user2 }">
-        <input type="text" value="${chatList.chatmember }">
+        <input type="hidden" id="user1" name="user1" value="${chatList.user1 }">
+        <input type="hidden" value="${chatList.user2 }">
+        <input type="hidden" id="chatroomno" name="chatroomno" value="${chatList.chatroomno }">
             <div class="location_header_img">
                 <img src="http://cjhftp.dothome.co.kr/ico/cross.png">
             </div>
@@ -251,11 +258,11 @@
                     </div>
                     <div class="location_memberlist_content">
                         <div class="location_memberlist_div">
-                            <img class="location_memberlist_img" src="http://cjhftp.dothome.co.kr/ico/duck.jpg">
+                             <img src="http://cjhftp.dothome.co.kr/${chatList.user1}/profile/${chatList.profile}">
                             <span class="location_memberlist_span">${chatList.login }</span>
                         </div>
                         <div class="location_memberlist_div">
-                            <img class="location_memberlist_img" src="http://cjhftp.dothome.co.kr/ico/duck.jpg">
+                             <img src="http://cjhftp.dothome.co.kr/${chatList.user2}/profile/${chatList.memberprofile}">
                             <span class="location_memberlist_span">${chatList.member}</span>
                         </div>
                         
@@ -383,7 +390,7 @@ function displayPlaces(places) {
                 $(".location_location_input").val(title);
                 
                 
-                $('#coordinate').val(title+"/"+xxx+"/"+yyy);
+                $('#coordinate').val(title+"//"+xxx+"//"+yyy);
                 
             };
 
@@ -506,5 +513,36 @@ function removeAllChildNods(el) {
 $("li").click(function(){
     
  });
+ 
+ 
+   /*socket*/
+  
+ $(function () {
+	 var today = new Date();
+     var time = (today.getMonth()+1)+'.'+today.getDate()+' '+today.getHours()+':'+today.getMinutes();
+     
+     var date = document.querySelector('input[name="location_date_input"]');
+     var location = document.querySelector('input[name="location_location_input"]');
+     var coordinate = document.querySelector('input[name="coordinate"]');
+     
+     
+     
+     var socket = io("http://cjhwebsocket.cafe24app.com:80"); 
+     /* socket.emit("send_msg", "2//"+$("#roomno").val()+"//"+$("#loginmemberno").val()+"//"+$("#msg").val()+"//"+time); ****/
+ 
+ 	$("#location_submit_input").on({
+ 		'click':function() {
+ 			 /* socket.emit("send_msg", "2//2//47//약속이 공유되었습니다.//"+time+"//2//37.000//127.000//"+date+"//안양역//40"); */
+			socket.emit("send_msg", "2//2//47//약속이 공유되었습니다.//"+time+"//2//"+coordinate.value+"//"+date.value+"//40");
+			alert("?dddd");
+ 		}
+	});
+ 
+ 	
+ }); 
+ 
+ 
+ 
+ 
 </script>
 </html>

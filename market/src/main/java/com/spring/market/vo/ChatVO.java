@@ -33,10 +33,21 @@ public class ChatVO {
 	private String locationdate;
 	private String location;
 	private String locationdescription;
+	private String memberprofile;
 	public String getLogin() {
 		return login;
 	}
 	
+
+	public String getMemberprofile() {
+		return memberprofile;
+	}
+
+
+	public void setMemberprofile(String memberprofile) {
+		this.memberprofile = memberprofile;
+	}
+
 
 	public int getMemberno() {
 		return memberno;
@@ -105,10 +116,13 @@ public class ChatVO {
 
 	
 
+	
+
+
 	public ChatVO(int chatroomno, int boardno, int buyerno, String datetime, int chatmember, int user1, int user2,
 			String name, String address, String profile, String login, String member, int memberno, int chatmessageno,
 			int seller, String chatmessage, int readst, int locationno, String locationtitle, String locationdate,
-			String location, String locationdescription) {
+			String location, String locationdescription, String memberprofile) {
 		super();
 		this.chatroomno = chatroomno;
 		this.boardno = boardno;
@@ -132,6 +146,7 @@ public class ChatVO {
 		this.locationdate = locationdate;
 		this.location = location;
 		this.locationdescription = locationdescription;
+		this.memberprofile = memberprofile;
 	}
 
 

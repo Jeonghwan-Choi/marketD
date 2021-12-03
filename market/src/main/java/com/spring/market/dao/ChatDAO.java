@@ -61,5 +61,20 @@ public class ChatDAO {
 		return sqlSession.selectOne("ChatDAO.chatlocationlist",chatmember);
 		
 	}
+	public ChatVO selectLocationMember(ChatVO vo) {
+		System.out.println("run BoardDAO selectLocationMember()");
+		return sqlSession.selectOne("ChatDAO.selectLocationMember",vo);
+		
+	}
+	
+	public List<ChatVO> selectCalendarList(int user1) {
+		System.out.println("run ChatDAO selectCalendarList()");
+		return sqlSession.selectList("ChatDAO.selectCalendarList",user1);
+	}
 
+	public void insertLocationMessage(ChatVO vo) {
+		System.out.println("run BoardDAO insertLocationMessage()");
+		sqlSession.update("ChatDAO.insertLocationMessage",vo);
+		
+	}
 }
