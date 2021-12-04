@@ -77,4 +77,11 @@ public class ChatDAO {
 		sqlSession.update("ChatDAO.insertLocationMessage",vo);
 		
 	}
+	public ChatVO selectCalendarLocation(ChatVO vo) {
+		System.out.println("run BoardDAO selectCalendarLocation()");
+		return sqlSession.selectOne("ChatDAO.selectCalendarLocation",vo);
+		
+	}
+	
+	
 }

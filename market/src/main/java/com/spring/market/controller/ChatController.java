@@ -138,17 +138,24 @@ public class ChatController {
 //	}
 	
 	@RequestMapping("/chatlocation")
-	public String chatlocation(HttpServletRequest req, Model model, ChatVO vo, int user1, int user2,int chatroomno) throws IllegalStateException {
+	public String chatlocation(HttpServletRequest req, Model model, ChatVO vo, int user1, int user2,int chatroomno,int calendarLocationno) throws IllegalStateException {
 
 		System.out.println(user1);
 		System.out.println(user2);
-		System.out.println(chatroomno);
 
 		vo.setUser1(user1);
 		vo.setUser2(user2);
 		
 		vo= chatService.selectLocationMember(vo);
 		model.addAttribute("chatList",vo);
+		
+		vo.setLocationno(calendarLocationno);
+		if(calendarLocationno!=0) {
+
+			model.addAttribute("calendarLocation",chatService.selectCalendarLocation(vo));
+		}
+		
+		
 		return "/jsp/chatlocation";
 	}
 	@RequestMapping("/chatcalendar")

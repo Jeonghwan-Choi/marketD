@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -199,11 +200,20 @@
         <input type="hidden" id="user1" name="user1" value="${chatList.user1 }">
         <input type="hidden" value="${chatList.user2 }">
         <input type="hidden" id="chatroomno" name="chatroomno" value="${chatList.chatroomno }">
+        
+        <input type="hidden" id="location" name="location" value='<%=request.getParameter("locationjsp")%>'>
+        <input type="text" id="calendarLocation" value="${calendarLocation.locationno }">
             <div class="location_header_img">
                 <img src="http://cjhftp.dothome.co.kr/ico/cross.png">
             </div>
             <div class="location_header_title">
+            <c:set var="jstlTitle" value="${calendarLocation.locationtitle }"/>
+            <c:if test="${not empty jstlTitle }">
+                <input type="text" id="location_header_input" name="location_header_input" value="${calendarLocation.locationtitle }" readonly>
+            </c:if>
+            <c:if test="${empty jstlTitle }">
                 <input type="text" id="location_header_input" name="location_header_input" placeholder="일정제목">
+            </c:if>
             </div>
         </div>
         
@@ -212,7 +222,14 @@
                 <table class="location_table">
                     <tr class="location_tr">
                         <th class="location_th">일시</th>
-                        <td class="location_td"><input name="location_date_input" class="location_date_input" id="location_date_input" type="date"></td>
+                         <c:set var="jstlDate" value="${calendarLocation.locationdate }"/>
+			            <c:if test="${not empty jstlDate }">
+			                 <td class="location_td"><input name="location_date_input" class="location_date_input" id="location_date_input" type="text" value="${calendarLocation.locationdate }"></td>
+			            </c:if>
+			            <c:if test="${empty jstlDate }">
+			                <td class="location_td"><input name="location_date_input" class="location_date_input" id="location_date_input" type="date"></td>
+			            </c:if>
+                       
                     </tr>
                     
                     <tr class="location_tr">
@@ -224,8 +241,33 @@
 							    <div id="menu_wrap" class="bg_white">
 							        <div class="option">
 							            <div>
-							                    키워드 : <input type="text" value="" id="keyword" size="15" placeholder="키워드입력"> 
+							            
+							            <c:set var="jstlLocation" value="${calendarLocation.location }"/>
+							            <c:if test="${not empty jstlLocation }">
+								            <input type="hidden" id="calendarlocation" value="${calendarLocation.location }">
+								            약속장소 : <input type="text" value="" id="keyword" size="15"> 
+								            
+											<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+								            <script>
+								                 const jstllocation = $('#calendarlocation').val();
+												 const jbSplit = jstllocation.split('//');
+											     $('#keyword').val(jbSplit[0]); 		
+								                 
+								            </script>
+								            	 
+								            
+								        </c:if>
+							            <c:if test="${empty jstlLocation }">
+							                 키워드 : <input type="text" value="" id="keyword" size="15" placeholder="키워드입력"> 
 							                    <input type="button" value="검색하기" onclick="searchPlaces()">
+							            </c:if>
+							            
+							            
+							            
+							            
+							            
+							            
+							                   
 							            </div>
 							        </div>
 							        <hr>
@@ -238,12 +280,45 @@
                     </tr>
                     <tr class="location_tr">
                         <th class="location_th">장소</th>
-                        <td class="location_td"><input class="location_location_input" id="location_location_input" name="location_location_input" type="text" value="" readonly></td>
+                        
+                        
+                        
+                        <c:set var="jstlLocation" value="${calendarLocation.location }"/>
+			            <c:if test="${not empty jstlLocation }">
+			            		<input type="hidden" id="calendarlocation" value="${calendarLocation.location }">
+			                 <td class="location_td"><input class="location_location_input" id="location_location_input" name="location_location_input" type="text" value="" readonly></td>
+			                 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+			                 <script>
+								const jstllocation2 = $('#calendarlocation').val();
+								const jbSplit2 = jstllocation2.split('//');
+								$('#location_location_input').val(jbSplit2[0]); 	
+								                 
+							</script>
+			            </c:if>
+			            <c:if test="${empty jstlLocation }">
+			                <td class="location_td"><input class="location_location_input" id="location_location_input" name="location_location_input" type="text" value="" readonly></td>
+			            </c:if>
+                        
+                        
+                        
+                        
                         
                     </tr>
                     <tr class="location_tr">
                         <th class="location_th" style="vertical-align: top; padding-top: 10px;">설명</th>
-                        <td class="location_td" style="padding-top: 10px;"><textarea cols="70" rows="15" id="location_textarea" name="location_textarea" class="location_textarea" placeholder="설명추가"></textarea></td>
+                        
+                        
+                        <c:set var="jstlDescription" value="${calendarLocation.locationdescription }"/>
+			            <c:if test="${not empty jstlDescription }">
+			                 <td class="location_td"><input name="location_textarea" class="location_textarea" id="location_textarea" type="text" value="${calendarLocation.locationdescription }"></td>
+			            </c:if>
+			            <c:if test="${empty jstlDescription }">
+			                <td class="location_td" style="padding-top: 10px;"><textarea cols="70" rows="15" id="location_textarea" name="location_textarea" class="location_textarea" placeholder="설명추가"></textarea></td>
+			            </c:if>
+                        
+                        
+                        
+                        
                     </tr>
                     <tr class="location_tr">
                         <th class="location_th"></th>

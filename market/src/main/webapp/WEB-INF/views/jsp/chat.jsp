@@ -28,6 +28,7 @@
       		 <label>LoginMemberNO : </label><input id="loginmemberno" type="text" value="${loginMemberno}"><br>
         	 <label>MyProfile : </label><input id="myprofilename" type="text" value="${sessionScope.memberVO.profile}"><br>
         	 <label>Profile : </label><input id="profilename" type="text" value=""><br>
+        	 <input type="hidden" id="location" value="0">
         </div>
         <div class = "header_img_div">
             <img class="fixed-logo" alt="당근마켓" src="https://d1unjqcospf8gs.cloudfront.net/assets/home/base/header/logo-basic-24b18257ac4ef693c02233bf21e9cb7ecbf43ebd8d5b40c24d99e14094a44c81.svg">
@@ -159,8 +160,9 @@
 			var user1 = $('#loginmemberno').val();
 			var user2 = $('#memberno').val();
 			var chatroomno = $('#roomno').val();
-		    
-				window.open("chatlocation?user1="+user1+"&user2="+user2+"&chatroomno="+chatroomno, "_blank", "width=1100, height=700,toolbar=no,location=no,resizable=no,left=30,top=30,menubar=no" ); 
+			var location = $('#location').val();
+		    var calendarLocationno = 0;
+				window.open("chatlocation?user1="+user1+"&user2="+user2+"&chatroomno="+chatroomno+"&locationjsp="+location+"&calendarLocationno="+calendarLocationno, "_blank", "width=1100, height=700,toolbar=no,location=no,resizable=no,left=30,top=30,menubar=no" ); 
 		
 		})
 

@@ -72,7 +72,11 @@ public class ChatServiceImpl implements ChatService {
 		chatDAO.insertLocationMessage(vo);
 		
 	}
-
+	@Override
+	public ChatVO selectCalendarLocation(ChatVO vo) {
+		System.out.println("run ChatServiceImpl selectCalendarLocation()");
+		return chatDAO.selectCalendarLocation(vo);
+	}
 	/*
 	 * @Override public List<ChatVO> myChatList(ChatVO vo) {
 	 * System.out.println("run ChatServiceImpl myChatList()"); return

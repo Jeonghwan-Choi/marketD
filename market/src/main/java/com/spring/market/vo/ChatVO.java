@@ -34,6 +34,17 @@ public class ChatVO {
 	private String location;
 	private String locationdescription;
 	private String memberprofile;
+	private int locactionjsp;
+	public int getLocactionjsp() {
+		return locactionjsp;
+	}
+
+
+	public void setLocactionjsp(int locactionjsp) {
+		this.locactionjsp = locactionjsp;
+	}
+
+
 	public String getLogin() {
 		return login;
 	}
@@ -119,10 +130,12 @@ public class ChatVO {
 	
 
 
+	
+
 	public ChatVO(int chatroomno, int boardno, int buyerno, String datetime, int chatmember, int user1, int user2,
 			String name, String address, String profile, String login, String member, int memberno, int chatmessageno,
 			int seller, String chatmessage, int readst, int locationno, String locationtitle, String locationdate,
-			String location, String locationdescription, String memberprofile) {
+			String location, String locationdescription, String memberprofile, int locactionjsp) {
 		super();
 		this.chatroomno = chatroomno;
 		this.boardno = boardno;
@@ -147,6 +160,7 @@ public class ChatVO {
 		this.location = location;
 		this.locationdescription = locationdescription;
 		this.memberprofile = memberprofile;
+		this.locactionjsp = locactionjsp;
 	}
 
 

@@ -109,7 +109,7 @@
 	
 	<select id="selectCalendarList" parameterType="chat" resultType="chat">
 		<![CDATA[
-			select a.locationno,a.locationtitle,a.locationdate,a.location,c.user1,c.user2,d.name name,e.name member
+			select a.locationno,a.locationtitle,a.locationdate,a.location,b.chatroomno,c.user1,c.user2,d.name name,e.name member
 			from chatlocation a
 			left join chatmessage b
 			on a.locationno=b.locationno
@@ -121,6 +121,9 @@
 			on c.user2=e.memberno
 			where c.user1=#{user1}
 		]]>
+    </select>
+    <select id="selectCalendarLocation" parameterType="chat" resultType="chat">
+    	select *from chatlocation where locationno=#{locationno}
     </select>
     
     

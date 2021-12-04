@@ -48,7 +48,6 @@ input[name=chatcalendar_top_perMon]{
 
 }
 .chatcalendar_top_day{
-    font-weight: lighter;
     font-size:17px;
     text-align: left;
     padding-left:10px;
@@ -56,8 +55,7 @@ input[name=chatcalendar_top_perMon]{
 .chatcalendar_top_event{
     width:100px;
     height: 20px;
-    background-color: cadetblue;
-    color:white;
+    color:#858585;
 }
 #carrotimg{
 	width:15px;
