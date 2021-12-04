@@ -553,7 +553,6 @@
     width: 30%;
     text-overflow: ellipsis;
     border: 1px solid rgb(212, 212, 212);
-    height: 300px;
 }
 
 
@@ -588,7 +587,6 @@
     border: 1px solid rgb(240, 240, 240);
     width: 30%;
     border: 1px solid rgb(212, 212, 212);
-    height: 300px;
 }
 .c .chat_box_m_div_time_div{
     display: flex;

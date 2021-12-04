@@ -155,6 +155,8 @@
     
 
 </body>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=25eb93196f96f5e9cacf100023363c56"></script>
 <script>
 		$("#msg_location").click(function(){
 			var user1 = $('#loginmemberno').val();
@@ -431,7 +433,25 @@
 	                    		
 	                    	}
 	                    	 
-	                        
+
+	                    	// 이미지 지도에서 마커가 표시될 위치입니다 
+	                    	var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
+
+	                    	// 이미지 지도에 표시할 마커입니다
+	                    	// 이미지 지도에 표시할 마커는 Object 형태입니다
+	                    	var marker = {
+	                    	    position: markerPosition
+	                    	};
+
+	                    	var staticMapContainer  = document.getElementById('staticMap'), // 이미지 지도를 표시할 div  
+	                    	    staticMapOption = { 
+	                    	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 이미지 지도의 중심좌표
+	                    	        level: 3, // 이미지 지도의 확대 레벨
+	                    	        marker: marker // 이미지 지도에 표시할 마커 
+	                    	    };    
+
+	                    	// 이미지 지도를 생성합니다
+	                    	var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
 	                    	
 	                    }else{
 	                    	if($("."+$("#roomno").val()+"-"+$("#memberno").val()).html()==1){
@@ -519,24 +539,74 @@
 							           	console.log("jbjb"+jbSplit[0]); 	
 								
 									$('<div class="d"><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div>'+
-						              '<div class="chat_box_m_div" ><div>일정이 공유되었어요.</div><div id="staticMap" class="chat_box_m_div_map"></div>'+
+						              '<div class="chat_box_m_div" ><div>일정이 공유되었어요.</div><div id="staticMap'+this.locationno+'" class="chat_box_m_div_map"></div>'+
 									  '<div class="chat_box_m_div_date">날짜: '+this.locationdate+'</div>'+
 						              '<div class="chat_box_m_div_location">장소:' +jbSplit[0]+'</div>'+
 						              '<input type="button" value= "일정보기"></div><div class="chat_box_p_div">'+
 						              '<img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'"></div></div>').appendTo("#chat_box_ms");
+
+									// 이미지 지도에서 마커가 표시될 위치입니다 
+								var markerPosition  = new kakao.maps.LatLng(jbSplit[2], jbSplit[1]); 
+
+								// 이미지 지도에 표시할 마커입니다
+								// 이미지 지도에 표시할 마커는 Object 형태입니다
+								var marker = {
+								    position: markerPosition
+								};
+
+								var staticMapContainer  = document.getElementById('staticMap'+this.locationno), // 이미지 지도를 표시할 div  
+								    staticMapOption = { 
+								        center: new kakao.maps.LatLng(jbSplit[2], jbSplit[1]), // 이미지 지도의 중심좌표
+									        level: 3, // 이미지 지도의 확대 레벨
+									        marker: marker // 이미지 지도에 표시할 마커 
+									    };    
+
+									// 이미지 지도를 생성합니다
+									var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
+									
+									
 								}else{$('<div class="b"><div class="chat_box_m_div_read_div"><span class="chat_box_m_div_read_div_span"></span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div><div class="chat_box_m_div" ><span>'+this.chatmessage+'</span></div><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'" ></div></div>').appendTo("#chat_box_ms");
 								}
 							
 								
 							}else{
 								if(this.locationno!=0){
+
+					        	    const location = this.location;
+					        	    console.log("location:"+location);
+									 const jbSplit = location.split('//');
+							           	console.log("jbjb"+jbSplit[0]); 
+								
 									//넣어야함d
 									$('<div class="d"><div class="chat_box_m_div_read_div"><span class="chat_box_m_div_read_div_span">'+this.readst+'</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div>'+
-								      '<div class="chat_box_m_div" ><div>일정이 공유되었어요.</div><div id="staticMap" class="chat_box_m_div_map"></div>'+
+								      '<div class="chat_box_m_div" ><div>일정이 공유되었어요.</div><div id="staticMap'+this.locationno+'" class="chat_box_m_div_map"></div>'+
 									  '<div class="chat_box_m_div_date">날짜: '+this.locationdate+'</div>'+
 								      '<div class="chat_box_m_div_location">장소: '+jbSplit[0]+'</div>'+
 								      '<input type="button" value= "일정보기"></div><div class="chat_box_p_div">'+
 								      '<img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'"></div></div>').appendTo("#chat_box_ms");
+									
+
+									// 이미지 지도에서 마커가 표시될 위치입니다 
+								var markerPosition  = new kakao.maps.LatLng(jbSplit[2], jbSplit[1]); 
+
+								// 이미지 지도에 표시할 마커입니다
+								// 이미지 지도에 표시할 마커는 Object 형태입니다
+								var marker = {
+								    position: markerPosition
+								};
+
+								var staticMapContainer  = document.getElementById('staticMap'+this.locationno), // 이미지 지도를 표시할 div  
+								    staticMapOption = { 
+								        center: new kakao.maps.LatLng(jbSplit[2], jbSplit[1]), // 이미지 지도의 중심좌표
+									        level: 3, // 이미지 지도의 확대 레벨
+									        marker: marker // 이미지 지도에 표시할 마커 
+									    };    
+
+									// 이미지 지도를 생성합니다
+									var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
+									
+									
+									
 								}else{$('<div class="b"><div class="chat_box_m_div_read_div"><span class="chat_box_m_div_read_div_span">'+this.readst+'</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div><div class="chat_box_m_div" ><span>'+this.chatmessage+'</span></div><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'" ></div></div>').appendTo("#chat_box_ms");
 								}
 
@@ -550,12 +620,37 @@
 				        	    console.log("location:"+location);
 								 const jbSplit = location.split('//');
 						           	console.log("jbjb"+jbSplit[0]); 	
-		            	  
+
+						           	console.log("jbjb1"+jbSplit[1]);
+						           	console.log("jbjb2"+jbSplit[2]);
 								//넣어야함c
-								$('<div class="c"><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'"></div><div class="chat_box_m_div" ><div>일정이 공유되었어요.</div><div id="staticMap" class="chat_box_m_div_map"></div>'+
+								$('<div class="c"><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'"></div><div class="chat_box_m_div" ><div>일정이 공유되었어요.</div><div id="staticMap'+this.locationno+'" class="chat_box_m_div_map"></div>'+
 
 				                        '<div class="chat_box_m_div_date">날짜: ' +this.locationdate+'</div><div class="chat_box_m_div_location">장소:'+jbSplit[0]+'</div>'+
 				                        '<input type="button" value= "일정보기"> </div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div> </div>').appendTo("#chat_box_ms");
+								
+								
+
+								// 이미지 지도에서 마커가 표시될 위치입니다 
+								var markerPosition  = new kakao.maps.LatLng(jbSplit[2], jbSplit[1]); 
+
+								// 이미지 지도에 표시할 마커입니다
+								// 이미지 지도에 표시할 마커는 Object 형태입니다
+								var marker = {
+								    position: markerPosition
+								};
+
+								var staticMapContainer  = document.getElementById('staticMap'+this.locationno), // 이미지 지도를 표시할 div  
+								    staticMapOption = { 
+								        center: new kakao.maps.LatLng(jbSplit[2], jbSplit[1]), // 이미지 지도의 중심좌표
+								        level: 3, // 이미지 지도의 확대 레벨
+								        marker: marker // 이미지 지도에 표시할 마커 
+								    };    
+
+								// 이미지 지도를 생성합니다
+								var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
+								
+								
 							}else{  $('<div class="a"><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'" ></div><div class="chat_box_m_div" > <span>'+this.chatmessage+'</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div></div>').appendTo("#chat_box_ms");
 				              }
 	                       
@@ -574,5 +669,7 @@
        
 </script>
 
+<script>
+</script>
 
 </html>
