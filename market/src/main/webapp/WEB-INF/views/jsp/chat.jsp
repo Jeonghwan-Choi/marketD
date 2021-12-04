@@ -520,7 +520,7 @@
 								
 									$('<div class="d"><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div>'+
 						              '<div class="chat_box_m_div" ><div>일정이 공유되었어요.</div><div id="staticMap" class="chat_box_m_div_map"></div>'+
-									  '<div class="chat_box_m_div_date">날짜: '+this.datetime+'</div>'+
+									  '<div class="chat_box_m_div_date">날짜: '+this.locationdate+'</div>'+
 						              '<div class="chat_box_m_div_location">장소:' +jbSplit[0]+'</div>'+
 						              '<input type="button" value= "일정보기"></div><div class="chat_box_p_div">'+
 						              '<img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'"></div></div>').appendTo("#chat_box_ms");
@@ -533,7 +533,7 @@
 									//넣어야함d
 									$('<div class="d"><div class="chat_box_m_div_read_div"><span class="chat_box_m_div_read_div_span">'+this.readst+'</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div>'+
 								      '<div class="chat_box_m_div" ><div>일정이 공유되었어요.</div><div id="staticMap" class="chat_box_m_div_map"></div>'+
-									  '<div class="chat_box_m_div_date">날짜: '+this.datetime+'</div>'+
+									  '<div class="chat_box_m_div_date">날짜: '+this.locationdate+'</div>'+
 								      '<div class="chat_box_m_div_location">장소: '+jbSplit[0]+'</div>'+
 								      '<input type="button" value= "일정보기"></div><div class="chat_box_p_div">'+
 								      '<img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'"></div></div>').appendTo("#chat_box_ms");

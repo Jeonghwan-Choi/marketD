@@ -55,7 +55,7 @@
     	</script> 
     </c:forEach>
     
-    	<input type="text" id="test" name="test" value="">
+    	
 </div>
 </body>
 
@@ -123,7 +123,7 @@
 		                	var calendarRoomno =  $("#calendarRoomno"+j).val();
 		                	var calendarLocationno = $("#calendarLocationno"+j).val();
 		                	var calendarLocationno= $("#calendarLocationno"+j).val();
-		                	if(now===calendarDate){	$("#chatcalendar_top_date"+ i +"").append("<br><img id='carrotimg' src='http://cjhftp.dothome.co.kr/ico/carrot.png'><div style='display:inline;' class='chatcalendar_top_event'><a href='/chatlocation?user1="+user1+"&user2="+user2+"&chatroomno="+calendarRoomno+"&locationjsp=1&calendarLocationno="+calendarLocationno+"'>"+calendarTitle+"</a></div>");}
+		                	if(now===calendarDate){	$("#chatcalendar_top_date"+ i +"").append("<div class='testdong'><img id='carrotimg' src='http://cjhftp.dothome.co.kr/ico/carrot.png'><div style='display:inline;' class='chatcalendar_top_event'><a href='/chatlocation?user1="+user1+"&user2="+user2+"&chatroomno="+calendarRoomno+"&locationjsp=1&calendarLocationno="+calendarLocationno+"'> "+calendarTitle+"</a></div></div>");}
 					}}else{
 						var now = nowYear+"-"+(nowMonth+1)+"-0"+i;
 						console.log("now:"+now);
@@ -135,7 +135,7 @@
 		                	var user2 = $("#calendarUser2"+j).val();
 		                	var calendarRoomno =  $("#calendarRoomno"+j).val();
 		                	var calendarLocationno= $("#calendarLocationno"+j).val();
-			               	if(now===calendarDate){	$("#chatcalendar_top_date"+ i +"").append("<br><img id='carrotimg' src='http://cjhftp.dothome.co.kr/ico/carrot.png'><div style='display:inline;' class='chatcalendar_top_event'><a href='/chatlocation?user1="+user1+"&user2="+user2+"&chatroomno="+calendarRoomno+"&locationjsp=1&calendarLocationno="+calendarLocationno+"'>"+calendarTitle+"</a></div>");}
+			               	if(now===calendarDate){	$("#chatcalendar_top_date"+ i +"").append("<div class='testdong'><img id='carrotimg' src='http://cjhftp.dothome.co.kr/ico/carrot.png'><div style='display:inline;' class='chatcalendar_top_event'><a href='/chatlocation?user1="+user1+"&user2="+user2+"&chatroomno="+calendarRoomno+"&locationjsp=1&calendarLocationno="+calendarLocationno+"'> "+calendarTitle+"</a></div></div>");}
 					}}
 					
 				}else{  
@@ -148,7 +148,7 @@
 	                	var user2 = $("#calendarUser2"+j).val();
 	                	var calendarRoomno =  $("#calendarRoomno"+j).val();
 	                	var calendarLocationno= $("#calendarLocationno"+j).val();
-	                	if(now===calendarDate){	$("#chatcalendar_top_date"+ i +"").append("<br><img id='carrotimg' src='http://cjhftp.dothome.co.kr/ico/carrot.png'><div style='display:inline;' class='chatcalendar_top_event'><a href='/chatlocation?user1="+user1+"&user2="+user2+"&chatroomno="+calendarRoomno+"&locationjsp=1&calendarLocationno="+calendarLocationno+"'>"+calendarTitle+"</a></div>");}
+	                	if(now===calendarDate){	$("#chatcalendar_top_date"+ i +"").append("<div class='testdong'><img id='carrotimg' src='http://cjhftp.dothome.co.kr/ico/carrot.png'><div style='display:inline;' class='chatcalendar_top_event'><a href='/chatlocation?user1="+user1+"&user2="+user2+"&chatroomno="+calendarRoomno+"&locationjsp=1&calendarLocationno="+calendarLocationno+"'> "+calendarTitle+"</a></div></div>");}
 	                }}else{var now = nowYear+"-"+(nowMonth+1)+"-"+i;
 	                for(j=1;j<=31;j++){
 	                	var calendarDate = $("#calendarDate"+j).val();
@@ -158,7 +158,7 @@
 	                	var user2 = $("#calendarUser2"+j).val();
 	                	var calendarRoomno =  $("#calendarRoomno"+j).val();
 	                	var calendarLocationno= $("#calendarLocationno"+j).val();
-	                	if(now===calendarDate){	$("#chatcalendar_top_date"+ i +"").append("<br><img id='carrotimg' src='http://cjhftp.dothome.co.kr/ico/carrot.png'><div style='display:inline;' class='chatcalendar_top_event'><a href='/chatlocation?user1="+user1+"&user2="+user2+"&chatroomno="+calendarRoomno+"&locationjsp=1&calendarLocationno="+calendarLocationno+"'>"+calendarTitle+"</a></div>");}
+	                	if(now===calendarDate){	$("#chatcalendar_top_date"+ i +"").append("<div class='testdong'><img id='carrotimg' src='http://cjhftp.dothome.co.kr/ico/carrot.png'><div style='display:inline;' class='chatcalendar_top_event'><a href='/chatlocation?user1="+user1+"&user2="+user2+"&chatroomno="+calendarRoomno+"&locationjsp=1&calendarLocationno="+calendarLocationno+"'> "+calendarTitle+"</a></div></div>");}
 	                }}	
 				
 					

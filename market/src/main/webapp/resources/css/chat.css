@@ -438,11 +438,11 @@
     line-height: 23px;
     font-size: 15px;
 }
-.b, .d{
+.b{
  
     color: white;
 }
-.a, .c{
+.a, .c, .d{
   
     color: black;
 }

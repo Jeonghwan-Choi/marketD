@@ -10,191 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
  <script src="http://cjhwebsocket.cafe24app.com:80/socket.io/socket.io.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chatlocation.css ">
     <title>Document</title>
-    <style>
-        /* .main{
-            margin-left: auto;
-            margin-right: auto;
-        } */
-        .main{
-            
-        }
-        .location_header{
-            border-bottom: 2px gray solid;
-            width:1100px;
-            height: 80px;
-            padding-bottom:2px;
-        }
-        .location_header_img{
-            width:80px;
-            height: 80px;
-            float: left;
-            text-align: center;
-            line-height: 90px;
-        }
-        
-        .location_header_title{
-            width: 1000px;
-            height: 80px;
-            float:right;
-            
-            line-height: 80px;
-        }
-        #location_header_input{
-            height: 80px;
-            width:800px;
-            font-size: 20px;
-            font-weight: bold;
-            border:none;
-        }
-        #location_header_input:focus{
-            outline:none;
-        }
-        .location_center{
-            
-        }
-        .location_center{
-            width:1070px;
-            height: 460px;
-            padding-top: 5px;
-        }
-        .location_center_left{
-            width:730px;
-            height: 460px;
-            float: left;
-            padding-top:10px;
-        }
-        .location_date_input{
-            height: 35px;
-            border:rgb(179, 177, 177) 2px solid;
-            border-radius: 5px;
-        }
-        .location_location_input{
-            height: 35px;
-            border:rgb(179, 177, 177) 2px solid;
-            border-radius: 5px;
-
-        }
-        .location_th{
-            width:80px;
-            height: 50px;
-            color:rgb(136, 136, 136);
-        }
-        .location_textarea{
-            resize: none;
-            border:rgb(179, 177, 177) 2px solid;
-            border-radius: 5px;
-        }
-        .location_textarea:focus{
-            outline: none;
-        }
-
-        /* right */
-        
-        .location_center_right{
-            width:300px;
-            height: 460px;
-            float: right;
-        }
-        .location_memberlist{
-            width:300px;
-            height: 460px;
-
-        }
-        .location_memberlist_title{
-            width:280px;
-            height: 60px;
-            border:rgb(179, 177, 177) 2px solid;
-            border-radius: 5px;
-            text-align: center;
-            line-height: 60px;
-            margin: 5px;
-        }
-        .location_memberlist_title_button{
-            width:250px;
-            height: 50px;
-            font-size: 20px;
-            background-color: white;
-            color: gray;
-            font-weight: bold;
-            border:none;
-        }
-        .location_memberlist_content{
-
-        }
-        .location_memberlist_img{
-            width:40px;
-            height: 40px;
-        }
-        .location_memberlist_div{
-            margin-left:20px;
-            margin-top:20px;
-            height: 40px;
-            /* align-items: center; */
-        }
-        .location_memberlist_span{
-            /* text-align: center;*/
-            /* line-height: 40px; 
-            margin:0 auto; */
-        }
-       .location_location_input{
-       		background:rgb(218, 218, 218,0.5);
-       }
-       .location_submit_input{
-       		background:white;
-       		border:none;
-       		color:gray;
-       		font-weight:border;
-       }
-       .location_memberlist_div img{
-       		width:50px;
-            height:50px;
-       		
-       }
-       
-       
-       /* map */
-       
-       .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
-		.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-		.map_wrap {position:relative;width:100%;height:500px;}
-		#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
-		.bg_white {background:#fff;}
-		#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
-		#menu_wrap .option{text-align: center;}
-		#menu_wrap .option p {margin:10px 0;}  
-		#menu_wrap .option button {margin-left:5px;}
-		#placesList li {list-style: none;}
-		#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
-		#placesList .item span {display: block;margin-top:4px;}
-		#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
-		#placesList .item .info{padding:10px 0 10px 55px;}
-		#placesList .info .gray {color:#8a8a8a;}
-		#placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
-		#placesList .info .tel {color:#009900;}
-		#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
-		#placesList .item .marker_1 {background-position: 0 -10px;}
-		#placesList .item .marker_2 {background-position: 0 -56px;}
-		#placesList .item .marker_3 {background-position: 0 -102px}
-		#placesList .item .marker_4 {background-position: 0 -148px;}
-		#placesList .item .marker_5 {background-position: 0 -194px;}
-		#placesList .item .marker_6 {background-position: 0 -240px;}
-		#placesList .item .marker_7 {background-position: 0 -286px;}
-		#placesList .item .marker_8 {background-position: 0 -332px;}
-		#placesList .item .marker_9 {background-position: 0 -378px;}
-		#placesList .item .marker_10 {background-position: 0 -423px;}
-		#placesList .item .marker_11 {background-position: 0 -470px;}
-		#placesList .item .marker_12 {background-position: 0 -516px;}
-		#placesList .item .marker_13 {background-position: 0 -562px;}
-		#placesList .item .marker_14 {background-position: 0 -608px;}
-		#placesList .item .marker_15 {background-position: 0 -654px;}
-		#pagination {margin:10px auto;text-align: center;}
-		#pagination a {display:inline-block;margin-right:10px;}
-		#pagination .on {font-weight: bold; cursor: default;color:#777;}
-    </style>
 </head>
 <body>
-<form action="/chatcalendar" method="post">
+<!-- <form action="/chatcalendar" method="post"> -->
+<form method="post">
     <div class="main">
         <div class="location_header">
         <input type="hidden" id="user1" name="user1" value="${chatList.user1 }">
@@ -202,7 +23,7 @@
         <input type="hidden" id="chatroomno" name="chatroomno" value="${chatList.chatroomno }">
         
         <input type="hidden" id="location" name="location" value='<%=request.getParameter("locationjsp")%>'>
-        <input type="text" id="calendarLocation" value="${calendarLocation.locationno }">
+        <input type="hidden" id="calendarLocation" value="${calendarLocation.locationno }">
             <div class="location_header_img">
                 <img src="http://cjhftp.dothome.co.kr/ico/cross.png">
             </div>
@@ -224,7 +45,7 @@
                         <th class="location_th">일시</th>
                          <c:set var="jstlDate" value="${calendarLocation.locationdate }"/>
 			            <c:if test="${not empty jstlDate }">
-			                 <td class="location_td"><input name="location_date_input" class="location_date_input" id="location_date_input" type="text" value="${calendarLocation.locationdate }"></td>
+			                 <td class="location_td"><input style="background:rgb(218, 218, 218,0.5);" name="jstl_location_date_input" class="jstl_location_date_input" id="jstl_location_date_input" type="text" value="${calendarLocation.locationdate }" readonly></td>
 			            </c:if>
 			            <c:if test="${empty jstlDate }">
 			                <td class="location_td"><input name="location_date_input" class="location_date_input" id="location_date_input" type="date"></td>
@@ -236,7 +57,7 @@
                         <th class="location_th">지도</th>
                         <td class="location_td">
 							<div class="map_wrap">
-							    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+							    <div id="map" style="width:650px;height:100%;position:relative;overflow:hidden;"></div>
 							
 							    <div id="menu_wrap" class="bg_white">
 							        <div class="option">
@@ -286,7 +107,7 @@
                         <c:set var="jstlLocation" value="${calendarLocation.location }"/>
 			            <c:if test="${not empty jstlLocation }">
 			            		<input type="hidden" id="calendarlocation" value="${calendarLocation.location }">
-			                 <td class="location_td"><input class="location_location_input" id="location_location_input" name="location_location_input" type="text" value="" readonly></td>
+			                 <td class="location_td"><input class="jstl_location_location_input" id="jstl_location_location_input" name="jstl_location_location_input" type="text" value="" readonly></td>
 			                 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 			                 <script>
 								const jstllocation2 = $('#calendarlocation').val();
@@ -310,7 +131,7 @@
                         
                         <c:set var="jstlDescription" value="${calendarLocation.locationdescription }"/>
 			            <c:if test="${not empty jstlDescription }">
-			                 <td class="location_td"><input name="location_textarea" class="location_textarea" id="location_textarea" type="text" value="${calendarLocation.locationdescription }"></td>
+			                 <td class="location_td"><input style="background:rgb(218, 218, 218,0.5);" name="jstl_location_textarea" class="jstl_location_textarea" id="jstl_location_textarea" type="text" value="${calendarLocation.locationdescription }" readonly></td>
 			            </c:if>
 			            <c:if test="${empty jstlDescription }">
 			                <td class="location_td" style="padding-top: 10px;"><textarea cols="70" rows="15" id="location_textarea" name="location_textarea" class="location_textarea" placeholder="설명추가"></textarea></td>
@@ -322,7 +143,19 @@
                     </tr>
                     <tr class="location_tr">
                         <th class="location_th"></th>
-                        <td class="location_td"><input name="location_submit_input" class="location_submit_input" id="location_submit_input" type="submit" value="약속잡기"></td>
+                        
+                        
+                        <c:set var="jstlTitle2" value="${calendarLocation.locationtitle }"/>
+			            <c:if test="${empty jstlTitle2 }">
+			                 <td class="location_td"><input name="location_submit_input" class="location_submit_input" id="location_submit_input" type="submit" value="약속잡기" formaction="/chatcalendar"></td>
+			            </c:if>
+			            <c:if test="${not empty jstlTitle2 }">
+			                <td class="location_td"><input name="jstl_location_submit_input" class="jstl_location_submit_input" id="jstl_location_submit_input" type="submit" value="달력보기" formaction="/chatcalendarview"></td>
+			            </c:if>
+                        
+                        
+                        
+                        
                     </tr>
                 </table>
             </div>

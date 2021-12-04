@@ -202,5 +202,18 @@ public class ChatController {
 		
 		return "/jsp/chatcalendar";
 	}
+	
+	@RequestMapping("/chatcalendarview")
+	public String chatcalendarview(HttpServletRequest req, Model model, ChatVO vo) throws IllegalStateException {
+
+		int user1 = Integer.parseInt(req.getParameter("user1"));
+	
+		
+		model.addAttribute("calendarList",chatService.selectCalendarList(user1));
+		
+		
+		
+		return "/jsp/chatcalendar";
+	}
 
 }
