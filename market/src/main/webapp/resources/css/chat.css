@@ -667,3 +667,31 @@
     height: 25px;
    
 }
+   .chat_user_readm div{
+        padding: 5px;
+        float: right;
+        width: 140px;
+    }
+    .chat_user_readm div:hover{
+        background-color:rgb(243, 243, 243);
+        border-radius: 3px;
+    }
+
+    .chat_user_readm img{
+        width: 16px;
+        height: 16px;
+    }
+    
+    .chat_user_list_room_read{
+		width:20px;
+		height:20px;
+		background-color: rgb(237,102,83);
+		float:right; text-align:center;
+		color:white; font-size:14px;
+		font-weight:600; border-radius:100%;
+		margin-top:-15px;
+		
+	}
+	.chat_user_list_room_read span{
+		line-height: 21px;
+	}

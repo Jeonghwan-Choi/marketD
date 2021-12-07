@@ -8,9 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <link href="${pageContext.request.contextPath}/resources/css/chatcalendar.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/chatcalendar.css?ver=1.1" rel="stylesheet">
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic-coding.css" rel="stylesheet">
-	
+   
     <title>calendar</title>
 </head>
 <body>
@@ -38,24 +38,24 @@
         </table>
     </div>
     <c:forEach items="${calendarList}" var="list" varStatus="status">
-    	<input type="hidden" id="calendarDate${status.count }" name="calendarDate" value="${list.locationdate }">
-    	<input type="hidden" id="calendarMember${status.count }" name="calendarMember" value="${list.member }">
-    	<input type="hidden" id="calendarTitle${status.count }" name="calendarTitle" value="${list.locationtitle }">
-    	<input type="hidden" id="calendarUser1${status.count }" name="calendarUser1" value="${list.user1 }">
-    	<input type="hidden" id="calendarUser2${status.count }" name="calendarUser2" value="${list.user2 }">
-    	<input type="hidden" id="calendarRoomno${status.count }" name="calendarRoomno" value="${list.chatroomno }">
-    	<input type="hidden" id="calendarLocationno${status.count }" name="calendarRoomno" value="${list.locationno }">
-    	
-    	 <script>
-    	 var count = ${status.count };
-    		 var date = $("#calendarDate"+count).val();
-    		var now = date.substring(8,10);
-    		
-    		
-    	</script> 
+       <input type="hidden" id="calendarDate${status.count }" name="calendarDate" value="${list.locationdate }">
+       <input type="hidden" id="calendarMember${status.count }" name="calendarMember" value="${list.member }">
+       <input type="hidden" id="calendarTitle${status.count }" name="calendarTitle" value="${list.locationtitle }">
+       <input type="hidden" id="calendarUser1${status.count }" name="calendarUser1" value="${list.user1 }">
+       <input type="hidden" id="calendarUser2${status.count }" name="calendarUser2" value="${list.user2 }">
+       <input type="hidden" id="calendarRoomno${status.count }" name="calendarRoomno" value="${list.chatroomno }">
+       <input type="hidden" id="calendarLocationno${status.count }" name="calendarRoomno" value="${list.locationno }">
+       
+        <script>
+        var count = ${status.count };
+           var date = $("#calendarDate"+count).val();
+          var now = date.substring(8,10);
+          
+          
+       </script> 
     </c:forEach>
     
-    	
+       
 </div>
 </body>
 
@@ -110,65 +110,65 @@
                     
                 }
                 for(i=1;i<=lastDate;i++){
-				if(i<10){
-					if((nowMonth+1)<10){
-						var now = nowYear+"-0"+(nowMonth+1)+"-0"+i;
-						console.log("now:"+now);
-		                for(j=1;j<=31;j++){
-		                	var calendarDate = $("#calendarDate"+j).val();
-		                	var calendarMember = $("#calendarMember"+j).val();
-		                	var calendarTitle = $("#calendarTitle"+j).val();
-		                	var user1 = $("#calendarUser1"+j).val();
-		                	var user2 = $("#calendarUser2"+j).val();
-		                	var calendarRoomno =  $("#calendarRoomno"+j).val();
-		                	var calendarLocationno = $("#calendarLocationno"+j).val();
-		                	var calendarLocationno= $("#calendarLocationno"+j).val();
-		                	if(now===calendarDate){	$("#chatcalendar_top_date"+ i +"").append("<div class='testdong'><img id='carrotimg' src='http://cjhftp.dothome.co.kr/ico/carrot.png'><div style='display:inline;' class='chatcalendar_top_event'><a href='/chatlocation?user1="+user1+"&user2="+user2+"&chatroomno="+calendarRoomno+"&locationjsp=1&calendarLocationno="+calendarLocationno+"'> "+calendarTitle+"</a></div></div>");}
-					}}else{
-						var now = nowYear+"-"+(nowMonth+1)+"-0"+i;
-						console.log("now:"+now);
-			               for(j=1;j<=31;j++){
-			               	var calendarDate = $("#calendarDate"+j).val();
-			               	var calendarMember = $("#calendarMember"+j).val();
-			               	var calendarTitle = $("#calendarTitle"+j).val();
-		                	var user1 = $("#calendarUser1"+j).val();
-		                	var user2 = $("#calendarUser2"+j).val();
-		                	var calendarRoomno =  $("#calendarRoomno"+j).val();
-		                	var calendarLocationno= $("#calendarLocationno"+j).val();
-			               	if(now===calendarDate){	$("#chatcalendar_top_date"+ i +"").append("<div class='testdong'><img id='carrotimg' src='http://cjhftp.dothome.co.kr/ico/carrot.png'><div style='display:inline;' class='chatcalendar_top_event'><a href='/chatlocation?user1="+user1+"&user2="+user2+"&chatroomno="+calendarRoomno+"&locationjsp=1&calendarLocationno="+calendarLocationno+"'> "+calendarTitle+"</a></div></div>");}
-					}}
-					
-				}else{  
-					if((nowMonth+1)<10){var now = nowYear+"-0"+(nowMonth+1)+"-"+i;
-	                for(j=1;j<=31;j++){
-	                	var calendarDate = $("#calendarDate"+j).val();
-	                	var calendarMember = $("#calendarMember"+j).val();
-	                	var calendarTitle = $("#calendarTitle"+j).val();
-	                	var user1 = $("#calendarUser1"+j).val();
-	                	var user2 = $("#calendarUser2"+j).val();
-	                	var calendarRoomno =  $("#calendarRoomno"+j).val();
-	                	var calendarLocationno= $("#calendarLocationno"+j).val();
-	                	if(now===calendarDate){	$("#chatcalendar_top_date"+ i +"").append("<div class='testdong'><img id='carrotimg' src='http://cjhftp.dothome.co.kr/ico/carrot.png'><div style='display:inline;' class='chatcalendar_top_event'><a href='/chatlocation?user1="+user1+"&user2="+user2+"&chatroomno="+calendarRoomno+"&locationjsp=1&calendarLocationno="+calendarLocationno+"'> "+calendarTitle+"</a></div></div>");}
-	                }}else{var now = nowYear+"-"+(nowMonth+1)+"-"+i;
-	                for(j=1;j<=31;j++){
-	                	var calendarDate = $("#calendarDate"+j).val();
-	                	var calendarMember = $("#calendarMember"+j).val();
-	                	var calendarTitle = $("#calendarTitle"+j).val();
-	                	var user1 = $("#calendarUser1"+j).val();
-	                	var user2 = $("#calendarUser2"+j).val();
-	                	var calendarRoomno =  $("#calendarRoomno"+j).val();
-	                	var calendarLocationno= $("#calendarLocationno"+j).val();
-	                	if(now===calendarDate){	$("#chatcalendar_top_date"+ i +"").append("<div class='testdong'><img id='carrotimg' src='http://cjhftp.dothome.co.kr/ico/carrot.png'><div style='display:inline;' class='chatcalendar_top_event'><a href='/chatlocation?user1="+user1+"&user2="+user2+"&chatroomno="+calendarRoomno+"&locationjsp=1&calendarLocationno="+calendarLocationno+"'> "+calendarTitle+"</a></div></div>");}
-	                }}	
-				
-					
-	                console.log(now);}
+            if(i<10){
+               if((nowMonth+1)<10){
+                  var now = nowYear+"-0"+(nowMonth+1)+"-0"+i;
+                  console.log("now:"+now);
+                      for(j=1;j<=31;j++){
+                         var calendarDate = $("#calendarDate"+j).val();
+                         var calendarMember = $("#calendarMember"+j).val();
+                         var calendarTitle = $("#calendarTitle"+j).val();
+                         var user1 = $("#calendarUser1"+j).val();
+                         var user2 = $("#calendarUser2"+j).val();
+                         var calendarRoomno =  $("#calendarRoomno"+j).val();
+                         var calendarLocationno = $("#calendarLocationno"+j).val();
+                         var calendarLocationno= $("#calendarLocationno"+j).val();
+                         if(now===calendarDate){   $("#chatcalendar_top_date"+ i +"").append("<div class='testdong'><img id='carrotimg' src='http://cjhftp.dothome.co.kr/ico/carrot.png'><div style='display:inline;' class='chatcalendar_top_event'><a href='/chatlocation?user1="+user1+"&user2="+user2+"&chatroomno="+calendarRoomno+"&locationjsp=1&calendarLocationno="+calendarLocationno+"'> "+calendarTitle+"</a></div></div>");}
+               }}else{
+                  var now = nowYear+"-"+(nowMonth+1)+"-0"+i;
+                  console.log("now:"+now);
+                        for(j=1;j<=31;j++){
+                           var calendarDate = $("#calendarDate"+j).val();
+                           var calendarMember = $("#calendarMember"+j).val();
+                           var calendarTitle = $("#calendarTitle"+j).val();
+                         var user1 = $("#calendarUser1"+j).val();
+                         var user2 = $("#calendarUser2"+j).val();
+                         var calendarRoomno =  $("#calendarRoomno"+j).val();
+                         var calendarLocationno= $("#calendarLocationno"+j).val();
+                           if(now===calendarDate){   $("#chatcalendar_top_date"+ i +"").append("<div class='testdong'><img id='carrotimg' src='http://cjhftp.dothome.co.kr/ico/carrot.png'><div style='display:inline;' class='chatcalendar_top_event'><a href='/chatlocation?user1="+user1+"&user2="+user2+"&chatroomno="+calendarRoomno+"&locationjsp=1&calendarLocationno="+calendarLocationno+"'> "+calendarTitle+"</a></div></div>");}
+               }}
+               
+            }else{  
+               if((nowMonth+1)<10){var now = nowYear+"-0"+(nowMonth+1)+"-"+i;
+                   for(j=1;j<=31;j++){
+                      var calendarDate = $("#calendarDate"+j).val();
+                      var calendarMember = $("#calendarMember"+j).val();
+                      var calendarTitle = $("#calendarTitle"+j).val();
+                      var user1 = $("#calendarUser1"+j).val();
+                      var user2 = $("#calendarUser2"+j).val();
+                      var calendarRoomno =  $("#calendarRoomno"+j).val();
+                      var calendarLocationno= $("#calendarLocationno"+j).val();
+                      if(now===calendarDate){   $("#chatcalendar_top_date"+ i +"").append("<div class='testdong'><img id='carrotimg' src='http://cjhftp.dothome.co.kr/ico/carrot.png'><div style='display:inline;' class='chatcalendar_top_event'><a href='/chatlocation?user1="+user1+"&user2="+user2+"&chatroomno="+calendarRoomno+"&locationjsp=1&calendarLocationno="+calendarLocationno+"'> "+calendarTitle+"</a></div></div>");}
+                   }}else{var now = nowYear+"-"+(nowMonth+1)+"-"+i;
+                   for(j=1;j<=31;j++){
+                      var calendarDate = $("#calendarDate"+j).val();
+                      var calendarMember = $("#calendarMember"+j).val();
+                      var calendarTitle = $("#calendarTitle"+j).val();
+                      var user1 = $("#calendarUser1"+j).val();
+                      var user2 = $("#calendarUser2"+j).val();
+                      var calendarRoomno =  $("#calendarRoomno"+j).val();
+                      var calendarLocationno= $("#calendarLocationno"+j).val();
+                      if(now===calendarDate){   $("#chatcalendar_top_date"+ i +"").append("<div class='testdong'><img id='carrotimg' src='http://cjhftp.dothome.co.kr/ico/carrot.png'><div style='display:inline;' class='chatcalendar_top_event'><a href='/chatlocation?user1="+user1+"&user2="+user2+"&chatroomno="+calendarRoomno+"&locationjsp=1&calendarLocationno="+calendarLocationno+"'> "+calendarTitle+"</a></div></div>");}
+                   }}   
+            
+               
+                   console.log(now);}
                 }
                 
                 
-			/* if(now=calendarDate){ */
-			
-			
+         /* if(now=calendarDate){ */
+         
+         
                 
                 if($("#calendar_top_table > #chatcalendar_top_tbody > td").length%7!=0) { //마지막 줄 빈칸
                     for(i=1; i<= $("#calendar > #chatcalendar_top_tbody > td").length%7; i++) {

@@ -10,21 +10,21 @@
 
     
     <select id="boardInfo" resultType="board" parameterType="board">
-    	select * from board where boardno=#{boardno} 
-    	
+       select * from board where boardno=#{boardno} 
+       
     </select> 
   
   <insert id="insertBoard" parameterType="board">
-  	 insert into board(memberno,title,category,datetime,content,price) values(#{memberno},#{title},#{category},TO_CHAR(LOCALTIMESTAMP,'yyyy/mm/dd HH24:MI'),#{content},#{price}) 
-  	<!--insert into board(memberno,title,category,datetime,content,price) values(#{memberno},#{title},#{category},#{datetime},#{content},#{price})-->
+      insert into board(memberno,title,category,datetime,content,price) values(#{memberno},#{title},#{category},TO_CHAR(LOCALTIMESTAMP,'yyyy/mm/dd HH24:MI'),#{content},#{price}) 
+     <!--insert into board(memberno,title,category,datetime,content,price) values(#{memberno},#{title},#{category},#{datetime},#{content},#{price})-->
   </insert>
   
   <insert id="addwish" parameterType="board">
-  	insert into wish(memberno,boardno,datetime) values(#{memberno},#{boardno},TO_CHAR(LOCALTIMESTAMP,'yyyy/mm/dd HH24:MI'))
+     insert into wish(memberno,boardno,datetime) values(#{memberno},#{boardno},TO_CHAR(LOCALTIMESTAMP,'yyyy/mm/dd HH24:MI'))
   </insert>
   
   <select id="firstBoardno" parameterType="board" resultType="board">
-  	select boardno from (select boardno from board where memberno=#{memberno} order by boardno desc) where rownum=1
+     select boardno from (select boardno from board where memberno=#{memberno} order by boardno desc) where rownum=1
   </select>
   
  
@@ -32,41 +32,76 @@
   
   
   <select id="boardList" resultType="board">
-	<![CDATA[
-	    select a.boardno, a.memberno, a.title, a.category,a.content,a.price, nvl((b.cnt),0)"cnt",d.imagename,e.address,f.wish
-		from board a
-		LEFT JOIN (SELECT boardno,COUNT(distinct(memberno))cnt FROM guest GROUP BY boardno ) b
-		ON a.boardno = b.boardno
-		LEFT JOIN image d
-		ON a.boardno = d.boardno
-		LEFT JOIN member e
-		ON a.memberno = e.memberno
-		LEFT JOIN (SELECT boardno,COUNT(memberno)wish FROM wish group by boardno) f
-		ON a.boardno = f.boardno
-		where d.imageindex = 1 and rownum < 10
-		order by cnt desc NULLS LAST
+   <![CDATA[
+       select a.boardno, a.memberno, a.title, a.category,a.content,a.price, nvl((b.cnt),0)"cnt",d.imagename,e.address,f.wish
+      from board a
+      LEFT JOIN (SELECT boardno,COUNT(distinct(memberno))cnt FROM guest GROUP BY boardno ) b
+      ON a.boardno = b.boardno
+      LEFT JOIN image d
+      ON a.boardno = d.boardno
+      LEFT JOIN member e
+      ON a.memberno = e.memberno
+      LEFT JOIN (SELECT boardno,COUNT(memberno)wish FROM wish group by boardno) f
+      ON a.boardno = f.boardno
+      where d.imageindex = 1 and rownum < 10
+      order by cnt desc NULLS LAST
      ]]>
     </select>
     
       <insert id="insertGuest" parameterType="board">
-	  	 insert into guest(boardno,memberno) values(#{boardno},#{memberno}) 
-  	 </insert>
-  	 
-  	 
-	
-	<select id="boardquery" parameterType="board" resultType="board">
- 	<![CDATA[
-		select a.boardno,a.memberno,a.title,a.category,a.datetime,a.content,a.price,m.email,m.name,m.profile,m.address,w.wishcount,c.chatcount,nvl((m.viewscount),0)viewscount from board a 
-		left join member m
-		on a.memberno=m.memberno
-		left join (select boardno,count(wishno)wishcount from wish group by boardno) w
-		on a.boardno=w.boardno
-		left join (select boardno,count(chatroomno)chatcount from chatroom group by boardno) c
-		on a.boardno=c.boardno
-		LEFT JOIN (SELECT boardno,COUNT(distinct(memberno))viewscount FROM guest GROUP BY boardno ) m
-		ON a.boardno = m.boardno
-		where a.boardno=#{boardno}
-	]]>
-	</select>
-	
+         insert into guest(boardno,memberno) values(#{boardno},#{memberno}) 
+      </insert>
+      
+      
+   
+   <select id="boardquery" parameterType="board" resultType="board">
+    <![CDATA[
+      select a.boardno,a.memberno,a.title,a.category,a.datetime,a.content,a.price,m.email,m.name,m.profile,m.address,w.wishcount,c.chatcount,nvl((m.viewscount),0)viewscount from board a 
+      left join member m
+      on a.memberno=m.memberno
+      left join (select boardno,count(wishno)wishcount from wish group by boardno) w
+      on a.boardno=w.boardno
+      left join (select boardno,count(chatroomno)chatcount from chatroom group by boardno) c
+      on a.boardno=c.boardno
+      LEFT JOIN (SELECT boardno,COUNT(distinct(memberno))viewscount FROM guest GROUP BY boardno ) m
+      ON a.boardno = m.boardno
+      where a.boardno=#{boardno}
+   ]]>
+   </select>
+   
+   
+   <select id="addressSearch" parameterType="board" resultType="board">
+    <![CDATA[
+      select a.boardno, a.memberno, a.title, a.category,a.content,a.price, nvl((b.cnt),0)"cnt",d.imagename,e.address,f.wish
+      from board a
+      LEFT JOIN (SELECT boardno,COUNT(distinct(memberno))cnt FROM guest GROUP BY boardno ) b
+      ON a.boardno = b.boardno
+      LEFT JOIN image d
+      ON a.boardno = d.boardno
+      LEFT JOIN member e
+      ON a.memberno = e.memberno
+      LEFT JOIN (SELECT boardno,COUNT(memberno)wish FROM wish group by boardno) f
+      ON a.boardno = f.boardno
+      where d.imageindex = 1 and e.address Like '%'||#{searchdata}||'%'
+      order by cnt desc NULLS LAST OFFSET #{firstvalue} ROWS FETCH FIRST #{lastvalue} ROWS ONLY
+   ]]>
+   </select>
+
+	<select id="productSearch" parameterType="board" resultType="board">
+    <![CDATA[
+      select a.boardno, a.memberno, a.title, a.category,a.content,a.price, nvl((b.cnt),0)"cnt",d.imagename,e.address,f.wish
+      from board a
+      LEFT JOIN (SELECT boardno,COUNT(distinct(memberno))cnt FROM guest GROUP BY boardno ) b
+      ON a.boardno = b.boardno
+      LEFT JOIN image d
+      ON a.boardno = d.boardno
+      LEFT JOIN member e
+      ON a.memberno = e.memberno
+      LEFT JOIN (SELECT boardno,COUNT(memberno)wish FROM wish group by boardno) f
+      ON a.boardno = f.boardno
+      where d.imageindex = 1 and (a.title Like '%'||#{searchdata}||'%' or a.content Like '%'||#{searchdata}||'%' )
+      order by cnt desc NULLS LAST OFFSET #{firstvalue} ROWS FETCH FIRST #{lastvalue} ROWS ONLY
+   ]]>
+   </select>
+   
 </mapper>

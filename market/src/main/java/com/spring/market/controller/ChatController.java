@@ -194,7 +194,7 @@ public class ChatController {
 		
 		vo.setDatetime(currentDate);
 		chatService.insertLocationMessage(vo);
-		
+		model.addAttribute("locationno",vo.getLocationno());
 		
 		model.addAttribute("calendarList",chatService.selectCalendarList(user1));
 		

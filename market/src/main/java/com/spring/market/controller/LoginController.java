@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -49,10 +50,10 @@ public class LoginController {
 	}
 
 	@RequestMapping("/kakaologin")
-	public String kakaologin(HttpServletRequest req,Model model,String code) throws IllegalStateException {
+	public String kakaologin(HttpServletRequest req,ModelMap model,String code) throws IllegalStateException {
 		System.out.println("#########" + code);
 		
-		model.addAttribute("email","tttt@naver.com");
+	
 
 		String authorize_code = code;
 		String access_Token = "";
@@ -74,7 +75,7 @@ public class LoginController {
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
 			sb.append("&client_id=a748acc709f6bb26bfb1e237f62fb4f0"); // 본인이 발급받은 key
-			sb.append("&redirect_uri=http://localhost:8181/kakaologin"); // 본인이 설정해 놓은 경로
+			sb.append("&redirect_uri=http://localhost:8080/kakaologin"); // 본인이 설정해 놓은 경로
 			sb.append("&client_secret=IaPN81VVwJGcwou1IbXJVp94sI8xEFhY"); // 수정 할것
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());
@@ -111,9 +112,10 @@ public class LoginController {
 			e.printStackTrace();
 		}
 		
-//		List<MemberVO> userInfo = new List<MemberVO>();
-        String reqURLMe = "https://kapi.kakao.com/v2/user/me";
+		HashMap<String , Object> userInfo = new HashMap<>();
+        String reqURLMe = "https://kapi.kakao.com/v2/user/me HTTP/1.1";
         try {
+ //       	Model  model = new Model();
             URL url = new URL(reqURLMe);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
@@ -140,32 +142,35 @@ public class LoginController {
             JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
             JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 
-            String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-           // String profile_image = properties.getAsJsonObject().get("profile_image").toString();
-            String email = kakao_account.getAsJsonObject().get("email").getAsString();
+            String nickname = properties.getAsJsonObject().get("nickname").toString();
+            String profile_image = properties.getAsJsonObject().get("profile_image").toString();
+            String email = kakao_account.getAsJsonObject().get("email").toString();
+
+           
+            userInfo.put("nickname", nickname);
+            userInfo.put("profile_image", profile_image);
+            userInfo.put("email", email);
             
-            model.addAttribute("email",email);
-//           
-//            userInfo.put("nickname", nickname);
-//            userInfo.put("profile_image", profile_image);
-//            userInfo.put("email", email);
-            model.addAttribute("nickname",nickname);
-           // model.addAttribute("profile_image",profile_image);
-            
-            System.out.println(nickname);
-            //System.out.println(profile_image);
+           
+
+//            model.addAttribute("userInfo",userInfo);
+           
 
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
+        model.addAttribute("nickname",userInfo.get("nickname").toString());
+        model.addAttribute("profile_image",userInfo.get("profile_image").toString());
+        model.addAttribute("email","ttst");
+        System.out.println(userInfo.get("nickname").toString());
+        System.out.println(userInfo.get("profile_image").toString());
        
         
 
         
         
-		return "redirect:/join";
+		return "/jsp/join";
 	}
 
 }

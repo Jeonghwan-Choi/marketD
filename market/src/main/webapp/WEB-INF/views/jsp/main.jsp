@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%> 
 <%@ include file = "header.jsp"%>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css ">
+<link href="https://hangeul.pstatic.net/hangeul_static/css/NanumMyeongjoYetHangul.css" rel="stylesheet">
     <main class="main">
         <div class="main_product" >
             <p>인기중고</p>
@@ -18,13 +18,7 @@
 		                <div>
 		                    <div class="main_product_price" >${productVO.price } 원
 		                        <div class="main_product_favorit">
-		                        
 		                        <img class="watch-icon" alt="Watch count" src="https://d1unjqcospf8gs.cloudfront.net/assets/home/base/like-8111aa74d4b1045d7d5943a901896992574dd94c090cef92c26ae53e8da58260.svg" >
-		                            
-		                        </div>
-		                        <div class="main_product_wish">
-		                        
-		                        
 		                            ${productVO.wish } 
 		                        </div>
 		                    </div>
@@ -34,9 +28,7 @@
 	            </div>
 			</c:forEach>
         </div>
-        <a href="/insertBoardForm" id="insertBoardForm" class="btn-3" style="text-decoration: none; ">+</a>
-       <!--  <input type="button" id="insertBoardForm" class="btn-3" name="insertBoardForm" value="+"> -->
-        
+        <a href="/insertBoardForm">피효정바보</a>
       </main>   
       <footer class="footer">
 

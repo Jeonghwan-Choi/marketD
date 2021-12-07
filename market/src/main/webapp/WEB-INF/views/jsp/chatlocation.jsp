@@ -44,59 +44,59 @@
                     <tr class="location_tr">
                         <th class="location_th">일시</th>
                          <c:set var="jstlDate" value="${calendarLocation.locationdate }"/>
-			            <c:if test="${not empty jstlDate }">
-			                 <td class="location_td"><input style="background:rgb(218, 218, 218,0.5);" name="jstl_location_date_input" class="jstl_location_date_input" id="jstl_location_date_input" type="text" value="${calendarLocation.locationdate }" readonly></td>
-			            </c:if>
-			            <c:if test="${empty jstlDate }">
-			                <td class="location_td"><input name="location_date_input" class="location_date_input" id="location_date_input" type="date"></td>
-			            </c:if>
+                     <c:if test="${not empty jstlDate }">
+                          <td class="location_td"><input style="background:rgb(218, 218, 218,0.5);" name="jstl_location_date_input" class="jstl_location_date_input" id="jstl_location_date_input" type="text" value="${calendarLocation.locationdate }" readonly></td>
+                     </c:if>
+                     <c:if test="${empty jstlDate }">
+                         <td class="location_td"><input name="location_date_input" class="location_date_input" id="location_date_input" type="date"></td>
+                     </c:if>
                        
                     </tr>
                     
                     <tr class="location_tr">
                         <th class="location_th">지도</th>
                         <td class="location_td">
-							<div class="map_wrap">
-							    <div id="map" style="width:650px;height:100%;position:relative;overflow:hidden;"></div>
-							
-							    <div id="menu_wrap" class="bg_white">
-							        <div class="option">
-							            <div>
-							            
-							            <c:set var="jstlLocation" value="${calendarLocation.location }"/>
-							            <c:if test="${not empty jstlLocation }">
-								            <input type="hidden" id="calendarlocation" value="${calendarLocation.location }">
-								            약속장소 : <input type="text" value="" id="keyword" size="15"> 
-								            
-											<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-								            <script>
-								                 const jstllocation = $('#calendarlocation').val();
-												 const jbSplit = jstllocation.split('//');
-											     $('#keyword').val(jbSplit[0]); 		
-								                 
-								            </script>
-								            	 
-								            
-								        </c:if>
-							            <c:if test="${empty jstlLocation }">
-							                 키워드 : <input type="text" value="" id="keyword" size="15" placeholder="키워드입력"> 
-							                    <input type="button" value="검색하기" onclick="searchPlaces()">
-							            </c:if>
-							            
-							            
-							            
-							            
-							            
-							            
-							                   
-							            </div>
-							        </div>
-							        <hr>
-							        <ul id="placesList"></ul>
-							        <div id="pagination"></div>
-							    </div>
-							</div>
-                        	
+                     <div class="map_wrap">
+                         <div id="map" style="width:650px;height:100%;position:relative;overflow:hidden;"></div>
+                     
+                         <div id="menu_wrap" class="bg_white">
+                             <div class="option">
+                                 <div>
+                                 
+                                 <c:set var="jstlLocation" value="${calendarLocation.location }"/>
+                                 <c:if test="${not empty jstlLocation }">
+                                    <input type="hidden" id="calendarlocation" value="${calendarLocation.location }">
+                                    약속장소 : <input type="text" value="" id="keyword" size="15"> 
+                                    
+                                 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+                                    <script>
+                                         const jstllocation = $('#calendarlocation').val();
+                                     const jbSplit = jstllocation.split('//');
+                                      $('#keyword').val(jbSplit[0]);       
+                                         
+                                    </script>
+                                        
+                                    
+                                </c:if>
+                                 <c:if test="${empty jstlLocation }">
+                                      키워드 : <input type="text" value="" id="keyword" size="15" placeholder="키워드입력"> 
+                                         <input type="button" value="검색하기" onclick="searchPlaces()">
+                                 </c:if>
+                                 
+                                 
+                                 
+                                 
+                                 
+                                 
+                                        
+                                 </div>
+                             </div>
+                             <hr>
+                             <ul id="placesList"></ul>
+                             <div id="pagination"></div>
+                         </div>
+                     </div>
+                           
                         </td>
                     </tr>
                     <tr class="location_tr">
@@ -105,20 +105,20 @@
                         
                         
                         <c:set var="jstlLocation" value="${calendarLocation.location }"/>
-			            <c:if test="${not empty jstlLocation }">
-			            		<input type="hidden" id="calendarlocation" value="${calendarLocation.location }">
-			                 <td class="location_td"><input class="jstl_location_location_input" id="jstl_location_location_input" name="jstl_location_location_input" type="text" value="" readonly></td>
-			                 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-			                 <script>
-								const jstllocation2 = $('#calendarlocation').val();
-								const jbSplit2 = jstllocation2.split('//');
-								$('#location_location_input').val(jbSplit2[0]); 	
-								                 
-							</script>
-			            </c:if>
-			            <c:if test="${empty jstlLocation }">
-			                <td class="location_td"><input class="location_location_input" id="location_location_input" name="location_location_input" type="text" value="" readonly></td>
-			            </c:if>
+                     <c:if test="${not empty jstlLocation }">
+                           <input type="hidden" id="calendarlocation" value="${calendarLocation.location }">
+                          <td class="location_td"><input class="jstl_location_location_input" id="jstl_location_location_input" name="jstl_location_location_input" type="text" value="" readonly></td>
+                          <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+                          <script>
+                        const jstllocation2 = $('#calendarlocation').val();
+                        const jbSplit2 = jstllocation2.split('//');
+                        $('#location_location_input').val(jbSplit2[0]);    
+                                         
+                     </script>
+                     </c:if>
+                     <c:if test="${empty jstlLocation }">
+                         <td class="location_td"><input class="location_location_input" id="location_location_input" name="location_location_input" type="text" value="" readonly></td>
+                     </c:if>
                         
                         
                         
@@ -130,12 +130,12 @@
                         
                         
                         <c:set var="jstlDescription" value="${calendarLocation.locationdescription }"/>
-			            <c:if test="${not empty jstlDescription }">
-			                 <td class="location_td"><input style="background:rgb(218, 218, 218,0.5);" name="jstl_location_textarea" class="jstl_location_textarea" id="jstl_location_textarea" type="text" value="${calendarLocation.locationdescription }" readonly></td>
-			            </c:if>
-			            <c:if test="${empty jstlDescription }">
-			                <td class="location_td" style="padding-top: 10px;"><textarea cols="70" rows="15" id="location_textarea" name="location_textarea" class="location_textarea" placeholder="설명추가"></textarea></td>
-			            </c:if>
+                     <c:if test="${not empty jstlDescription }">
+                          <td class="location_td"><input style="background:rgb(218, 218, 218,0.5);" name="jstl_location_textarea" class="jstl_location_textarea" id="jstl_location_textarea" type="text" value="${calendarLocation.locationdescription }" readonly></td>
+                     </c:if>
+                     <c:if test="${empty jstlDescription }">
+                         <td class="location_td" style="padding-top: 10px;"><textarea cols="70" rows="15" id="location_textarea" name="location_textarea" class="location_textarea" placeholder="설명추가"></textarea></td>
+                     </c:if>
                         
                         
                         
@@ -146,12 +146,12 @@
                         
                         
                         <c:set var="jstlTitle2" value="${calendarLocation.locationtitle }"/>
-			            <c:if test="${empty jstlTitle2 }">
-			                 <td class="location_td"><input name="location_submit_input" class="location_submit_input" id="location_submit_input" type="submit" value="약속잡기" formaction="/chatcalendar"></td>
-			            </c:if>
-			            <c:if test="${not empty jstlTitle2 }">
-			                <td class="location_td"><input name="jstl_location_submit_input" class="jstl_location_submit_input" id="jstl_location_submit_input" type="submit" value="달력보기" formaction="/chatcalendarview"></td>
-			            </c:if>
+                     <c:if test="${empty jstlTitle2 }">
+                          <td class="location_td"><input name="location_submit_input" class="location_submit_input" id="location_submit_input" type="submit" value="약속잡기" formaction="/chatcalendar"></td>
+                     </c:if>
+                     <c:if test="${not empty jstlTitle2 }">
+                         <td class="location_td"><input name="jstl_location_submit_input" class="jstl_location_submit_input" id="jstl_location_submit_input" type="submit" value="달력보기" formaction="/chatcalendarview"></td>
+                     </c:if>
                         
                         
                         
@@ -244,7 +244,7 @@ function placesSearchCB(data, status, pagination) {
 
 // 검색 결과 목록과 마커를 표출하는 함수입니다
 function displayPlaces(places) {
-	console.log(places);
+   console.log(places);
     var listEl = document.getElementById('placesList'), 
     menuEl = document.getElementById('menu_wrap'),
     fragment = document.createDocumentFragment(), 
@@ -267,7 +267,7 @@ function displayPlaces(places) {
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
         // LatLngBounds 객체에 좌표를 추가합니다
         bounds.extend(placePosition);
-	
+   
         // 마커와 검색결과 항목에 mouseover 했을때
         // 해당 장소에 인포윈도우에 장소명을 표시합니다
         // mouseout 했을 때는 인포윈도우를 닫습니다
@@ -286,8 +286,8 @@ function displayPlaces(places) {
             });
 
             itemEl.onclick =  function () {
-            	 var index = $("li").index(this);
-                	
+                var index = $("li").index(this);
+                   
                  var xxx =places[index].x;
                  var yyy =places[index].y;
                  
@@ -426,27 +426,28 @@ $("li").click(function(){
    /*socket*/
   
  $(function () {
-	 var today = new Date();
+    var today = new Date();
      var time = (today.getMonth()+1)+'.'+today.getDate()+' '+today.getHours()+':'+today.getMinutes();
      
      var date = document.querySelector('input[name="location_date_input"]');
      var location = document.querySelector('input[name="location_location_input"]');
      var coordinate = document.querySelector('input[name="coordinate"]');
      
-     
+     var user1 = $("#user1").val();
+     var chatroomno = $("#chatroomno").val();
      
      var socket = io("http://cjhwebsocket.cafe24app.com:80"); 
      /* socket.emit("send_msg", "2//"+$("#roomno").val()+"//"+$("#loginmemberno").val()+"//"+$("#msg").val()+"//"+time); ****/
  
- 	$("#location_submit_input").on({
- 		'click':function() {
- 			 /* socket.emit("send_msg", "2//2//47//약속이 공유되었습니다.//"+time+"//2//37.000//127.000//"+date+"//안양역//40"); */
-			socket.emit("send_msg", "2//2//47//약속이 공유되었습니다.//"+time+"//2//"+coordinate.value+"//"+date.value+"//40");
-			alert("?dddd");
- 		}
-	});
+    $("#location_submit_input").on({
+       'click':function() {
+           /* socket.emit("send_msg", "2//2//47//약속이 공유되었습니다.//"+time+"//2//37.000//127.000//"+date+"//안양역//40"); */
+         socket.emit("send_msg", "2//"+chatroomno+"//"+user1+"//약속이 공유되었습니다.//"+time+"//2//"+coordinate.value+"//"+date.value+"//"+Math.random().toString(36));
+         alert("?dddd");
+       }
+   });
  
- 	
+    
  }); 
  
  

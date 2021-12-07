@@ -174,5 +174,61 @@ public class BoardController {
 	public void deleteWish(HttpServletRequest req, Model model,MemberVO vo) throws Exception {
 		memberService.deleteWish(vo);
 	}
+	
+	 @RequestMapping("/searchboard")
+	   public String searchboard(HttpServletRequest req, Model model,BoardVO vo,int count,String searchData,int firstvalue, int lastvalue) throws IllegalStateException, ParseException {
+		   
+		   System.out.println(count);
+		   vo.setSearchdata(searchData);
+		   vo.setFirstvalue(firstvalue);
+		   vo.setLastvalue(lastvalue);
+		   if(count == 0) {
+			//0이면 주소가 없다는 상황으로 판단하여 상품명으로 검색  		  
+			   System.out.println("상품검색");
+			   model.addAttribute("SearchBoard", boardService.productSearchData(vo));
+			  
+		   }else if(count != 0) {
+			 //0이 아니 주소가 존재한다고 판단되어 주소로 검색
+			   System.out.println("주소검색");
+			   System.out.println();
+			 
+			   model.addAttribute("SearchBoard", boardService.addressSearchData(vo));
+			  
+		   }
+		   model.addAttribute("searchData",searchData);
+		   model.addAttribute("count",count);
+		   
+		   
+		   
+	      return "/jsp/search";
+	   }
+	   
+	   @RequestMapping("/searchmoreboard")
+	   @ResponseBody
+		public List<BoardVO>  searchmoreboard(HttpServletRequest req, Model model,BoardVO vo,int count,String searchData,int firstvalue, int lastvalue) throws IllegalStateException, ParseException {
+		   System.out.println("searchmoreboard");
+		   System.out.println(count);
+		   vo.setSearchdata(searchData);
+		   vo.setFirstvalue(firstvalue);
+		   vo.setLastvalue(lastvalue);
+		   List<BoardVO> photoVo = new ArrayList<BoardVO>();
+		   
+		   if(count == 0) {
+			//0이면 주소가 없다는 상황으로 판단하여 상품명으로 검색  		  
+			   System.out.println("상품검색");
+			   photoVo = boardService.productSearchData(vo);
+		   }else if(count != 0) {
+			 //0이 아니 주소가 존재한다고 판단되어 주소로 검색
+			   System.out.println("주소검색");		 
+			   photoVo = boardService.addressSearchData(vo);
+		   }
+		   System.out.println("photoVo.size(): "+photoVo.size());
+		   model.addAttribute("searchData",searchData);
+		   model.addAttribute("count",count);
+
+	      return photoVo;
+	   }
+
+	
 
 }

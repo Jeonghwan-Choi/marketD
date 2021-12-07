@@ -9,8 +9,8 @@ table{
        border-collapse: collapse;
 }
 a{
-	 text-decoration: none;
-	 color:rgb(25, 25, 25);
+    text-decoration: none;
+    color:rgb(25, 25, 25);
 }
 .chatcalendar_top_day,td{
     
@@ -60,8 +60,8 @@ input[name=chatcalendar_top_perMon]{
     color:#858585;
 }
 #carrotimg{
-	width:15px;
-	height:15px;
+   width:15px;
+   height:15px;
 }
 .testdong{
     border:1px rgb(255,155,89,0.5) solid;
@@ -70,4 +70,3 @@ input[name=chatcalendar_top_perMon]{
     border-radius:5px;
     padding:0.1em;
 }
-
