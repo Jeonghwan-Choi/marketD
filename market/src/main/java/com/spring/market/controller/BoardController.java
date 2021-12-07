@@ -31,157 +31,202 @@ import com.spring.market.vo.MemberVO;
 
 @Controller
 public class BoardController {
-	@Autowired
-	BoardService boardService;
-	
-	@Autowired
-	MemberService memberService;
-	
-	@Autowired
-	ImageService imageService;
-	
-	@RequestMapping("/board")
-	public String boardInfo(HttpServletRequest req, Model model,int boardno,int memberno) throws IllegalStateException, ParseException {
-		System.out.println("run BoardController boardInfo()");
-		System.out.println(boardno);
-		model.addAttribute("boardInfo", boardService.boardInfo(boardno));
-		
-		//게시물 등록 시간
-		String from = boardService.boardInfo(boardno).getDatetime();
-		Date format1 = new SimpleDateFormat("yyyy/MM/dd HH:mm").parse(from);
-		//현재시간
-		Date time = new Date();
-		long diffHor = (time.getTime()-format1.getTime())/3600000;
-		System.out.println(diffHor);
-		model.addAttribute("diffHor", diffHor);
-		
-		
-		MemberVO memberVO = memberService.memberInfo(memberno);
-		model.addAttribute("memberInfo", memberVO);
-		
-		List<ImageVO> boardImages = imageService.boardImages(boardno);
-		
-		System.out.println("size: "+boardImages.size());
+   @Autowired
+   BoardService boardService;
+   
+   @Autowired
+   MemberService memberService;
+   
+   @Autowired
+   ImageService imageService;
+   
+   @RequestMapping("/board")
+   public String boardInfo(HttpServletRequest req, Model model,int boardno,int memberno) throws IllegalStateException, ParseException {
+      System.out.println("run BoardController boardInfo()");
 
-		model.addAttribute("boardImages", boardImages);
-		model.addAttribute("BoardMemberno", memberno);
-		model.addAttribute("BoardBoardno", boardno);
-		
-//		방문자 등록 1인1개 한정임 인기중고 뽑기위해
-		BoardVO vo = new BoardVO();
-		vo.setBoardno(boardno);
-		HttpSession session = req.getSession();
-		System.out.println(session.getAttribute("loginM"));
-		int loginMemberno = (int) session.getAttribute("loginM");
-		
-		vo.setMemberno(loginMemberno);
-		boardService.insertGuest(vo);
-		
-		
-		
-		return "/jsp/board";
-	}
-	
-	@RequestMapping("/insertBoardForm")
-	public String insertBoardForm(HttpServletRequest req, Model model) throws IllegalStateException, ParseException {
-		
-		return "/jsp/insertBoard";
-	}
-	
-	@RequestMapping("/insertBoard")
-	@ResponseBody
-	public String insertBoard(HttpServletRequest req, Model model,BoardVO vo,MultipartHttpServletRequest mtfRequest) throws Exception {
-		System.out.println("run BoardController insertBoard()");
+      
+      BoardVO bo =boardService.boardquery(boardno); 
+      
+      model.addAttribute("board",bo );
+      
+      List<ImageVO> boardImages = imageService.boardImages(boardno);
+      model.addAttribute("boardImages", boardImages);
+   
+//      //인기중고
+      model.addAttribute("productList", boardService.boardList());
+      
+      return "/jsp/board";
+   }
+   
+   @RequestMapping("/insertBoardForm")
+   public String insertBoardForm(HttpServletRequest req, Model model) throws IllegalStateException, ParseException {
+      
+      return "/jsp/insertBoard";
+   }
+   
+   @RequestMapping("/insertBoard")
+   public String insertBoard(HttpServletRequest req, Model model,BoardVO vo,MultipartHttpServletRequest mtfRequest) throws Exception {
+      System.out.println("run BoardController insertBoard()");
 
+       
+      String title = req.getParameter("title");
+      String category = req.getParameter("category");
+      int  price = Integer.parseInt(req.getParameter("price"));
+      String content=req.getParameter("content");
+      int memberno = Integer.parseInt(req.getParameter("memberno"));
+   
+      System.out.println(title);      
+      System.out.println(content);   
+      
+      
+      vo.setTitle(title);
+      vo.setCategory(category);
+      vo.setPrice(price);
+      vo.setContent(content);
+      vo.setMemberno(memberno);
+      
+      boardService.insertBoard(vo);   
+
+      int boardno = boardService.firstBoardno(memberno).getBoardno();
+      
+      List<MultipartFile> fileList = mtfRequest.getFiles("input_imgs");
+
+      FtpClient client = new FtpClient("112.175.184.60", 21, "cjhftp", "chlwjdghks1!");
+        for (MultipartFile mf : fileList) {
+           
+          String str1 = mf.getContentType();
+          String getStr1[] = str1.split("/");
+          String itype = getStr1[1];
+          
+           File p123 = File.createTempFile(mf.getInputStream().toString(),"."+itype);
+           IOUtils.copy(mf.getInputStream(),new FileOutputStream(p123));
+           client.boardUpload(p123,"html/"+memberno+"/board/"+boardno,memberno,boardno);
+
+          ImageVO imageVO = new ImageVO();
+          
+          imageVO.setBoardno(boardno);
+          imageVO.setMemberno(memberno);
+           imageVO.setImagename(p123.getName());
+          imageVO.setImageindex(fileList.indexOf(mf)+1);
+          
+          imageService.insertBoardImage(imageVO);
+          
+          
+      }
+        
+        //main이동
+      model.addAttribute("productList", boardService.boardList());
+      
+      return "/jsp/main";
+   }
+   
+   @RequestMapping("/insertBoardImage")
+   //public String insertBoardImage(HttpServletRequest req, Model model,MultipartHttpServletRequest mtfRequest) throws Exception {
+      public String insertBoardImage(HttpServletRequest req, Model model,MultipartHttpServletRequest mtfRequest) throws Exception{
+      System.out.println("run BoardController insertBoardImage()");
+      
+      String title = req.getParameter("title");
+      String category = req.getParameter("category");
+      String  price = req.getParameter("price");
+      String content=req.getParameter("name");
+      
+      
+      ImageVO vo = new ImageVO();
+      List<MultipartFile> fileList = mtfRequest.getFiles("input_imgs");
+
+      FtpClient client = new FtpClient("112.175.184.60", 21, "cjhftp", "chlwjdghks1!");
+      
+        for (MultipartFile mf : fileList) {
+           
+          String str1 = mf.getContentType();
+          String getStr1[] = str1.split("/");
+          String itype = getStr1[1];
+          
+           File p123 = File.createTempFile(mf.getInputStream().toString(),"."+itype);
+           IOUtils.copy(mf.getInputStream(),new FileOutputStream(p123));
+           //client.upload(p123,"html/");
+           
+           vo.setImagename(p123.getName());
+          imageService.insertBoardImage(vo);
+      }
+      
+      
+      
+      
+      
+      return "/jsp/board";
+   }
+   
+   @RequestMapping("/addwish")
+   @ResponseBody
+   public void addwish(HttpServletRequest req, Model model,BoardVO vo) throws Exception {
+      boardService.addwish(vo);
+       
+   }
+   @RequestMapping("/wishchk")
+   @ResponseBody
+   public int wishchk(HttpServletRequest req, Model model,MemberVO vo) throws Exception {
+      return memberService.wishchk(vo).getWishno();
+      
+   }
+   @RequestMapping("/deleteWish")
+   @ResponseBody
+   public void deleteWish(HttpServletRequest req, Model model,MemberVO vo) throws Exception {
+      memberService.deleteWish(vo);
+   }
+   
+   @RequestMapping("/searchboard")
+   public String searchboard(HttpServletRequest req, Model model,BoardVO vo,int count,String searchData,int firstvalue, int lastvalue) throws IllegalStateException, ParseException {
+	   
+	   System.out.println(count);
+	   vo.setSearchdata(searchData);
+	   vo.setFirstvalue(firstvalue);
+	   vo.setLastvalue(lastvalue);
+	   if(count == 0) {
+		//0이면 주소가 없다는 상황으로 판단하여 상품명으로 검색  		  
+		   System.out.println("상품검색");
+		   model.addAttribute("SearchBoard", boardService.productSearchData(vo));
+		  
+	   }else if(count != 0) {
+		 //0이 아니 주소가 존재한다고 판단되어 주소로 검색
+		   System.out.println("주소검색");
+		   System.out.println();
 		 
-		String title = req.getParameter("title");
-		String category = req.getParameter("category");
-		int  price = Integer.parseInt(req.getParameter("price"));
-		String content=req.getParameter("content");
-		int memberno = Integer.parseInt(req.getParameter("memberno"));
-	
-		System.out.println(title);		
-		System.out.println(content);	
-		
-		
-		vo.setTitle(title);
-		vo.setCategory(category);
-		vo.setPrice(price);
-		vo.setContent(content);
-		vo.setMemberno(memberno);
-		
-		boardService.insertBoard(vo);	
+		   model.addAttribute("SearchBoard", boardService.addressSearchData(vo));
+		  
+	   }
+	   model.addAttribute("searchData",searchData);
+	   model.addAttribute("count",count);
+	   
+	   
+	   
+      return "/jsp/search";
+   }
+   
+   @RequestMapping("/searchmoreboard")
+   @ResponseBody
+	public List<BoardVO>  searchmoreboard(HttpServletRequest req, Model model,BoardVO vo,int count,String searchData,int firstvalue, int lastvalue) throws IllegalStateException, ParseException {
+	   System.out.println("searchmoreboard");
+	   System.out.println(count);
+	   vo.setSearchdata(searchData);
+	   vo.setFirstvalue(firstvalue);
+	   vo.setLastvalue(lastvalue);
+	   List<BoardVO> photoVo = new ArrayList<BoardVO>();
+	   
+	   if(count == 0) {
+		//0이면 주소가 없다는 상황으로 판단하여 상품명으로 검색  		  
+		   System.out.println("상품검색");
+		   photoVo = boardService.productSearchData(vo);
+	   }else if(count != 0) {
+		 //0이 아니 주소가 존재한다고 판단되어 주소로 검색
+		   System.out.println("주소검색");		 
+		   photoVo = boardService.addressSearchData(vo);
+	   }
+	   System.out.println("photoVo.size(): "+photoVo.size());
+	   model.addAttribute("searchData",searchData);
+	   model.addAttribute("count",count);
 
-		int boardno = boardService.firstBoardno(memberno).getBoardno();
-		
-		List<MultipartFile> fileList = mtfRequest.getFiles("input_imgs");
-
-		FtpClient client = new FtpClient("112.175.184.60", 21, "cjhftp", "chlwjdghks1!");
-        for (MultipartFile mf : fileList) {
-        	
-    		String str1 = mf.getContentType();
-    		String getStr1[] = str1.split("/");
-    		String itype = getStr1[1];
-    		
-        	File p123 = File.createTempFile(mf.getInputStream().toString(),"."+itype);
-        	IOUtils.copy(mf.getInputStream(),new FileOutputStream(p123));
-        	client.boardUpload(p123,"html/"+memberno+"/board/"+boardno,memberno,boardno);
-
-    		ImageVO imageVO = new ImageVO();
-    		
-    		imageVO.setBoardno(boardno);
-    		imageVO.setMemberno(memberno);
-        	imageVO.setImagename(p123.getName());
-    		imageVO.setImageindex(fileList.indexOf(mf)+1);
-    		
-    		imageService.insertBoardImage(imageVO);
-    		
-    		
-		}
-		
-		return "redirect:/board";
-	}
-	
-//	@RequestMapping("/firstBoardno")
-//	@ResponseBody
-//	public int firstBoardno(HttpServletRequest req, Model model,BoardVO vo) throws IllegalStateException, ParseException {
-//		
-//	}
-	@RequestMapping("/insertBoardImage")
-	//public String insertBoardImage(HttpServletRequest req, Model model,MultipartHttpServletRequest mtfRequest) throws Exception {
-		public String insertBoardImage(HttpServletRequest req, Model model,MultipartHttpServletRequest mtfRequest) throws Exception{
-		System.out.println("run BoardController insertBoardImage()");
-		
-		String title = req.getParameter("title");
-		String category = req.getParameter("category");
-		String  price = req.getParameter("price");
-		String content=req.getParameter("name");
-		
-		
-		ImageVO vo = new ImageVO();
-		List<MultipartFile> fileList = mtfRequest.getFiles("input_imgs");
-
-		FtpClient client = new FtpClient("112.175.184.60", 21, "cjhftp", "chlwjdghks1!");
-		
-        for (MultipartFile mf : fileList) {
-        	
-    		String str1 = mf.getContentType();
-    		String getStr1[] = str1.split("/");
-    		String itype = getStr1[1];
-    		
-        	File p123 = File.createTempFile(mf.getInputStream().toString(),"."+itype);
-        	IOUtils.copy(mf.getInputStream(),new FileOutputStream(p123));
-        	//client.upload(p123,"html/");
-        	
-        	vo.setImagename(p123.getName());
-    		imageService.insertBoardImage(vo);
-		}
-		
-		
-		
-		
-		
-		return "/jsp/board";
-	}
+      return photoVo;
+   }
 
 }

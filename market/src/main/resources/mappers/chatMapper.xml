@@ -6,16 +6,18 @@
 
   
 <mapper namespace="ChatDAO">
- 
+   
 
-  <!-- 채팅목록 조회  -->
+    <!--  -->
+    
+    <!-- 채팅목록 조회  -->
   <select id="myChatList" parameterType="chat" resultType="chat">
-	<![CDATA[
-		select a.chatmember,a.chatroomno,a.user1,a.user2,m.name,m.address,m.profile,cm.chatmessage,NVL((cmm.readst),0)"readst"
-		from chatmember a
-		Left Join member m
-		ON a.user2 = m.memberno
-		Left Join (SELECT chatroomno, chatmessage,chatmessageno
+   <![CDATA[
+      select a.chatmember,a.chatroomno,a.user1,a.user2,m.name,m.address,m.profile,cm.chatmessage,NVL((cmm.readst),0)"readst"
+      from chatmember a
+      Left Join member m
+      ON a.user2 = m.memberno
+      Left Join (SELECT chatroomno, chatmessage,chatmessageno
         FROM ( SELECT chatroomno, chatmessage,chatmessageno
         , ROW_NUMBER() OVER(PARTITION BY chatroomno ORDER BY chatmessageno DESC) as RowIdx
         FROM chatmessage 
@@ -24,18 +26,18 @@
         Left Join (select chatroomno,count(readst)readst
         FROM chatmessage where readst='1' and seller != #{user1} group by chatroomno ) cmm
         ON a.chatroomno = cmm.chatroomno
-		where user1 =  #{user1} order by cm.chatmessageno desc
+      where user1 =  #{user1} order by cm.chatmessageno desc
      ]]>
     </select>
     
     <!-- 읽지 않은 메세지 뽑기 -->
     <select id="myChatListNotRead" parameterType="chat" resultType="chat">
-	<![CDATA[
-		select a.chatmember,a.chatroomno,a.user1,a.user2,m.name,m.address,m.profile,cm.chatmessage,NVL((cmm.readst),0)"readst"
-		from chatmember a
-		Left Join member m
-		ON a.user2 = m.memberno
-		Left Join (SELECT chatroomno, chatmessage,chatmessageno
+   <![CDATA[
+      select a.chatmember,a.chatroomno,a.user1,a.user2,m.name,m.address,m.profile,cm.chatmessage,NVL((cmm.readst),0)"readst"
+      from chatmember a
+      Left Join member m
+      ON a.user2 = m.memberno
+      Left Join (SELECT chatroomno, chatmessage,chatmessageno
         FROM ( SELECT chatroomno, chatmessage,chatmessageno
         , ROW_NUMBER() OVER(PARTITION BY chatroomno ORDER BY chatmessageno DESC) as RowIdx
         FROM chatmessage 
@@ -44,26 +46,90 @@
         Left Join (select chatroomno,count(readst)readst
         FROM chatmessage where readst='1' and seller != #{user1} group by chatroomno ) cmm
         ON a.chatroomno = cmm.chatroomno
-		where user1 =  #{user1} and cmm.readst != 0 order by cm.chatmessageno desc
+      where user1 =  #{user1} and cmm.readst != 0 order by cm.chatmessageno desc
      ]]>
     </select>
 
     
   <!-- 선택된 채팅내용  -->
   <select id="SelectChatList" parameterType="chat" resultType="chat">
-	<![CDATA[
-		select a.chatmessageno,a.chatroomno,a.seller,a.chatmessage,a.readst,a.datetime,m.profile from chatmessage a
+   <![CDATA[
+        select a.chatmessageno,a.chatroomno,a.seller,a.chatmessage,a.readst,a.datetime,a.locationno,m.profile,l.locationtitle,l.locationdate,l.location,l.locationdescription from chatmessage a
         Left Join member m
         on seller = m.memberno
+        left join chatlocation l
+        on a.locationno=l.locationno
         where chatroomno =  #{chatroomno} order by datetime asc
      ]]>
     </select>
+    <!-- select a.chatmessageno,a.chatroomno,a.seller,a.chatmessage,a.readst,a.datetime,a.locationno,m.profile from chatmessage a
+        Left Join member m
+        on seller = m.memberno
+        where chatroomno =  #{chatroomno} order by datetime asc -->
     
     <insert id="insertMessage" parameterType="chat"> 
         insert into chatmessage(chatroomno,seller,chatmessage,readst,datetime) values(#{chatroomno},#{seller},#{chatmessage},#{readst},TO_CHAR(LOCALTIMESTAMP,'yyyy/mm/dd HH24:MI')) 
     </insert>
     <update id="updateReadst" parameterType="chat"> 
-   		update chatmessage set readst = 0 where chatroomno = #{chatroomno} and seller = #{seller}
+         update chatmessage set readst = 0 where chatroomno = #{chatroomno} and seller = #{seller}
     </update>
- 	
+    
+    <!-- dfhaksljdhfdkjashdfkjhasdkfhasldkfjhaskdhjfaksjhdfklasjfhasjhdf -->
+    
+    <insert id="insertChatLocation" parameterType="chat"> 
+      insert into chatlocation(locationtitle,locationdate,location,locationdescription) values(#{locationtitle},#{locationdate},#{location},#{locationdescription})
+   </insert>
+    
+    <insert id="insertLocationMessage1" parameterType="chat"> 
+    
+        insert into chatmessage(chatroomno,seller,chatmessage,readst,datetime) values(#{chatroomno},#{seller},#{chatmessage},0,TO_CHAR(LOCALTIMESTAMP,'yyyy/mm/dd HH24:MI')) 
+    </insert>
+
+    
+    
+    <select id="selectLocationMember" parameterType="chat" resultType="chat">
+   <![CDATA[
+       select a.user1,a.user2,a.chatmember,b.memberno,b.name login,b.profile,d.memberno,d.name member ,d.profile memberprofile,a.chatroomno
+      from chatmember a
+      left join member b
+      on a.user1=b.memberno
+      left join member d
+      on a.user2=d.memberno
+      where a.user1=#{user1} and a.user2=#{user2}
+   ]]>
+    </select>
+    
+   <insert id="insertLocationMessage" parameterType="chat">
+      <selectKey resultType="int" keyProperty="locationno" order="BEFORE">
+         select max(locationno) locationno from chatlocation
+      </selectKey>
+         insert into chatmessage(chatroomno,seller,chatmessage,readst,datetime,locationno) values(#{chatroomno},#{seller},#{chatmessage},0,TO_CHAR(LOCALTIMESTAMP,'yyyy/mm/dd HH24:MI'),#{locationno})
+   
+   </insert>
+   
+   <select id="selectCalendarList" parameterType="chat" resultType="chat">
+      <![CDATA[
+         select a.locationno,a.locationtitle,a.locationdate,a.location,b.chatroomno,c.user1,c.user2,d.name name,e.name member
+         from chatlocation a
+         left join chatmessage b
+         on a.locationno=b.locationno
+         left join chatmember c
+         on b.chatroomno=c.chatroomno
+         left join member d
+         on c.user1=d.memberno
+         left join member e
+         on c.user2=e.memberno
+         where c.user1=#{user1}
+      ]]>
+    </select>
+    <select id="selectCalendarLocation" parameterType="chat" resultType="chat">
+       select *from chatlocation where locationno=#{locationno}
+    </select>
+    
+    
+    
+    <!--  -->
+    
+    
+    
 </mapper>

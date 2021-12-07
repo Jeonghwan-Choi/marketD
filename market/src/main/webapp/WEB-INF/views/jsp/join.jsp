@@ -167,8 +167,11 @@
                     <br>
                     <br>
                     <div style="margin-left: 10px;"> 프로필사진 </div>
-                    <img style="width: 150px; margin: 20px; border-radius: 100%;" id="preview-image" name="prview" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
-                    <input style="display: block;" type="file" id="input-image" name = "profileimg">
+                     <img style="width: 150px; margin: 20px; border-radius: 100%;" id="preview-image" name="prview" src=${profile_image}>
+                
+
+ 					<span>${email}</span>
+ 					<input style="display: block;" type="file" id="input-image" name = "profileimg">
                     
                     
                 </div>

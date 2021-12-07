@@ -26,7 +26,7 @@ public class FtpClient {
 		this.password = password;
 	}
 
-	public void upload(File fileObj, String fileName,int memberno) throws SocketException, IOException, Exception {
+	public void upload(File fileObj, String fileName, int memberno) throws SocketException, IOException, Exception {
 		FileInputStream fis = null;
 		FTPClient ftpClient = new FTPClient();
 
@@ -66,10 +66,10 @@ public class FtpClient {
 			SimpleDateFormat nowDate = new SimpleDateFormat("yyyy-MM-dd");
 			String now=nowDate.format(from);
 			
-			
-			
-			ftpClient.makeDirectory("html/"+now);
-			//ftpClient.changeWorkingDirectory("/html/"+now);
+			ftpClient.makeDirectory("html/"+memberno);
+			ftpClient.makeDirectory("html/"+memberno+"/profile");
+			ftpClient.makeDirectory("html/"+memberno+"/board");
+			ftpClient.changeWorkingDirectory("/html/"+memberno+"/profile");
 			
 			
 

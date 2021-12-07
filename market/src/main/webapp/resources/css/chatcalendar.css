@@ -1,0 +1,72 @@
+@charset "UTF-8";
+body{
+    font-family: 'NanumGothicCodingLigature';
+font-family: 'NanumGothicCodingLigatureBold';
+font-family: 'NanumGothicCoding';
+font-family: 'NanumGothicCodingBold';
+}
+table{
+       border-collapse: collapse;
+}
+a{
+    text-decoration: none;
+    color:rgb(25, 25, 25);
+}
+.chatcalendar_top_day,td{
+    
+    border:1px solid rgb(87, 87, 87,0.2);
+}
+
+input[name=chatcalendar_top_perMon]{
+    width: 70px;
+}
+#calendar_top_table th {
+    height: 50px;
+    width: 370px;
+    background-color:  white;
+}
+#calendar_top_table td {
+    text-align: left;
+    height: 80px;
+    width: 70px;
+    background-color: white;
+}
+#chatcalendar_top_preMon, #chatcalendar_top_nextMon {
+    height: 50px;
+    border: none;
+    background-color:  white;
+    font-size: 30px;
+}
+.calendar_top_year_mon{
+    font-size: 25px;
+}
+.chatcalendar_top_date{
+    font-size:15px;
+    font-weight: bolder;
+    color:rgb(87, 87, 87);
+    vertical-align: top;
+    padding-top:10px;
+    padding-left:10px;
+
+}
+.chatcalendar_top_day{
+    font-size:17px;
+    text-align: left;
+    padding-left:10px;
+}
+.chatcalendar_top_event{
+    width:100px;
+    height: 20px;
+    color:#858585;
+}
+#carrotimg{
+   width:15px;
+   height:15px;
+}
+.testdong{
+    border:1px rgb(255,155,89,0.5) solid;
+    width:150px;
+    margin-bottom:3px;
+    border-radius:5px;
+    padding:0.1em;
+}
