@@ -13,12 +13,12 @@
  	<!-- 채팅목록 조회  -->
   <select id="myChatList" parameterType="chat" resultType="chat">
 	<![CDATA[
-		select a.chatmember,a.chatroomno,a.user1,a.user2,m.name,m.address,m.profile,cm.chatmessage,NVL((cmm.readst),0)"readst"
+		select a.chatmember,a.chatroomno,a.user1,a.user2,m.name,m.address,m.profile,cm.chatmessage,NVL((cmm.readst),0)"readst",cm.datetime
 		from chatmember a
 		Left Join member m
 		ON a.user2 = m.memberno
-		Left Join (SELECT chatroomno, chatmessage,chatmessageno
-        FROM ( SELECT chatroomno, chatmessage,chatmessageno
+		Left Join (SELECT chatroomno, chatmessage,chatmessageno,datetime
+        FROM ( SELECT chatroomno, chatmessage,chatmessageno,datetime
         , ROW_NUMBER() OVER(PARTITION BY chatroomno ORDER BY chatmessageno DESC) as RowIdx
         FROM chatmessage 
         ) t1 WHERE RowIdx = 1) cm

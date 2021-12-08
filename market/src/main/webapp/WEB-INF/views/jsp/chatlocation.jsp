@@ -45,7 +45,7 @@
                         <th class="location_th">일시</th>
                          <c:set var="jstlDate" value="${calendarLocation.locationdate }"/>
                      <c:if test="${not empty jstlDate }">
-                          <td class="location_td"><input style="background:rgb(218, 218, 218,0.5);" name="jstl_location_date_input" class="jstl_location_date_input" id="jstl_location_date_input" type="text" value="${calendarLocation.locationdate }" readonly></td>
+                          <td class="location_td"><input name="jstl_location_date_input" class="jstl_location_date_input" id="jstl_location_date_input" type="text" value="${calendarLocation.locationdate }" readonly></td>
                      </c:if>
                      <c:if test="${empty jstlDate }">
                          <td class="location_td"><input name="location_date_input" class="location_date_input" id="location_date_input" type="date"></td>
@@ -80,7 +80,7 @@
                                 </c:if>
                                  <c:if test="${empty jstlLocation }">
                                       키워드 : <input type="text" value="" id="keyword" size="15" placeholder="키워드입력"> 
-                                         <input type="button" value="검색하기" onclick="searchPlaces()">
+                                         <input type="button" value="검색하기" id="keywordbutton" onclick="searchPlaces()">
                                  </c:if>
                                  
                                  
@@ -105,17 +105,19 @@
                         
                         
                         <c:set var="jstlLocation" value="${calendarLocation.location }"/>
-                     <c:if test="${not empty jstlLocation }">
-                           <input type="hidden" id="calendarlocation" value="${calendarLocation.location }">
-                          <td class="location_td"><input class="jstl_location_location_input" id="jstl_location_location_input" name="jstl_location_location_input" type="text" value="" readonly></td>
-                          <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-                          <script>
-                        const jstllocation2 = $('#calendarlocation').val();
-                        const jbSplit2 = jstllocation2.split('//');
-                        $('#location_location_input').val(jbSplit2[0]);    
-                                         
-                     </script>
+                     	<c:if test="${not empty jstlLocation }">
+							<input type="hidden" id="calendarlocation" value="${calendarLocation.location }">
+							<td class="location_td"><input class="jstl_location_location_input" id="jstl_location_location_input" name="jstl_location_location_input" type="text" value="" readonly></td>
+							<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+							<script>
+		                        const jstllocation2 = $('#calendarlocation').val();
+		                        const jbSplit2 = jstllocation2.split('//');
+		                        $('#jstl_location_location_input').val(jbSplit2[0]);    
+	                                         
+		                    </script>
+	                    
                      </c:if>
+                     
                      <c:if test="${empty jstlLocation }">
                          <td class="location_td"><input class="location_location_input" id="location_location_input" name="location_location_input" type="text" value="" readonly></td>
                      </c:if>
@@ -439,19 +441,25 @@ $("li").click(function(){
      var socket = io("http://cjhwebsocket.cafe24app.com:80"); 
      /* socket.emit("send_msg", "2//"+$("#roomno").val()+"//"+$("#loginmemberno").val()+"//"+$("#msg").val()+"//"+time); ****/
  
+     
     $("#location_submit_input").on({
        'click':function() {
            /* socket.emit("send_msg", "2//2//47//약속이 공유되었습니다.//"+time+"//2//37.000//127.000//"+date+"//안양역//40"); */
          socket.emit("send_msg", "2//"+chatroomno+"//"+user1+"//약속이 공유되었습니다.//"+time+"//2//"+coordinate.value+"//"+date.value+"//"+Math.random().toString(36));
-         alert("?dddd");
+
        }
    });
  
     
  }); 
  
- 
- 
- 
+ $("#keyword").keydown(function(key) {
+		//해당하는 키가 엔터키(13) 일떄
+		if (key.keyCode == 13) {
+			//msg_process를 클릭해준다.
+	    event.preventDefault();
+			keywordbutton.click();
+		}
+	});
 </script>
 </html>

@@ -42,7 +42,6 @@ public class ChatController {
 		model.addAttribute("loginMemberno",req.getParameter("user1"));
 		int user1 = Integer.parseInt(req.getParameter("user1"));
 
-		
 		List <ChatVO> mychatList =  chatService.myChatList(vo);
 	
 		
@@ -51,6 +50,9 @@ public class ChatController {
 		System.out.println("mychatList.size(): "+mychatList.size());
 		
 		
+		  for(int i=0;i<mychatList.size();i++) {
+		  System.out.println("datetime:::"+mychatList.get(i).getChatmessage()); }
+		 
 		
 		return "/jsp/chat";
 	}

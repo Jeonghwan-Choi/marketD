@@ -54,6 +54,25 @@
             border:rgb(179, 177, 177) 2px solid;
             border-radius: 5px;
         }
+        .jstl_location_date_input{
+        	background:rgb(218, 218, 218,0.5);
+            border:rgb(179, 177, 177) 2px solid;
+            border-radius: 5px;
+            height: 35px;
+        }
+        .jstl_location_location_input{
+        	background:rgb(218, 218, 218,0.5);
+            border:rgb(179, 177, 177) 2px solid;
+            border-radius: 5px;
+            height: 35px;
+        }
+        .jstl_location_textarea{
+        	background:rgb(218, 218, 218,0.5);
+            border:rgb(179, 177, 177) 2px solid;
+            border-radius: 5px;
+            height: 35px;
+        
+        }
         .location_location_input{
             height: 35px;
             border:rgb(179, 177, 177) 2px solid;
@@ -131,6 +150,13 @@
              border:none;
              color:gray;
              font-weight:border;
+       }
+       .jstl_location_submit_input{
+             background:white;
+             border:none;
+             color:gray;
+             font-weight:border;
+       
        }
        .location_memberlist_div img{
              width:50px;
