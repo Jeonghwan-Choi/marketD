@@ -91,6 +91,7 @@
                 
                    <div class="chat_user_list_room">
                    <a id="chatroomno" class="chatroom${chatVO.chatroomno }" >
+                   <span id="${chatVO.user2 }" class="${chatVO.chatroomno }-${chatVO.user2 }" style="display:none;"></span>
                    <span class="boardMemberno" style="display:none;">${chatVO.user2}</span>
                 	<input type="hidden" id="boardMemberno" name="boardMemberno" value="${chatVO.user2}">
                           <span class="boardRoomno" style="display:none;">${chatVO.chatroomno}</span>
@@ -115,7 +116,20 @@
                                           <span>
                                               ${chatVO.chatmessage }
                                           </span>
+                                          
                                       </div>
+                                      <c:choose>
+										         	<c:when test="${chatVO.readst != 0 }">
+										         	<div  id="${chatVO.chatroomno}_chat_user_list_room_read" class="chat_user_list_room_read" >
+	  													<span id="${chatVO.chatroomno}_chat_user_list_room_read_span" class="chat_user_list_room_read_span">${chatVO.readst }</span>
+	  												</div>	
+	 								    		 	</c:when>
+	 								    		 	<c:when test="${chatVO.readst == 0 }">
+										         	<div  id="${chatVO.chatroomno}_chat_user_list_room_read" class="chat_user_list_room_read" style="display:none;">
+	  													<span id="${chatVO.chatroomno}_chat_user_list_room_read_span" class="chat_user_list_room_read_span">0</span>
+	  												</div>	
+	 								    		 	</c:when>
+								         		</c:choose> 
                                   </div>
                               </div>
                           </a>                
@@ -532,7 +546,7 @@
 	                    		if(jbSplit[5]==1){
 	                    			$('<div class="b"><div class="chat_box_m_div_read_div"><span class="chat_box_m_div_read_div_span">1</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+jbSplit[4]+'</span></div><div class="chat_box_m_div" ><span>'+jbSplit[3]+'</span></div><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+jbSplit[2]+'/profile/'+$("#myprofilename").val()+'" ></div></div>').appendTo("#chat_box_ms");
 	          	                 }else if(jbSplit[5]==2){
-	                    			$(' <div class="d"><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'
+	                    			$('<div class="d"><div class="chat_box_m_div_read_div"><span class="chat_box_m_div_read_div_span">1</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'
 											+ jbSplit[4]
 											+ '</span></div>'
 											+ '<div class="chat_box_m_div" ><div> 약속이 공유되었습니다.</div><div id="staticMap'+ jbSplit[10]+'" class="chat_box_m_div_map">'
@@ -629,8 +643,8 @@
 								if(this.locationno!=0){
 
 					        	    const location = this.location;
-									 const jbSplit = location.split('//');
-		 	                    		const memberno = $('#memberno').val();
+									const jbSplit = location.split('//');
+		 	                    	const memberno = $('#memberno').val();
 									const loginmemberno = $('#loginmemberno').val();
 									const roomno = $('#roomno').val();
 									 $('<div class="d"><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'
@@ -667,7 +681,8 @@
 									 const recentroomno = $("#roomno").val();
 						                $("#chat_user_list_room_m_message_div"+jbSplit[1]).html("약속이 공유되었습니다.");
 									
-								}else{$('<div class="b"><div class="chat_box_m_div_read_div"><span class="chat_box_m_div_read_div_span"></span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div><div class="chat_box_m_div" ><span>'+this.chatmessage+'</span></div><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'" ></div></div>').appendTo("#chat_box_ms");
+								}else{
+									$('<div class="b"><div class="chat_box_m_div_read_div"><span class="chat_box_m_div_read_div_span"></span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div><div class="chat_box_m_div" ><span>'+this.chatmessage+'</span></div><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'" ></div></div>').appendTo("#chat_box_ms");
 								}
 							
 								
@@ -754,7 +769,7 @@
 								
 								 const recentroomno = $("#roomno").val();
 					                $("#chat_user_list_room_m_message_div"+jbSplit[1]).html("약속이 공유되었습니다.");
-							}else{  $('<div class="a"><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'" ></div><div class="chat_box_m_div" > <span>'+this.chatmessage+'</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div></div>').appendTo("#chat_box_ms");
+							}else{  $('<div class="a"><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'" ></div><div class="chat_box_m_div" > <span>'+this.chatmessage+'</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div><div class="chat_box_m_div_read_div"><span class="chat_box_m_div_read_div_span"></span></div></div>').appendTo("#chat_box_ms");
 				              }
 	                       
 		              }
