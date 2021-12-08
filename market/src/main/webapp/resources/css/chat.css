@@ -120,12 +120,12 @@
 
     .chat_user_list_room_m_message_div{
         margin-top: 2px;
-        font-size: 14px;
         overflow: hidden;
         display: -webkit-box;
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
         color: rgb(92, 92, 92);
+        font-size: 14px;
     }
 
     #chat_box{
@@ -553,6 +553,13 @@
     width: 30%;
     text-overflow: ellipsis;
     border: 1px solid rgb(212, 212, 212);
+        color: rgb(92, 92, 92);
+        font-size: 14px;
+}
+.c .chat_box_m_div{
+
+        color: rgb(92, 92, 92);
+        font-size: 14px;
 }
 
 
