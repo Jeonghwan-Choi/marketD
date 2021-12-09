@@ -1,6 +1,7 @@
 package com.spring.market.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -59,10 +60,13 @@ public class ChatController {
 	
 	@RequestMapping("/selectChat")
 	@ResponseBody
-	public List <ChatVO> selectChat(HttpServletRequest req,Model model,ChatVO vo,int roomno,int seller, String chatmessage, int readst)throws Exception {
+	public List <ChatVO> selectChat(HttpServletRequest req,Model model,ChatVO vo,int roomno,int seller, String chatmessage, int readst,int firstvalue, int lastvalue)throws Exception {
 
+		   vo.setLastvalue(lastvalue);
+		   vo.setFirstvalue(firstvalue);
 		vo.setChatroomno(roomno);
 		List<ChatVO> chatVo = chatService.selectChatList(vo);
+		Collections.reverse(chatVo);
 		System.out.println("========= chatVo size:: " + chatVo.size());
 		
 		vo.setSeller(seller);
@@ -71,12 +75,24 @@ public class ChatController {
 		chatService.updateReadst(vo);
 
 	
+		model.addAttribute("selectChatList", chatVo);
+		return chatVo;
+	}
+	@RequestMapping("/searchmorechat")
+	@ResponseBody
+	public List <ChatVO> searchmorechat(HttpServletRequest req,Model model,ChatVO vo,int roomno,int seller, String chatmessage, int readst,int firstvalue, int lastvalue)throws Exception {
+			System.out.println("run serachmorechat!");
+		   vo.setLastvalue(lastvalue);
+		   vo.setFirstvalue(firstvalue);
+		vo.setChatroomno(roomno);
+		List<ChatVO> chatVo = chatService.selectChatList(vo);
+		
+		vo.setSeller(seller);
+		vo.setChatmessage(chatmessage);
+		vo.setReadst(readst);
+		chatService.updateReadst(vo);
 
-//		for (int i = 0; i < chatVo.size(); i++) {
-//
-//			list.add(photoVo.get(i));
-//			folder = photoVo.get(i).getFolder();
-//		}
+	
 		model.addAttribute("selectChatList", chatVo);
 		return chatVo;
 	}
