@@ -177,7 +177,6 @@
 
    //diffHor
      var boardDatetime = document.getElementById('boardDatetime').value;
-     console.log('2021/11/23 17:40');
      var boardyear = boardDatetime.substring(0,4);
      var boardmonth = boardDatetime.substring(5,7);
      var boarddate = boardDatetime.substring(8,10);
@@ -196,8 +195,19 @@
    const date2 =new Date(year,month,date,hours,minutes);
    const elapsedSec = date2.getTime()-date1.getTime();
    const elapsedhour=elapsedSec/1000/60/60;
-   var timehtml = ". "+(Math.round(elapsedhour))+" 시간 전";
-   $(".product_detail_time").html(timehtml);
+   var timehtml = (Math.round(elapsedhour));
+   const elapseDay=(Math.round(elapsedSec/1000/60/60/24));
+   
+   if(timehtml<24){
+
+	   $(".product_detail_time").html(". "+timehtml+" 시간 전");
+   }else if(timehtml>=24&&timehtml<168){
+
+	   $(".product_detail_time").html(". "+elapseDay+" 일 전");
+   }else if(timehtml>=168){
+	   $(".product_detail_time").html(". "+boardDatetime);
+	   
+   }
    
    /* */
    
