@@ -56,4 +56,9 @@ public class MemberDAO {
       System.out.println("run MemberDAO deleteWish()");
       sqlSession.delete("MemberDAO.deleteWish",vo);
    }
+   public List<MemberVO> selectuser(MemberVO mvo) {
+	  System.out.println("run MemberDAO selectuser()");
+	  return sqlSession.selectList("MemberDAO.selectuser",mvo);
+   }
+   
 }

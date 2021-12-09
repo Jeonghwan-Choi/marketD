@@ -52,10 +52,10 @@
                 </div>
                     <div class="proudct_product_profile_div">
                         <div class="proudct_product_profile" >
-                            <img  src="https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png">                      
+                            <img src="http://cjhftp.dothome.co.kr/${board.memberno}/profile/${board.profile}" onerror="this.src='https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png';">                      
                         </div>             
                         <div class="proudct_product_profile_name">
-                            <a class="proudct_product_profile_name_name">${board.name }</a><br>
+                            <a class="proudct_product_profile_name_name" href="user?memberno=${board.memberno }">${board.name }</a><br>
                             <a class="proudct_product_profile_name_address" >${board.address }</a>
                             <div class="wish_span">
                                 <div class="wish_input" id="wish_input">
@@ -145,32 +145,35 @@
 </body>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-
+location.href = document.referrer;
    //wish
       var memberno = document.getElementById('loginMemberno').value;
       var boardno = document.getElementById('boardBoardno').value;
    
-      $.ajax({
-            url : 'wishchk',
-            method : 'POST',
-            data : 'memberno=' + memberno + '&boardno=' + boardno,
-            type : "POST",
+      if(memberno != ""){
+    	  $.ajax({
+              url : 'wishchk',
+              method : 'POST',
+              data : 'memberno=' + memberno + '&boardno=' + boardno,
+              type : "POST",
 
-            success : function(data) {
-                 const data1 = $.trim(data);
-                 if(data1==0){
-                     $("#wish_img").attr("src", "http://cjhftp.dothome.co.kr/ico/heart.png");
-                 }
-                 if(data1!=0){
-                    $("#wish_img").attr("src", "http://cjhftp.dothome.co.kr/ico/heart2.png");
-                 }
+              success : function(data) {
+                   const data1 = $.trim(data);
+                   if(data1==0){
+                       $("#wish_img").attr("src", "http://cjhftp.dothome.co.kr/ico/heart.png");
+                   }
+                   if(data1!=0){
+                      $("#wish_img").attr("src", "http://cjhftp.dothome.co.kr/ico/heart2.png");
+                   }
 
-                
-         },
-            error : function() {
-               alert("request error!");
-            }
-         })  
+                  
+           },
+              error : function() {
+                 alert("request error!");
+              }
+           }) 
+      }
+       
       console.log(boardDatetime);
    
 

@@ -123,8 +123,55 @@ header {
   margin-top: 80px;
   outline: 0 !important;
   background-color: #f8f9fa;
+  min-height: 596px;
   
 } 
+
+.main_user{
+  margin-left: auto;
+  margin-right: auto;
+  width:950px;
+  height: 60px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgb(223, 223, 223);
+  background-color: white;
+  border-radius: 20px;
+}
+.user_profile-img{
+  float: left;
+  margin-right: 10px;
+}
+.user_profile-img img{
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  border: 1px solid black;
+}
+.user_profile-content1{
+  margin-bottom: 5px;
+}
+.user_profile-content1 .content1-nickname{
+  font-size: 20px;
+  font-weight: 500;
+}
+.user_profile-content1 .content1-address{
+  font-size: 17px;
+  font-weight: 400;
+}
+.user_profile-content2 .content2-proudct{
+  font-size: 15px;
+  font-weight: 300;
+}
+.user_profile-content2 .content2-proudct2{
+  font-size: 18px;
+  color:#ff8a3d;
+  font-weight: 400;
+}
+
 .main_product{
     margin-left: auto;
     margin-right: auto;
@@ -294,10 +341,9 @@ width: 100%;
   
   background-color: #495057;
   height: 200px;
-
+  display: block;
   width: 100%;
 
-  position: absolute;
 
 }
 

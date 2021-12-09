@@ -89,7 +89,7 @@
       width: 95%;
   }
 
-  .proudct_product_div img{
+  .proudct_product_div .landscape{
     width: 100%;  
     height: 100%;
     border-radius: 10px;
@@ -106,11 +106,23 @@
   }
   .proudct_product_profile img{
     border-radius: 100%;
+    height:50px;
   }
   .proudct_product_profile_name{
       width: 100%;
       padding-left: 30px;
 
+  }
+  .proudct_product_profile_name_name{
+      font-weight:500;
+      font-size:17px;
+      cursor: pointer;
+	  text-decoration:none; 
+	  color: black;
+  }
+  .proudct_product_profile_name_name:hover{
+  	text-decoration:solid;
+  	color:blue; 
   }
   
   .proudct_product_profile_name_address{

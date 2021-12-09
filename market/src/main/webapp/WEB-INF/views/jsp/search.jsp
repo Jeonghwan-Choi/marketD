@@ -32,10 +32,12 @@
 			<input type="button" id="search_more" value="더보기" onclick="moredata()">
 
 		</div>
+		<div style="display:none;">
 			<input type="text" id="firstvalue" value="1">
 			<input type="text" id="lastvalue" value="6">
 			<input type="text" id="searchData" value="${searchData }">
         	<input type="text" id="count" value="${count}">
+        </div>	
         <a href="/insertBoardForm">피효정바보</a>
       </main>   
       <footer class="footer">

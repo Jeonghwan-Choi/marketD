@@ -18,4 +18,6 @@ public interface MemberService {
    void updateProfileImg(MemberVO vo);
    MemberVO wishchk(MemberVO vo);
    void deleteWish(MemberVO vo);
+   
+   List<MemberVO> selectuser(MemberVO mvo);
 }

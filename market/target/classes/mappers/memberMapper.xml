@@ -47,5 +47,23 @@
     <delete id="deleteWish" parameterType="member">
        delete from wish where boardno=#{boardno} and memberno=#{memberno}
     </delete>
+
+	<select id="selectuser" resultType="board" parameterType="member">
+
+		select b.*,m.*,d.imagename,f.wish
+		from board b
+		LEFT join member m
+		on b.memberno = m.memberno
+		LEFT JOIN image d
+		ON b.boardno = d.boardno
+		LEFT JOIN (SELECT boardno,COUNT(memberno)wish FROM wish group by boardno)f
+		ON b.boardno = f.boardno
+		where b.memberno = #{memberno} and d.imageindex = 1
+
+	</select> 
+    
+    
+    
+        
     
 </mapper>

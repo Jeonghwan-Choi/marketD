@@ -39,7 +39,7 @@
             <div class="header_chatting_div">
                 <div>
                    <form name="formm" method="post" action="/chat">
-                      <input name="user1" id="loginMemberno" type= "text" value="${sessionScope.memberVO.memberno}">
+                      <input name="user1" id="loginMemberno" type= "text" value="${sessionScope.memberVO.memberno}"style="display:none;">
                           <input class="header_chatting_btn" type="submit"  value="당근채팅" >
                    </form>
                 </div>
@@ -50,17 +50,10 @@
                         </div>
                   </c:when>
                   <c:otherwise>
-                     <div class="header_login_div">
-                         <c:choose>
-                        <c:when test="${sessionScope.memberVO.profiletype eq 'octet-stream' }">   
-                             <img class="header_login_div_profile" src="${sessionScope.memberVO.profile}">
-                          </c:when>
-                          <c:otherwise>
-                             <img class="header_login_div_profile" src="http://cjhftp.dothome.co.kr/${sessionScope.memberVO.memberno}/profile/${sessionScope.memberVO.profile}">
-                          </c:otherwise>
-                       </c:choose>
+                     <div class="header_login_div">                          
+                       <img class="header_login_div_profile" src="${sessionScope.memberVO.profile}" onerror="this.src='https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png';">   
                        <span>${sessionScope.memberVO.name}</span>
-                         <img class="header_login_div_down"  src="https://cdn-icons.flaticon.com/png/512/2985/premium/2985150.png?token=exp=1637135271~hmac=3f62a84e9d5a4112839b78e572418d09" >
+                        <!--  <img class="header_login_div_down"  src="https://cdn-icons.flaticon.com/png/512/2985/premium/2985150.png?token=exp=1637135271~hmac=3f62a84e9d5a4112839b78e572418d09" > -->
                     </div>
                   </c:otherwise>
                </c:choose>

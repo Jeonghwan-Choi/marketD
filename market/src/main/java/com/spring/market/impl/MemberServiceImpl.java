@@ -61,4 +61,11 @@ public class MemberServiceImpl implements MemberService {
       memberDAO.deleteWish(vo);
    }
 
+	@Override
+	public List<MemberVO> selectuser(MemberVO mvo) {
+		 System.out.println("run MemberServiceImpl memberList()");
+		return memberDAO.selectuser(mvo);
+	}
+
+   
 }
