@@ -22,7 +22,7 @@
 <body>
 
     <header>
-       <div style="display:none;">
+        <div style="display:none;"> 
                <label>MemberNO : </label><input id="memberno" type="text" value="${boardMemberno} "><br>
       	 	 <label>RoomNO : </label><input id="roomno" type="text" value="${boardBoardno}"><br>
       		 <label>LoginMemberNO : </label><input id="loginmemberno" type="text" value="${loginMemberno}"><br>
@@ -149,14 +149,14 @@
                 <div>
                     <span>최정환</span>
                 </div>
-                <input type="hidden" id="firstvalue" value="1">
+                <input type="hidden" id="firstvalue" value="0">
 			<input type="hidden" id="lastvalue" value="15">
                 
             </div>
-            <div class="search_more"> 
+             <div class="search_more" style="display:none;"> 
 			<input type="button" id="search_more" value="더보기" onclick="moredata()">
 
-		</div>
+		</div> 
 		
             <div id="chat_box_ms" class="chat_box_ms">
              <img id="messageimg" style="display : block; margin : auto;" src="http://cjhftp.dothome.co.kr/ico/message (2).png">
@@ -172,199 +172,12 @@
         </div>
         
     </div>
-    
+    <input type="button" id="test" value="chkchk">
 
 </body>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=25eb93196f96f5e9cacf100023363c56"></script>
 <script>
-
-//more data
-
-function moredata(){
-	console.log("run moredate()!");
-	
-	var firstvalue = parseInt($("#firstvalue").val());
-	var lastvalue = parseInt($("#lastvalue").val());
-	var roomno = $('#roomno').val();
-	var seller = $('#memberno').val();
-	var msg = $('#msg').val();
-
-	console.log(roomno+";;"+seller+";;"+msg);
-	
-	$("#firstvalue").val(firstvalue + 15);
-	$("#lastvalue").val(lastvalue + 15);
-	
-
-	console.log("run mordata()!!!!");
-	 $.ajax({
-		 url : 'searchmorechat',
-	      method : 'POST',
-	      data : 'firstvalue='+firstvalue+'&lastvalue='+lastvalue+'&roomno=' + roomno +'&seller='+seller +'&chatmessage='+msg+'&readst=0',
-	      type : "POST",
-         success : function(data) {
-        	 
-        	 if($(data).length != 0){
-     			
-        	 
-        	 $(data).each(
-	           function(index) {
-	              if(loginmemberno == this.seller){
-	            	  
-						if(this.readst == 0){
-							if(this.locationno!=0){
-
-				        	    const location = this.location;
-								const jbSplit = location.split('//');
-	 	                    	const memberno = $('#memberno').val();
-								const loginmemberno = $('#loginmemberno').val();
-								const roomno = $('#roomno').val();
-								 $("#chat_box_ms").prepend('<div class="d"><div class="chat_box_m_div_read_div"><span class="chat_box_m_div_read_div_span"></span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'
-											+ this.datetime
-											+ '</span></div>'
-											+ '<div class="chat_box_m_div" ><div>약속이 공유되었습니다.</div><div id="staticMap'+this.locationno+'" class="chat_box_m_div_map"></div>'
-											+ '<div class="chat_box_m_div_date">날짜: '
-											+ this.locationdate
-											+ '</div>'
-											+ '<div class="chat_box_m_div_location">장소:'
-											+ jbSplit[0]
-											+ '</div>'
-											+ '<input type="button" value= "일정보기" onclick="window.open(\'chatlocation?user1='+loginmemberno+'&user2='+memberno+'&chatroomno='+roomno+'&calendarLocationno='+this.locationno+'\',\'_blank\',\'width=1100, height=700,toolbar=no,location=no,resizable=no,left=30,top=30,menubar=no\');"></div><div class="chat_box_p_div">'
-											+ '<img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'"></div></div>');
-
-								// 이미지 지도에서 마커가 표시될 위치입니다 
-							var markerPosition  = new kakao.maps.LatLng(jbSplit[2], jbSplit[1]); 
-
-							// 이미지 지도에 표시할 마커입니다
-							// 이미지 지도에 표시할 마커는 Object 형태입니다
-							var marker = {
-							    position: markerPosition
-							};
-
-							var staticMapContainer  = document.getElementById('staticMap'+this.locationno), // 이미지 지도를 표시할 div  
-							    staticMapOption = { 
-							        center: new kakao.maps.LatLng(jbSplit[2], jbSplit[1]), // 이미지 지도의 중심좌표
-								        level: 3, // 이미지 지도의 확대 레벨
-								        marker: marker // 이미지 지도에 표시할 마커 
-								    };    
-
-								// 이미지 지도를 생성합니다
-								var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
-								 const recentroomno = $("#roomno").val();
-					                $("#chat_user_list_room_m_message_div"+jbSplit[1]).html("약속이 공유되었습니다.");
-								
-							}else{
-								 $("#chat_box_ms").prepend('<div class="b"><div class="chat_box_m_div_read_div"><span class="chat_box_m_div_read_div_span"></span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div><div class="chat_box_m_div" ><span>'+this.chatmessage+'</span></div><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'" ></div></div>');
-							}
-						
-							
-						}else{
-							if(this.locationno!=0){
-
-				        	    const location = this.location;
-								 const jbSplit = location.split('//');
-								 const memberno = $('#memberno').val();
-									const loginmemberno = $('#loginmemberno').val();
-									const roomno = $('#roomno').val();
-							
-									 $("#chat_box_ms").prepend('<div class="d"><div class="chat_box_m_div_read_div"><span class="chat_box_m_div_read_div_span">'+this.readst+'</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div>'+
-							      '<div class="chat_box_m_div" ><div>약속이 공유되었습니다.</div><div id="staticMap'+this.locationno+'" class="chat_box_m_div_map"></div>'+
-								  '<div class="chat_box_m_div_date">날짜: '+this.locationdate+'</div>'+
-							      '<div class="chat_box_m_div_location">장소: '+jbSplit[0]+'</div>'+
-							      '<input type="button" value= "일정보기" onclick="window.open(\'chatlocation?user1='+loginmemberno+'&user2='+memberno+'&chatroomno='+roomno+'&calendarLocationno='+this.locationno+'\',\'_blank\',\'width=1100, height=700,toolbar=no,location=no,resizable=no,left=30,top=30,menubar=no\');"></div><div class="chat_box_p_div">'+
-							      '<img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'"></div></div>');
-								
-
-								// 이미지 지도에서 마커가 표시될 위치입니다 
-							var markerPosition  = new kakao.maps.LatLng(jbSplit[2], jbSplit[1]); 
-
-							// 이미지 지도에 표시할 마커입니다
-							// 이미지 지도에 표시할 마커는 Object 형태입니다
-							var marker = {
-							    position: markerPosition
-							};
-
-							var staticMapContainer  = document.getElementById('staticMap'+this.locationno), // 이미지 지도를 표시할 div  
-							    staticMapOption = { 
-							        center: new kakao.maps.LatLng(jbSplit[2], jbSplit[1]), // 이미지 지도의 중심좌표
-								        level: 3, // 이미지 지도의 확대 레벨
-								        marker: marker // 이미지 지도에 표시할 마커 
-								    };    
-
-								// 이미지 지도를 생성합니다
-								var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
-								 const recentroomno = $("#roomno").val();
-					                $("#chat_user_list_room_m_message_div"+jbSplit[1]).html("약속이 공유되었습니다.");
-								
-								
-							}else{ $("#chat_box_ms").prepend('<div class="b"><div class="chat_box_m_div_read_div"><span class="chat_box_m_div_read_div_span">'+this.readst+'</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div><div class="chat_box_m_div" ><span>'+this.chatmessage+'</span></div><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'" ></div></div>');
-							}
-
-						
-							
-						}
-                        
-	              }else if(loginmemberno != this.seller){
-	            	  if(this.locationno!=0){
-	            		  const location = this.location;
-							 const jbSplit = location.split('//');
-							 const memberno = $('#memberno').val();
-								const loginmemberno = $('#loginmemberno').val();
-								const roomno = $('#roomno').val();
-
-							//넣어야함c
-							 $("#chat_box_ms").prepend('<div class="c"><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'"></div><div class="chat_box_m_div" ><div>약속이 공유되었습니다.</div><div id="staticMap'+this.locationno+'" class="chat_box_m_div_map"></div>'+
-
-			                        '<div class="chat_box_m_div_date">날짜: ' +this.locationdate+'</div><div class="chat_box_m_div_location">장소:'+jbSplit[0]+'</div>'+
-			                        '<input type="button" value= "일정보기" onclick="window.open(\'chatlocation?user1='+loginmemberno+'&user2='+memberno+'&chatroomno='+roomno+'&calendarLocationno='+this.locationno+'\',\'_blank\',\'width=1100, height=700,toolbar=no,location=no,resizable=no,left=30,top=30,menubar=no\');"> </div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div><div class="chat_box_m_div_read_div"><span class="chat_box_m_div_read_div_span"></span></div> </div>');
-							
-							
-
-							// 이미지 지도에서 마커가 표시될 위치입니다 
-							var markerPosition  = new kakao.maps.LatLng(jbSplit[2], jbSplit[1]); 
-
-							// 이미지 지도에 표시할 마커입니다
-							// 이미지 지도에 표시할 마커는 Object 형태입니다
-							var marker = {
-							    position: markerPosition
-							};
-
-							var staticMapContainer  = document.getElementById('staticMap'+this.locationno), // 이미지 지도를 표시할 div  
-							    staticMapOption = { 
-							        center: new kakao.maps.LatLng(jbSplit[2], jbSplit[1]), // 이미지 지도의 중심좌표
-							        level: 3, // 이미지 지도의 확대 레벨
-							        marker: marker // 이미지 지도에 표시할 마커 
-							    };    
-
-							// 이미지 지도를 생성합니다
-							var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
-							
-							 const recentroomno = $("#roomno").val();
-				                $("#chat_user_list_room_m_message_div"+jbSplit[1]).html("약속이 공유되었습니다.");
-				                
-				                
-						}else{   $("#chat_box_ms").prepend('<div class="a"><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'" ></div><div class="chat_box_m_div" > <span>'+this.chatmessage+'</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div><div class="chat_box_m_div_read_div"><span class="chat_box_m_div_read_div_span"></span></div></div>');
-			              }
-                       
-	              }
-	       	   });
-        	 }else if($(data).length == 0){
-     			$("#firstvalue").val($("#firstvalue").val()-6);
-     			$("#lastvalue").val($("#lastvalue").val()-6);
-     			console.log($(data).length);
-     			console.log(firstvalue);
-     			console.log(lastvalue);
-     			alert('더보기가 없습니다.')
-     			
-     		}
-     	},
-        error : function() {
-           alert("request error!");
-        }
-           })  
-	
-
-}
 
 
 		$("#msg_location").click(function(){
@@ -794,7 +607,9 @@ function moredata(){
                 //스크롤 자동으로 내려가기
 /*                 $('#chat_box_ms').stop().animate({scrollTop:$('#chat_box_ms')[0].scrollHeight},100)
  */            
-                $("#chat_box_ms").scrollTop($("#chat_box_ms")[0].scrollHeight); 
+                $("#chat_box_ms").scrollTop($("#chat_box_ms")[0].scrollHeight);
+
+                
             });
             
         });
@@ -803,10 +618,10 @@ function moredata(){
     $(document).on("click","a",function(){
     	$("#messageimg").remove();
     	$('.chat_box_send_div').css('display','block');
+    	//$('.search_more').css('display','block');
     	/* $('<div class="chat_box_send_div"><div class="chat_box_send_text_div"><input type="text" id="msg" placeholder="메세지를 입력해보세요."></div>'
     			+'<div class="chat_box_send_btn_div"><button id="msg_location">약속잡기</button><button id="msg_process">전송</button></div>'
     			+'</div> ').appendTo('#chat_box'); */	
-    	
     
     
 /*     $("a").click(function() { */
@@ -830,7 +645,7 @@ function moredata(){
         socket.emit("send_msg", "1//"+boardRoomno+"//"+loginmemberno+"//"+boardMemberno);
         
         $.ajax({
-	         url : 'selectChat?firstvalue=1&lastvalue=15',
+	         url : 'selectChat?firstvalue=0&lastvalue=15',
 	         method : 'POST',
 	         data : 'roomno=' + $("#roomno").val() +'&seller='+$("#memberno").val() +'&chatmessage='+$("#msg").val()+"&readst=0",
 	         type : "POST",
@@ -980,18 +795,220 @@ function moredata(){
 				              }
 	                       
 		              }
-		              $("#chat_box_ms").scrollTop($("#chat_box_ms")[0].scrollHeight); 
+		              $("#chat_box_ms").scrollTop($("#chat_box_ms")[0].scrollHeight);
+		              /* $('#chat_box_ms').scroll(function () {
+		                  if ($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+		                      alert("dd");
+		                  }
+		              }); */
+		             /*  if($('#chat_box_ms').scrollTop()==0){
+	                      alert("dd");
+	                  } */
+
+		              
+		              
 		       	   });
          	},
             error : function() {
                alert("request error!");
             }
          })  
-        
+
     });	
 });    
     
-       
+
+	//more data
+
+	function moredata(){
+		console.log("run moredate()!");
+		
+		var firstvalue = parseInt($("#firstvalue").val());
+		var lastvalue = parseInt($("#lastvalue").val());
+		var roomno = $('#roomno').val();
+		var seller = $('#memberno').val();
+		var msg = $('#msg').val();
+		
+		$("#firstvalue").val(firstvalue + 15);
+		$("#lastvalue").val(lastvalue + 15);
+		console.log("chk"+parseInt($("#firstvalue").val()))
+		console.log("chk"+parseInt($("#lastvalue").val()))
+		 $.ajax({
+			 url : 'searchmorechat',
+		      method : 'POST',
+		      data : 'firstvalue='+parseInt($("#firstvalue").val())+'&lastvalue='+parseInt($("#lastvalue").val())+'&roomno=' + roomno +'&seller='+seller +'&chatmessage='+msg+'&readst=0',
+		      type : "POST",
+	         success : function(data) {
+	        	 
+	        	 if($(data).length != 0){
+	     			
+	        	 
+	        	 $(data).each(
+		           function(index) {
+		              if(loginmemberno == this.seller){
+		            	  
+							if(this.readst == 0){
+								if(this.locationno!=0){
+
+					        	    const location = this.location;
+									const jbSplit = location.split('//');
+		 	                    	const memberno = $('#memberno').val();
+									const loginmemberno = $('#loginmemberno').val();
+									const roomno = $('#roomno').val();
+									 $("#chat_box_ms").prepend('<div class="d"><div class="chat_box_m_div_read_div"><span class="chat_box_m_div_read_div_span"></span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'
+												+ this.datetime
+												+ '</span></div>'
+												+ '<div class="chat_box_m_div" ><div>약속이 공유되었습니다.</div><div id="staticMap'+this.locationno+'" class="chat_box_m_div_map"></div>'
+												+ '<div class="chat_box_m_div_date">날짜: '
+												+ this.locationdate
+												+ '</div>'
+												+ '<div class="chat_box_m_div_location">장소:'
+												+ jbSplit[0]
+												+ '</div>'
+												+ '<input type="button" value= "일정보기" onclick="window.open(\'chatlocation?user1='+loginmemberno+'&user2='+memberno+'&chatroomno='+roomno+'&calendarLocationno='+this.locationno+'\',\'_blank\',\'width=1100, height=700,toolbar=no,location=no,resizable=no,left=30,top=30,menubar=no\');"></div><div class="chat_box_p_div">'
+												+ '<img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'"></div></div>');
+
+									// 이미지 지도에서 마커가 표시될 위치입니다 
+								var markerPosition  = new kakao.maps.LatLng(jbSplit[2], jbSplit[1]); 
+
+								// 이미지 지도에 표시할 마커입니다
+								// 이미지 지도에 표시할 마커는 Object 형태입니다
+								var marker = {
+								    position: markerPosition
+								};
+
+								var staticMapContainer  = document.getElementById('staticMap'+this.locationno), // 이미지 지도를 표시할 div  
+								    staticMapOption = { 
+								        center: new kakao.maps.LatLng(jbSplit[2], jbSplit[1]), // 이미지 지도의 중심좌표
+									        level: 3, // 이미지 지도의 확대 레벨
+									        marker: marker // 이미지 지도에 표시할 마커 
+									    };    
+
+									// 이미지 지도를 생성합니다
+									var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
+									 const recentroomno = $("#roomno").val();
+						                $("#chat_user_list_room_m_message_div"+jbSplit[1]).html("약속이 공유되었습니다.");
+									
+								}else{
+									 $("#chat_box_ms").prepend('<div class="b"><div class="chat_box_m_div_read_div"><span class="chat_box_m_div_read_div_span"></span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div><div class="chat_box_m_div" ><span>'+this.chatmessage+'</span></div><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'" ></div></div>');
+								}
+							
+								
+							}else{
+								if(this.locationno!=0){
+
+					        	    const location = this.location;
+									 const jbSplit = location.split('//');
+									 const memberno = $('#memberno').val();
+										const loginmemberno = $('#loginmemberno').val();
+										const roomno = $('#roomno').val();
+								
+										 $("#chat_box_ms").prepend('<div class="d"><div class="chat_box_m_div_read_div"><span class="chat_box_m_div_read_div_span">'+this.readst+'</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div>'+
+								      '<div class="chat_box_m_div" ><div>약속이 공유되었습니다.</div><div id="staticMap'+this.locationno+'" class="chat_box_m_div_map"></div>'+
+									  '<div class="chat_box_m_div_date">날짜: '+this.locationdate+'</div>'+
+								      '<div class="chat_box_m_div_location">장소: '+jbSplit[0]+'</div>'+
+								      '<input type="button" value= "일정보기" onclick="window.open(\'chatlocation?user1='+loginmemberno+'&user2='+memberno+'&chatroomno='+roomno+'&calendarLocationno='+this.locationno+'\',\'_blank\',\'width=1100, height=700,toolbar=no,location=no,resizable=no,left=30,top=30,menubar=no\');"></div><div class="chat_box_p_div">'+
+								      '<img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'"></div></div>');
+									
+
+									// 이미지 지도에서 마커가 표시될 위치입니다 
+								var markerPosition  = new kakao.maps.LatLng(jbSplit[2], jbSplit[1]); 
+
+								// 이미지 지도에 표시할 마커입니다
+								// 이미지 지도에 표시할 마커는 Object 형태입니다
+								var marker = {
+								    position: markerPosition
+								};
+
+								var staticMapContainer  = document.getElementById('staticMap'+this.locationno), // 이미지 지도를 표시할 div  
+								    staticMapOption = { 
+								        center: new kakao.maps.LatLng(jbSplit[2], jbSplit[1]), // 이미지 지도의 중심좌표
+									        level: 3, // 이미지 지도의 확대 레벨
+									        marker: marker // 이미지 지도에 표시할 마커 
+									    };    
+
+									// 이미지 지도를 생성합니다
+									var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
+									 const recentroomno = $("#roomno").val();
+						                $("#chat_user_list_room_m_message_div"+jbSplit[1]).html("약속이 공유되었습니다.");
+									
+									
+								}else{ $("#chat_box_ms").prepend('<div class="b"><div class="chat_box_m_div_read_div"><span class="chat_box_m_div_read_div_span">'+this.readst+'</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div><div class="chat_box_m_div" ><span>'+this.chatmessage+'</span></div><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'" ></div></div>');
+								}
+
+							
+								
+							}
+	                        
+		              }else if(loginmemberno != this.seller){
+		            	  if(this.locationno!=0){
+		            		  const location = this.location;
+								 const jbSplit = location.split('//');
+								 const memberno = $('#memberno').val();
+									const loginmemberno = $('#loginmemberno').val();
+									const roomno = $('#roomno').val();
+
+								//넣어야함c
+								 $("#chat_box_ms").prepend('<div class="c"><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'"></div><div class="chat_box_m_div" ><div>약속이 공유되었습니다.</div><div id="staticMap'+this.locationno+'" class="chat_box_m_div_map"></div>'+
+
+				                        '<div class="chat_box_m_div_date">날짜: ' +this.locationdate+'</div><div class="chat_box_m_div_location">장소:'+jbSplit[0]+'</div>'+
+				                        '<input type="button" value= "일정보기" onclick="window.open(\'chatlocation?user1='+loginmemberno+'&user2='+memberno+'&chatroomno='+roomno+'&calendarLocationno='+this.locationno+'\',\'_blank\',\'width=1100, height=700,toolbar=no,location=no,resizable=no,left=30,top=30,menubar=no\');"> </div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div><div class="chat_box_m_div_read_div"><span class="chat_box_m_div_read_div_span"></span></div> </div>');
+								
+								
+
+								// 이미지 지도에서 마커가 표시될 위치입니다 
+								var markerPosition  = new kakao.maps.LatLng(jbSplit[2], jbSplit[1]); 
+
+								// 이미지 지도에 표시할 마커입니다
+								// 이미지 지도에 표시할 마커는 Object 형태입니다
+								var marker = {
+								    position: markerPosition
+								};
+
+								var staticMapContainer  = document.getElementById('staticMap'+this.locationno), // 이미지 지도를 표시할 div  
+								    staticMapOption = { 
+								        center: new kakao.maps.LatLng(jbSplit[2], jbSplit[1]), // 이미지 지도의 중심좌표
+								        level: 3, // 이미지 지도의 확대 레벨
+								        marker: marker // 이미지 지도에 표시할 마커 
+								    };    
+
+								// 이미지 지도를 생성합니다
+								var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
+								
+								 const recentroomno = $("#roomno").val();
+					                $("#chat_user_list_room_m_message_div"+jbSplit[1]).html("약속이 공유되었습니다.");
+					                
+					                
+							}else{   $("#chat_box_ms").prepend('<div class="a"><div class="chat_box_p_div"><img src="http://cjhftp.dothome.co.kr/'+this.seller+'/profile/'+this.profile+'" ></div><div class="chat_box_m_div" > <span>'+this.chatmessage+'</span></div><div class="chat_box_m_div_time_div"><span class="chat_box_m_div_time" >'+this.datetime+'</span></div><div class="chat_box_m_div_read_div"><span class="chat_box_m_div_read_div_span"></span></div></div>');
+				              }
+	                       
+		              }
+		       	   });
+	        	 }else if($(data).length == 0){
+	     			$("#firstvalue").val($("#firstvalue").val()-6);
+	     			$("#lastvalue").val($("#lastvalue").val()-6);
+	     			console.log($(data).length);
+	     			console.log(firstvalue);
+	     			console.log(lastvalue);
+	     			alert('더보기가 없습니다.')
+	     			
+	     		}
+	     	},
+	        error : function() {
+	           alert("request error!");
+	        }
+	           })  
+		
+
+	}
+
+	//스크롤 닿으면 moredata
+	$('.chat_box_ms').scroll(function() {
+    	if (Math.round( $('.chat_box_ms').scrollTop()) == 0) {
+    		moredata();
+    	}
+    })
+	
 </script>
 
 <script>

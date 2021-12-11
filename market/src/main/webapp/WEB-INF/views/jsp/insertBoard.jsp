@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/insertBoard.css ">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
-<body>
+<section>
 <form action="/insertBoard" method="post" id="insertBoard" name="insertBoard" enctype="multipart/form-data">
     <main class="insertboard">
     <input type="hidden" value="${memberVO.memberno}" id="memberno" name="memberno">
@@ -76,8 +76,7 @@
             </div>
         </div>
     </main>
-</form>
-</body>
+</form></section>
 <script>
     $(function () {
         $(".insertboard_insertboard_category").hide();

@@ -136,7 +136,7 @@
 
     }
     .chat_box_ms{
-        height: 73%;
+        height: 68%;
         overflow:auto;
     }
 /* 공통 */
@@ -437,10 +437,6 @@
     height: 100%;
    
 
-}
-.chat_box_ms{
-    height: 73%;
-    overflow:auto;
 }
 /* 공통 */
 .chat_box_p_div img{
