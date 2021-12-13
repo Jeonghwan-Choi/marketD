@@ -36,24 +36,30 @@ public class ChatController {
 	
 	public String chat(HttpServletRequest req, Model model, ChatVO vo) throws IllegalStateException {
 
-		System.out.println(vo.getUser1());
-
+		vo.setBoardno(Integer.parseInt(req.getParameter("boardBoardno")));
+		vo.setBuyerno(Integer.parseInt(req.getParameter("user1")));
+		chatService.insertChatroom(vo);
+		
+		vo.setUser1(Integer.parseInt(req.getParameter("boardMemberno")));
+		vo.setUser2(Integer.parseInt(req.getParameter("user1")));
+		chatService.insertChatmember1(vo);
+		
+		vo.setUser1(Integer.parseInt(req.getParameter("user1")));
+		vo.setUser2(Integer.parseInt(req.getParameter("boardMemberno")));
+		chatService.insertChatmember2(vo);
+		
 		model.addAttribute("boardMemberno",req.getParameter("boardMemberno"));
 		model.addAttribute("boardBoardno",req.getParameter("boardBoardno"));
 		model.addAttribute("loginMemberno",req.getParameter("user1"));
-		int user1 = Integer.parseInt(req.getParameter("user1"));
 
+		int user1 = Integer.parseInt(req.getParameter("user1"));
+	
 		List <ChatVO> mychatList =  chatService.myChatList(vo);
 	
 		
 		
 		model.addAttribute("mychatList",mychatList);
-		System.out.println("mychatList.size(): "+mychatList.size());
-		
-		
-		  for(int i=0;i<mychatList.size();i++) {
-		  System.out.println("datetime:::"+mychatList.get(i).getChatmessage()); }
-		 
+
 		
 		return "/jsp/chat";
 	}

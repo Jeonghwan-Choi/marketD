@@ -13,7 +13,7 @@
  	<!-- 채팅목록 조회  -->
   <select id="myChatList" parameterType="chat" resultType="chat">
 	<![CDATA[
-		select a.chatmember,a.chatroomno,a.user1,a.user2,m.name,m.address,m.profile,cm.chatmessage,NVL((cmm.readst),0)"readst",cm.datetime
+		select a.chatmember,a.chatroomno,a.user1,a.user2,m.name,m.address,m.profile,cm.chatmessage,NVL((cmm.readst),0)"readst",cm.datetime,d.boardno,e.title
 		from chatmember a
 		Left Join member m
 		ON a.user2 = m.memberno
@@ -26,6 +26,10 @@
         Left Join (select chatroomno,count(readst)readst
         FROM chatmessage where readst='1' and seller != #{user1} group by chatroomno ) cmm
         ON a.chatroomno = cmm.chatroomno
+        left join chatroom d
+        on a.chatroomno=d.chatroomno
+        left join board e
+        on d.boardno=e.boardno
 		where user1 =  #{user1} order by cm.chatmessageno desc
      ]]>
     </select>
@@ -95,7 +99,7 @@
 		on a.user1=b.memberno
 		left join member d
 		on a.user2=d.memberno
-		where a.user1=#{user1} and a.user2=#{user2}
+		where a.user1=#{user1} and a.user2=#{user2} and chatroomno=#{chatroomno}
 	]]>
     </select>
     
@@ -103,7 +107,7 @@
 		<selectKey resultType="int" keyProperty="locationno" order="BEFORE">
 			select max(locationno) locationno from chatlocation
 		</selectKey>
-			insert into chatmessage(chatroomno,seller,chatmessage,readst,datetime,locationno) values(#{chatroomno},#{seller},#{chatmessage},0,TO_CHAR(LOCALTIMESTAMP,'yyyy/mm/dd HH24:MI'),#{locationno})
+			insert into chatmessage(chatroomno,seller,chatmessage,readst,datetime,locationno) values(#{chatroomno},#{seller},#{chatmessage},1,TO_CHAR(LOCALTIMESTAMP,'yyyy/mm/dd HH24:MI'),#{locationno})
 	
 	</insert>
 	
@@ -127,7 +131,21 @@
     </select>
     
     
-    
+	<insert id="insertChatroom" parameterType="chat">
+		insert into chatroom(boardno,buyerno,datetime) values(#{boardno},#{buyerno},TO_CHAR(LOCALTIMESTAMP,'yyyy/mm/dd HH24:MI'))
+	</insert>
+    <insert id="insertChatmember1" parameterType="chat">
+    	<selectKey resultType="int" keyProperty="chatroomno" order="BEFORE">
+			select max(chatroomno)chatroomno from chatroom
+		</selectKey>
+		INSERT INTO chatmember(chatroomno,user1,user2) VALUES (#{chatroomno},#{user1},#{user2})
+	</insert>
+	<insert id="insertChatmember2" parameterType="chat">
+		<selectKey resultType="int" keyProperty="chatroomno" order="BEFORE">
+			select max(chatroomno)chatroomno from chatroom
+		</selectKey>
+		INSERT INTO chatmember(chatroomno,user1,user2) VALUES (#{chatroomno},#{user1},#{user2})
+	</insert>
     <!--  -->
     
     

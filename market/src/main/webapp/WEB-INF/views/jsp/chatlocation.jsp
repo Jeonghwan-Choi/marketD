@@ -42,7 +42,7 @@
             <div class="location_center_left">
                 <table class="location_table">
                     <tr class="location_tr">
-                        <th class="location_th">일시</th>
+                        <th class="location_th"><img src="http://cjhftp.dothome.co.kr/ico/calendar (1).png"></th>
                          <c:set var="jstlDate" value="${calendarLocation.locationdate }"/>
                      <c:if test="${not empty jstlDate }">
                           <td class="location_td"><input name="jstl_location_date_input" class="jstl_location_date_input" id="jstl_location_date_input" type="text" value="${calendarLocation.locationdate }" readonly></td>
@@ -54,10 +54,10 @@
                     </tr>
                     
                     <tr class="location_tr">
-                        <th class="location_th">지도</th>
+                        <th class="location_th"><img src="http://cjhftp.dothome.co.kr/ico/placeholder.png"></th>
                         <td class="location_td">
                      <div class="map_wrap">
-                         <div id="map" style="width:650px;height:100%;position:relative;overflow:hidden;"></div>
+                         <div id="map" style="border-radius:5px;width:490px;height:340px;position:relative;overflow:hidden;"></div>
                      
                          <div id="menu_wrap" class="bg_white">
                              <div class="option">
@@ -100,7 +100,7 @@
                         </td>
                     </tr>
                     <tr class="location_tr">
-                        <th class="location_th">장소</th>
+                        <th class="location_th"><img src="http://cjhftp.dothome.co.kr/ico/map.png"></th>
                         
                         
                         
@@ -128,7 +128,7 @@
                         
                     </tr>
                     <tr class="location_tr">
-                        <th class="location_th" style="vertical-align: top; padding-top: 10px;">설명</th>
+                        <th class="location_th" style="vertical-align: top; padding-top: 10px;"><img src="http://cjhftp.dothome.co.kr/ico/memo.png"></th>
                         
                         
                         <c:set var="jstlDescription" value="${calendarLocation.locationdescription }"/>
@@ -136,14 +136,14 @@
                           <td class="location_td"><input style="background:rgb(218, 218, 218,0.5);" name="jstl_location_textarea" class="jstl_location_textarea" id="jstl_location_textarea" type="text" value="${calendarLocation.locationdescription }" readonly></td>
                      </c:if>
                      <c:if test="${empty jstlDescription }">
-                         <td class="location_td" style="padding-top: 10px;"><textarea cols="70" rows="15" id="location_textarea" name="location_textarea" class="location_textarea" placeholder="설명추가"></textarea></td>
+                         <td class="location_td" style="padding-top: 10px;"><textarea cols="66" rows="15" id="location_textarea" name="location_textarea" class="location_textarea" placeholder="설명추가"></textarea></td>
                      </c:if>
                         
                         
                         
                         
                     </tr>
-                    <tr class="location_tr">
+                    <tr class="location_tr" id="location_submit_tr">
                         <th class="location_th"></th>
                         
                         
@@ -164,16 +164,16 @@
             <div class="location_center_right">
                 <div class="location_memberlist">
                     <div class="location_memberlist_title">
-                        <button class="location_memberlist_title_button">참석자</button>
+                        <button class="location_memberlist_title_button" disabled>참석자</button>
                     </div>
                     <div class="location_memberlist_content">
                         <div class="location_memberlist_div">
                              <img src="http://cjhftp.dothome.co.kr/${chatList.user1}/profile/${chatList.profile}">
-                            <span class="location_memberlist_span">${chatList.login }</span>
+                            <a class="location_memberlist_span">${chatList.login }</a>
                         </div>
                         <div class="location_memberlist_div">
                              <img src="http://cjhftp.dothome.co.kr/${chatList.user2}/profile/${chatList.memberprofile}">
-                            <span class="location_memberlist_span">${chatList.member}</span>
+                            <a class="location_memberlist_span">${chatList.member}</a>
                         </div>
                         
                     </div>

@@ -37,15 +37,11 @@ public class LoginController {
 	public String loginMember(HttpServletRequest req, Model model, MemberVO vo) throws IllegalStateException {
 
 		MemberVO member = memberService.loginMember(vo);
-		System.out.println(member.getMemberno());
-		System.out.println(member.getEmail());
-		// System.out.println(member.getPassword());
-
-		System.out.println(member.getProfile());
 		
 		HttpSession session = req.getSession();
 		session.setAttribute("memberVO", member);
 		session.setAttribute("loginM", member.getMemberno());
+		session.setAttribute("loginMemberProfile", member.getProfile());
 		return "redirect:/main";
 	}
 

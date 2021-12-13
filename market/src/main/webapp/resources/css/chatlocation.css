@@ -5,30 +5,28 @@
         } */
         input:focus {outline:none;}
         .location_header{
-            border-bottom: 2px gray solid;
-            width:1100px;
-            height: 80px;
+            border-bottom: 1px #a2a2a2 solid;
+            width:900px;
+            height: 60px;
             padding-bottom:2px;
         }
         .location_header_img{
-            width:80px;
-            height: 80px;
+            width:40px;
+            height: 40px;
             float: left;
             text-align: center;
-            line-height: 90px;
+            line-height: 70px;
         }
-        
         .location_header_title{
-            width: 1000px;
-            height: 80px;
+            width: 800px;
+            height: 60px;
             float:right;
-            
-            line-height: 80px;
+            line-height: 60px;
         }
         #location_header_input{
-            height: 80px;
-            width:800px;
-            font-size: 20px;
+            height: 60px;
+            width:600px;
+            font-size: 15px;
             font-weight: bold;
             border:none;
         }
@@ -39,61 +37,66 @@
             
         }
         .location_center{
-            width:1070px;
+            width:870px;
             height: 460px;
             padding-top: 5px;
         }
         .location_center_left{
-            width:730px;
+            width:530px;
             height: 460px;
             float: left;
             padding-top:10px;
         }
         .location_date_input{
-            height: 35px;
-            border:rgb(179, 177, 177) 2px solid;
+            height: 30px;
+            border:rgb(179, 177, 177) 1px solid;
             border-radius: 5px;
+            font-size:14px;
         }
         .jstl_location_date_input{
         	background:rgb(218, 218, 218,0.5);
-            border:rgb(179, 177, 177) 2px solid;
+            border:rgb(179, 177, 177) 1px solid;
             border-radius: 5px;
             height: 35px;
         }
         .jstl_location_location_input{
         	background:rgb(218, 218, 218,0.5);
-            border:rgb(179, 177, 177) 2px solid;
+            border:rgb(179, 177, 177) 1px solid;
             border-radius: 5px;
             height: 35px;
+			width:485px;
         }
         .jstl_location_textarea{
         	background:rgb(218, 218, 218,0.5);
-            border:rgb(179, 177, 177) 2px solid;
+            border:rgb(179, 177, 177) 1px solid;
             border-radius: 5px;
             height: 35px;
         
         }
         .location_location_input{
             height: 35px;
-            border:rgb(179, 177, 177) 2px solid;
+            border:rgb(179, 177, 177) 1px solid;
             border-radius: 5px;
-
+			width:485px;
         }
         .location_th{
             width:80px;
             height: 50px;
-            color:rgb(136, 136, 136);
+			padding:5px;
+            
         }
         .location_textarea{
             resize: none;
-            border:rgb(179, 177, 177) 2px solid;
+            border:rgb(179, 177, 177) 1px solid;
             border-radius: 5px;
              height: 35px;
+             width:485px;
+             
         }
         .location_textarea:focus{
             outline: none;
         }
-
+        
         /* right */
         
         .location_center_right{
@@ -104,52 +107,47 @@
         .location_memberlist{
             width:300px;
             height: 460px;
+            padding-top:72px;
 
         }
         .location_memberlist_title{
-            width:280px;
-            height: 60px;
-            border:rgb(179, 177, 177) 2px solid;
+            width:240px;
+            height: 35px;
+            border:rgb(179, 177, 177) 1px solid;
             border-radius: 5px;
             text-align: center;
-            line-height: 60px;
-            margin: 5px;
         }
         .location_memberlist_title_button{
-            width:250px;
-            height: 50px;
-            font-size: 20px;
+            width:230px;
+            height: 35px;
+            font-size: 13px;
             background-color: white;
             color: gray;
-            font-weight: bold;
             border:none;
         }
-        .location_memberlist_content{
-
-        }
         .location_memberlist_img{
-            width:40px;
-            height: 40px;
+            width:30px;
+            height: 30px;
         }
         .location_memberlist_div{
             margin-left:20px;
             margin-top:20px;
             height: 40px;
-            /* align-items: center; */
-        }
-        .location_memberlist_span{
-            /* text-align: center;*/
-            /* line-height: 40px; 
-            margin:0 auto; */
+            font-size: 13px;
+            
+            bottom:-10px;
         }
        .location_location_input{
              background:rgb(218, 218, 218,0.5);
        }
        .location_submit_input{
              background:white;
-             border:none;
+             border:1px solid rgb(255, 175, 96,0.5);
              color:gray;
              font-weight:border;
+             border-radius:5px;
+			width:485px;
+            height: 35px;
        }
        .jstl_location_submit_input{
              background:white;
@@ -159,17 +157,24 @@
        
        }
        .location_memberlist_div img{
-             width:50px;
-            height:50px;
+             width:40px;
+            height:40px;
              
+            border-radius:50px;
        }
-       
+       .location_memberlist_div a{
+            height: 40px;
+       }
+       .location_memberlist_span{
+       	font-size:15px;
+            line-height:20px;
+       }
        
        /* map */
        
        .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
       .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-      .map_wrap {position:relative;width:100%;height:500px;}
+      .map_wrap {position:relative;}
       #menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
       .bg_white {background:#fff;}
       #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}

@@ -19,7 +19,17 @@ public class ChatVO {
 	private String login;
 	private String member;
 	private int memberno;
+	private String title;
 	
+
+	public String getTitle() {
+		return title;
+	}
+
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 	//chatmessage
 	private int chatmessageno;
@@ -148,21 +158,12 @@ public class ChatVO {
 
 	public ChatVO() {}
 
-	
 
-	
-
-	
-
-
-	
-
-	
 	public ChatVO(int chatroomno, int boardno, int buyerno, String datetime, int chatmember, int user1, int user2,
-			String name, String address, String profile, String login, String member, int memberno, int chatmessageno,
-			int seller, String chatmessage, int readst, int locationno, String locationtitle, String locationdate,
-			String location, String locationdescription, String memberprofile, int locactionjsp, int firstvalue,
-			int lastvalue) {
+			String name, String address, String profile, String login, String member, int memberno, String title,
+			int chatmessageno, int seller, String chatmessage, int readst, int locationno, String locationtitle,
+			String locationdate, String location, String locationdescription, String memberprofile, int locactionjsp,
+			int firstvalue, int lastvalue) {
 		super();
 		this.chatroomno = chatroomno;
 		this.boardno = boardno;
@@ -177,6 +178,7 @@ public class ChatVO {
 		this.login = login;
 		this.member = member;
 		this.memberno = memberno;
+		this.title = title;
 		this.chatmessageno = chatmessageno;
 		this.seller = seller;
 		this.chatmessage = chatmessage;

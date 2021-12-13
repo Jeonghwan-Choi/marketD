@@ -83,5 +83,25 @@ public class ChatServiceImpl implements ChatService {
 	 * chatDAO.myChatList(vo); }
 	 */
 
+	@Override
+	public void insertChatroom(ChatVO vo) {
+		System.out.println("run ChatServiceImpl insertChatroom(ChatVO)");
+		chatDAO.insertChatroom(vo);
+		
+	}
+
+	@Override
+	public void insertChatmember1(ChatVO vo) {
+		System.out.println("run ChatServiceImpl insertChatmember1(ChatVO)");
+		chatDAO.insertChatmember1(vo);
+	}
+
+	@Override
+	public void insertChatmember2(ChatVO vo) {
+		System.out.println("run ChatServiceImpl insertChatmember2(ChatVO)");
+		chatDAO.insertChatmember2(vo);
+		
+	}
+
 
 }

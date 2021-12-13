@@ -28,6 +28,7 @@
                    <input name="boardBoardno" id="boardBoardno" type="hidden" value="${board.boardno}">
                    <input name="user1" id="loginMemberno" type="hidden" value="${sessionScope.memberVO.memberno}">
                     <input type="hidden" id="boardDatetime" value="${board.datetime }"> 
+                    <input type="hidden" name="loginMemberProfile" id="loginMemberProfile" value="${board.profile }"> 
                    <input type="submit" style="background-color:transparent;  border:0px transparent solid;" value="">
                 </form>
                 <%-- <input type="hidden" id="wishno" value="${wishchk.wishno }"> --%>

@@ -82,6 +82,20 @@ public class ChatDAO {
       return sqlSession.selectOne("ChatDAO.selectCalendarLocation",vo);
       
    }
-   
+   public void insertChatroom(ChatVO vo) {
+	      System.out.println("run ChatDAO insertChatroom()");
+	      sqlSession.update("ChatDAO.insertChatroom",vo);
+	      
+	   }
+   public void insertChatmember1(ChatVO vo) {
+		      System.out.println("run ChatDAO insertChatmember1()");
+		      sqlSession.update("ChatDAO.insertChatmember1",vo);
+		      
+		   }
+   public void insertChatmember2(ChatVO vo) {
+	      System.out.println("run ChatDAO insertChatmember2()");
+	      sqlSession.update("ChatDAO.insertChatmember2",vo);
+	      
+	   }
    
 }

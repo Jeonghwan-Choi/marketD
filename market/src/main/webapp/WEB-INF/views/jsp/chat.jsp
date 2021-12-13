@@ -49,8 +49,8 @@
                     <input class="header_chatting_btn" type="button" value="로그인" onclick="loginform()">
                     </div>
                     <div class="header_login_div">
-                        <img class="header_login_div_profile" src="https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_256_disabled-97ac2510cb2860b9e37caf23beb1e8e0ca130152a119b65402c4673af18bf2a1.png">
-                        <span>최정환</span>
+                        <img class="header_login_div_profile" src="http://cjhftp.dothome.co.kr/${loginMemberno}/profile/${loginMemberProfile}">
+                        <span>${sessionScope.memberVO.name}</span>
                      </div>
 
                                 
@@ -86,7 +86,6 @@
                 <!-- 여기서 부터 사람 한명 -->
                 <c:forEach items="${mychatList}" var="chatVO" varStatus="status">
                 	<input type="hidden" id="user${status.count}" name="user${status.count}" value="${chatVO.user2}">
-                	
                 
                    <div class="chat_user_list_room">
                    <a id="chatroomno" class="chatroom${chatVO.chatroomno }" >
@@ -94,21 +93,24 @@
                    <span class="boardMemberno" style="display:none;">${chatVO.user2}</span>
                 	<input type="hidden" id="boardMemberno" name="boardMemberno" value="${chatVO.user2}">
                           <span class="boardRoomno" style="display:none;">${chatVO.chatroomno}</span>
+                          <span class="boardname" style="display:none;">${chatVO.name}</span>
                               <div class="chat_user_list_room_m">
                                   <div class="chat_user_list_room_m_img_div">
 <%--                                   <c:choose>
                                     <c:when test="${sessionScope.memberVO==null}"> --%>
-                                         <img src="http://cjhftp.dothome.co.kr/${chatVO.user2}/profile/${chatVO.profile}">
-                                         <%-- <span id="userprofile">${chatVO.profile}</span> --%>
+                                         <img src="http://cjhftp.dothome.co.kr/${chatVO.user2}/profile/${chatVO.profile}" onerror="this.src='https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png';">
+                                          <span style="display:none;" id="userprofile">${chatVO.profile}</span> 
    <%--                              </c:when>
                                  </c:choose> --%>
                                       
                                   </div>
                                   <div class="chat_user_list_room_m_center_div">
-                                      <div class="chat_user_list_room_m_member_div">
+                                      <div id="chat_user_list_room_m_member_div${chatVO.chatroomno }" class="chat_user_list_room_m_member_div">
                                           <span>${chatVO.name }</span>   
-                                          <span> · </span>
-                                          <span>${chatVO.datetime } </span>
+                                         <%--  <c:if test="${not empty chatVO.datetime }"> --%>
+                                          <span id="chat_user_list_room_m_datetime${chatVO.chatroomno }">· ${chatVO.datetime } </span>
+                                        <%--   </c:if> --%>
+                							<span>· ${chatVO.title }</span>
                                       </div>
                                       <br>
                                       <div id="chat_user_list_room_m_message_div${chatVO.chatroomno }" class="chat_user_list_room_m_message_div">
@@ -137,33 +139,36 @@
           
                 </c:forEach> 
                  <!-- 여기까지 -->
-
-
             </div>
         </div>
         <div id="chat_box" >
             <div class="chat_box_user">
                 <div>
-                    <img onerror="this.src='https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png';" class="chat_box_user_img" src="">
+                    <!-- <img id="chat_box_user_img" onerror="this.src='https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png';" class="chat_box_user_img" src=""> -->
+                    <img style="display:none;" id="chat_box_user_img" class="chat_box_user_img" src="https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png">
                 </div>
                 <div>
-                    <span>최정환</span>
+                    <span id="chat_box_user_span"></span>
                 </div>
                 <input type="hidden" id="firstvalue" value="0">
 			<input type="hidden" id="lastvalue" value="15">
-                
             </div>
              <div class="search_more" style="display:none;"> 
 			<input type="button" id="search_more" value="더보기" onclick="moredata()">
-
 		</div> 
 		
-            <div id="chat_box_ms" class="chat_box_ms">
-             <img id="messageimg" style="display : block; margin : auto;" src="http://cjhftp.dothome.co.kr/ico/message (2).png">
+            <div id="chat_box_ms"  style=" text-align:center; margin-top:27%;" class="chat_box_ms">
+            <div class="chat_box_ms_first">
+             <img id="messageimg" src="http://cjhftp.dothome.co.kr/ico/message (2).png"><br><br>
+             <input style="border:none; width:200px;" id="chat_box_ms_input" type="text" value="채팅할 상대를 선택해주세요">
+             </div>
             </div>
+            
+            
+            
               <div class="chat_box_send_div" style="display:none;">
-              <div class="chat_box_send_text_div"><input type="text" id="msg" placeholder="메세지를 입력해보세요."></div>
-                   <div class="chat_box_send_btn_div"><button id="msg_location">약속잡기</button><button id="msg_process">전송</button></div> 
+            <div class="chat_box_send_text_div"><input type="text" id="msg" placeholder="메세지를 입력해보세요."></div>
+                   <div class="chat_box_send_btn_div"><button id="msg_location">약속잡기</button>&nbsp;<button id="msg_process">전송</button></div> 
                 
             </div> 
                <div class="chat_box_notsend">
@@ -172,13 +177,11 @@
         </div>
         
     </div>
-    <input type="button" id="test" value="chkchk">
 
 </body>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=25eb93196f96f5e9cacf100023363c56"></script>
 <script>
-
 
 		$("#msg_location").click(function(){
 			var user1 = $('#loginmemberno').val();
@@ -186,7 +189,7 @@
 			var chatroomno = $('#roomno').val();
 			var location = $('#location').val();
 		    var calendarLocationno = 0;
-				window.open("chatlocation?user1="+user1+"&user2="+user2+"&chatroomno="+chatroomno+"&locationjsp="+location+"&calendarLocationno="+calendarLocationno, "_blank", "width=1100, height=700,toolbar=no,location=no,resizable=no,left=30,top=30,menubar=no" ); 
+				window.open("chatlocation?user1="+user1+"&user2="+user2+"&chatroomno="+chatroomno+"&locationjsp="+location+"&calendarLocationno="+calendarLocationno, "_blank", "width=900, height=610,toolbar=no,location=no,resizable=no,left=30,top=30,menubar=no" ); 
 		
 		})
 
@@ -352,6 +355,19 @@
             //msg_process를 클릭할 때
             $("#msg_process").click(function() {
             	const message = $("#msg").val();
+            	const today = new Date();   
+
+            	const year = today.getFullYear(); // 년도
+            	const month = today.getMonth() + 1;  // 월
+            	if(month < 10){ '0' + month.toString()}else{ month.toString()};
+            	const day = today.getDate();  // 날짜
+            	if(day < 10){ '0' + day.toString()}else{ day.toString()};
+            	const hour = today.getHours(); // 시
+            	if(hour < 10){ '0' + hour.toString()}else{ hour.toString()};
+            	const minutes = today.getMinutes();  // 분
+            	if(minutes < 10){ '0' + minutes.toString()}else{ minutes.toString()};
+				const datetime = (year+"/"+month+"/"+day+" "+hour+":"+minutes);
+            	
             	if(typeof message==null||message=="undefined"||message==""){
             		swal("INFO", "메세지를 입력해주세요", "info");
             	}else{
@@ -363,9 +379,9 @@
                 socket.emit("send_msg", "2//"+$("#roomno").val()+"//"+$("#loginmemberno").val()+"//"+$("#msg").val()+"//"+time+"//1");/* *** */
                 //ajax insert sql
 		        
-                const recentmessage = $("#msg").val();
                 const recentroomno = $("#roomno").val();
-                $("#chat_user_list_room_m_message_div"+recentroomno).html(recentmessage);
+                $("#chat_user_list_room_m_message_div"+recentroomno).html(message);
+                $("#chat_user_list_room_m_datetime"+recentroomno).html(datetime);
   
 	                    	
 	                    if($("."+$("#roomno").val()+"-"+$("#memberno").val()).html()==1){
@@ -617,7 +633,15 @@
     /* 채팅목록 사람 클릭  */
     $(document).on("click","a",function(){
     	$("#messageimg").remove();
+    	
+
+		$("#firstvalue").val(0);
+		$("#lastvalue").val(14);
     	$('.chat_box_send_div').css('display','block');
+    	$('.chat_box_ms').css('margin-top','0');
+    	$('.chat_box_ms').css('text-align','left');
+    	$('.chat_box_ms_first').css('display','none');
+    	
     	//$('.search_more').css('display','block');
     	/* $('<div class="chat_box_send_div"><div class="chat_box_send_text_div"><input type="text" id="msg" placeholder="메세지를 입력해보세요."></div>'
     			+'<div class="chat_box_send_btn_div"><button id="msg_location">약속잡기</button><button id="msg_process">전송</button></div>'
@@ -632,6 +656,11 @@
         var boardRoomno = $("."+myClass).children('.boardRoomno').html();
         var loginmemberno = $("#loginmemberno").val();//loginuser
          var profilename = $("."+myClass).children('.chat_user_list_room_m').children('.chat_user_list_room_m_img_div').children('#userprofile').html(); 
+         var boardname = $("."+myClass).children('.boardname').html();
+        
+
+     	$('#chat_box_user_img').css("display","block");
+     	$('#chat_box_user_span').html(boardname);
         
         $("#"+boardRoomno+"_chat_user_list_room_read").css("display","none");
     	
@@ -641,11 +670,12 @@
         $("#roomno").val(boardRoomno);
         $("#profilename").val(profilename);
         
-       
+
+     	$('#chat_box_user_img').attr("src", "http://cjhftp.dothome.co.kr/"+boardMemberno+"/profile/"+profilename);
         socket.emit("send_msg", "1//"+boardRoomno+"//"+loginmemberno+"//"+boardMemberno);
         
         $.ajax({
-	         url : 'selectChat?firstvalue=0&lastvalue=15',
+	         url : 'selectChat?firstvalue=0&lastvalue=14',
 	         method : 'POST',
 	         data : 'roomno=' + $("#roomno").val() +'&seller='+$("#memberno").val() +'&chatmessage='+$("#msg").val()+"&readst=0",
 	         type : "POST",
@@ -815,12 +845,10 @@
          })  
 
     });	
-});    
-    
-
-	//more data
-
-	function moredata(){
+    			
+    			
+    			
+    function moredata(){
 		console.log("run moredate()!");
 		
 		var firstvalue = parseInt($("#firstvalue").val());
@@ -828,6 +856,7 @@
 		var roomno = $('#roomno').val();
 		var seller = $('#memberno').val();
 		var msg = $('#msg').val();
+        var loginmemberno = $("#loginmemberno").val();//loginuser
 		
 		$("#firstvalue").val(firstvalue + 15);
 		$("#lastvalue").val(lastvalue + 15);
@@ -985,8 +1014,8 @@
 		              }
 		       	   });
 	        	 }else if($(data).length == 0){
-	     			$("#firstvalue").val($("#firstvalue").val()-6);
-	     			$("#lastvalue").val($("#lastvalue").val()-6);
+	     			$("#firstvalue").val($("#firstvalue").val()-15);
+	     			$("#lastvalue").val($("#lastvalue").val()-15);
 	     			console.log($(data).length);
 	     			console.log(firstvalue);
 	     			console.log(lastvalue);
@@ -1008,6 +1037,12 @@
     		moredata();
     	}
     })
+});    
+    
+
+	//more data
+
+	
 	
 </script>
 
