@@ -34,4 +34,18 @@
 
       </footer>
 </body>
+<script>
+if(document.referrer=="http://localhost:8181/login"){
+console.log("gaga"+document.referrer);
+window.location.reload()}
+/* window.onpageshow =  function(event) {
+    //back 이벤트 일 경우
+    if (event.persisted) {
+    	location.href = document.referrer; 
+    }
+} */
+$(document).on("pageload",function(){
+	  window.location.reload(true);
+	});
+</script>
 </html>

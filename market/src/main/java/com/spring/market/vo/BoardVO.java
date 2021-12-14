@@ -21,7 +21,28 @@ public class BoardVO {
    private String searchdata;
    private int firstvalue;
    private int lastvalue;
-   private MemberVO member;
+   
+   private int guestno;
+   private int guestcountchk;
+   
+   
+   public int getGuestcountchk() {
+	return guestcountchk;
+}
+
+public void setGuestcountchk(int guestcountchk) {
+	this.guestcountchk = guestcountchk;
+}
+
+public int getGuestno() {
+	return guestno;
+}
+
+public void setGuestno(int guestno) {
+	this.guestno = guestno;
+}
+
+private MemberVO member;
 
    
    public BoardVO() {}
@@ -186,9 +207,18 @@ public class BoardVO {
 
 
 
-   public BoardVO(int boardno, int memberno, String title, String category, String datetime, String content, int price,
+public MemberVO getMember() {
+      return member;
+   }
+
+   public void setMember(MemberVO member) {
+      this.member = member;
+   }
+
+public BoardVO(int boardno, int memberno, String title, String category, String datetime, String content, int price,
 		String email, String name, String profile, int cnt, String imagename, String address, int wish, int wishcount,
-		int chatcount, int viewscount, String searchdata, int firstvalue, int lastvalue, MemberVO member) {
+		int chatcount, int viewscount, String searchdata, int firstvalue, int lastvalue, int guestno, int guestcountchk,
+		MemberVO member) {
 	super();
 	this.boardno = boardno;
 	this.memberno = memberno;
@@ -210,16 +240,10 @@ public class BoardVO {
 	this.searchdata = searchdata;
 	this.firstvalue = firstvalue;
 	this.lastvalue = lastvalue;
+	this.guestno = guestno;
+	this.guestcountchk = guestcountchk;
 	this.member = member;
 }
-
-public MemberVO getMember() {
-      return member;
-   }
-
-   public void setMember(MemberVO member) {
-      this.member = member;
-   }
 
    
 

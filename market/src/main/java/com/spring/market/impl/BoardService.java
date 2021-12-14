@@ -4,6 +4,7 @@ package com.spring.market.impl;
 import java.util.List;
 
 import com.spring.market.vo.BoardVO;
+import com.spring.market.vo.MemberVO;
 
 public interface BoardService {
    void insertBoard(BoardVO vo);
@@ -15,5 +16,7 @@ public interface BoardService {
    BoardVO boardquery(int boardno);
    List<BoardVO> addressSearchData(BoardVO vo);
    List<BoardVO> productSearchData(BoardVO vo);
-   
+   int wishcount(BoardVO vo);
+   int guestnochk(BoardVO vo);
+   int guestcountchk(BoardVO vo);   
 }

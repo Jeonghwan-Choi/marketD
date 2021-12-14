@@ -13,9 +13,21 @@ public class MemberVO {
 	private int wishno;
 	private int boardno;
 	private int cnt;
+	
+	//guest
+	private int guestno;
+	
+	
+	public int getGuestno() {
+		return guestno;
+	}
+	public void setGuestno(int guestno) {
+		this.guestno = guestno;
+	}
 	public MemberVO() {}
-	public MemberVO(int memberno, String email, String password, String name, int gender, int phone,
-			String address,int cnt, String profile, String profiletype,int wishno,int boardno) {
+
+	public MemberVO(int memberno, String email, String password, String name, int gender, int phone, String address,
+			String profile, String profiletype, int wishno, int boardno, int cnt, int guestno) {
 		super();
 		this.memberno = memberno;
 		this.email = email;
@@ -26,9 +38,10 @@ public class MemberVO {
 		this.address = address;
 		this.profile = profile;
 		this.profiletype = profiletype;
-		this.wishno=wishno;
-		this.boardno=boardno;
-		this.cnt=cnt;
+		this.wishno = wishno;
+		this.boardno = boardno;
+		this.cnt = cnt;
+		this.guestno = guestno;
 	}
 	public int getBoardno() {
 		return boardno;

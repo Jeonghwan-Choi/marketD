@@ -1,11 +1,14 @@
 package com.spring.market.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -183,48 +186,61 @@ public class ChatController {
 		return "/jsp/chatlocation";
 	}
 	@RequestMapping("/chatcalendar")
-	public String chatcalendar(HttpServletRequest req, Model model, ChatVO vo) throws IllegalStateException {
+	public String chatcalendar(HttpServletRequest req,HttpServletResponse res, Model model, ChatVO vo) throws IllegalStateException, IOException {
+		/*
+		 * PrintWriter writer = res.getWriter();
+		 * writer.println("<script type='text/javascript'>"); writer.
+		 * println("window.onload = function(){alert('메시지'); location.href='이동URL';}");/
+		 * /alert 이후, URL 이동 writer.println("</script>"); writer.flush();
+		 */
+//		document.onkeydown = function(e){
+//		    /* F5, Ctrl+r, Ctrl+F5 */
+//		    if(e.keyCode == 116 || e.ctrlKey == true && (e.keyCode == 82)){
+//		        e.cancelBubble = true; 
+//		        e.returnValue = false; 
+//		        setTimeout(function(){
+//		            window.location.reload();
+//		        }, 1000);
+//		        return false;
+//		    }
+//		}
+		
+		int keyCode = 0;
+		if(keyCode==116) {
+			System.out.println("새로고침!");
+		}
+//		if(System.in.read()==116) {System.out.println("새로고침!");}
 
-		String title = req.getParameter("location_header_input");
-		String date = req.getParameter("location_date_input");
-		String coordinate = req.getParameter("coordinate");
-		String content = req.getParameter("location_textarea");
-		
-		vo.setLocationtitle(title);
-		vo.setLocationdate(date);
-		vo.setLocation(coordinate);
-		vo.setLocationdescription(content);
-
-		chatService.insertChatLocation(vo);
-		
-//		chatService.insertChatLocation(vo);
-//		int user1 = Integer.parseInt(req.getParameter("user1"));
-//		int chatroomno = Integer.parseInt(req.getParameter("chatroomno"));
-//		vo.setSeller(user1);
-//		vo.setChatroomno(chatroomno);
-//		vo.setChatmessage("<div class='ok' style='width:50px;height:50px;background-color:black;'>please</div>");
-//		chatService.insertLocationMessage(vo);
-//		model.addAttribute("calendarList",chatService.selectCalendarList(user1));
-		
-		int user1 = Integer.parseInt(req.getParameter("user1"));
-		int chatroomno = Integer.parseInt(req.getParameter("chatroomno"));
-		vo.setSeller(user1);
-		vo.setChatroomno(chatroomno);
-		vo.setChatmessage("일정이 공유되었습니다.");
-		vo.setReadst(1);
-		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		String currentDate = dateFormat.format(new Date());
-		
-		vo.setDatetime(currentDate);
-		chatService.insertLocationMessage(vo);
-		model.addAttribute("locationno",vo.getLocationno());
-		
-		model.addAttribute("calendarList",chatService.selectCalendarList(user1));
-		
-		
-		
-		return "/jsp/chatcalendar";
+			String title = req.getParameter("location_header_input");
+			String date = req.getParameter("location_date_input");
+			String coordinate = req.getParameter("coordinate");
+			String content = req.getParameter("location_textarea");
+			
+			vo.setLocationtitle(title);
+			vo.setLocationdate(date);
+			vo.setLocation(coordinate);
+			vo.setLocationdescription(content);
+	
+			chatService.insertChatLocation(vo);
+			int user1 = Integer.parseInt(req.getParameter("user1"));
+			int chatroomno = Integer.parseInt(req.getParameter("chatroomno"));
+			vo.setSeller(user1);
+			vo.setChatroomno(chatroomno);
+			vo.setChatmessage("일정이 공유되었습니다.");
+			vo.setReadst(1);
+			
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			String currentDate = dateFormat.format(new Date());
+			
+			vo.setDatetime(currentDate);
+			chatService.insertLocationMessage(vo);
+			model.addAttribute("locationno",vo.getLocationno());
+			
+			model.addAttribute("calendarList",chatService.selectCalendarList(user1));
+			
+			
+			
+			return "/jsp/chatcalendar";
 	}
 	
 	@RequestMapping("/chatcalendarview")

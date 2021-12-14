@@ -105,7 +105,7 @@
                                       
                                   </div>
                                   <div class="chat_user_list_room_m_center_div">
-                                      <div id="chat_user_list_room_m_member_div${chatVO.chatroomno }" class="chat_user_list_room_m_member_div">
+                                      <div style="width:600px; cursor:pointer;" id="chat_user_list_room_m_member_div${chatVO.chatroomno }" class="chat_user_list_room_m_member_div">
                                           <span>${chatVO.name }</span>   
                                          <%--  <c:if test="${not empty chatVO.datetime }"> --%>
                                           <span id="chat_user_list_room_m_datetime${chatVO.chatroomno }">· ${chatVO.datetime } </span>
@@ -189,7 +189,7 @@
 			var chatroomno = $('#roomno').val();
 			var location = $('#location').val();
 		    var calendarLocationno = 0;
-				window.open("chatlocation?user1="+user1+"&user2="+user2+"&chatroomno="+chatroomno+"&locationjsp="+location+"&calendarLocationno="+calendarLocationno, "_blank", "width=900, height=610,toolbar=no,location=no,resizable=no,left=30,top=30,menubar=no" ); 
+				window.open("chatlocation?user1="+user1+"&user2="+user2+"&chatroomno="+chatroomno+"&locationjsp="+location+"&calendarLocationno="+calendarLocationno, "_blank", "width=900, height=620,toolbar=no,location=no,resizable=no,left=30,top=30,menubar=no" ); 
 		
 		})
 

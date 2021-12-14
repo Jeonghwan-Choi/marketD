@@ -58,5 +58,19 @@ public class BoardServiceImpl implements BoardService {
 		 System.out.println("run BoardServiceImpl productSearchData()");
 		  return boardDAO.productSearchData(vo);
 	}
-   
+	@Override
+	public int wishcount(BoardVO vo) {
+		System.out.println("run BoardServiceImpl wishcount()");
+	      return boardDAO.wishcount(vo).getWishcount();
+	}
+	@Override
+	public int guestnochk(BoardVO vo) {
+		System.out.println("run BoardServiceImpl guestnochk()");
+	      return boardDAO.guestnochk(vo).getGuestno();
+	}
+	@Override
+	public int guestcountchk(BoardVO vo) {
+		System.out.println("run BoardServiceImpl guestcountchk()");
+		return boardDAO.guestcountchk(vo).getGuestno();
+	}
 }

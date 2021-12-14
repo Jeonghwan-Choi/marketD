@@ -67,4 +67,16 @@ public class BoardDAO {
 	   System.out.println("run BoardDAO boardInfo()"+vo.getSearchdata());
 	   return sqlSession.selectList("BoardDAO.productSearch",vo);
    }
+   public BoardVO wishcount(BoardVO vo) {
+	      System.out.println("run BoardDAO wishcount()");
+	      return sqlSession.selectOne("BoardDAO.wishcount",vo);
+	   }
+   public BoardVO guestnochk(BoardVO vo) {
+	      System.out.println("run BoardDAO guestnochk()");
+	      return sqlSession.selectOne("BoardDAO.guestnochk",vo);
+	   }
+   public BoardVO guestcountchk(BoardVO vo) {
+	      System.out.println("run BoardDAO guestcountchk()");
+	      return sqlSession.selectOne("BoardDAO.guestcountchk",vo);
+	   }
 }

@@ -91,9 +91,15 @@
                             ${board.price }원
                         </a><br>
                         <p class="product_detail_content">${board.content }</p>
+                        
+                        
+                        
                         <a class="product_detail_favorite" >관심 </a><a class="product_detail_favorite_1">${board.wishcount}</a>
                         <a class="product_detail_chatting" >채팅</a> <a class="product_detail_chatting" >${board.chatcount }</a>
-                        <a class="product_detail_select" >조회</a> <a class="product_detail_select" >${board.viewscount }</a>
+                        <a class="product_detail_select" >조회</a> <a class="product_detail_select_1" >${board.viewscount }</a>
+                        
+                        
+                        
                     </div>
 
                 </div>
@@ -147,9 +153,62 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 
+
+
+var memberno = document.getElementById('loginMemberno').value;
+var boardno = document.getElementById('boardBoardno').value;
+var boardmemberno = document.getElementById('boardMemberno').value;
+	$.ajax({
+	    url : 'guestnochk',
+	    method : 'POST',
+	    data : 'memberno=' + memberno + '&boardno=' + boardno,
+	    type : "POST",
+	
+	    success : function(data) {
+	         
+	         if(data==0){
+	        	 
+	        	 $.ajax({
+	        		    url : 'insertGuest',
+	        		    method : 'POST',
+	        		    data : 'memberno=' + memberno + '&boardno=' + boardno,
+	        		    type : "POST",
+	        		
+	        		    success : function(data) {
+	        		    	
+	        		    	 $.ajax({
+	     	        		    url : 'guestcountchk',
+	     	        		    method : 'POST',
+	     	        		    data : 'boardno=' + boardno,
+	     	        		    type : "POST",
+	     	        		
+	     	        		    success : function(data) {
+	     	        		    	console.log(data);
+	     	        		         $('.product_detail_select_1').html(data);
+	     	        		         
+	     	        		 },
+	     	        		    error : function() {
+	     	        		       alert("request error!");
+	     	        		    }
+	     	        		 }) 
+	        		         
+	        		         
+	        		 },
+	        		    error : function() {
+	        		       alert("request error!");
+	        		    }
+	        		 })  
+	         }
+	         
+	         
+	        
+	 },
+	    error : function() {
+	       alert("request error!");
+	    }
+	 })  
+ 
    //wish
-      var memberno = document.getElementById('loginMemberno').value;
-      var boardno = document.getElementById('boardBoardno').value;
    
       $.ajax({
             url : 'wishchk',
@@ -306,7 +365,6 @@
                    const boardno = document.getElementById('boardBoardno').value;
                    var wish = $(".product_detail_favorite_1").html
                var wishchk = $(".product_detail_favorite_1").html
-               var num = parseInt(wishchk);
                    
                    $.ajax({
                        url : 'addwish',
@@ -315,8 +373,19 @@
                        type : "POST",
 
                        success : function(data) {
-                          num = num+1;
-                            alert("해당 상품을 찜했습니다.")
+                            alert("해당 상품을 찜했습니다."+data.wishno)
+                            
+                            $.ajax({
+                            	url:'wishcount',
+                            	method : 'POST',
+                            	data :'boardno=' + boardno,
+                            	type : 'POST',
+                            	success :function(data){
+                            		$(".product_detail_favorite_1").html(data);
+                            		alert("성공"+data);
+                            	}
+                            })
+                            
                            
                     },
                        error : function() {
@@ -338,7 +407,8 @@
                        type : "POST",
 
                        success : function(data) {
-                            alert("해당 상품의 찜선택을 취소했습니다.")
+                            alert("해당 상품의 찜선택을 취소했습니다.");
+                            window.location.reload();
                            
                     },
                        error : function() {
@@ -348,5 +418,13 @@
                }           
            } 
        });
+   /*  window.onpageshow =  function(event) {
+        //back 이벤트 일 경우
+        if (event.persisted) {
+        	location.href = document.referrer; 
+        }
+    } */
+    /* if(window.history.back()){location.href="/main"} */
+    
 </script>
 </html>

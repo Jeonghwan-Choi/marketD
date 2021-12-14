@@ -15,7 +15,7 @@
 </head>
 <body>
 <!-- <form action="/chatcalendar" method="post"> -->
-<form method="post">
+<form method="post" id="reload" action="/chatcalendar">
     <div class="main">
         <div class="location_header">
         <input type="hidden" id="user1" name="user1" value="${chatList.user1 }">
@@ -149,7 +149,8 @@
                         
                         <c:set var="jstlTitle2" value="${calendarLocation.locationtitle }"/>
                      <c:if test="${empty jstlTitle2 }">
-                          <td class="location_td"><input name="location_submit_input" class="location_submit_input" id="location_submit_input" type="submit" value="약속잡기" formaction="/chatcalendar"></td>
+                           <td class="location_td"><input name="location_submit_input" class="location_submit_input" id="location_submit_input" type="submit" value="약속잡기" formaction="/chatcalendar"></td>
+                         <!-- <td class="location_td"><input name="location_submit_input" class="location_submit_input" id="location_submit_input" type="submit" value="약속잡기" onclick="reload();"></td> -->
                      </c:if>
                      <c:if test="${not empty jstlTitle2 }">
                          <td class="location_td"><input name="jstl_location_submit_input" class="jstl_location_submit_input" id="jstl_location_submit_input" type="submit" value="달력보기" formaction="/chatcalendarview"></td>
@@ -168,11 +169,11 @@
                     </div>
                     <div class="location_memberlist_content">
                         <div class="location_memberlist_div">
-                             <img src="http://cjhftp.dothome.co.kr/${chatList.user1}/profile/${chatList.profile}">
+                             <img onerror="this.src='https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png';" src="http://cjhftp.dothome.co.kr/${chatList.user1}/profile/${chatList.profile}">
                             <a class="location_memberlist_span">${chatList.login }</a>
                         </div>
                         <div class="location_memberlist_div">
-                             <img src="http://cjhftp.dothome.co.kr/${chatList.user2}/profile/${chatList.memberprofile}">
+                             <img onerror="this.src='https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png';" src="http://cjhftp.dothome.co.kr/${chatList.user2}/profile/${chatList.memberprofile}">
                             <a class="location_memberlist_span">${chatList.member}</a>
                         </div>
                         
@@ -188,6 +189,22 @@
  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fb6a99631a16b1a22bae6ea2a8990dee&libraries=services"></script>
 <script>
+
+/*
+function reload(){
+	
+	if(performance.navigation.type==1){alert("dd")}else{alert("not reloaded")}
+	  window.onbeforeunload = function (e) {
+		  alert("dd")
+  };
+	
+	
+	if
+	window.onbeforeunload=function(){
+		}else{
+	document.getElementById('reload').submit();} 
+	
+};*/
 // 마커를 담을 배열입니다
 var markers = [];
 

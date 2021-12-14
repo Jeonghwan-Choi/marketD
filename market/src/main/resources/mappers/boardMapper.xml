@@ -27,9 +27,13 @@
      select boardno from (select boardno from board where memberno=#{memberno} order by boardno desc) where rownum=1
   </select>
   
+  	<select id="wishcount" parameterType="board" resultType="board">
+  		select count(wishno)wishcount from wish where boardno=#{boardno}
+  	</select>
  
-    
-  
+  	<select id="guestnochk" parameterType="board" resultType="board">
+    	select count(guestno)guestno from guest where boardno=#{boardno} and memberno=#{memberno}
+  	</select>
   
   <select id="boardList" resultType="board">
    <![CDATA[
@@ -51,7 +55,9 @@
       <insert id="insertGuest" parameterType="board">
          insert into guest(boardno,memberno) values(#{boardno},#{memberno}) 
       </insert>
-      
+      <select id="guestcountchk" parameterType="board">
+      	select count(guestno)guestcountchk from guest where boardno=#{boardno}
+      </select>
       
    
    <select id="boardquery" parameterType="board" resultType="board">

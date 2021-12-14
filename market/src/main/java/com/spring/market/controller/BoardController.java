@@ -163,6 +163,14 @@ public class BoardController {
 		boardService.addwish(vo);
 		 
 	}
+	@RequestMapping("/wishcount")
+	@ResponseBody
+	public int wishcount(HttpServletRequest req, Model model,BoardVO vo) throws Exception {
+		
+		int num = boardService.wishcount(vo);
+		return num;
+		 
+	}
 	@RequestMapping("/wishchk")
 	@ResponseBody
 	public int wishchk(HttpServletRequest req, Model model,MemberVO vo) throws Exception {
@@ -173,6 +181,23 @@ public class BoardController {
 	@ResponseBody
 	public void deleteWish(HttpServletRequest req, Model model,MemberVO vo) throws Exception {
 		memberService.deleteWish(vo);
+	}
+	@RequestMapping("/guestnochk")
+	@ResponseBody
+	public int guestnochk(HttpServletRequest req, Model model,BoardVO vo) throws Exception {
+		int num = boardService.guestnochk(vo);
+		return num;
+	}
+	@RequestMapping("/insertGuest")
+	@ResponseBody
+	public void insertGuest(HttpServletRequest req, Model model,BoardVO vo) throws Exception {
+		boardService.insertGuest(vo);
+	}
+	@RequestMapping("/guestcountchk")
+	@ResponseBody
+	public int guestcountchk(HttpServletRequest req, Model model,BoardVO vo) throws Exception {
+		int num = boardService.guestnochk(vo);
+		return num;
 	}
 	
 	 @RequestMapping("/searchboard")

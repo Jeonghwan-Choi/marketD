@@ -12,6 +12,8 @@ a{
     text-decoration: none;
     color:rgb(25, 25, 25);
 }
+#chatcalendar_top_thead{
+}
 .chatcalendar_top_day,td{
     
     border:1px solid rgb(87, 87, 87,0.2);
@@ -21,7 +23,8 @@ input[name=chatcalendar_top_perMon]{
     width: 50px;
 }
 #calendar_top_table th {
-    height: 50px;
+    height: 30px;
+    min-width:100px;
     width: 300px;
     background-color:  white;
 }
@@ -32,17 +35,16 @@ input[name=chatcalendar_top_perMon]{
     background-color: white;
 }
 #chatcalendar_top_preMon, #chatcalendar_top_nextMon {
-    height: 50px;
+    height: 40px;
     border: none;
     background-color:  white;
-    font-size: 30px;
+    font-size: 15px;
 }
 .calendar_top_year_mon{
-    font-size: 25px;
+    font-size: 13px;
 }
 .chatcalendar_top_date{
-    font-size:15px;
-    font-weight: bolder;
+    font-size:13px;
     color:rgb(87, 87, 87);
     vertical-align: top;
     padding-top:10px;
@@ -50,14 +52,16 @@ input[name=chatcalendar_top_perMon]{
 
 }
 .chatcalendar_top_day{
-    font-size:17px;
+    font-size:14px;
     text-align: left;
     padding-left:10px;
 }
 .chatcalendar_top_event{
     width:60px;
-    height: 20px;
+    height: 17px;
 	color:rgb(255,255,255);
+	font-size:13px;
+	font-weight:normal;
 }
 /* #carrotimg{
    width:15px;
@@ -70,6 +74,6 @@ input[name=chatcalendar_top_perMon]{
     border-radius:5px;
     padding:0.1em;
 }
-.testdong a{
+.testdong span{
 	color:white;
 }
