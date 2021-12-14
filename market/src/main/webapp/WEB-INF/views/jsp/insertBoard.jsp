@@ -1,16 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="UTF-8">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>insertBoard</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/insertBoard.css ">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-</head>
-<body>
+
+<%@ include file = "header.jsp"%>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/insertBoard.css?ver=1.1 ">
+
 <form action="/insertBoard" method="post" id="insertBoard" name="insertBoard" enctype="multipart/form-data">
     <main class="insertboard">
     <input type="hidden" value="${memberVO.memberno}" id="memberno" name="memberno">
@@ -76,6 +69,9 @@
             </div>
         </div>
     </main>
+          <footer class="footer">
+
+      </footer>
 </form>
 </body>
 <script>

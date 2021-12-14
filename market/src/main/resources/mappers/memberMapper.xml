@@ -34,7 +34,10 @@
      </select>
      
       <select id="loginMember" resultType="member">
-       select * from member where email = #{email}
+       select m.*,c."cnt" from member m
+		Left Join (select count(*)"cnt",seller from chatmessage where readst = 1 group by seller) c
+		on m.memberno = c.seller
+		where m.email = #{email}
     </select>
     
     <update id="updateProfileImg" parameterType="member"> 
@@ -61,6 +64,8 @@
 		where b.memberno = #{memberno} and d.imageindex = 1
 
 	</select> 
+    
+    
     
     
     

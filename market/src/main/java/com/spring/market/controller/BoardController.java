@@ -117,7 +117,7 @@ public class BoardController {
         //main이동
       model.addAttribute("productList", boardService.boardList());
       
-      return "/jsp/main";
+      return "redirect:/main";
    }
    
    @RequestMapping("/insertBoardImage")
@@ -208,6 +208,8 @@ public class BoardController {
 	public List<BoardVO>  searchmoreboard(HttpServletRequest req, Model model,BoardVO vo,int count,String searchData,int firstvalue, int lastvalue) throws IllegalStateException, ParseException {
 	   System.out.println("searchmoreboard");
 	   System.out.println(count);
+	   System.out.println(firstvalue);
+	   System.out.println(lastvalue);
 	   vo.setSearchdata(searchData);
 	   vo.setFirstvalue(firstvalue);
 	   vo.setLastvalue(lastvalue);

@@ -145,7 +145,7 @@
 </body>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-location.href = document.referrer;
+
    //wish
       var memberno = document.getElementById('loginMemberno').value;
       var boardno = document.getElementById('boardBoardno').value;
@@ -291,53 +291,62 @@ location.href = document.referrer;
     
     $('.wish_div').on({ 
            'click': function(){
-               if(jQuery('#wish_img').attr("src")=='http://cjhftp.dothome.co.kr/ico/heart.png'){
-                   $('#wish_img').attr('src','http://cjhftp.dothome.co.kr/ico/heart2.png');
-                   
-                   const memberno = document.getElementById('loginMemberno').value;
-                   const boardno = document.getElementById('boardBoardno').value;
-                   var wish = $(".product_detail_favorite_1").html
-               var wishchk = $(".product_detail_favorite_1").html
-               var num = parseInt(wishchk);
-                   
-                   $.ajax({
-                       url : 'addwish',
-                       method : 'POST',
-                       data : 'memberno=' + memberno + '&boardno=' + boardno,
-                       type : "POST",
+        	   
+        	   if(memberno != ""){
+        		   
+        		   if(jQuery('#wish_img').attr("src")=='http://cjhftp.dothome.co.kr/ico/heart.png'){
+                       $('#wish_img').attr('src','http://cjhftp.dothome.co.kr/ico/heart2.png');
+                       
+                       const memberno = document.getElementById('loginMemberno').value;
+                       const boardno = document.getElementById('boardBoardno').value;
+                       var wish = $(".product_detail_favorite_1").html
+                   var wishchk = $(".product_detail_favorite_1").html
+                   var num = parseInt(wishchk);
+                       
+                       $.ajax({
+                           url : 'addwish',
+                           method : 'POST',
+                           data : 'memberno=' + memberno + '&boardno=' + boardno,
+                           type : "POST",
 
-                       success : function(data) {
-                          num = num+1;
-                            alert("해당 상품을 찜했습니다.")
-                           
-                    },
-                       error : function() {
-                          alert("request error!");
-                       }
-                    })  
-                   
-               }else if(jQuery('#wish_img').attr("src")=='http://cjhftp.dothome.co.kr/ico/heart2.png'){
-                   $('#wish_img').attr('src','http://cjhftp.dothome.co.kr/ico/heart.png');
-                   
-                   const memberno = document.getElementById('loginMemberno').value;
-                   const boardno = document.getElementById('boardBoardno').value;
-                   
-                   
-                   $.ajax({
-                       url : 'deleteWish',
-                       method : 'POST',
-                       data : 'memberno=' + memberno + '&boardno=' + boardno,
-                       type : "POST",
+                           success : function(data) {
+                              num = num+1;
+                                alert("해당 상품을 찜했습니다.")
+                               
+                        },
+                           error : function() {
+                              alert("request error!");
+                           }
+                        })  
+                       
+                   }else if(jQuery('#wish_img').attr("src")=='http://cjhftp.dothome.co.kr/ico/heart2.png'){
+                       $('#wish_img').attr('src','http://cjhftp.dothome.co.kr/ico/heart.png');
+                       
+                       const memberno = document.getElementById('loginMemberno').value;
+                       const boardno = document.getElementById('boardBoardno').value;
+                       
+                       
+                       $.ajax({
+                           url : 'deleteWish',
+                           method : 'POST',
+                           data : 'memberno=' + memberno + '&boardno=' + boardno,
+                           type : "POST",
 
-                       success : function(data) {
-                            alert("해당 상품의 찜선택을 취소했습니다.")
-                           
-                    },
-                       error : function() {
-                          alert("request error!");
-                       }
-                    }) 
-               }           
+                           success : function(data) {
+                                alert("해당 상품의 찜선택을 취소했습니다.")
+                               
+                        },
+                           error : function() {
+                              alert("request error!");
+                           }
+                        }) 
+                   }  
+        		   
+        	   }else if(memberno == ""){
+        				   location.href = "/login";
+        	   }
+        	   
+                        
            } 
        });
 </script>
