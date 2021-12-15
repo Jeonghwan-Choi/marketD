@@ -15,14 +15,6 @@ import com.spring.market.vo.ChatVO;
 public class ChatDAO {
    @Inject
    SqlSession sqlSession;
-   
-   /*
-    * public List<ChatVO> myChatList(ChatVO vo){
-    * System.out.println("run ChatDAO myChatList()");
-    * System.out.println("user1 = "+vo.getUser1()); return
-    * sqlSession.selectList("ChatDAO.myChatList",vo); }
-    */
-   
    public List<ChatVO> myChatList(ChatVO vo){
       System.out.println("run ChatDAO myChatList()");
       System.out.println("user1 = "+vo.getUser1());

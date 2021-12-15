@@ -231,8 +231,7 @@ public class BoardController {
 	   @RequestMapping("/searchmoreboard")
 	   @ResponseBody
 		public List<BoardVO>  searchmoreboard(HttpServletRequest req, Model model,BoardVO vo,int count,String searchData,int firstvalue, int lastvalue) throws IllegalStateException, ParseException {
-		   System.out.println("searchmoreboard");
-		   System.out.println(count);
+		   
 		   vo.setSearchdata(searchData);
 		   vo.setFirstvalue(firstvalue);
 		   vo.setLastvalue(lastvalue);

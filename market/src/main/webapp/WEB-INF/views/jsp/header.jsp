@@ -26,7 +26,7 @@
     <header>
     <nav class="headernav">
         <div class = "header_img_div">
-            <img class="fixed-logo" alt="당근마켓" src="https://d1unjqcospf8gs.cloudfront.net/assets/home/base/header/logo-basic-24b18257ac4ef693c02233bf21e9cb7ecbf43ebd8d5b40c24d99e14094a44c81.svg" onclick="http://localhost:8181/main">
+            <img class="fixed-logo" alt="당근마켓" onclick="mainlogo()" src="https://d1unjqcospf8gs.cloudfront.net/assets/home/base/header/logo-basic-24b18257ac4ef693c02233bf21e9cb7ecbf43ebd8d5b40c24d99e14094a44c81.svg" onclick="http://localhost:8181/main">
         </div>
         <section class="header_section" >
             <input id="search" type="text" placeholder="동네 이름, 물품명등을 검색해보세요!">
@@ -35,39 +35,53 @@
             </button>
 
         </section>
-        <nav>      
-            <div class="header_chatting_div">
-                <div>
-                   <form name="formm" method="post" action="/chat">
-                      <input name="user1" id="loginMemberno" type= "text" value="${sessionScope.memberVO.memberno}">
-                          <input class="header_chatting_btn" type="submit"  value="당근채팅" >
-                   </form>
-                </div>
-                 <c:choose>
-                  <c:when test="${sessionScope.memberVO==null}">
-                       <div>
-                         <input class="header_chatting_btn" type="button" value="로그인" onclick="loginform()">
-                        </div>
-                  </c:when>
-                  <c:otherwise>
-                     <div class="header_login_div">
-                         <c:choose>
-                        <c:when test="${sessionScope.memberVO.profiletype eq 'octet-stream' }">   
-                             <img class="header_login_div_profile" src="${sessionScope.memberVO.profile}">
-                          </c:when>
-                          <c:otherwise>
-                             <img class="header_login_div_profile" src="http://cjhftp.dothome.co.kr/${sessionScope.memberVO.memberno}/profile/${sessionScope.memberVO.profile}">
-                          </c:otherwise>
-                       </c:choose>
-                       <span>${sessionScope.memberVO.name}</span>
-                         <img class="header_login_div_down"  src="https://cdn-icons.flaticon.com/png/512/2985/premium/2985150.png?token=exp=1637135271~hmac=3f62a84e9d5a4112839b78e572418d09" >
-                    </div>
-                  </c:otherwise>
-               </c:choose>
+        <nav>
+				<div class="header_chatting_div">
+					<div>
+						<form name="formm" method="post" action="/chat">
+							<input name="user1" id="loginMemberno" type="text"
+								value="${sessionScope.memberVO.memberno}" style="display: none;">
+							<%--                           <input class="header_chatting_btn" type="submit"  value="당근채팅 ${sessionScope.memberVO.cnt }" >
+ --%>
+							<c:choose>
+								<c:when test="${sessionScope.memberVO==null}">
+									<a class="header_chatting_btn" href="/login"> <span>당근채팅</span>
+										<span class="header_chatting_btn_cnt">${sessionScope.memberVO.cnt }</span>
+									</a>
+								</c:when>
+								<c:otherwise>
+									<a class="header_chatting_btn" onclick="chatsubmit()"> <span>당근채팅</span>
+										<span class="header_chatting_btn_cnt">${sessionScope.memberVO.cnt }</span>
+									</a>
+								</c:otherwise>
+							</c:choose>
 
-            </div>
-        </nav>
+						</form>
+					</div>
+					<c:choose>
+						<c:when test="${sessionScope.memberVO==null}">
+							<div>
+								<input class="header_login_btn" type="button" value="로그인"
+									onclick="loginform()">
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="header_login_div">
+								<img class="header_login_div_profile"
+									src="${sessionScope.memberVO.profile}"
+									onerror="this.src='https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png';">
+								<span>${sessionScope.memberVO.name}</span>
+								<!--  <img class="header_login_div_down"  src="https://cdn-icons.flaticon.com/png/512/2985/premium/2985150.png?token=exp=1637135271~hmac=3f62a84e9d5a4112839b78e572418d09" > -->
+							</div>
+						</c:otherwise>
+					</c:choose>
+
+				</div>
+			</nav>
         <script>
+	       function mainlogo(){
+	          location.href = "/main";
+	       }
            function loginform(){
               location.href = "/login";
            }
@@ -75,6 +89,9 @@
               console.log($("#Loginmemberno").val());
              location.href = "/chat";
            }
+           function chatsubmit(){
+ 	          document.formm.submit();
+ 	       }
            
 
            $(document).ready(function() {

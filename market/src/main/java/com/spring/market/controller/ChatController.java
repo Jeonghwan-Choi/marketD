@@ -39,6 +39,29 @@ public class ChatController {
 	
 	public String chat(HttpServletRequest req, Model model, ChatVO vo) throws IllegalStateException {
 
+		
+		
+		model.addAttribute("boardMemberno",req.getParameter("boardMemberno"));
+		model.addAttribute("boardBoardno",req.getParameter("boardBoardno"));
+		model.addAttribute("loginMemberno",req.getParameter("user1"));
+
+		int user1 = Integer.parseInt(req.getParameter("user1"));
+	
+		List <ChatVO> mychatList =  chatService.myChatList(vo);
+	
+		
+		
+		model.addAttribute("mychatList",mychatList);
+
+		
+		return "/jsp/chat";
+	}
+	
+
+@RequestMapping("/insertchatRoom")
+	
+	public String insertchatRoom(HttpServletRequest req, Model model, ChatVO vo) throws IllegalStateException {
+
 		vo.setBoardno(Integer.parseInt(req.getParameter("boardBoardno")));
 		vo.setBuyerno(Integer.parseInt(req.getParameter("user1")));
 		chatService.insertChatroom(vo);
@@ -66,7 +89,6 @@ public class ChatController {
 		
 		return "/jsp/chat";
 	}
-	
 	@RequestMapping("/selectChat")
 	@ResponseBody
 	public List <ChatVO> selectChat(HttpServletRequest req,Model model,ChatVO vo,int roomno,int seller, String chatmessage, int readst,int firstvalue, int lastvalue)throws Exception {
@@ -143,27 +165,6 @@ public class ChatController {
 		return chatVo;
 	}
 	
-//	cjh
-
-
-//	@RequestMapping("/chatlocationlist")
-//	@ResponseBody
-//	public void chatlocationlist(HttpServletRequest req, Model model, ChatVO vo) throws IllegalStateException {
-////		int memberno = Integer.parseInt(req.getParameter("memberno"));
-////		int loginmemberno = Integer.parseInt(req.getParameter("loginmemberno"));
-////		vo.setUser1(loginmemberno);
-////		vo.setChatmember(memberno);
-//		//System.out.println("memberno:"+req.getParameter("memberno"));
-//		
-//	
-//		
-//		int chatmember = Integer.parseInt(req.getParameter("chatmember"));
-//		vo.setChatmember(chatmember);
-//		System.out.println("chatmember::controller"+chatmember);
-//		vo = chatService.chatlocationlist(chatmember);
-//		model.addAttribute("chatList",vo);
-//	}
-	
 	@RequestMapping("/chatlocation")
 	public String chatlocation(HttpServletRequest req, Model model, ChatVO vo, int user1, int user2,int chatroomno,int calendarLocationno) throws IllegalStateException {
 
@@ -187,29 +188,11 @@ public class ChatController {
 	}
 	@RequestMapping("/chatcalendar")
 	public String chatcalendar(HttpServletRequest req,HttpServletResponse res, Model model, ChatVO vo) throws IllegalStateException, IOException {
-		/*
-		 * PrintWriter writer = res.getWriter();
-		 * writer.println("<script type='text/javascript'>"); writer.
-		 * println("window.onload = function(){alert('메시지'); location.href='이동URL';}");/
-		 * /alert 이후, URL 이동 writer.println("</script>"); writer.flush();
-		 */
-//		document.onkeydown = function(e){
-//		    /* F5, Ctrl+r, Ctrl+F5 */
-//		    if(e.keyCode == 116 || e.ctrlKey == true && (e.keyCode == 82)){
-//		        e.cancelBubble = true; 
-//		        e.returnValue = false; 
-//		        setTimeout(function(){
-//		            window.location.reload();
-//		        }, 1000);
-//		        return false;
-//		    }
-//		}
 		
 		int keyCode = 0;
 		if(keyCode==116) {
 			System.out.println("새로고침!");
 		}
-//		if(System.in.read()==116) {System.out.println("새로고침!");}
 
 			String title = req.getParameter("location_header_input");
 			String date = req.getParameter("location_date_input");

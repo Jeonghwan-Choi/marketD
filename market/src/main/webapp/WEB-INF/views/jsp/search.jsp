@@ -1,9 +1,11 @@
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%> 
 <%@ include file = "header.jsp"%>
 <link href="https://hangeul.pstatic.net/hangeul_static/css/NanumMyeongjoYetHangul.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
     <main class="main">
         <div class="main_product" >
             <p>인기중고</p>
@@ -32,17 +34,48 @@
 			<input type="button" id="search_more" value="더보기" onclick="moredata()">
 
 		</div>
-			<input type="text" id="firstvalue" value="1">
-			<input type="text" id="lastvalue" value="6">
+		<div style="display:none;">
+			<input type="text" id="firstvalue" value="6">
+			<input type="text" id="lastvalue" value="11">
 			<input type="text" id="searchData" value="${searchData }">
         	<input type="text" id="count" value="${count}">
-        <a href="/insertBoardForm">피효정바보</a>
+        </div>	
+        	<c:choose>
+		<c:when test="${sessionScope.memberVO==null}">
+			<div>
+				<a class="insertboardbtn" href="/login"> <img
+					src="https://cdn-icons.flaticon.com/png/512/4274/premium/4274059.png?token=exp=1639301269~hmac=f58dc472843fb41dbf625eb5c07107bb">
+				</a>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<a class="insertboardbtn" href="/insertBoardForm"> <img
+				src="https://cdn-icons.flaticon.com/png/512/4274/premium/4274059.png?token=exp=1639301269~hmac=f58dc472843fb41dbf625eb5c07107bb">
+			</a>
+		</c:otherwise>
+	</c:choose>
       </main>   
       <footer class="footer">
 
       </footer>
 </body>
 <script>
+	
+var alert1 = function(msg, type) {
+	swal({
+	    title: "알림",   
+	    text: "마지막 상품입니다.",   
+	    type: "info" 
+	});
+ }
+ 
+
+	
+	function Alert() {
+	      alert('gg', '더보기가 없습니다.');
+	}
+
+
 	function moredata(){
 		
 		
@@ -105,7 +138,7 @@
 					console.log($(data).length);
 					console.log(firstvalue);
 					console.log(lastvalue);
-					alert('더보기가 없습니다.')
+					 alert1('gg', '더보기가 없습니다.');
 					
 				}
 				

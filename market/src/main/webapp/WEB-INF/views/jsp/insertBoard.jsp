@@ -1,17 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%@ include file = "header.jsp"%>
-<!DOCTYPE html>
-<html lang="UTF-8">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>insertBoard</title>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/insertBoard.css ">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-</head>
-<section>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/insertBoard.css?ver=1.1 ">
+
 <form action="/insertBoard" method="post" id="insertBoard" name="insertBoard" enctype="multipart/form-data">
     <main class="insertboard">
     <input type="hidden" value="${memberVO.memberno}" id="memberno" name="memberno">
@@ -42,7 +34,8 @@
                     <input type="number" id="insertboard_insertboard_price" value="" placeholder="&#8361; 가격" name="price">
                     <span style="float: right;">원</span>
                     <hr>
-                    <textarea style="width:100%;" rows="10" placeholder="${memberVO.address }에 올릴게시글 내용을 작성해주세요.(가품 및 판매금지품목은 게시가 제한될 수 있어요.)" value="" id="insertboard_insertboard_content" name="content"></textarea>
+                    <textarea style="width:100%;" rows="10"
+                        placeholder="${memberVO.address }에 올릴게시글 내용을 작성해주세요.(가품 및 판매금지품목은 게시가 제한될 수 있어요.)" value="" id="insertboard_insertboard_content" name="content"></textarea>
                 </div>
                 <div class="insertboard_insertboard_submitButton_div">
 
@@ -76,7 +69,11 @@
             </div>
         </div>
     </main>
-</form></section>
+          <footer class="footer">
+
+      </footer>
+</form>
+</body>
 <script>
     $(function () {
         $(".insertboard_insertboard_category").hide();
@@ -188,20 +185,28 @@
 		
 		})
 
+		
+    //ajax 먼저 board생성-> select 아이디로 최신의 boardno 찾아서 -> 
+
+    //var rr =;//success
+    //var length = document.getElementsByClassName("image").length
 
     console.log(length);
     for (let i = 1; i < length - 1; i++) {
+
         console.log(jQuery(".image").eq(i).attr("alt"))
+        //boardno 가지고 image insert
     }
-    
-    
-  
+   /*  document.formm.action = "/insertBoardImage";
+    	document.formm.submit(); */
 }
     function boardSubmit(){
- 	   var str = $("#insertboard_insertboard_content").val();
- 	    str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
- 	    $("#insertboard_insertboard_content").val(str);
+    	   var str = $("#insertboard_insertboard_content").val();
+
+    	    str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+    	    $("#insertboard_insertboard_content").val(str);
 			$("#insertBoard").submit();
- }
+
+    }
 </script>
 </html>

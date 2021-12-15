@@ -23,7 +23,7 @@
         <div class="proudct_product" >
             <div class="proudct_product_div">
                 <div class="proudct_product_img_div">
-                <form method="post" action="/chat" name="formm" id="formm">
+                <form method="post" action="/insertchatRoom" name="formm" id="formm">
                    <input name="boardMemberno" id="boardMemberno" type="hidden" value="${board.memberno}">
                    <input name="boardBoardno" id="boardBoardno" type="hidden" value="${board.boardno}">
                    <input name="user1" id="loginMemberno" type="hidden" value="${sessionScope.memberVO.memberno}">
@@ -31,8 +31,6 @@
                     <input type="hidden" name="loginMemberProfile" id="loginMemberProfile" value="${board.profile }"> 
                    <input type="submit" style="background-color:transparent;  border:0px transparent solid;" value="">
                 </form>
-                <%-- <input type="hidden" id="wishno" value="${wishchk.wishno }"> --%>
-                
                     <div class="wrapper">
                     
                     <div class="btn">
@@ -53,10 +51,10 @@
                 </div>
                     <div class="proudct_product_profile_div">
                         <div class="proudct_product_profile" >
-                            <img  src="https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png">                      
-                        </div>             
-                        <div class="proudct_product_profile_name">
-                            <a class="proudct_product_profile_name_name">${board.name }</a><br>
+                             <img src="http://cjhftp.dothome.co.kr/${board.memberno}/profile/${board.profile}" onerror="this.src='https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png';">                      
+                        </div>                        
+                      <div class="proudct_product_profile_name">
+                            <a class="proudct_product_profile_name_name" href="user?memberno=${board.memberno }">${board.name }</a><br>
                             <a class="proudct_product_profile_name_address" >${board.address }</a>
                             <div class="wish_span">
                                 <div class="wish_input" id="wish_input">
@@ -174,9 +172,9 @@ var boardmemberno = document.getElementById('boardMemberno').value;
 	        		    data : 'memberno=' + memberno + '&boardno=' + boardno,
 	        		    type : "POST",
 	        		
-	        		    success : function(data) {
+	        		    success : function() {
 	        		    	
-	        		    	 $.ajax({
+	        		    	  $.ajax({
 	     	        		    url : 'guestcountchk',
 	     	        		    method : 'POST',
 	     	        		    data : 'boardno=' + boardno,
@@ -190,7 +188,7 @@ var boardmemberno = document.getElementById('boardMemberno').value;
 	     	        		    error : function() {
 	     	        		       alert("request error!");
 	     	        		    }
-	     	        		 }) 
+	     	        		 })  
 	        		         
 	        		         
 	        		 },
@@ -210,29 +208,29 @@ var boardmemberno = document.getElementById('boardMemberno').value;
  
    //wish
    
-      $.ajax({
-            url : 'wishchk',
-            method : 'POST',
-            data : 'memberno=' + memberno + '&boardno=' + boardno,
-            type : "POST",
-
-            success : function(data) {
-                 const data1 = $.trim(data);
-                 if(data1==0){
-                     $("#wish_img").attr("src", "http://cjhftp.dothome.co.kr/ico/heart.png");
-                 }
-                 if(data1!=0){
-                    $("#wish_img").attr("src", "http://cjhftp.dothome.co.kr/ico/heart2.png");
-                 }
-
-                
-         },
-            error : function() {
-               alert("request error!");
-            }
-         })  
+      if(memberno != ""){
+    	  $.ajax({
+              url : 'wishchk',
+              method : 'POST',
+              data : 'memberno=' + memberno + '&boardno=' + boardno,
+              type : "POST",
+              success : function(data) {
+                   const data1 = $.trim(data);
+                   if(data1==0){
+                       $("#wish_img").attr("src", "http://cjhftp.dothome.co.kr/ico/heart.png");
+                   }
+                   if(data1!=0){
+                      $("#wish_img").attr("src", "http://cjhftp.dothome.co.kr/ico/heart2.png");
+                   }
+                  
+           },
+              error : function() {
+                 alert("request error!");
+              }
+           }) 
+      }
+       
       console.log(boardDatetime);
-   
 
 
    //diffHor
@@ -340,7 +338,7 @@ var boardmemberno = document.getElementById('boardMemberno').value;
             swal('', '채팅방이 생성 되었습니다.', "success",
                   $("#formm").submit());
          }else{
-             document.formm.action = "/chat";
+             document.formm.action = "/insertchatroom";
              document.formm.submit(); 
             // swal('', '예약이 거부되었습니다.', "failed");
          }
@@ -356,15 +354,19 @@ var boardmemberno = document.getElementById('boardMemberno').value;
    }
    
     
-    $('.wish_div').on({ 
-           'click': function(){
-               if(jQuery('#wish_img').attr("src")=='http://cjhftp.dothome.co.kr/ico/heart.png'){
+   $('.wish_div').on({ 
+       'click': function(){
+    	   
+    	   if(memberno != ""){
+    		   
+    		   if(jQuery('#wish_img').attr("src")=='http://cjhftp.dothome.co.kr/ico/heart.png'){
                    $('#wish_img').attr('src','http://cjhftp.dothome.co.kr/ico/heart2.png');
                    
                    const memberno = document.getElementById('loginMemberno').value;
                    const boardno = document.getElementById('boardBoardno').value;
                    var wish = $(".product_detail_favorite_1").html
                var wishchk = $(".product_detail_favorite_1").html
+               var num = parseInt(wishchk);
                    
                    $.ajax({
                        url : 'addwish',
@@ -373,19 +375,8 @@ var boardmemberno = document.getElementById('boardMemberno').value;
                        type : "POST",
 
                        success : function(data) {
-                            alert("해당 상품을 찜했습니다."+data.wishno)
-                            
-                            $.ajax({
-                            	url:'wishcount',
-                            	method : 'POST',
-                            	data :'boardno=' + boardno,
-                            	type : 'POST',
-                            	success :function(data){
-                            		$(".product_detail_favorite_1").html(data);
-                            		alert("성공"+data);
-                            	}
-                            })
-                            
+                          num = num+1;
+                            alert("해당 상품을 찜했습니다.")
                            
                     },
                        error : function() {
@@ -407,24 +398,21 @@ var boardmemberno = document.getElementById('boardMemberno').value;
                        type : "POST",
 
                        success : function(data) {
-                            alert("해당 상품의 찜선택을 취소했습니다.");
-                            window.location.reload();
+                            alert("해당 상품의 찜선택을 취소했습니다.")
                            
                     },
                        error : function() {
                           alert("request error!");
                        }
                     }) 
-               }           
-           } 
-       });
-   /*  window.onpageshow =  function(event) {
-        //back 이벤트 일 경우
-        if (event.persisted) {
-        	location.href = document.referrer; 
-        }
-    } */
-    /* if(window.history.back()){location.href="/main"} */
-    
+               }  
+    		   
+    	   }else if(memberno == ""){
+    				   location.href = "/login";
+    	   }
+    	   
+                    
+       } 
+   });
 </script>
 </html>

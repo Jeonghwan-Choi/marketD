@@ -167,7 +167,7 @@
                     <br>
                     <br>
                     <div style="margin-left: 10px;"> 프로필사진 </div>
-                     <img style="width: 150px; margin: 20px; border-radius: 100%;" id="preview-image" name="prview" src=${profile_image}>
+                     <img style="width: 150px; margin: 20px; border-radius: 100%;" id="preview-image" name="preview-image">
                 
 
  					<span>${email}</span>

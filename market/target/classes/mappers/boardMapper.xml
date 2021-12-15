@@ -56,7 +56,7 @@
          insert into guest(boardno,memberno) values(#{boardno},#{memberno}) 
       </insert>
       <select id="guestcountchk" parameterType="board">
-      	select count(guestno)guestcountchk from guest where boardno=#{boardno}
+      	select count(guestno)guestno from guest where boardno=#{boardno}
       </select>
       
    

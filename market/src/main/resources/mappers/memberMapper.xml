@@ -10,18 +10,18 @@
 
     
     <select id="memberList" resultType="member">
-    	select * from member
+       select * from member
     </select> 
   
    <select id="memberInfo" resultType="member" parameterType="member">
-    	 select * from member where memberno=#{memberno} 
-    	<!--<![CDATA[
-	    	select m.memberno,m.email,m.password,m.name,m.gender,m.phone,m.address,m.profile,b.wishno,b.boardno,b.memberno
-			from member m
-			left join (select boardno,memberno,wishno from wish) b
-			on b.boardno=#{boardno} and b.memberno=#{memberno}
-			where m.memberno=#{memberno}
-		]]>-->
+        select * from member where memberno=#{memberno} 
+       <!--<![CDATA[
+          select m.memberno,m.email,m.password,m.name,m.gender,m.phone,m.address,m.profile,b.wishno,b.boardno,b.memberno
+         from member m
+         left join (select boardno,memberno,wishno from wish) b
+         on b.boardno=#{boardno} and b.memberno=#{memberno}
+         where m.memberno=#{memberno}
+      ]]>-->
     </select> 
    
     
@@ -30,11 +30,14 @@
     </insert>
     
    <select id="emailChk" resultType="member" parameterType="member">
-  		select NVL(count(email),0)"email"  from member where email = #{email}
-  	</select>
-  	
-   	<select id="loginMember" resultType="member">
-    	select * from member where email = #{email}
+        select NVL(count(email),0)"email"  from member where email = #{email}
+     </select>
+     
+      <select id="loginMember" resultType="member">
+       select m.*,c."cnt" from member m
+		Left Join (select count(*)"cnt",seller from chatmessage where readst = 1 group by seller) c
+		on m.memberno = c.seller
+		where m.email = #{email}
     </select>
     
     <update id="updateProfileImg" parameterType="member"> 
@@ -42,10 +45,30 @@
     </update>
     
       <select id="wishchk" resultType="member" parameterType="member">
-    	select NVL(MAX(wishno),0)wishno from wish where boardno=#{boardno} and memberno=#{memberno}
+       select NVL(MAX(wishno),0)wishno from wish where boardno=#{boardno} and memberno=#{memberno}
     </select> 
     <delete id="deleteWish" parameterType="member">
-    	delete from wish where boardno=#{boardno} and memberno=#{memberno}
+       delete from wish where boardno=#{boardno} and memberno=#{memberno}
     </delete>
- 	
+
+	<select id="selectuser" resultType="board" parameterType="member">
+
+		select b.*,m.*,d.imagename,f.wish
+		from board b
+		LEFT join member m
+		on b.memberno = m.memberno
+		LEFT JOIN image d
+		ON b.boardno = d.boardno
+		LEFT JOIN (SELECT boardno,COUNT(memberno)wish FROM wish group by boardno)f
+		ON b.boardno = f.boardno
+		where b.memberno = #{memberno} and d.imageindex = 1
+
+	</select> 
+    
+    
+    
+    
+    
+        
+    
 </mapper>
