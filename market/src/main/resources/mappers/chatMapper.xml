@@ -63,7 +63,7 @@
         on seller = m.memberno
         left join chatlocation l
         on a.locationno=l.locationno
-        where chatroomno =  #{chatroomno} order by datetime desc NULLS LAST OFFSET #{firstvalue} ROWS FETCH FIRST #{lastvalue} ROWS ONLY
+        where chatroomno =  #{chatroomno} order by chatmessageno desc NULLS LAST OFFSET #{firstvalue} ROWS FETCH FIRST #{lastvalue} ROWS ONLY
      ]]>
     </select>
     <!-- select a.chatmessageno,a.chatroomno,a.seller,a.chatmessage,a.readst,a.datetime,a.locationno,m.profile from chatmessage a

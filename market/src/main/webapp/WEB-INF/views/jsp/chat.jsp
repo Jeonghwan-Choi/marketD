@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>   
+<%@ include file = "header.jsp"%> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +13,9 @@
 </head>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css ">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chat.css ">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+And+White+Picture&family=Kirang+Haerang&family=Single+Day&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="http://cjhwebsocket.cafe24app.com:80/socket.io/socket.io.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
@@ -21,7 +25,6 @@
 </style>
 <body>
 
-    <header>
         <div style="display:none;"> 
                <label>MemberNO : </label><input id="memberno" type="text" value="${boardMemberno} "><br>
       	 	 <label>RoomNO : </label><input id="roomno" type="text" value="${boardBoardno}"><br>
@@ -30,6 +33,8 @@
         	 <label>Profile : </label><input id="profilename" type="text" value=""><br>
         	 <input type="hidden" id="location" value="0">
         </div>
+        
+  <%--   <header>
         <div class = "header_img_div">
             <img class="fixed-logo" alt="당근마켓" src="https://d1unjqcospf8gs.cloudfront.net/assets/home/base/header/logo-basic-24b18257ac4ef693c02233bf21e9cb7ecbf43ebd8d5b40c24d99e14094a44c81.svg">
         </div>
@@ -49,7 +54,7 @@
                     <input class="header_chatting_btn" type="button" value="로그인" onclick="loginform()">
                     </div>
                     <div class="header_login_div">
-                        <img class="header_login_div_profile" src="http://cjhftp.dothome.co.kr/${loginMemberno}/profile/${loginMemberProfile}">
+                        <img class="header_login_div_profile" src="http://cjhftp.dothome.co.kr/${loginMemberno}/profile/${sessionScope.memberVO.profile}">
                         <span>${sessionScope.memberVO.name}</span>
                      </div>
 
@@ -60,7 +65,7 @@
             </nav>
 
 
-      </header>
+      </header> --%>
 
 
    <div class = "chat_main">
@@ -78,7 +83,7 @@
                 <div id="chat_user_readm" class="chat_user_readm">
                   
                     
-                        <div class="readm_img_span">안읽은 메시지만 보기
+                         <div class="readm_img_span">안읽은 메시지만 보기
                             <img id="readm_img" class="readm_img" src="http://cjhftp.dothome.co.kr/ico/tick2.png" onerror="this.src='https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png';">
                         </div>
                     
@@ -105,7 +110,7 @@
                                       
                                   </div>
                                   <div class="chat_user_list_room_m_center_div">
-                                      <div style="width:600px; cursor:pointer;" id="chat_user_list_room_m_member_div${chatVO.chatroomno }" class="chat_user_list_room_m_member_div">
+                                      <div style="width:600px;" id="chat_user_list_room_m_member_div${chatVO.chatroomno }" class="chat_user_list_room_m_member_div">
                                           <span>${chatVO.name }</span>   
                                          <%--  <c:if test="${not empty chatVO.datetime }"> --%>
                                           <span id="chat_user_list_room_m_datetime${chatVO.chatroomno }">· ${chatVO.datetime } </span>
@@ -144,18 +149,17 @@
         <div id="chat_box" >
             <div class="chat_box_user">
                 <div>
-                    <!-- <img id="chat_box_user_img" onerror="this.src='https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png';" class="chat_box_user_img" src=""> -->
-                    <img style="display:none;" id="chat_box_user_img" class="chat_box_user_img" src="https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png">
-                </div>
+                  <!-- <img id="chat_box_user_img" onerror="this.src='https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png';" class="chat_box_user_img" src=""> -->
+                    <img style="display:none;" id="chat_box_user_img" class="chat_box_user_img" onerror="this.src='https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png';">
+                    <!-- <img style="display:none;" id="chat_box_user_img" class="chat_box_user_img" src="https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png"> -->
+                  </div>
                 <div>
                     <span id="chat_box_user_span"></span>
                 </div>
                 <input type="hidden" id="firstvalue" value="0">
 			<input type="hidden" id="lastvalue" value="15">
             </div>
-             <div class="search_more" style="display:none;"> 
-			<input type="button" id="search_more" value="더보기" onclick="moredata()">
-		</div> 
+             
 		
             <div id="chat_box_ms"  style=" text-align:center; margin-top:27%;" class="chat_box_ms">
             <div class="chat_box_ms_first">
@@ -244,7 +248,7 @@
 				                    '<span>'+this.datetime+' </span>'+
 				                    '</div>'+
 				                    '<br>'+
-				                    '<div class="chat_user_list_room_m_message_div">'+
+				                    '<div class="chat_user_list_room_m_message_div" id="chat_user_list_room_m_message_div'+this.chatroomno+'">'+
 				                    '<span>'+
 				                    ''+this.chatmessage+''+
 				                    '</span>'+
@@ -306,8 +310,8 @@
 				                    '<span>'+this.datetime+' </span>'+
 				                    '</div>'+
 				                    '<br>'+
-				                    '<div class="chat_user_list_room_m_message_div">'+
-				                    '<span>'+
+				                    '<div class="chat_user_list_room_m_message_div" id="chat_user_list_room_m_message_div'+this.chatroomno+'">'+
+					                '<span>'+
 				                    ''+this.chatmessage+''+
 				                    '</span>'+
 				                    '</div>'+
@@ -381,7 +385,7 @@
 		        
                 const recentroomno = $("#roomno").val();
                 $("#chat_user_list_room_m_message_div"+recentroomno).html(message);
-                $("#chat_user_list_room_m_datetime"+recentroomno).html(datetime);
+                $("#chat_user_list_room_m_datetime"+recentroomno).html("· "+datetime);
   
 	                    	
 	                    if($("."+$("#roomno").val()+"-"+$("#memberno").val()).html()==1){
@@ -853,15 +857,17 @@
 		
 		var firstvalue = parseInt($("#firstvalue").val());
 		var lastvalue = parseInt($("#lastvalue").val());
+		console.log("chk"+firstvalue)
+		//console.log("chk"+lastvalue)
 		var roomno = $('#roomno').val();
 		var seller = $('#memberno').val();
 		var msg = $('#msg').val();
         var loginmemberno = $("#loginmemberno").val();//loginuser
 		
 		$("#firstvalue").val(firstvalue + 15);
-		$("#lastvalue").val(lastvalue + 15);
+		//$("#lastvalue").val(lastvalue + 15);
 		console.log("chk"+parseInt($("#firstvalue").val()))
-		console.log("chk"+parseInt($("#lastvalue").val()))
+		//console.log("chk"+parseInt($("#lastvalue").val()))
 		 $.ajax({
 			 url : 'searchmorechat',
 		      method : 'POST',
@@ -1014,12 +1020,11 @@
 		              }
 		       	   });
 	        	 }else if($(data).length == 0){
-	     			$("#firstvalue").val($("#firstvalue").val()-15);
-	     			$("#lastvalue").val($("#lastvalue").val()-15);
-	     			console.log($(data).length);
-	     			console.log(firstvalue);
-	     			console.log(lastvalue);
-	     			alert('더보기가 없습니다.')
+		     			/* $("#firstvalue").val($("#firstvalue").val()-15);
+		     			$("#lastvalue").val($("#lastvalue").val()-15);
+		     			console.log($(data).length);
+		     			console.log(firstvalue);
+		     			console.log(lastvalue); */
 	     			
 	     		}
 	     	},

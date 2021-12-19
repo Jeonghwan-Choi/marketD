@@ -10,6 +10,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+And+White+Picture&family=Kirang+Haerang&family=Single+Day&display=swap" rel="stylesheet">
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -24,6 +27,14 @@
             <div class="proudct_product_div">
                 <div class="proudct_product_img_div">
                 <form method="post" action="/insertchatRoom" name="formm" id="formm">
+                   <input name="boardMemberno" id="boardMemberno" type="hidden" value="${board.memberno}">
+                   <input name="boardBoardno" id="boardBoardno" type="hidden" value="${board.boardno}">
+                   <input name="user1" id="loginMemberno" type="hidden" value="${sessionScope.memberVO.memberno}">
+                    <input type="hidden" id="boardDatetime" value="${board.datetime }"> 
+                    <input type="hidden" name="loginMemberProfile" id="loginMemberProfile" value="${board.profile }"> 
+                   <input type="submit" style="background-color:transparent;  border:0px transparent solid;" value="">
+                </form>
+                 <form method="post" action="/gochat" name="form" id="form">
                    <input name="boardMemberno" id="boardMemberno" type="hidden" value="${board.memberno}">
                    <input name="boardBoardno" id="boardBoardno" type="hidden" value="${board.boardno}">
                    <input name="user1" id="loginMemberno" type="hidden" value="${sessionScope.memberVO.memberno}">
@@ -57,8 +68,19 @@
                             <a class="proudct_product_profile_name_name" href="user?memberno=${board.memberno }">${board.name }</a><br>
                             <a class="proudct_product_profile_name_address" >${board.address }</a>
                             <div class="wish_span">
-                                <div class="wish_input" id="wish_input">
-                                  <input onclick="Confirm();" type="button" value="당근채팅">
+                                <div class="wish_input" id="wish_input_confirm" style="display:none">
+                                
+                                  <input onclick="Confirm();" type="button" id="Confirm" value="당근채팅">
+                                  
+                                  
+                                  
+                               </div>
+                               <div class="wish_input" id="wish_input_gochat" style="display:none">
+                                
+                                  <input onclick="gochat();" style="background-color:white; color:gray;" type="button" id="gochatroom" value="당근채팅">
+                                
+                                  
+                                  
                                </div>
                                <div class="wish_div" id="wish_div">
                                     <span>
@@ -110,25 +132,25 @@
        </div>   
       
 
-       <div class="main">
-        <div class="main_product_board" >
+       <div class="main1">
+        <div class="main1_product_board" >
             <p>인기중고</p>
             <c:forEach items="${productList}" var="productVO">
-               <div class="main_product_div">
-                  <a class="main_product_div_a" href="board?boardno=${productVO.boardno }&memberno=${productVO.memberno}">
+               <div class="main1_product_div">
+                  <a class="main1_product_div_a" href="board?boardno=${productVO.boardno }&memberno=${productVO.memberno}">
                       <img class="product_img" src="http://cjhftp.dothome.co.kr/${productVO.memberno}/board/${productVO.boardno }/${productVO.imagename}">
-                      <div class="main_product_title" >${productVO.title }</div><br>
-                      <div class="main_product_address">${productVO.address }</div><br>
+                      <div class="main1_product_title" >${productVO.title }</div><br>
+                      <div class="main1_product_address">${productVO.address }</div><br>
                       <input type="hidden" value ="${productVO.memberno }">
                       <input type="hidden" value ="${productVO.boardno }">
                       <div>
-                          <div class="main_product_price" >${productVO.price } 원
-                              <div class="main_product_favorit">
+                          <div class="main1_product_price" >${productVO.price } 원
+                              <div class="main1_product_favorit">
                               
                               <img class="watch-icon" alt="Watch count" src="https://d1unjqcospf8gs.cloudfront.net/assets/home/base/like-8111aa74d4b1045d7d5943a901896992574dd94c090cef92c26ae53e8da58260.svg" >
                                   
                               </div>
-                              <div class="main_product_wish">
+                              <div class="main1_product_wish">
                               
                               
                                   ${productVO.wish } 
@@ -156,6 +178,33 @@
 var memberno = document.getElementById('loginMemberno').value;
 var boardno = document.getElementById('boardBoardno').value;
 var boardmemberno = document.getElementById('boardMemberno').value;
+
+
+//당근채팅 버튼
+
+ $.ajax({
+      url : 'chkchatroom',
+      method : 'POST',
+      data : 'boardno='+boardno,
+      type : "POST",
+		
+      success : function(data) {
+
+			if(data==0){
+				$('#wish_input_confirm').css('display','block');
+			}else{
+
+				$('#wish_input_gochat').css('display','block');
+			}
+
+      },
+      error : function() {
+         alert("request erㄹror!");
+      }
+   }) 
+
+
+
 	$.ajax({
 	    url : 'guestnochk',
 	    method : 'POST',
@@ -352,6 +401,10 @@ var boardmemberno = document.getElementById('boardMemberno').value;
    function Confirm() {
       confirm('', '채팅방을 생성할까요?');
    }
+
+   function gochat(){
+       document.form.submit();
+    }
    
     
    $('.wish_div').on({ 

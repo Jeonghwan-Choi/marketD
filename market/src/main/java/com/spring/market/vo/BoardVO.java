@@ -25,8 +25,40 @@ public class BoardVO {
    private int guestno;
    private int guestcountchk;
    
+   //채팅버튼
+   private int buyerno;
+   private int chatroomno;
    
-   public int getGuestcountchk() {
+   public int getBuyerno() {
+	return buyerno;
+}
+
+public void setBuyerno(int buyerno) {
+	this.buyerno = buyerno;
+}
+
+public int getChatroomno() {
+	return chatroomno;
+}
+
+public void setChatroomno(int chatroomno) {
+	this.chatroomno = chatroomno;
+}
+
+private String loginmemberno;
+   private int user2;
+   
+   
+   
+   public int getUser2() {
+	return user2;
+}
+
+public void setUser2(int user2) {
+	this.user2 = user2;
+}
+
+public int getGuestcountchk() {
 	return guestcountchk;
 }
 
@@ -215,10 +247,18 @@ public MemberVO getMember() {
       this.member = member;
    }
 
+public String getLoginmemberno() {
+	return loginmemberno;
+}
+
+public void setLoginmemberno(String loginmemberno) {
+	this.loginmemberno = loginmemberno;
+}
+
 public BoardVO(int boardno, int memberno, String title, String category, String datetime, String content, int price,
 		String email, String name, String profile, int cnt, String imagename, String address, int wish, int wishcount,
 		int chatcount, int viewscount, String searchdata, int firstvalue, int lastvalue, int guestno, int guestcountchk,
-		MemberVO member) {
+		int buyerno, int chatroomno, String loginmemberno, int user2, MemberVO member) {
 	super();
 	this.boardno = boardno;
 	this.memberno = memberno;
@@ -242,10 +282,12 @@ public BoardVO(int boardno, int memberno, String title, String category, String 
 	this.lastvalue = lastvalue;
 	this.guestno = guestno;
 	this.guestcountchk = guestcountchk;
+	this.buyerno = buyerno;
+	this.chatroomno = chatroomno;
+	this.loginmemberno = loginmemberno;
+	this.user2 = user2;
 	this.member = member;
 }
-
-   
 
    
    

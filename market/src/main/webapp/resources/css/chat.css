@@ -1,5 +1,7 @@
 @charset "UTF-8";
 input:focus {outline:none;}
+*{
+ font-family: 'NanumMyeongjoYetHangul';}
     .chat_main{
         border: 1px solid rgb(219, 219, 219);
         height: 85vh;
@@ -120,13 +122,17 @@ input:focus {outline:none;}
     }
 
     .chat_user_list_room_m_message_div{
-        margin-top: 2px;
+           margin-top: 2px;
         overflow: hidden;
         display: -webkit-box;
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
-        color: rgb(92, 92, 92);
-        font-size: 14px;
+		color: rgb(92, 92, 92);
+		font-size: 14px;
+		width: 70%;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis
     }
 
     #chat_box{
@@ -265,7 +271,7 @@ input:focus {outline:none;}
 
     .chat_box_send_text_div{
         background-color: blue;
-        width: 100%;
+        width: 99%;
         height: 70%;
     }
     #msg{
@@ -430,7 +436,11 @@ input:focus {outline:none;}
     -webkit-box-orient: vertical;
     color: rgb(92, 92, 92);
 }
-
+.chat_user_list_room_m_message_div span{
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 /* 공통 */
 .chat_box_p_div img{
     width: 50px;
@@ -685,6 +695,9 @@ input:focus {outline:none;}
         padding: 5px;
         float: right;
         width: 140px;
+    }
+    .chat_user_list_room_m{
+       width:90%;
     }
     .chat_user_readm div:hover{
         background-color:rgb(243, 243, 243);

@@ -1,6 +1,7 @@
 package com.spring.market.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,7 +34,8 @@ public class MainController {
 	@RequestMapping("/login")
 	public String login(HttpServletRequest req, Model model) throws IllegalStateException {
 
-				
+		HttpSession session = req.getSession();
+		session.invalidate();
 		return "/jsp/login";
 	}
 

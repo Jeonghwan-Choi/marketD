@@ -1,11 +1,11 @@
 *{  
+  
+ font-family: 'NanumMyeongjoYetHangul';
+} 
+body{
+ 
   margin: 0;
   padding: 0;
-  
-}
-body{
- font-family: 'NanumMyeongjoYetHangul';
- 
 }
 header {
   position: fixed;
@@ -33,16 +33,19 @@ header {
 
 .header_section{
     padding: 4px;
-    float: left;
     border: 1px solid rgb(216, 216, 216);
     border-radius: 3px;
     float: left;
     margin-top: 18px;
     width: 400px;
     margin-left: 40px;
+    height:26px;
 }
 .header_section input{
-    font-size: 18px;
+    font-size: 13px;
+    margin-top:0;
+    padding:0;
+    
     border: none;
     outline: none;
     font-family: inherit;
@@ -255,6 +258,9 @@ header {
     font-weight: 550;
     margin-left: 5px;
     margin-top: 5px;
+    white-space:nowrap;
+    overflow: hidden;
+  	text-overflow: ellipsis;
 }
 .main_product_address{
     color: gray;

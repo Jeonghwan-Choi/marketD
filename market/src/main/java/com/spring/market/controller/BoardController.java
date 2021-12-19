@@ -63,7 +63,12 @@ public class BoardController {
 		
 		return "/jsp/insertBoard";
 	}
-	
+	@RequestMapping("/chkchatroom")
+	@ResponseBody
+	public int chkchatroom(HttpServletRequest req, Model model,int boardno) throws IllegalStateException, ParseException {
+		int chatroomno = boardService.chkchatroom(boardno).getChatroomno();
+		return chatroomno;
+	}
 	@RequestMapping("/insertBoard")
 	public String insertBoard(HttpServletRequest req, Model model,BoardVO vo,MultipartHttpServletRequest mtfRequest) throws Exception {
 		System.out.println("run BoardController insertBoard()");

@@ -58,6 +58,29 @@ public class ChatController {
 	}
 	
 
+
+@RequestMapping("/gochat")
+	
+	public String gochat(HttpServletRequest req, Model model, ChatVO vo) throws IllegalStateException {
+
+		
+		
+		model.addAttribute("boardMemberno",req.getParameter("boardMemberno"));
+		model.addAttribute("boardBoardno",req.getParameter("boardBoardno"));
+		model.addAttribute("loginMemberno",req.getParameter("user1"));
+
+		int user1 = Integer.parseInt(req.getParameter("user1"));
+	
+		List <ChatVO> mychatList =  chatService.myChatList(vo);
+	
+		
+		
+		model.addAttribute("mychatList",mychatList);
+
+		
+		return "/jsp/chat";
+	}
+
 @RequestMapping("/insertchatRoom")
 	
 	public String insertchatRoom(HttpServletRequest req, Model model, ChatVO vo) throws IllegalStateException {

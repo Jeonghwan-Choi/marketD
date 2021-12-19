@@ -10,12 +10,15 @@
     border-radius: 10px;
     margin: 2px;
 }
+.insertboard_insertboard_img_div{
+	margin-bottom:10px;
+}
 .insertboard_insertboard_img_div_label_p_update{
     color:#ff8a3d;
 }
 body {
-    font-family:'Malgun Gothic';
-    line-height:40px;
+ font-family: 'NanumMyeongjoYetHangul';
+  
     
 }
 textarea,input{

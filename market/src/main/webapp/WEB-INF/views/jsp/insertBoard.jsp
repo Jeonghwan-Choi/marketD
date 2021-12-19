@@ -95,7 +95,7 @@
 
     function readMultipleImage(input) {
         const multipleContainer = document.getElementById("imgs_wrap")
-
+		$('.column').remove();
         // 인풋 태그에 파일들이 있는 경우
         if (input.files) {
             // 이미지 파일 검사 (생략)
@@ -105,29 +105,58 @@
             const $colDiv1 = document.createElement("div")
             $colDiv1.classList.add("column")
             fileArr.forEach((file, index) => {
-                const reader = new FileReader()
-                const $img = document.createElement("img")
-                $img.alt = file.name
-                $img.classList.add("image")
-                $colDiv1.appendChild($img)
-                reader.onload = e => {
-                    $img.src = e.target.result
-                }
-                console.log("파일이름: " + file.name)
-                reader.readAsDataURL(file)
+            	if(index<5){
+            		const reader = new FileReader()
+            		const input = document.createElement('input');
+            		input.setAttribute("type","button");
+            		input.setAttribute("name",index);
+            		input.setAttribute("value",index);
+            		input.setAttribute("id","deleteImgBtn");
+            		//input.setAttribute("style","width:10px; height:10px;");
+                    $colDiv1.appendChild(input)
+            		
+                    const $img = document.createElement("img")
+                     $img.setAttribute("id","deleteimg"+index)
+                    $img.alt = file.name
+                    $img.classList.add("imagenum")
+                    
+                    $colDiv1.appendChild($img)
+                    reader.onload = e => {
+                        $img.src = e.target.result
+                    }
+                    console.log("파일이름: " + file.name)
+                    reader.readAsDataURL(file)
+            		
+            	}else{alert("사진등록은 5장까지 가능합니다.")
+                	location.href("insertBoard");}
+                
             })
             console.log(fileArr.length);
             $(".insertboard_insertboard_img_div_label_p_update").html(fileArr.length);
             multipleContainer.appendChild($colDiv1)
-             if(fileArr.length>5){
+             /* if(fileArr.length>5){
             	alert("사진등록은 5장까지 가능합니다.")
             	location.href("insertBoard");
-            } else if(fileArr.length==0){
+            } else */
+            	if(fileArr.length==0){
             	alert("사진은 한 개 이상 등록해야합니다.")
             	location.href("insertBoard");
             } 
         }
     }
+    
+    $(document).on("click","#deleteImgBtn",function(){
+    	var num = $(this).val(); 
+    	console.log(num);
+    	$('#deleteimg'+num).remove();
+    	$(this).remove();
+    	
+
+        var imgnum = $(".imagenum").length;
+        $(".insertboard_insertboard_img_div_label_p_update").html(imgnum);
+    })
+   
+    
     const inputMultipleImage = document.getElementById("input_imgs")
     inputMultipleImage.addEventListener("change", e => {
         readMultipleImage(e.target)

@@ -75,6 +75,14 @@
    ]]>
    </select>
    
+     <select id="chkchatroom" parameterType="board" resultType="board">
+	    <![CDATA[
+	    	select count(a.chatroomno)chatroomno from chatroom a
+	    	left join chatmember b
+	    	on a.chatroomno=b.chatroomno and a.buyerno=b.user2
+	    	where a.boardno=#{boardno} 
+	    ]]>
+   </select>
    
    <select id="addressSearch" parameterType="board" resultType="board">
     <![CDATA[

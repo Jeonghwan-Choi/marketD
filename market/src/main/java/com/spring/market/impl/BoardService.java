@@ -19,4 +19,5 @@ public interface BoardService {
    int wishcount(BoardVO vo);
    int guestnochk(BoardVO vo);
    int guestcountchk(BoardVO vo);   
+   BoardVO chkchatroom(int boardno);
 }

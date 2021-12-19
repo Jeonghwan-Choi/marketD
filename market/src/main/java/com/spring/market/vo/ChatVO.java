@@ -22,15 +22,6 @@ public class ChatVO {
 	private String title;
 	
 
-	public String getTitle() {
-		return title;
-	}
-
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
 	//chatmessage
 	private int chatmessageno;
 	private int seller;
@@ -50,6 +41,18 @@ public class ChatVO {
 	 private int firstvalue;
 	 private int lastvalue;
 	   
+	 
+	 
+
+		public String getTitle() {
+			return title;
+		}
+
+
+		public void setTitle(String title) {
+			this.title = title;
+		}
+
 	public int getFirstvalue() {
 		return firstvalue;
 	}

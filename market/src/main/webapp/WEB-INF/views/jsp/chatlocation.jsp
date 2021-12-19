@@ -11,10 +11,12 @@
     
  <script src="http://cjhwebsocket.cafe24app.com:80/socket.io/socket.io.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/chatlocation.css ">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+And+White+Picture&family=Kirang+Haerang&family=Single+Day&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
-<!-- <form action="/chatcalendar" method="post"> -->
 <form method="post" id="reload" action="/chatcalendar">
     <div class="main">
         <div class="location_header">
@@ -25,7 +27,7 @@
         <input type="hidden" id="location" name="location" value='<%=request.getParameter("locationjsp")%>'>
         <input type="hidden" id="calendarLocation" value="${calendarLocation.locationno }">
             <div class="location_header_img">
-                <img src="http://cjhftp.dothome.co.kr/ico/cross.png">
+                <input type="submit" value="" class="location_header_submitImg">
             </div>
             <div class="location_header_title">
             <c:set var="jstlTitle" value="${calendarLocation.locationtitle }"/>
@@ -44,121 +46,75 @@
                     <tr class="location_tr">
                         <th class="location_th"><img src="http://cjhftp.dothome.co.kr/ico/calendar (1).png"></th>
                          <c:set var="jstlDate" value="${calendarLocation.locationdate }"/>
-                     <c:if test="${not empty jstlDate }">
-                          <td class="location_td"><input name="jstl_location_date_input" class="jstl_location_date_input" id="jstl_location_date_input" type="text" value="${calendarLocation.locationdate }" readonly></td>
-                     </c:if>
-                     <c:if test="${empty jstlDate }">
-                         <td class="location_td"><input name="location_date_input" class="location_date_input" id="location_date_input" type="date"></td>
-                     </c:if>
-                       
+                     		<c:if test="${not empty jstlDate }">
+                          		<td class="location_td"><input name="jstl_location_date_input" class="jstl_location_date_input" id="jstl_location_date_input" type="text" value="${calendarLocation.locationdate }" readonly></td>
+                     		</c:if>
+                     		<c:if test="${empty jstlDate }">
+                         		<td class="location_td"><input name="location_date_input" class="location_date_input" id="location_date_input" type="date"></td>
+                     		</c:if>
                     </tr>
-                    
                     <tr class="location_tr">
                         <th class="location_th"><img src="http://cjhftp.dothome.co.kr/ico/placeholder.png"></th>
                         <td class="location_td">
-                     <div class="map_wrap">
-                         <div id="map" style="border-radius:5px;width:490px;height:340px;position:relative;overflow:hidden;"></div>
-                     
-                         <div id="menu_wrap" class="bg_white">
-                             <div class="option">
-                                 <div>
-                                 
-                                 <c:set var="jstlLocation" value="${calendarLocation.location }"/>
-                                 <c:if test="${not empty jstlLocation }">
-                                    <input type="hidden" id="calendarlocation" value="${calendarLocation.location }">
-                                    약속장소 : <input type="text" value="" id="keyword" size="15"> 
-                                    
-                                 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-                                    <script>
-                                         const jstllocation = $('#calendarlocation').val();
-                                     const jbSplit = jstllocation.split('//');
-                                      $('#keyword').val(jbSplit[0]);       
-                                         
-                                    </script>
-                                        
-                                    
-                                </c:if>
-                                 <c:if test="${empty jstlLocation }">
-                                      키워드 : <input type="text" value="" id="keyword" size="15" placeholder="키워드입력"> 
-                                         <input type="button" value="검색하기" id="keywordbutton" onclick="searchPlaces()">
-                                 </c:if>
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                        
-                                 </div>
-                             </div>
-                             <hr>
-                             <ul id="placesList"></ul>
-                             <div id="pagination"></div>
-                         </div>
-                     </div>
-                           
+		                     <div class="map_wrap">
+		                         <div id="map"></div>
+		                         <div id="menu_wrap" class="bg_white">
+		                             <div class="option">
+		                                 <div style="text-align:left;">
+			                                 <c:set var="jstlLocation" value="${calendarLocation.location }"/>
+			                                 <c:if test="${not empty jstlLocation }">
+			                                    <span>약속장소 : </span>
+			                                    
+			                                    <input type="hidden" id="calendarlocation" value="${calendarLocation.location }">
+			                                    <input type="text" value="" id="keyword"> 
+			                                 </c:if>
+			                                 <c:if test="${empty jstlLocation }">
+			                                      키워드 : <input type="text" value="" id="keyword" placeholder="키워드입력"> 
+			                                      <input type="button" value="검색" id="keywordbutton" onclick="searchPlaces()">
+			                                 </c:if>
+		                                 </div>
+		                             </div>
+		                             <hr>
+		                             <ul id="placesList"></ul>
+		                             <div id="pagination"></div>
+		                         </div>
+		                     </div>
                         </td>
                     </tr>
                     <tr class="location_tr">
                         <th class="location_th"><img src="http://cjhftp.dothome.co.kr/ico/map.png"></th>
-                        
-                        
-                        
                         <c:set var="jstlLocation" value="${calendarLocation.location }"/>
                      	<c:if test="${not empty jstlLocation }">
 							<input type="hidden" id="calendarlocation" value="${calendarLocation.location }">
-							<td class="location_td"><input class="jstl_location_location_input" id="jstl_location_location_input" name="jstl_location_location_input" type="text" value="" readonly></td>
-							<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-							<script>
-		                        const jstllocation2 = $('#calendarlocation').val();
-		                        const jbSplit2 = jstllocation2.split('//');
-		                        $('#jstl_location_location_input').val(jbSplit2[0]);    
-	                                         
-		                    </script>
-	                    
-                     </c:if>
-                     
-                     <c:if test="${empty jstlLocation }">
-                         <td class="location_td"><input class="location_location_input" id="location_location_input" name="location_location_input" type="text" value="" readonly></td>
-                     </c:if>
-                        
-                        
-                        
-                        
-                        
+							<td class="location_td"><input class="jstl_location_location_input" id="jstl_location_location_input" name="jstl_location_location_input" type="text" value="" readonly></td>							
+	                    </c:if>
+	                     
+	                    <c:if test="${empty jstlLocation }">
+	                        <td class="location_td"><input class="location_location_input" id="location_location_input" name="location_location_input" type="text" value="" readonly></td>
+	                    </c:if>
                     </tr>
                     <tr class="location_tr">
-                        <th class="location_th" style="vertical-align: top; padding-top: 10px;"><img src="http://cjhftp.dothome.co.kr/ico/memo.png"></th>
-                        
-                        
+                        <th class="location_th"><img src="http://cjhftp.dothome.co.kr/ico/memo.png"></th>
                         <c:set var="jstlDescription" value="${calendarLocation.locationdescription }"/>
-                     <c:if test="${not empty jstlDescription }">
-                          <td class="location_td"><input style="background:rgb(218, 218, 218,0.5);" name="jstl_location_textarea" class="jstl_location_textarea" id="jstl_location_textarea" type="text" value="${calendarLocation.locationdescription }" readonly></td>
-                     </c:if>
-                     <c:if test="${empty jstlDescription }">
-                         <td class="location_td" style="padding-top: 10px;"><textarea cols="66" rows="15" id="location_textarea" name="location_textarea" class="location_textarea" placeholder="설명추가"></textarea></td>
-                     </c:if>
-                        
-                        
-                        
-                        
+                     		<c:if test="${not empty jstlDescription }">
+                          		<td class="location_td"><input name="jstl_location_textarea" class="jstl_location_textarea" id="jstl_location_textarea" type="text" value="${calendarLocation.locationdescription }" readonly></td>
+                     		</c:if>
+                     		<c:if test="${empty jstlDescription }">
+                         		<td class="location_td" style="padding-top: 10px;"><textarea cols="66" rows="15" id="location_textarea" name="location_textarea" class="location_textarea" placeholder="설명추가"></textarea></td>
+                     		</c:if>
                     </tr>
                     <tr class="location_tr" id="location_submit_tr">
                         <th class="location_th"></th>
                         
                         
                         <c:set var="jstlTitle2" value="${calendarLocation.locationtitle }"/>
-                     <c:if test="${empty jstlTitle2 }">
-                           <td class="location_td"><input name="location_submit_input" class="location_submit_input" id="location_submit_input" type="submit" value="약속잡기" formaction="/chatcalendar"></td>
-                         <!-- <td class="location_td"><input name="location_submit_input" class="location_submit_input" id="location_submit_input" type="submit" value="약속잡기" onclick="reload();"></td> -->
-                     </c:if>
-                     <c:if test="${not empty jstlTitle2 }">
-                         <td class="location_td"><input name="jstl_location_submit_input" class="jstl_location_submit_input" id="jstl_location_submit_input" type="submit" value="달력보기" formaction="/chatcalendarview"></td>
-                     </c:if>
-                        
-                        
-                        
-                        
+                     		<c:if test="${empty jstlTitle2 }">
+                           		<td class="location_td"><input name="location_submit_input" class="location_submit_input" id="location_submit_input" type="submit" value="약속잡기" formaction="/chatcalendar"></td>
+                        		<!-- <td class="location_td"><input name="location_submit_input" class="location_submit_input" id="location_submit_input" type="submit" value="약속잡기" onclick="reload();"></td> -->
+                    		 </c:if>
+                     		<c:if test="${not empty jstlTitle2 }">
+                         		<td class="location_td"><input name="jstl_location_submit_input" class="jstl_location_submit_input" id="jstl_location_submit_input" type="submit" value="달력보기" formaction="/chatcalendarview"></td>
+                     		</c:if>
                     </tr>
                 </table>
             </div>
@@ -168,15 +124,22 @@
                         <button class="location_memberlist_title_button" disabled>참석자</button>
                     </div>
                     <div class="location_memberlist_content">
-                        <div class="location_memberlist_div">
-                             <img onerror="this.src='https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png';" src="http://cjhftp.dothome.co.kr/${chatList.user1}/profile/${chatList.profile}">
-                            <a class="location_memberlist_span">${chatList.login }</a>
-                        </div>
-                        <div class="location_memberlist_div">
-                             <img onerror="this.src='https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png';" src="http://cjhftp.dothome.co.kr/${chatList.user2}/profile/${chatList.memberprofile}">
-                            <a class="location_memberlist_span">${chatList.member}</a>
-                        </div>
-                        
+						<div class="location_memberlist_div">
+							<div class="location_memberlist_img">
+								<img onerror="this.src='https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png';" src="http://cjhftp.dothome.co.kr/${chatList.user1}/profile/${chatList.profile}">
+							</div>
+							<div class="location_memberlist_a">
+								<a class="location_memberlist_span">${chatList.login }</a>
+							</div>
+						</div>
+	                    <div class="location_memberlist_div">
+	                      	<div class="location_memberlist_img">
+	                          	<img onerror="this.src='https://d1unjqcospf8gs.cloudfront.net/assets/users/default_profile_80-7e50c459a71e0e88c474406a45bbbdce8a3bf2ed4f2efcae59a064e39ea9ff30.png';" src="http://cjhftp.dothome.co.kr/${chatList.user2}/profile/${chatList.memberprofile}">
+	                        </div>
+	                        <div class="location_memberlist_a">
+	                          	<a class="location_memberlist_span">${chatList.member}</a>
+	                        </div>
+	                    </div>
                     </div>
                 </div>
             </div>
@@ -185,26 +148,12 @@
     <input type="hidden" id="coordinate" name="coordinate" value="">
 </form>
 </body>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
- <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fb6a99631a16b1a22bae6ea2a8990dee&libraries=services"></script>
 <script>
 
-/*
-function reload(){
-	
-	if(performance.navigation.type==1){alert("dd")}else{alert("not reloaded")}
-	  window.onbeforeunload = function (e) {
-		  alert("dd")
-  };
-	
-	
-	if
-	window.onbeforeunload=function(){
-		}else{
-	document.getElementById('reload').submit();} 
-	
-};*/
 // 마커를 담을 배열입니다
 var markers = [];
 
@@ -478,5 +427,14 @@ $("li").click(function(){
 			keywordbutton.click();
 		}
 	});
+ 
+ 
+ //jstl location 
+	const jstllocation = $('#calendarlocation').val();
+	const jbSplit = jstllocation.split('//');
+	$('#keyword').val(jbSplit[0]);       
+    $('#jstl_location_location_input').val(jbSplit[0]);    
+             
+      
 </script>
 </html>

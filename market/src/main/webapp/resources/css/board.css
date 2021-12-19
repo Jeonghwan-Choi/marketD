@@ -52,10 +52,10 @@
         }
         
         
-
+        
 .proudct{
     height:100%;
-    display:block;
+
      padding: 30px 0 40px 0;
     margin-top: 80px;
     outline: 0 !important;
@@ -71,10 +71,10 @@
       border-radius: 20px; 
 
   }
-
+/*  */
   .proudct_product_div{
       width: 100%;
-      height: 500px;
+      height: 100%;
       border-radius: 10px;
   }
   .proudct_product_img_div{
@@ -95,7 +95,7 @@
     border-radius: 10px;
     border: none;
   }
-
+/*  */
   .proudct_product_profile{
       width: 50px;
       height: 50px;
@@ -160,10 +160,12 @@
 }
 .product_detail h1{
     font-size: 17px;
-}.product_detail_kinds,.product_detail_time,.product_detail_favorite,.product_detail_favorite_1,.product_detail_chatting,.product_detail_select_1,.product_detail_select{
+}
+.product_detail_kinds,.product_detail_time,.product_detail_favorite,.product_detail_favorite_1,.product_detail_chatting,.product_detail_select{
     font-size: 13px;
     color: gray;
 } 
+
 .product_detail_content{
     margin-top: 20px;
     width: 100%;
@@ -175,82 +177,6 @@
     font-size: 18px;
     margin-bottom:40px;
 }
-
-
-
-
-
-
-
-.main{
-     margin-top: 200px;
-    outline: 0 !important; 
-    background-color: white;
-  } 
-  .main_product{
-       
-      margin-left: auto;
-      margin-right: auto;
-      background-color: white;
-      width:700px;
-       min-height: 200px; 
-      border: 1px solid rgb(223, 223, 223);
-      border-radius: 20px;
-      padding-left: 15px;
-      padding-right: 15px;
-      padding-bottom: 30px;
-      box-shadow: rgb(247, 247, 247) 0px 0px 0px 2px;
-      margin-bottom: 30px;
-  }
-  .main_product p{
-      margin-left: 30px;
-      padding-top: 15px;
-      font-size: 18px;
-      font-weight: 600;
-      color: rgb(70, 70, 70);
-      
-
-  }
-  .main_product_div{
-      width: 205px;
-      height: 320px;
-      border: 1px solid rgb(223, 223, 223);
-      display: inline-block;
-      margin: 10px;
-      border-radius: 10px;
-  }
-  .main_product_div img{
-    width: 100%;  
-    height: 60%;
-    border-radius: 10px;
-    border: none;
-  }
-
-  .main_product_title{
-      color: balck;
-      font-weight: 700;
-      margin-left: 5px;
-      margin-top: 5px;
-  }
-  .main_product_address{
-      color: gray;
-      font-size: 13px;
-      margin-top:-15px ;
-  }
-  .main_product_price{
-    color: #ff8a3d;
-    font-weight: 600;
-    font-size: 15px;
-
-
-  }
-
-  .main_product_favorit{
-      padding-right: 10px;
-      float: right;
-        color: black;
-       
-    }
 
 .wish_span{
     float:right;
@@ -271,6 +197,81 @@
    display:inline-block;
    margin-right:10px;
 }
+
+
+
+
+
+.main1{
+
+    outline: 0 !important; 
+    background-color: white;
+  } 
+  .main1_product{
+
+      margin-left: auto;
+      margin-right: auto;
+      background-color: white;
+      width:700px;
+       min-height: 200px; 
+      border: 1px solid rgb(223, 223, 223);
+      border-radius: 20px;
+      padding-left: 15px;
+      padding-right: 15px;
+      padding-bottom: 30px;
+      box-shadow: rgb(247, 247, 247) 0px 0px 0px 2px;
+      margin-bottom: 30px;
+  }
+  .main1_product p{
+      margin-left: 30px;
+      padding-top: 15px;
+      font-size: 18px;
+      font-weight: 600;
+      color: rgb(70, 70, 70);
+      
+
+  }
+  .main1_product_div{
+      width: 205px;
+      height: 320px;
+      display: inline-block;
+      margin: 10px;
+      border-radius: 10px;
+  }
+  .main1_product_div img{
+    width: 100%;  
+    height: 60%;
+    border-radius: 10px;
+    border: none;
+  }
+
+  .main1_product_title{
+      color: black;
+      font-weight: 700;
+      margin-left: 5px;
+      margin-top: 5px;
+  }
+  .main1_product_address{
+      color: gray;
+      font-size: 13px;
+      margin-top:-15px ;
+  }
+  .main1_product_price{
+    color: #ff8a3d;
+    font-weight: 600;
+    font-size: 15px;
+
+
+  }
+
+  .main1_product_favorit{
+      padding-right: 10px;
+      float: right;
+        color: black;
+       
+    }
+
+
 /* 
 .wish_span input{
    vertical-align: middle;
@@ -281,7 +282,7 @@
 /*=============================  */
 
 /*  */
-   .main_product_board{
+   .main1_product_board{
       margin-left: auto;
       margin-right: auto;
       background-color: white;
@@ -293,8 +294,9 @@
       padding-right: 30px;
       padding-bottom: 30px;
       box-shadow: rgb(247, 247, 247) 0px 0px 0px 2px;
+      margin-bottom:30px;
   }
-  .main_product_board p{
+  .main1_product_board p{
       margin-left: 30px;
       padding-top: 15px;
       font-size: 18px;
@@ -303,36 +305,36 @@
       
 
   }
-  .main_product_board .main_product_div{
+  .main1_product_board .main1_product_div{
       width: 265px;
       height: 300px;
-      display: inline-block;
       margin: 10px;
       border-radius: 10px;
       text-decoration:none ;
   }
-  .main_product_board .main_product_div .product_img{
+  .main1_product_board .main1_product_div .product_img{
     width: 100%;  
     height: 60%;
     border-radius: 10px;
     border: none;
     
   }
-  .main_product_board .main_product_div_a{
+  .main1_product_board .main1_product_div_a{
      text-decoration:none ;
   }
-  .main_product_board .main_product_title{
+  .main1_product_board .main1_product_title{
       color: balck;
       font-weight: 700;
       margin-left: 5px;
       margin-top: 5px;
   }
-  .main_product_board .main_product_address{
+  .main1_product_board .main1_product_address{
       color: gray;
       font-size: 13px;
       margin-top:-15px ;
+      margin-left:8px;
   }
-  .main_product_board .main_product_price{
+  .main1_product_board .main1_product_price{
     color: #ff8a3d;
     font-weight: 600;
     font-size: 15px;
@@ -341,17 +343,17 @@
 
   }
 
-  .main_product_board .main_product_favorit{
+  .main1_product_board .main1_product_favorit{
       padding-right: 10px;
       float: right;
         color: black;
     }
-    .main_product_board .main_product_wish{
+    .main1_product_board .main1_product_wish{
       padding-right: 10px;
       float: right;
         color: black;
     }
-  .main_product_board .main_product_div_a:hover{
+  .main1_product_board .main1_product_div_a:hover{
     color : red;
   }
  
