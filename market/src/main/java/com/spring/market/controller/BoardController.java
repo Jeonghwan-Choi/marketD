@@ -65,8 +65,8 @@ public class BoardController {
 	}
 	@RequestMapping("/chkchatroom")
 	@ResponseBody
-	public int chkchatroom(HttpServletRequest req, Model model,int boardno) throws IllegalStateException, ParseException {
-		int chatroomno = boardService.chkchatroom(boardno).getChatroomno();
+	public int chkchatroom(HttpServletRequest req, Model model,BoardVO vo) throws IllegalStateException, ParseException {
+		int chatroomno = boardService.chkchatroom(vo).getChatroomno();
 		return chatroomno;
 	}
 	@RequestMapping("/insertBoard")

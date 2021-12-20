@@ -74,8 +74,8 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.guestcountchk(vo).getGuestno();
 	}
 	@Override
-	public BoardVO chkchatroom(int boardno) {
+	public BoardVO chkchatroom(BoardVO vo) {
 		 System.out.println("run BoardServiceImpl chkchatroom()");
-		  return boardDAO.chkchatroom(boardno);
+		  return boardDAO.chkchatroom(vo);
 	}
 }

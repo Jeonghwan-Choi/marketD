@@ -104,7 +104,7 @@ input:focus {
 }
 
 .jstl_location_location_input {
-	width: 485px;
+	width: 480px;
 	height: 35px;
 	/*  background: linear-gradient( to bottom, rgb(218, 218, 218,0.5), rgb(218, 218, 218,0.5) ); */
 	
@@ -119,7 +119,7 @@ input:focus {
 }
 
 .jstl_location_textarea {
-width: 485px;
+width: 475px;
 	height: 35px;
 	/*  background: linear-gradient( to bottom, rgb(218, 218, 218,0.5), rgb(218, 218, 218,0.5) ); */
 	
@@ -131,6 +131,7 @@ width: 485px;
 	border-radius: 5px;
 	background-color: #fdfdfd;
 	padding-left: 7px;
+	padding-right: 7px;
 }
 
 .location_location_input {
@@ -159,6 +160,7 @@ width: 485px;
 	width: 485px;
 	padding-top:5px;
 	padding-left:5px;
+	padding-right:5px;
 }
 
 .location_textarea:focus {

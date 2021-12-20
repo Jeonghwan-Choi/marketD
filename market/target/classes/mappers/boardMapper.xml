@@ -80,7 +80,7 @@
 	    	select count(a.chatroomno)chatroomno from chatroom a
 	    	left join chatmember b
 	    	on a.chatroomno=b.chatroomno and a.buyerno=b.user2
-	    	where a.boardno=#{boardno} 
+	    	where a.boardno=#{boardno} and a.buyerno=#{buyerno}
 	    ]]>
    </select>
    

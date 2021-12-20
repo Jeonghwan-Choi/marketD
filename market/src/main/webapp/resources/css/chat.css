@@ -92,6 +92,7 @@ input:focus {outline:none;}
     .chat_user_list_room a{
         padding: 16px;
          width: 100%;
+         cursor:pointer;
     }    
     .chat_user_list_room a:hover{
         background-color: rgb(235, 235, 235);
@@ -694,7 +695,7 @@ input:focus {outline:none;}
    .chat_user_readm div{
         padding: 5px;
         float: right;
-        width: 140px;
+        width: 170px;
     }
     .chat_user_list_room_m{
        width:90%;

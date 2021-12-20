@@ -41,7 +41,7 @@ input[name=chatcalendar_top_perMon]{
     font-size: 15px;
 }
 .calendar_top_year_mon{
-    font-size: 13px;
+    font-size: 18px;
 }
 .chatcalendar_top_date{
     font-size:13px;
@@ -57,11 +57,11 @@ input[name=chatcalendar_top_perMon]{
     padding-left:10px;
 }
 .chatcalendar_top_event{
-    width:60px;
-    height: 17px;
+    width:70px;
 	color:rgb(255,255,255);
 	font-size:13px;
-	font-weight:normal;
+	display:inline;
+	font-weight: lighter;
 }
 /* #carrotimg{
    width:15px;

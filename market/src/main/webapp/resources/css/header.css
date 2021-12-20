@@ -40,6 +40,10 @@ header {
     width: 400px;
     margin-left: 40px;
     height:26px;
+    padding-top:10px;
+}
+.header_chatting_btn{
+	 text-decoration-line:none;
 }
 .header_section input{
     font-size: 13px;

@@ -170,7 +170,6 @@
                      <img style="width: 150px; margin: 20px; border-radius: 100%;" id="preview-image" name="preview-image">
                 
 
- 					<span>${email}</span>
  					<input style="display: block;" type="file" id="input-image" name = "profileimg">
                     
                     
