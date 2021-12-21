@@ -82,13 +82,7 @@
                                       키워드 : <input type="text" value="" id="keyword" size="15" placeholder="키워드입력"> 
                                          <input type="button" value="검색하기" id="keywordbutton" onclick="searchPlaces()">
                                  </c:if>
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                        
+
                                  </div>
                              </div>
                              <hr>
