@@ -65,7 +65,7 @@ public class FtpClient {
 			Date from =new Date();
 			SimpleDateFormat nowDate = new SimpleDateFormat("yyyy-MM-dd");
 			String now=nowDate.format(from);
-			
+			System.out.println("Make memberno : "+memberno);
 			ftpClient.makeDirectory("html/"+memberno);
 			ftpClient.makeDirectory("html/"+memberno+"/profile");
 			ftpClient.makeDirectory("html/"+memberno+"/board");

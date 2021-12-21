@@ -5,8 +5,9 @@
 
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%> 
 <%@ include file = "header.jsp"%>
-<link href="https://hangeul.pstatic.net/hangeul_static/css/NanumMyeongjoYetHangul.css" rel="stylesheet">
-    <main class="main">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+And+White+Picture&family=Kirang+Haerang&family=Single+Day&display=swap" rel="stylesheet">    <main class="main">
 
 	<c:forEach items="${selectuser}" var="productVO" begin="0" end="0">
 		<div class="main_user">
@@ -55,7 +56,20 @@
 			</div>
 		</c:forEach>
 	</div>
-	<a href="/insertBoardForm">피효정바보</a>
+	<c:choose>
+		<c:when test="${sessionScope.memberVO==null}">
+			<div>
+				<a class="insertboardbtn" href="/login"> <img
+					src="https://cdn-icons.flaticon.com/png/512/4274/premium/4274059.png?token=exp=1639301269~hmac=f58dc472843fb41dbf625eb5c07107bb">
+				</a>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<a class="insertboardbtn" href="/insertBoardForm"> <img
+				src="https://cdn-icons.flaticon.com/png/512/4274/premium/4274059.png?token=exp=1639301269~hmac=f58dc472843fb41dbf625eb5c07107bb">
+			</a>
+		</c:otherwise>
+	</c:choose>
       </main>   
       <footer class="footer">
 

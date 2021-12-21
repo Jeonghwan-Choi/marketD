@@ -58,5 +58,11 @@ public class BoardServiceImpl implements BoardService {
 		 System.out.println("run BoardServiceImpl productSearchData()");
 		  return boardDAO.productSearchData(vo);
 	}
+
+	@Override
+	public BoardVO chkchatroom(BoardVO vo) {
+		System.out.println("run BoardServiceImpl chkchatroom()");
+		return boardDAO.chkchatroom(vo);
+	}
    
 }

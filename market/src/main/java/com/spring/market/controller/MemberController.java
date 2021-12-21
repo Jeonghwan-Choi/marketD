@@ -21,12 +21,7 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 
-//	@RequestMapping("/user")
-//	public String userInfo(HttpServletRequest req, Model model,MemberVO mvo ,BoardVO bvo,int memberno) throws IllegalStateException {
-//		
-//		System.out.println("select memberno: "+memberno);
-//
-//	}
+
 	
 	@RequestMapping("/user")
 	public String userInfo(HttpServletRequest req, Model model, int memberno)

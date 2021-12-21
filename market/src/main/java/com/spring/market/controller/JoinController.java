@@ -3,14 +3,13 @@ package com.spring.market.controller;
 
 
 import java.io.File;
-import java.io.FileInputStream;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.SocketException;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +24,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.spring.market.impl.MemberService;
 import com.spring.market.vo.MemberVO;
 
-import org.apache.commons.net.ftp.FTPClient;
-import org.apache.commons.net.ftp.FTPFile;
-import org.apache.ibatis.session.SqlSession;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.json.simple.JSONObject;
 import net.nurigo.java_sdk.api.Message;
@@ -96,10 +92,8 @@ public class JoinController {
 			MemberVO member =  memberService.loginMember(vo);
 			System.out.println(member.getMemberno());
 			int memberno = member.getMemberno();
-			
-//			//파일질라 data upload
-//			
-		      List<MultipartFile> fileList = mtfRequest.getFiles("preview-image");
+		
+		      List<MultipartFile> fileList = mtfRequest.getFiles("profileimg");
 		      System.out.println(fileList.size());
 		      FtpClient client = new FtpClient("112.175.184.60", 21, "cjhftp", "chlwjdghks1!");
 		      
@@ -111,22 +105,11 @@ public class JoinController {
 		          
 		          System.out.println(itype);
 		          
-		         
-//		          if(itype.equals("octet-stream")) {
-//		        	  
-//		        	   vo.setProfile("https://dnvefa72aowie.cloudfront.net/origin/profile/202109/23D6FCD4F145019383458B90F66961C9E8AD8DFA8122229A084C2DAA4507023E.jpg?q=82&s=80x80&t=crop");
-//			           vo.setProfiletype(itype);
-//			           vo.setMemberno(memberno);
-//			           
-//			           memberService.updateProfileImg(vo);
-//		          
-//		          }else {
-		        	  //이미지 넣기 정리 
 		        	  
 		        	   File p123 = File.createTempFile(mf.getInputStream().toString(),"."+itype);
 			           IOUtils.copy(mf.getInputStream(),new FileOutputStream(p123));
 			           client.upload(p123,"html/"+memberno+"/profile",memberno);
-			           System.out.println(p123.getName());
+			           System.out.println("p123:"+p123.getName());
 			           
 			           vo.setProfile(p123.getName());
 			           vo.setProfiletype(itype);
@@ -134,7 +117,7 @@ public class JoinController {
 			           
 			           memberService.updateProfileImg(vo);
 			           
-//		          }
+
 		          
 		           
 		       }
@@ -146,27 +129,6 @@ public class JoinController {
 		
 
 		
-		@RequestMapping("/test")
-		   public String test(HttpServletRequest req, Model model,MultipartHttpServletRequest mtfRequest) throws Exception{
-		      List<MultipartFile> fileList = mtfRequest.getFiles("profile");
-		      System.out.println(fileList.size());
-		      FtpClient client = new FtpClient("112.175.184.60", 21, "cjhftp", "chlwjdghks1!");
-		      
-		        for (MultipartFile mf : fileList) {
-		           
-		          String str1 = mf.getContentType();
-		          String getStr1[] = str1.split("/");
-		          String itype = getStr1[1];
-		          int memberno = 32;
-		           File p123 = File.createTempFile(mf.getInputStream().toString(),"."+itype);
-		           IOUtils.copy(mf.getInputStream(),new FileOutputStream(p123));
-		           //client.upload(p123,"html/",memberno);
-		           System.out.println("upload suc" + mf);
-		       }
-			
-			return "redirect:/main";
-		}
-		
 		//ajax를 이용한 이메일 중복확인
 		@ResponseBody
 		   @RequestMapping(value = "/emailChk.do", method = RequestMethod.POST)
@@ -177,12 +139,6 @@ public class JoinController {
 		       
 		       return rowcount;
 		     }
-	   
-	   
-	   
-	   
-	   
 
-	
 
 }

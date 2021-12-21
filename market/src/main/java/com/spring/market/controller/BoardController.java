@@ -230,5 +230,11 @@ public class BoardController {
 
       return photoVo;
    }
+   @RequestMapping("/chkchatroom")
+   @ResponseBody
+   public int chkchatroom(HttpServletRequest req, Model model,BoardVO vo) throws IllegalStateException, ParseException {
+      int chatroomno = boardService.chkchatroom(vo).getChatroomno();
+      return chatroomno;
+   }
 
 }

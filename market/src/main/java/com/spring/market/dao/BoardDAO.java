@@ -67,4 +67,9 @@ public class BoardDAO {
 	   System.out.println("run BoardDAO boardInfo()"+vo.getSearchdata());
 	   return sqlSession.selectList("BoardDAO.productSearch",vo);
    }
+
+	public BoardVO chkchatroom(BoardVO vo) {
+		System.out.println("run BoardDAO chkchatroom()");
+		return sqlSession.selectOne("BoardDAO.chkchatroom", vo);
+	}
 }

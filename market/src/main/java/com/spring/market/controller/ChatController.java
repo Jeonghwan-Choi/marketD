@@ -1,10 +1,14 @@
 package com.spring.market.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,36 +35,70 @@ public class ChatController {
    
    
    
-@RequestMapping("/chat")
+   @RequestMapping("/chat")
    
    public String chat(HttpServletRequest req, Model model, ChatVO vo) throws IllegalStateException {
 
-      System.out.println(vo.getUser1());
 
+      
       model.addAttribute("boardMemberno",req.getParameter("boardMemberno"));
       model.addAttribute("boardBoardno",req.getParameter("boardBoardno"));
       model.addAttribute("loginMemberno",req.getParameter("user1"));
-      int user1 = Integer.parseInt(req.getParameter("user1"));
 
-      
+      int user1 = Integer.parseInt(req.getParameter("user1"));
+   
       List <ChatVO> mychatList =  chatService.myChatList(vo);
    
       
       
       model.addAttribute("mychatList",mychatList);
-      System.out.println("mychatList.size(): "+mychatList.size());
+
+      
+      return "/jsp/chat";
+   }
+   
+   
+   @RequestMapping("/insertchatRoom")
+   
+   public String insertchatRoom(HttpServletRequest req, Model model, ChatVO vo) throws IllegalStateException {
+
+      vo.setBoardno(Integer.parseInt(req.getParameter("boardBoardno")));
+      vo.setBuyerno(Integer.parseInt(req.getParameter("user1")));
+      chatService.insertChatroom(vo);
+      
+      vo.setUser1(Integer.parseInt(req.getParameter("boardMemberno")));
+      vo.setUser2(Integer.parseInt(req.getParameter("user1")));
+      chatService.insertChatmember1(vo);
+      
+      vo.setUser1(Integer.parseInt(req.getParameter("user1")));
+      vo.setUser2(Integer.parseInt(req.getParameter("boardMemberno")));
+      chatService.insertChatmember2(vo);
+      
+      model.addAttribute("boardMemberno",req.getParameter("boardMemberno"));
+      model.addAttribute("boardBoardno",req.getParameter("boardBoardno"));
+      model.addAttribute("loginMemberno",req.getParameter("user1"));
+
+      int user1 = Integer.parseInt(req.getParameter("user1"));
+   
+      List <ChatVO> mychatList =  chatService.myChatList(vo);
+   
       
       
+      model.addAttribute("mychatList",mychatList);
+
       
       return "/jsp/chat";
    }
    
    @RequestMapping("/selectChat")
    @ResponseBody
-   public List <ChatVO> selectChat(HttpServletRequest req,Model model,ChatVO vo,int roomno,int seller, String chatmessage, int readst)throws Exception {
+   public List <ChatVO> selectChat(HttpServletRequest req,Model model,ChatVO vo,int roomno,int seller, String chatmessage, int readst,int firstvalue, int lastvalue)throws Exception {
 
+         vo.setLastvalue(lastvalue);
+         vo.setFirstvalue(firstvalue);
       vo.setChatroomno(roomno);
       List<ChatVO> chatVo = chatService.selectChatList(vo);
+      Collections.reverse(chatVo);
       System.out.println("========= chatVo size:: " + chatVo.size());
       
       vo.setSeller(seller);
@@ -69,12 +107,24 @@ public class ChatController {
       chatService.updateReadst(vo);
 
    
+      model.addAttribute("selectChatList", chatVo);
+      return chatVo;
+   }
+   @RequestMapping("/searchmorechat")
+   @ResponseBody
+   public List <ChatVO> searchmorechat(HttpServletRequest req,Model model,ChatVO vo,int roomno,int seller, String chatmessage, int readst,int firstvalue, int lastvalue)throws Exception {
+         System.out.println("run serachmorechat!");
+         vo.setLastvalue(lastvalue);
+         vo.setFirstvalue(firstvalue);
+      vo.setChatroomno(roomno);
+      List<ChatVO> chatVo = chatService.selectChatList(vo);
+      
+      vo.setSeller(seller);
+      vo.setChatmessage(chatmessage);
+      vo.setReadst(readst);
+      chatService.updateReadst(vo);
 
-//      for (int i = 0; i < chatVo.size(); i++) {
-//
-//         list.add(photoVo.get(i));
-//         folder = photoVo.get(i).getFolder();
-//      }
+   
       model.addAttribute("selectChatList", chatVo);
       return chatVo;
    }
@@ -116,27 +166,6 @@ public class ChatController {
       return chatVo;
    }
    
-//   cjh
-
-
-//   @RequestMapping("/chatlocationlist")
-//   @ResponseBody
-//   public void chatlocationlist(HttpServletRequest req, Model model, ChatVO vo) throws IllegalStateException {
-////      int memberno = Integer.parseInt(req.getParameter("memberno"));
-////      int loginmemberno = Integer.parseInt(req.getParameter("loginmemberno"));
-////      vo.setUser1(loginmemberno);
-////      vo.setChatmember(memberno);
-//      //System.out.println("memberno:"+req.getParameter("memberno"));
-//      
-//   
-//      
-//      int chatmember = Integer.parseInt(req.getParameter("chatmember"));
-//      vo.setChatmember(chatmember);
-//      System.out.println("chatmember::controller"+chatmember);
-//      vo = chatService.chatlocationlist(chatmember);
-//      model.addAttribute("chatList",vo);
-//   }
-   
    @RequestMapping("/chatlocation")
    public String chatlocation(HttpServletRequest req, Model model, ChatVO vo, int user1, int user2,int chatroomno,int calendarLocationno) throws IllegalStateException {
 
@@ -159,48 +188,39 @@ public class ChatController {
       return "/jsp/chatlocation";
    }
    @RequestMapping("/chatcalendar")
-   public String chatcalendar(HttpServletRequest req, Model model, ChatVO vo) throws IllegalStateException {
+   public String chatcalendar(HttpServletRequest req,HttpServletResponse res, Model model, ChatVO vo) throws IllegalStateException, IOException {
+      
 
-      String title = req.getParameter("location_header_input");
-      String date = req.getParameter("location_date_input");
-      String coordinate = req.getParameter("coordinate");
-      String content = req.getParameter("location_textarea");
-      
-      vo.setLocationtitle(title);
-      vo.setLocationdate(date);
-      vo.setLocation(coordinate);
-      vo.setLocationdescription(content);
-
-      chatService.insertChatLocation(vo);
-      
-//      chatService.insertChatLocation(vo);
-//      int user1 = Integer.parseInt(req.getParameter("user1"));
-//      int chatroomno = Integer.parseInt(req.getParameter("chatroomno"));
-//      vo.setSeller(user1);
-//      vo.setChatroomno(chatroomno);
-//      vo.setChatmessage("<div class='ok' style='width:50px;height:50px;background-color:black;'>please</div>");
-//      chatService.insertLocationMessage(vo);
-//      model.addAttribute("calendarList",chatService.selectCalendarList(user1));
-      
-      int user1 = Integer.parseInt(req.getParameter("user1"));
-      int chatroomno = Integer.parseInt(req.getParameter("chatroomno"));
-      vo.setSeller(user1);
-      vo.setChatroomno(chatroomno);
-      vo.setChatmessage("일정이 공유되었습니다.");
-      vo.setReadst(1);
-      
-      SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-      String currentDate = dateFormat.format(new Date());
-      
-      vo.setDatetime(currentDate);
-      chatService.insertLocationMessage(vo);
-      
-      
-      model.addAttribute("calendarList",chatService.selectCalendarList(user1));
-      
-      
-      
-      return "/jsp/chatcalendar";
+         String title = req.getParameter("location_header_input");
+         String date = req.getParameter("location_date_input");
+         String coordinate = req.getParameter("coordinate");
+         String content = req.getParameter("location_textarea");
+         
+         vo.setLocationtitle(title);
+         vo.setLocationdate(date);
+         vo.setLocation(coordinate);
+         vo.setLocationdescription(content);
+   
+         chatService.insertChatLocation(vo);
+         int user1 = Integer.parseInt(req.getParameter("user1"));
+         int chatroomno = Integer.parseInt(req.getParameter("chatroomno"));
+         vo.setSeller(user1);
+         vo.setChatroomno(chatroomno);
+         vo.setChatmessage("일정이 공유되었습니다.");
+         vo.setReadst(1);
+         
+         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+         String currentDate = dateFormat.format(new Date());
+         
+         vo.setDatetime(currentDate);
+         chatService.insertLocationMessage(vo);
+         model.addAttribute("locationno",vo.getLocationno());
+         
+         model.addAttribute("calendarList",chatService.selectCalendarList(user1));
+         
+         
+         
+         return "/jsp/chatcalendar";
    }
    
    @RequestMapping("/chatcalendarview")

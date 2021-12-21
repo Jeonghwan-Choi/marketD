@@ -103,5 +103,16 @@
       order by cnt desc NULLS LAST OFFSET #{firstvalue} ROWS FETCH FIRST #{lastvalue} ROWS ONLY
    ]]>
    </select>
+      <select id="guestnochk" parameterType="board" resultType="board">
+       select count(guestno)guestno from guest where boardno=#{boardno} and memberno=#{memberno}
+     </select>
+	<select id="chkchatroom" parameterType="board" resultType="board">
+       <![CDATA[
+          select count(a.chatroomno)chatroomno from chatroom a
+          left join chatmember b
+          on a.chatroomno=b.chatroomno and a.buyerno=b.user2
+          where a.boardno=#{boardno} and a.buyerno=#{buyerno}
+       ]]>
+	</select>
    
 </mapper>

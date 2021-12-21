@@ -15,5 +15,5 @@ public interface BoardService {
    BoardVO boardquery(int boardno);
    List<BoardVO> addressSearchData(BoardVO vo);
    List<BoardVO> productSearchData(BoardVO vo);
-   
+   BoardVO chkchatroom(BoardVO vo);
 }

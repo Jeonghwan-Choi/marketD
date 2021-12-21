@@ -255,7 +255,11 @@ header {
     font-weight: 550;
     margin-left: 5px;
     margin-top: 5px;
+    white-space:nowrap;
+    overflow: hidden;
+  	text-overflow: ellipsis;
 }
+
 .main_product_address{
     color: gray;
     font-size: 13px;
@@ -377,7 +381,8 @@ width: 100%;
   float: right;
     position: -webkit-sticky; /* 사파리 브라우저 지원 */
     position: sticky;
-    bottom: 4px;
+    bottom: 10px;
+    margin-bottom:30px;
 
 }
 

@@ -10,12 +10,15 @@
     border-radius: 10px;
     margin: 2px;
 }
+.insertboard_insertboard_img_div{
+   margin-bottom:10px;
+}
 .insertboard_insertboard_img_div_label_p_update{
     color:#ff8a3d;
 }
 body {
-    font-family:'Malgun Gothic';
-    line-height:40px;
+ font-family: 'NanumMyeongjoYetHangul';
+  
     
 }
 textarea,input{
@@ -51,6 +54,13 @@ input[id=insertboard_submitButton]{
 }
 .insertboard_insertboard_submitButton_div{
     text-align: center;
+}
+.insertBoard_submit_button{
+   width:750px;
+   background: linear-gradient(to bottom, #fd9855, #ff8a3d);
+   height:40px;
+   border-radius:5px;
+   color:white;
 }
 .insertboard_insertboard_img_div_imgs_wrap img{
     height: 100%;

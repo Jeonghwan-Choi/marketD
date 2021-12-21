@@ -1,4 +1,9 @@
 @charset "UTF-8";
+body{
+ font-family: 'NanumMyeongjoYetHangul';
+ 
+}
+input:focus {outline:none;}
     .chat_main{
         border: 1px solid rgb(219, 219, 219);
         height: 85vh;
@@ -119,13 +124,17 @@
     }
 
     .chat_user_list_room_m_message_div{
-        margin-top: 2px;
+           margin-top: 2px;
         overflow: hidden;
         display: -webkit-box;
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
-        color: rgb(92, 92, 92);
-        font-size: 14px;
+      color: rgb(92, 92, 92);
+      font-size: 14px;
+      width: 70%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis
     }
 
     #chat_box{
@@ -136,7 +145,7 @@
 
     }
     .chat_box_ms{
-        height: 73%;
+        height: 75%;
         overflow:auto;
     }
 /* 공통 */
@@ -215,6 +224,24 @@
         font-size: 13px;
     }
 
+    .b .chat_box_m_div_read_div{
+        display: flex;
+        flex-direction: column;
+        -webkit-box-pack: end;
+        justify-content: flex-end;
+        padding: 0px 4px;
+        color: rgb(241, 119, 48);
+        font-size: 13px;
+    }
+    .d .chat_box_m_div_read_div{
+        display: flex;
+        flex-direction: column;
+        -webkit-box-pack: end;
+        justify-content: flex-end;
+        padding: 0px 4px;
+        color: rgb(241, 119, 48);
+        font-size: 13px;
+    }
     .chat_box_user{
         padding: 10px;
         height: 40px;
@@ -246,7 +273,7 @@
 
     .chat_box_send_text_div{
         background-color: blue;
-        width: 100%;
+        width: 99%;
         height: 70%;
     }
     #msg{
@@ -411,19 +438,11 @@
     -webkit-box-orient: vertical;
     color: rgb(92, 92, 92);
 }
-
-#chat_box{
-    width: 70%;
-    float: left;
-    text-align: left;
-    height: 100%;
-   
-
-}
-.chat_box_ms{
-    height: 73%;
-    overflow:auto;
-}
+.chat_user_list_room_m_message_div span{
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+   }
 /* 공통 */
 .chat_box_p_div img{
     width: 50px;
@@ -678,6 +697,9 @@
         padding: 5px;
         float: right;
         width: 140px;
+    }
+    .chat_user_list_room_m{
+       width:90%;
     }
     .chat_user_readm div:hover{
         background-color:rgb(243, 243, 243);
