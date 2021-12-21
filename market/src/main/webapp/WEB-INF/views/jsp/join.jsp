@@ -52,32 +52,28 @@
     		 $("#address-t").html("주소를 찾고 있습니다.");
     		 $("#address-t").css("color","red");
              //위치 정보를 얻기
-                 navigator.geolocation.getCurrentPosition (function(pos) {
-                     console.log(pos.coords.latitude);
-                     console.log(pos.coords.longitude);  
+             navigator.geolocation.getCurrentPosition (function(pos) {
+             	console.log(pos.coords.latitude);
+                console.log(pos.coords.longitude);  
 
-                     let geocoder = new kakao.maps.services.Geocoder();
+                let geocoder = new kakao.maps.services.Geocoder();
              
-                     let coord = new kakao.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-                     let callback = function(result, status) {
+                Let coord = new kakao.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+                let callback = function(result, status) {};
+                let lat = pos.coords.latitude;
+                let lng = pos.coords.longitude;
+                getAddr(lat,lng);
+                function getAddr(lat,lng){
+                	let geocoder = new kakao.maps.services.Geocoder();
 
-                     
-                        
-                 };
-                 let lat = pos.coords.latitude;
-                 let lng = pos.coords.longitude;
-                 getAddr(lat,lng);
-                 function getAddr(lat,lng){
-                     let geocoder = new kakao.maps.services.Geocoder();
-
-                     let coord = new kakao.maps.LatLng(lat, lng);
-                     let callback = function(result, status) {
-                         if (status === kakao.maps.services.Status.OK) {
-                             console.log(result)
-                             console.log(result[0].address.region_2depth_name+" "+result[0].address.region_3depth_name);
-                             $("#member_addr").val(result[0].address.region_2depth_name+" "+result[0].address.region_3depth_name);
-                             $("#address-t").html("주소인증을 완료하였습니다.");
-                    		 $("#address-t").css("color","blue");
+                    let coord = new kakao.maps.LatLng(lat, lng);
+                    let callback = function(result, status) {
+                    	if (status === kakao.maps.services.Status.OK) {
+                        	console.log(result)
+                            console.log(result[0].address.region_2depth_name+" "+result[0].address.region_3depth_name);
+                            $("#member_addr").val(result[0].address.region_2depth_name+" "+result[0].address.region_3depth_name);
+                            $("#address-t").html("주소인증을 완료하였습니다.");
+                    		$("#address-t").css("color","blue");
 
                          }
                      };

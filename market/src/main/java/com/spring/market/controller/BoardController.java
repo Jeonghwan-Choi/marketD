@@ -42,17 +42,13 @@ public class BoardController {
 	
 	@RequestMapping("/board")
 	public String boardInfo(HttpServletRequest req, Model model,int boardno,int memberno) throws IllegalStateException, ParseException {
+		
 		System.out.println("run BoardController boardInfo()");
-
-		
 		BoardVO bo =boardService.boardquery(boardno); 
-		
 		model.addAttribute("board",bo );
-		
 		List<ImageVO> boardImages = imageService.boardImages(boardno);
 		model.addAttribute("boardImages", boardImages);
-	
-//		//인기중고
+		//인기중고
 		model.addAttribute("productList", boardService.boardList());
 		
 		return "/jsp/board";

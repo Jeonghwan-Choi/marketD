@@ -1,79 +1,76 @@
 @charset "UTF-8";
-body{
-    font-family: 'NanumGothicCodingLigature';
-font-family: 'NanumGothicCodingLigatureBold';
-font-family: 'NanumGothicCoding';
-font-family: 'NanumGothicCodingBold';
+
+*{
+	font-family: 'NanumMyeongjoYetHangul';
 }
-table{
-       border-collapse: collapse;
+table {
+	border-collapse: collapse;
 }
-a{
-    text-decoration: none;
-    color:rgb(25, 25, 25);
+.chatcalendar a {
+	text-decoration: none;
+	color: rgb(25, 25, 25);
 }
-#chatcalendar_top_thead{
-}
-.chatcalendar_top_day,td{
-    
-    border:1px solid rgb(87, 87, 87,0.2);
+.chatcalendar_top_day, td {
+	border: 1px solid rgb(87, 87, 87, 0.2);
 }
 
-input[name=chatcalendar_top_perMon]{
-    width: 50px;
+input[name=chatcalendar_top_perMon] {
+	width: 50px;
 }
+
 #calendar_top_table th {
-    height: 30px;
-    min-width:100px;
-    width: 300px;
-    background-color:  white;
+	height: 30px;
+	min-width: 100px;
+	width: 300px;
+	background-color: white;
 }
-#calendar_top_table td {
-    text-align: left;
-    height: 80px;
-    width: 50px;
-    background-color: white;
-}
-#chatcalendar_top_preMon, #chatcalendar_top_nextMon {
-    height: 40px;
-    border: none;
-    background-color:  white;
-    font-size: 15px;
-}
-.calendar_top_year_mon{
-    font-size: 18px;
-}
-.chatcalendar_top_date{
-    font-size:13px;
-    color:rgb(87, 87, 87);
-    vertical-align: top;
-    padding-top:10px;
-    padding-left:10px;
 
+#calendar_top_table td {
+	text-align: left;
+	height: 80px;
+	width: 50px;
+	background-color: white;
 }
-.chatcalendar_top_day{
-    font-size:14px;
-    text-align: left;
-    padding-left:10px;
+
+#chatcalendar_top_preMon, #chatcalendar_top_nextMon {
+	height: 40px;
+	border: none;
+	background-color: white;
+	font-size: 15px;
 }
-.chatcalendar_top_event{
-    width:70px;
-	color:rgb(255,255,255);
-	font-size:13px;
-	display:inline;
+
+.calendar_top_year_mon {
+	font-size: 18px;
+}
+
+.chatcalendar_top_date {
+	font-size: 13px;
+	color: rgb(87, 87, 87);
+	vertical-align: top;
+	padding-top: 10px;
+	padding-left: 10px;
+}
+
+.chatcalendar_top_day {
+	font-size: 14px;
+	text-align: left;
+	padding-left: 10px;
+}
+
+.chatcalendar_top_event {
+	width: 70px;
+	color: rgb(255, 255, 255);
+	font-size: 13px;
+	display: inline;
 	font-weight: lighter;
 }
-/* #carrotimg{
-   width:15px;
-   height:15px;
-} */
-.testdong{
-	background-color:rgb(244,189,2);
-    width:100px;
-    margin-bottom:3px;
-    border-radius:5px;
-    padding:0.1em;
+.testdong {
+	background-color: rgb(244, 189, 2);
+	width: 100px;
+	margin-bottom: 3px;
+	border-radius: 5px;
+	padding: 0.1em;
 }
-.testdong span{
-	color:white;
+.testdong span {
+	color: white;
 }

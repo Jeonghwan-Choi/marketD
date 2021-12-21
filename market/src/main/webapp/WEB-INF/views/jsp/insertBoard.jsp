@@ -39,7 +39,7 @@
                 </div>
                 <div class="insertboard_insertboard_submitButton_div">
 
-                    <input type="button" value="완료" id="insertBoard" onclick="boardSubmit()">
+                    <input type="button" value="완료" class="insertBoard_submit_button" id="insertBoard" onclick="boardSubmit()">
 
                 </div>
             </div>
@@ -108,11 +108,12 @@
             	if(index<5){
             		const reader = new FileReader()
             		const input = document.createElement('input');
-            		input.setAttribute("type","button");
+            		input.setAttribute("type","image");
             		input.setAttribute("name",index);
             		input.setAttribute("value",index);
             		input.setAttribute("id","deleteImgBtn");
-            		//input.setAttribute("style","width:10px; height:10px;");
+            		input.setAttribute("src","http://cjhftp.dothome.co.kr/ico/cross.png");
+            		input.setAttribute("style","width:17px; height:17px;");
                     $colDiv1.appendChild(input)
             		
                     const $img = document.createElement("img")

@@ -110,8 +110,7 @@
                         <c:set var="jstlTitle2" value="${calendarLocation.locationtitle }"/>
                      		<c:if test="${empty jstlTitle2 }">
                            		<td class="location_td"><input name="location_submit_input" class="location_submit_input" id="location_submit_input" type="submit" value="약속잡기" formaction="/chatcalendar"></td>
-                        		<!-- <td class="location_td"><input name="location_submit_input" class="location_submit_input" id="location_submit_input" type="submit" value="약속잡기" onclick="reload();"></td> -->
-                    		 </c:if>
+                        	</c:if>
                      		<c:if test="${not empty jstlTitle2 }">
                          		<td class="location_td"><input name="jstl_location_submit_input" class="jstl_location_submit_input" id="jstl_location_submit_input" type="submit" value="달력보기" formaction="/chatcalendarview"></td>
                      		</c:if>

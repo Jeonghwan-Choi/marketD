@@ -5,22 +5,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css?ver=1.1">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Black+And+White+Picture&family=Kirang+Haerang&family=Single+Day&display=swap" rel="stylesheet">
-<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   
-    
-    <title>coco board</title>
-
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board.css?ver=1.1">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Black+And+White+Picture&family=Kirang+Haerang&family=Single+Day&display=swap" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>coco board</title>
 </head>
 <body>
 <div class="proudct">
@@ -70,119 +66,73 @@
                             <a class="proudct_product_profile_name_address" >${board.address }</a>
                             <div class="wish_span">
                                 <div class="wish_input" id="wish_input_confirm" style="display:none">
-                                
                                   <input onclick="Confirm();" type="button" id="Confirm" value="당근채팅">
-                                  
-                                  
-                                  
                                </div>
                                <div class="wish_input" id="wish_input_gochat" style="display:none">
-                                
                                   <input onclick="gochat();" style="background-color:white; color:gray;" type="button" id="gochatroom" value="당근채팅">
-                                
-                                  
-                                  
+                               </div>
+                               <div class="wish_input" id="wish_input_gologin" style="display:none">
+                                  <input onclick="gologin();" type="button" id="gologin" value="당근채팅">
                                </div>
                                <div class="wish_div" id="wish_div">
-                                    <span>
-                                   <img id="wish_img" class="wish_img" src="http://cjhftp.dothome.co.kr/ico/heart.png">
-                                        
-                                    </span>
+                                   <span>
+                                   		<img id="wish_img" class="wish_img" src="http://cjhftp.dothome.co.kr/ico/heart.png">
+                                   </span>
                                </div>
                             </div>
-                           
                         </div>
-                        
                     </div>
                     <div class="cr" ></div>
-
                     <div class= "product_detail">
                         <h1>${board.title }</h1>
-                        <a class="product_detail_kinds">
-                            ${board.category }
-                        </a>
-                        <a class="product_detail_time">
-                            
-                        </a><br>
-                        <a class="product_detail_price">
-                        
-                        
-                        
-                        
-                            ${board.price }원
-                        </a><br>
+                        <a class="product_detail_kinds">${board.category }</a>
+                        <a class="product_detail_time"></a><br>
+                        <a class="product_detail_price">${board.price }원</a><br>
                         <p class="product_detail_content">${board.content }</p>
-                        
-                        
                         
                         <a class="product_detail_favorite" >관심 </a><a class="product_detail_favorite_1">${board.wishcount}</a>
                         <a class="product_detail_chatting" >채팅</a> <a class="product_detail_chatting" >${board.chatcount }</a>
                         <a class="product_detail_select" >조회</a> <a class="product_detail_select_1" >${board.viewscount }</a>
-                        
-                        
-                        
                     </div>
-
                 </div>
                 <div class="cr" ></div>
-                  
             </div>
-         
-
         </div>
        </div>   
-      
-
        <div class="main1">
-        <div class="main1_product_board" >
-            <p>인기중고</p>
-            <c:forEach items="${productList}" var="productVO">
-               <div class="main1_product_div">
-                  <a class="main1_product_div_a" href="board?boardno=${productVO.boardno }&memberno=${productVO.memberno}">
-                      <img class="product_img" src="http://cjhftp.dothome.co.kr/${productVO.memberno}/board/${productVO.boardno }/${productVO.imagename}">
-                      <div class="main1_product_title" >${productVO.title }</div><br>
-                      <div class="main1_product_address">${productVO.address }</div><br>
-                      <input type="hidden" value ="${productVO.memberno }">
-                      <input type="hidden" value ="${productVO.boardno }">
-                      <div>
-                          <div class="main1_product_price" >${productVO.price } 원
-                              <div class="main1_product_favorit">
-                              
-                              <img class="watch-icon" alt="Watch count" src="https://d1unjqcospf8gs.cloudfront.net/assets/home/base/like-8111aa74d4b1045d7d5943a901896992574dd94c090cef92c26ae53e8da58260.svg" >
-                                  
-                              </div>
-                              <div class="main1_product_wish">
-                              
-                              
-                                  ${productVO.wish } 
-                              </div>
-                          </div>
-                         
-                      </div>   
-                  </a>     
-               </div>
-         </c:forEach>
-
-        </div>
+	       <div class="main1_product_board" >
+	            <p>인기중고</p>
+	            <c:forEach items="${productList}" var="productVO">
+	               <div class="main1_product_div">
+	                  <a class="main1_product_div_a" href="board?boardno=${productVO.boardno }&memberno=${productVO.memberno}">
+	                      <img class="product_img" src="http://cjhftp.dothome.co.kr/${productVO.memberno}/board/${productVO.boardno }/${productVO.imagename}">
+	                      <div class="main1_product_title" >${productVO.title }</div><br>
+	                      <div class="main1_product_address">${productVO.address }</div><br>
+	                      <input type="hidden" value ="${productVO.memberno }">
+	                      <input type="hidden" value ="${productVO.boardno }">
+	                      <div>
+	                          <div class="main1_product_price" >${productVO.price } 원
+	                              <div class="main1_product_favorit">
+	                              	<img class="watch-icon" alt="Watch count" src="https://d1unjqcospf8gs.cloudfront.net/assets/home/base/like-8111aa74d4b1045d7d5943a901896992574dd94c090cef92c26ae53e8da58260.svg" >
+	                              </div>
+	                              <div class="main1_product_wish">${productVO.wish }</div>
+	                          </div>
+	                      </div>   
+	                  </a>     
+	               </div>
+	         	</c:forEach>
+	       </div>
       </div>   
-      
-      <footer class="footer">
-
-      </footer>
-  
+      <footer class="footer"></footer>
 </body>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-
-
-
 var memberno = document.getElementById('loginMemberno').value;
 var boardno = document.getElementById('boardBoardno').value;
 var boardmemberno = document.getElementById('boardMemberno').value;
 
-
 //당근채팅 버튼
-
+if(memberno!=""){
  $.ajax({
       url : 'chkchatroom',
       method : 'POST',
@@ -203,9 +153,14 @@ var boardmemberno = document.getElementById('boardMemberno').value;
          alert("request erㄹror!");
       }
    }) 
+}else{
+	$('#wish_input_gologin').css('display','block');
+}
 
 
+//조회수
 
+if(memberno!=""){
 	$.ajax({
 	    url : 'guestnochk',
 	    method : 'POST',
@@ -232,15 +187,12 @@ var boardmemberno = document.getElementById('boardMemberno').value;
 	     	        		
 	     	        		    success : function(data) {
 	     	        		    	console.log(data);
-	     	        		         $('.product_detail_select_1').html(data);
-	     	        		         
+	     	        		         $('.product_detail_select_1').html(data); 
 	     	        		 },
 	     	        		    error : function() {
 	     	        		       alert("request error!");
 	     	        		    }
 	     	        		 })  
-	        		         
-	        		         
 	        		 },
 	        		    error : function() {
 	        		       alert("request error!");
@@ -255,9 +207,8 @@ var boardmemberno = document.getElementById('boardMemberno').value;
 	       alert("request error!");
 	    }
 	 })  
- 
+ }
    //wish
-   
       if(memberno != ""){
     	  $.ajax({
               url : 'wishchk',
@@ -279,8 +230,6 @@ var boardmemberno = document.getElementById('boardMemberno').value;
               }
            }) 
       }
-       
-      console.log(boardDatetime);
 
 
    //diffHor
@@ -406,7 +355,13 @@ var boardmemberno = document.getElementById('boardMemberno').value;
    function gochat(){
        document.form.submit();
     }
-   
+   function gologin(){
+	   alert("로그인을 해주세요");
+	   setTimeout(function(){
+
+		   location.href = "/login";
+	   },1500);
+   }
     
    $('.wish_div').on({ 
        'click': function(){
@@ -462,7 +417,13 @@ var boardmemberno = document.getElementById('boardMemberno').value;
                }  
     		   
     	   }else if(memberno == ""){
-    				   location.href = "/login";
+    		   
+    		   alert("로그인을 해주세요");
+    		   setTimeout(function(){
+
+    			   location.href = "/login";
+    		   },1500);
+    				   
     	   }
     	   
                     

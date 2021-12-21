@@ -79,8 +79,8 @@ public class BoardDAO {
 	      System.out.println("run BoardDAO guestcountchk()");
 	      return sqlSession.selectOne("BoardDAO.guestcountchk",vo);
 	   }
-   public BoardVO chkchatroom(BoardVO vo) {
+	public BoardVO chkchatroom(BoardVO vo) {
 	      System.out.println("run BoardDAO chkchatroom()");
 	      return sqlSession.selectOne("BoardDAO.chkchatroom",vo);
-	   }
+	}
 }

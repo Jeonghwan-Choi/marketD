@@ -55,6 +55,13 @@ input[id=insertboard_submitButton]{
 .insertboard_insertboard_submitButton_div{
     text-align: center;
 }
+.insertBoard_submit_button{
+	width:750px;
+	background: linear-gradient(to bottom, #fd9855, #ff8a3d);
+	height:40px;
+	border-radius:5px;
+	color:white;
+}
 .insertboard_insertboard_img_div_imgs_wrap img{
     height: 100%;
     
