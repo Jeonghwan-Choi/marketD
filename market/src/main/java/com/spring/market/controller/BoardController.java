@@ -122,7 +122,6 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/insertBoardImage")
-	//public String insertBoardImage(HttpServletRequest req, Model model,MultipartHttpServletRequest mtfRequest) throws Exception {
 		public String insertBoardImage(HttpServletRequest req, Model model,MultipartHttpServletRequest mtfRequest) throws Exception{
 		System.out.println("run BoardController insertBoardImage()");
 		
