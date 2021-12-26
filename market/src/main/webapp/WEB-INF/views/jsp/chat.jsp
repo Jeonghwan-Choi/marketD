@@ -33,7 +33,39 @@
         	 <label>Profile : </label><input id="profilename" type="text" value=""><br>
         	 <input type="hidden" id="location" value="0">
         </div>
-       
+        
+  <%--   <header>
+        <div class = "header_img_div">
+            <img class="fixed-logo" alt="당근마켓" src="https://d1unjqcospf8gs.cloudfront.net/assets/home/base/header/logo-basic-24b18257ac4ef693c02233bf21e9cb7ecbf43ebd8d5b40c24d99e14094a44c81.svg">
+        </div>
+        <section class="header_section" >
+            <input type="text" placeholder="동네 이름, 물품명등을 검색해보세요!">
+            <button>
+                <img src="https://cdn-icons-png.flaticon.com/512/482/482631.png">
+            </button>
+
+        </section>
+            <nav>      
+                <div class="header_chatting_div">
+                    <div>
+                        <input class="header_chatting_btn" type="button" value="당근채팅">
+                    </div>
+                    <div>
+                    <input class="header_chatting_btn" type="button" value="로그인" onclick="loginform()">
+                    </div>
+                    <div class="header_login_div">
+                        <img class="header_login_div_profile" src="http://cjhftp.dothome.co.kr/${loginMemberno}/profile/${sessionScope.memberVO.profile}">
+                        <span>${sessionScope.memberVO.name}</span>
+                     </div>
+
+                                
+                    
+                    
+                </div>
+            </nav>
+
+
+      </header> --%>
 
 
    <div class = "chat_main">
@@ -821,23 +853,28 @@
     			
     			
     function moredata(){
+		console.log("run moredate()!");
 		
 		var firstvalue = parseInt($("#firstvalue").val());
 		var lastvalue = parseInt($("#lastvalue").val());
 		console.log("chk"+firstvalue)
+		//console.log("chk"+lastvalue)
 		var roomno = $('#roomno').val();
 		var seller = $('#memberno').val();
 		var msg = $('#msg').val();
-        var loginmemberno = $("#loginmemberno").val();
+        var loginmemberno = $("#loginmemberno").val();//loginuser
 		
 		$("#firstvalue").val(firstvalue + 15);
+		//$("#lastvalue").val(lastvalue + 15);
 		console.log("chk"+parseInt($("#firstvalue").val()))
+		//console.log("chk"+parseInt($("#lastvalue").val()))
 		 $.ajax({
 			 url : 'searchmorechat',
 		      method : 'POST',
 		      data : 'firstvalue='+parseInt($("#firstvalue").val())+'&lastvalue='+parseInt($("#lastvalue").val())+'&roomno=' + roomno +'&seller='+seller +'&chatmessage='+msg+'&readst=0',
 		      type : "POST",
 	         success : function(data) {
+	        	 
 	        	 if($(data).length != 0){
 	     			
 	        	 
@@ -894,6 +931,7 @@
 								
 							}else{
 								if(this.locationno!=0){
+
 					        	    const location = this.location;
 									 const jbSplit = location.split('//');
 									 const memberno = $('#memberno').val();
@@ -937,12 +975,9 @@
 								
 							}
 	                        
-		              }else if(loginmemberno != this.seller){console.log("gd");
+		              }else if(loginmemberno != this.seller){
 		            	  if(this.locationno!=0){
-		            		  
-		            		  alert("gg");
 		            		  const location = this.location;
-		            		  alert(loginmemberno+location);
 								 const jbSplit = location.split('//');
 								 const memberno = $('#memberno').val();
 									const loginmemberno = $('#loginmemberno').val();
