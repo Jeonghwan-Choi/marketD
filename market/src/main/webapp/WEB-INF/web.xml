@@ -35,6 +35,7 @@
 		<url-pattern>/</url-pattern>
 		<url-pattern>/cart/*</url-pattern>
 		<url-pattern>/product/*</url-pattern>
+		
 	</servlet-mapping>
 
 	<!-- 한글 처리 코드 -->
@@ -52,28 +53,33 @@
 			<param-name>forceEncoding</param-name>
 			<param-value>true</param-value>
 		</init-param>
+		
 	</filter>
+	
 
 	<!-- 위 한글 처리 코드를 모든(/*) url 패턴에 적용 -->
 	<filter-mapping>
 		<filter-name>characterEncoding</filter-name>
 		<url-pattern>/*</url-pattern>
+		
 	</filter-mapping>
-	
 	
 	<filter>
-	    <filter-name>multipartFilter</filter-name>
-	    <filter-class>org.springframework.web.multipart.support.MultipartFilter
-	    </filter-class>
-	    <init-param>
-	    <param-name>multipartResolverBeanName</param-name>
-	    <param-value>multipartResolver</param-value>
-	    </init-param>
-	</filter>
-	 
-	<filter-mapping>
-	    <filter-name>multipartFilter</filter-name>
-	    <url-pattern>/*</url-pattern>
-	</filter-mapping>
+  <filter-name>multipart</filter-name>
+    <filter-class>org.springframework.web.multipart.support.MultipartFilter</filter-class>
+ </filter>
+
+ <filter-mapping>
+    <filter-name>multipart</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+
 	
+		<!-- <multipart-config>
+	<location>ftp://cjhftp.dothome.co.kr/html/</location>
+	<max-file-size>20971520</max-file-size> 최대크기 20M
+	<max-request-size>41943040</max-request-size> 한번에 올릴 최대 크기 40M
+	<file-size-threshold>20971520</file-size-threshold> 메모리
+	</multipart-config> -->
 </web-app>

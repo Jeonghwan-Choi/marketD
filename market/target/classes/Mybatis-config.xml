@@ -28,8 +28,11 @@
 	<typeAliases>
   		<!-- main alias -->
  		<typeAlias alias="member" type="com.spring.market.vo.MemberVO" />
-        <typeAlias alias="board" type="com.spring.market.vo.BoardVO"/>
- <!-- 		<typeAlias alias="item" type="com.world.domain.main.vo.ItemVO"/>
+ 		<typeAlias alias="board" type="com.spring.market.vo.BoardVO" />
+ 		<typeAlias alias="image" type="com.spring.market.vo.ImageVO" />
+ 		<typeAlias alias="chat" type="com.spring.market.vo.ChatVO" />
+    <!--    <typeAlias alias="product" type="com.world.domain.main.vo.ProductVO"/>
+  		<typeAlias alias="item" type="com.world.domain.main.vo.ItemVO"/>
   		<typeAlias alias="dotory" type="com.world.domain.main.vo.DotoryVO"/>
   		<typeAlias alias="friend" type="com.world.domain.main.vo.FriendVO"/>
   		<typeAlias alias="guest" type="com.world.domain.main.vo.GuestVO"/>

@@ -1,6 +1,7 @@
 package com.spring.market.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,8 +16,9 @@ import com.spring.market.vo.BoardVO;
 @Controller
 public class MainController {
 
+
 	@Autowired
-	BoardService boardService;	
+	BoardService boardService;
 
 	@RequestMapping("/main")
 	public String MainIndex(HttpServletRequest req, Model model, BoardVO vo) throws IllegalStateException {
@@ -26,18 +28,15 @@ public class MainController {
 		return "/jsp/main";
 	}
 	
+	
+
+	
 	@RequestMapping("/login")
 	public String login(HttpServletRequest req, Model model) throws IllegalStateException {
 
-				
+		HttpSession session = req.getSession();
+		session.invalidate();
 		return "/jsp/login";
 	}
-	@RequestMapping("/ttst")
-	public String ttst(HttpServletRequest req, Model model) throws IllegalStateException {
-
-				
-		return "/jsp/socket";
-	}
-
 
 }
