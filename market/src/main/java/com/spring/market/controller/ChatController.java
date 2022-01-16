@@ -92,7 +92,8 @@ public class ChatController {
    
    @RequestMapping("/selectChat")
    @ResponseBody
-   public List <ChatVO> selectChat(HttpServletRequest req,Model model,ChatVO vo,int roomno,int seller, String chatmessage, int readst,int firstvalue, int lastvalue)throws Exception {
+   public List <ChatVO> selectChat(HttpServletRequest req,Model model,ChatVO vo,int roomno,int seller, String chatmessage, int readst,int firstvalue, int lastvalue)
+		   throws Exception {
 
          vo.setLastvalue(lastvalue);
          vo.setFirstvalue(firstvalue);
@@ -131,7 +132,8 @@ public class ChatController {
    
    @RequestMapping("/insertMessage")
    @ResponseBody
-   public String insertMessage(HttpServletRequest req,Model model,ChatVO vo,int roomno,int seller, String chatmessage, int readst)throws Exception {
+   public String insertMessage(HttpServletRequest req,Model model,ChatVO vo,int roomno,int seller, String chatmessage, int readst)
+		   throws Exception {
 
       vo.setChatroomno(roomno);
       vo.setSeller(seller);

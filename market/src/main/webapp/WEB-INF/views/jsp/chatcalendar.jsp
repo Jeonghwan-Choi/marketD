@@ -103,10 +103,6 @@
                     }
                     $("#calendar_top_table #chatcalendar_top_tbody:last").append("<td class='chatcalendar_top_date' id='chatcalendar_top_date"+ i +"'>"+ i +"</td>");
 
-
-                   /*  var now = nowYear+"-"+(nowMonth+1)+"-"+i;
-                    $("#test").val(now);
-                    var calendarDate = $("#calendarDate").val(); */
                     
                 }
 
